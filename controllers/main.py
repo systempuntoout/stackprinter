@@ -115,7 +115,7 @@ class TopVoted:
             result = []
             service = web.input(service = None)['service']
             if not service:
-                return render.top_voted()
+                return render.topvoted()
             tagged = web.input(tagged = None)['tagged']
             if not tagged:
                 return render.top_voted()
