@@ -1,0 +1,22 @@
+/export
+Summary: shows a printable view of a question
+Parameters:
+question
+* question id
+* string
+
+service
+* endpoint (stackoverflow|meta.stackoverflow|superuser|serverfault|stackapps)
+* string
+
+format
+* exported format (HTML)
+* string 
+
+prettylinks
+* shows a list of urls above the question\answers a la wikipedia
+* boolean true (default)
+
+printer
+* enables the print command when page is loaded
+* boolean true (default)

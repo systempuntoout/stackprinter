@@ -1,0 +1,86 @@
+$def with (users, service)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Overflow Printer Suite">
+        <meta name="keywords" content="printer friendly stack overflow">
+        <title>StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/scrollable.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.tools.min.js"></script>
+        <script>
+            jQuery(function() {
+            	jQuery(".scrollable").scrollable({ vertical: true, mousewheel: true});
+            });
+        </script>
+  </head>
+    <body>
+             <div id="main_container">
+                  <div class="logo">                           
+                    </div>
+                  <div class="header links">
+                      <a class="nolines" href="/">Home</a>|<span class="header_current">Favorites</span>|<a class="nolines" href="/topvoted">TopVoted</a>|<a class="nolines" href="/about">About</a>
+                  </div>
+                  <div id="user_selection_container">
+                      <div id="result"><a href="/favorites"><img style="border:0;height:15px;width:15px"src="/images/search.png"></a>&nbsp;$(len(users)) users found</div>
+                      <div class="scrollable vertical">
+                      	<div class="items">
+                            $for rown, user in enumerate(users):
+                                $if rown % 3 == 0 :
+                                    <div>
+                                <div class="item">
+                                    <img src="http://www.gravatar.com/avatar/$(user['email_hash'])?s=40&d=identicon&r=PG" />    
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a href="/favorites?username=$(user['display_name'])|$(user['user_id'])&service=$(service)">$(user['display_name'])</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <tr>
+                                                        <td style="padding-right:20px;font-weight:bold">$commify(user['reputation'])</td>
+                                                        $if (user['badge_counts'].get('gold',0) > 0) : 
+                                                            <td>
+                                                                <img style="width:6px;height:6px;margin:0px"  src="/images/badge_gold.png"/>
+                                                            </td>
+                                                            <td>
+                                                                $(user['badge_counts'].get('gold')) 
+                                                            </td>
+                                                        $if (user['badge_counts'].get('silver',0) > 0) :
+                                                            <td>
+                                                                <img style="width:6px;height:6px;margin:0px" src="/images/badge_silver.png"/>
+                                                            </td>
+                                                            <td>
+                                                                $(user['badge_counts'].get('silver'))
+                                                            </td>
+                                                        $if (user['badge_counts'].get('bronze',0) > 0) :
+                                                            <td>
+                                                                <img style="width:6px;height:6px;margin:0px" src="/images/badge_bronze.png"/>
+                                                            </td>
+                                                            <td>
+                                                                $(user['badge_counts'].get('bronze'))
+                                                            </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                       </tr>
+                                    </table>
+                                </div>
+                                $if ((rown+1) % 3 == 0 and rown!=0) or (rown == len(users)-1):
+                                    </div>
+                        </div>
+                      </div>
+                      $if len(users) > 3:
+                          <div id="actions">
+                               <a class="prev">&laquo; Back</a>
+                               <a class="next">More users &raquo;</a>
+                          </div>
+                    </div>
+              </div>
+  </body>
+</html>

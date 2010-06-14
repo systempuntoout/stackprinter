@@ -1,0 +1,91 @@
+$def with (service, question , answers, pretty_links, printer)
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="/stylesheets/export.css">
+		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+		<title>$question['title']</title>
+		<script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-4276204-5");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
+	    <script>
+        function Print(){
+            $if printer:
+                document.body.offsetHeight;window.print()
+        };
+        </script>
+  </head>
+	<body onload="Print()">
+	    <div id="home">
+	        <a href="/"><img width="20px" heigth="20px" border="0" src="/images/icon_home.png"/></a>
+	    </div>         
+        <div id="question-block">
+          <div id="question-title">
+          	 <img width="30px" heigth="30px" src="/images/$(service).png"/>&nbsp;$question['title'].replace('<', '&lt;')<br>
+          </div>
+          <div id="question-details">
+                [$(['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0])$(int(question['up_vote_count'])-int(question['down_vote_count']))] [$question['answer_count']]
+            	 $question.get('owner', {'display_name':'community_owned'})['display_name']
+          </div>
+          <div id="question-details">
+              [$date_from(float(question['creation_date']))]
+          </div>
+          <div id="question-details">
+          [
+          $for tag in question['tags']:
+              $tag
+          ]
+          </div>
+          <div id="question">
+          $if pretty_links:
+              $code:
+                  (sup_question_body,sup_question_links) = suppify_body(question['body'])
+              $sup_question_body
+              <div id="question-links">
+              $for key in sup_question_links.keys():
+                  [$(key)] $(sup_question_links[key])<br>
+              </div>
+          $else:
+              $question['body']
+          </div>
+          	$for comment in question['comments']:
+                <div class="comment">
+                    $if int(comment['score']) > 0:
+                        ($comment['score'])    
+                    $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'})['display_name']</b>                   
+                </div>
+              $for answer in answers:
+                  <div class="answer-details">
+                      [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
+                      [$date_from(float(answer['creation_date']))]     
+                      $answer.get('owner', {'display_name':'community_owned'})['display_name']
+                      $if bool(answer['accepted']):
+                          [ACCEPTED]
+                  </div>
+                  <div class="answer">
+                    $if pretty_links:  
+                        $code:
+                            (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
+                        $sup_answer_body  
+                        $for key in sup_answer_links.keys():
+                            [$(key)] $(sup_answer_links[key])<br>
+                        <br>
+                    $else:
+                        $answer['body']
+                  </div>
+                  $for comment in answer['comments']:
+                      <div class="comment">
+                      $if int(comment['score']) > 0:
+                           ($comment['score'])    
+                      $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'})['display_name']</b>     
+                      </div>
+      </div>
+  </body>
+</html>

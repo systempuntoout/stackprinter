@@ -1,0 +1,4 @@
+*.pyc
+key.py
+web
+.DS_Store

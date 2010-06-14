@@ -1,0 +1,77 @@
+$def with (message = None)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Overflow Printer Suite">
+        <meta name="keywords" content="printer friendly stack overflow">
+        <title>StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.numeric.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
+        <script type="text/javascript">
+        jQuery(
+        	function()
+        	{   
+        	    jQuery("#check_username").fadeOut(2000);   		
+        		if (jQuery.cookie("USERNAME") != null){
+        		    jQuery("#input_main").val(jQuery.cookie("USERNAME"));
+        		}
+        		else{
+        		    jQuery("#input_main").focus();
+        		}
+        		jQuery("#favorites_button").click(function() {
+        		    input = jQuery.trim(jQuery("#input_main").val())
+                    if ( input != "") {
+                            jQuery.cookie("USERNAME", input , { expires: 50 })
+                        	jQuery("#favorites_form").submit();
+                        }else{
+                        	jQuery("input_main").focus();                      
+                        	return false;                                
+                        }                                                    
+                });
+        	});
+        </script>
+  </head>
+    <body>
+             <div id="main_container">
+                  <div class="logo">                           
+                    </div>
+                  <div class="header links">
+                      <a class="nolines" href="/">Home</a>|<span class="header_current">Favorites</span>|<a class="nolines" href="/topvoted">TopVoted</a>|<a class="nolines" href="/about">About</a>
+                  </div>
+                  <br>
+                  <form  id="favorites_form" action="/favorites" method="POST">
+                      <div id="input_container_favorites">
+                          <table cellpadding="0" cellspacing="0">
+                              <tr valign=top>
+                                  <td align=center nowrap>
+                                     <span class="main">Username</span>
+                                     <div id="input_wrapper">
+                                         <input maxlength="60" name="username" value="" size="20" id="input_main">
+                                     </div>
+                                     <div>                                       
+                                       <select id="service" name="service">
+                                           $for service_key in supported_services_keys:
+                                               <option  value="$(service_key)">$(supported_services[service_key])</option>
+                                           <option  value="delicious">Delicious</option> 
+                                      </select>
+                                      </div>
+                                      <div class="button">
+                                          <input id="favorites_button" type="button" value="Get questions"/>
+                                      </div>                                        
+                                 
+                                  </td>                                    
+                              </tr>
+                          </table>
+                      </div>
+                  </form>
+                  <p id="check_username">
+                          $if message:
+                              $message
+                  </p>                              
+              </div>
+  </body>
+</html>

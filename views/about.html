@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Overflow Printer Suite">
+        <meta name="keywords" content="printer friendly stack overflow">
+        <title>StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  </head>
+    <body>
+         <div id="main_container">
+              <div class="logo">                           
+              </div>
+              <div class="header links">
+                  <a class="nolines" href="/">Home</a>|<a class="nolines" href="/favorites">Favorites</a>|<a class="nolines" href="/topvoted">TopVoted</a>|<span class="header_current">About</span>
+              </div>
+              <div class="about">
+                  <br>
+                  <b>Printer-Friendly:</b><br>
+                  Produces an essential printable view of a given question id with:<br>
+                  * All the answers<br> 
+                  * All the comments<br>
+                  <br>
+                  The easiest way to use this service is with:<br>
+                  * <a href="http://userscripts.org/scripts/source/77298.user.js" >StackPrinter GM script</a><br>
+                  * <a href="javascript:(function(){var linkTokens = window.location.href.split('/');if (linkTokens[4]){var domainTokens= linkTokens[2].split('.');var service = domainTokens[0];window.open('http://stackprinter.appspot.com/export?format=HTML&service='+service+'&question='+linkTokens[4])}else{alert('Attention: question id not found!')}})()">Bookmarklet</a><br>
+                  <br>
+                  <b>Favorites:</b><br>
+                  Supported services:<br> 
+                  1. The Stack Overflow Trilogy<br>
+                  Retrieves and prints all the favorites users's questions<br>
+                  <br>
+                  2. Delicious<br>
+                  Retrieves the latest 100 Trilogy questions of a given Delicious username with <i>stackoverflow</i> tag (<a href="http://meta.stackoverflow.com/questions/47162/save-question-to-delicious-greasemonkey-script">more info</a>).<br>                
+                  To add and tag your questions to Delicious use:<br>
+                  * <a href="http://userscripts.org/scripts/source/74766.user.js"/>Delicious GM script</a><br>
+                  <br>
+                  <b>TopVoted:</b><br>
+                  Retrieves and prints the top voted questions by tags<br><br>
+                  <b>Info:</b><br>
+                  <a target="_new" href="/docs/changelog.txt">Changelog</a><br>
+                  <a target="_new" href="/docs/todo.txt">ToDo</a><br>
+                  <a target="_new" href="http://stackapps.com/questions/179/stackprinter-the-stackoverflow-trilogy-printer-suite">Stack Apps</a><br>
+                  Source code on Github<br>
+                  <img src="/images/systempuntooutmail.jpg"/>    
+              </div>                                 
+          </div>
+  </body>
+</html>

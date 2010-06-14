@@ -1,0 +1,46 @@
+$def with (username, result)
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Overflow Printer Suite">
+        <meta name="keywords" content="printer friendly stack overflow">
+        <title>StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/search.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  </head>
+    <body>
+        <div id="back">
+            <a href="/favorites"><img src="/images/search.png"/></a>
+        </div>
+             <p id="title" class="main">
+                 <img src="/images/delicious.jpg"/>&nbsp;Delicious <i>stackoverflow</i> question <br>
+                 <a target="_new" href="http://www.delicious.com/$(username)/stackoverflow">$(username)</a>
+            </p>
+            <table cellpadding="2" cellspacing="0">
+            $for rown,question in enumerate(result):
+                $if rown % 2 == 0:<tr class="even">
+                $else:<tr>
+                    <td class="printer">
+                        <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)"/>
+                            <img src="images/printer_black.png"/>
+                        </a>
+                    </td>    
+                    <td class="title">
+                        <a target="_blank" href="$question.url"/>$question.title</a><br>
+                        <span class="tag">
+                            [$(", ".join([tag for tag in question.tags_list if tag!='stackoverflow']))]
+                        </span>
+                    </td>
+                    <td class="date">
+                        [$(question.creation_date.strftime('%Y-%m-%d'))]
+                    </td>
+                </tr>
+                $if rown == len(result) - 1: </table>
+            $else:
+                $if len(result) == 0:
+                    <p id="not_found">
+                        No links found tagged <i>stackoverflow</i> 
+                    </p>                            
+  </body>
+</html>

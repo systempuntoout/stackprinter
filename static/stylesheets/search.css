@@ -1,0 +1,60 @@
+a:link, a:visited {
+ text-decoration: none;
+ font-family:Courier;
+ font-size:0.8em;
+}
+
+.tag{
+    font-family:Courier;
+    font-size:0.55em;
+    font-weigth:bold;
+}
+
+#back img{
+    width:20px;
+    height:20px;
+    border:0
+}
+
+#title{
+    margin-bottom:3px;
+    margin-top:5px;
+    text-align:center;
+}
+
+#title img{
+    width:30px;
+    height:30px;
+}
+
+table {
+    margin:auto;
+    border:1px #efefef solid;
+    width:90%;
+}
+
+tr.even {
+    background-color:#efefef;
+}
+
+td.printer img{
+    border:0px;
+    width:15px;
+    height:15px; 
+}
+
+td.title{
+    text-align:left;
+}
+
+td.date{
+    font-family:Courier;
+    font-size:0.75em;
+    font-weight:bold;
+    text-align:right;
+}
+
+#not_found{
+    margin-top:60px;
+    text-align:center;
+}

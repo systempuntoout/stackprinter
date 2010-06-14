@@ -1,0 +1,57 @@
+Version 0.8
+2010-06-14
+Added TopVoted features
+
+Version 0.7.9
+2010-06-13
+Added Greasemonkey script support for Chrome
+Fixed crossdomain.xml
+Added css on bookmarks
+Pagination
+
+Version 0.7.8
+2010-06-09
+Added "printer" parameters on urls to open print() on onload
+Changed Pagesize to 50 again trying to resolve ApplicationError:5 (UrlFetch's timeout)
+Fixed some graphics glitches on IE
+Fixed sup for big size font on export
+
+Version 0.7.7
+2010-06-09
+Fixed Scrollable problem on IE
+Added details to users selection
+
+Version 0.7.6
+2010-06-08
+Fixed jQuery trims
+Fixed null on cookies
+Fixed html tag problem on question's title
+
+Version 0.7.5
+2010-06-07
+Added browse and print favorites questions
+Updated About
+Fixed change on combo
+Fixed Json with doublequotes
+
+Version 0.7.4
+2010-06-06
+Changed Pagesize to 30 trying to resolve ApplicationError:5 (UrlFetch's timeout)
+Fixed Error 404\500
+Robots.txt
+Various small glitches
+
+Version 0.7.3
+2010-05-27
+Added meta.stackoverflow.com support
+Added stackapps.com support
+Updated Stackprinter bookmarklet
+Updated Stackprinter GM script
+
+Version 0.7.2
+2010-05-26
+Added prettylinks feature
+
+Version 0.7.1
+2010-05-21
+Up and running on Gae

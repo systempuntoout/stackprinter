@@ -1,0 +1,63 @@
+$def with (tagged, result, service, pagination)
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Overflow Printer Suite">
+        <meta name="keywords" content="printer friendly stack overflow">
+        <title>StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/search.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  </head>
+    <body>
+        <div id="back">
+	        <a href="/topvoted"><img src="/images/search.png"/></a>
+	    </div>
+             <p id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>top voted</i> questions <br>
+                 [$(tagged)]
+             </p>
+             <table cellpadding="2" cellspacing="0">
+                    $for rown,question in enumerate(result):
+                        $if rown % 2 == 0:
+                            <tr class="even">
+                        $else:
+                            <tr>
+                        <td class="printer">
+                            <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)"/>
+                                <img src="images/printer_black.png"/>
+                            </a>
+                        </td>    
+                        <td class="title">
+                            <a target="_blank" href="$question.url"/>$question.title</a><br>
+                            <span class="tag">
+                                [$(", ".join([tag for tag in question.tags_list]))]
+                            </span>
+                        </td>
+                        <td class="date">
+                                [$(question.creation_date.strftime('%Y-%m-%d'))]
+                        </td>
+                        </tr>
+                        $if rown == len(result) - 1:
+                            </table>
+                            <table id="pagination">
+                                <tr>
+                                    <td class="pagination_back">
+                                        $if pagination.has_previous_entries():
+                                	        <a href="/topvoted?service=$(service)&tagged=$(urlencode(tagged))&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; back</a>
+                                    </td>
+                                    <td class="pagination_info">
+                                        Page: $pagination.page | Pagesize: $pagination.pagesize | Total questions : $pagination.total
+                                    </td>
+                                    <td class="pagination_more">
+                                        $if pagination.has_more_entries():
+                                	           <a href="/topvoted?service=$(service)&tagged=$(urlencode(tagged))&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">more &raquo;</a>   
+                                    </td>
+                                </tr>
+                            </table>
+                    $else:
+                        $if len(result) == 0:
+                            <p id="not_found">
+                                No questions found
+                            </p>
+  </body>
+</html>

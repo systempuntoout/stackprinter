@@ -1,0 +1,25 @@
+application: stackprinter
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+- url: /robots.txt
+  static_files: static/docs/robots.txt
+  upload: static/docs/robots.txt
+- url: /crossdomain.xml
+  static_files: static/docs/crossdomain.xml
+  upload: static/docs/crossdomain.xml
+- url: /javascripts
+  static_dir: static/javascripts
+- url: /stylesheets
+  static_dir: static/stylesheets
+- url: /images
+  static_dir: static/images
+- url: /docs
+  static_dir: static/docs
+- url: /.*
+  script: application.py
