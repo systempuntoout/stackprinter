@@ -82,7 +82,16 @@ class Favorites:
                     questions = favorite_questions[0]
                     pagination = favorite_questions[1]
                     for question in questions:
-                        result.append(Question(question['question_id'], "http://%s.com/questions/%d" % (service, question['question_id']), question['title'].replace('<', '&lt;'), question['tags'], utils.date_from(question['creation_date']), service))
+                        result.append(Question(question['question_id'],
+                                               "http://%s.com/questions/%d" % (service, question['question_id']),
+                                               question['title'],
+                                               question['tags'], 
+                                               utils.date_from(question['creation_date']),
+                                               service,
+                                               question['up_vote_count'],
+                                               question['down_vote_count'],
+                                               question['answer_count']
+                                               ))
                     return render.favorites_trilogy(users[0]['display_name'], user_id, result, service, pagination)
                 else:
                     render.favorites(message = NOT_FOUND_ERROR)    
@@ -114,18 +123,25 @@ class TopVoted:
         try:
             result = []
             service = web.input(service = None)['service']
-            if not service:
-                return render.topvoted()
             tagged = web.input(tagged = None)['tagged']
-            if not tagged:
-                return render.top_voted()
             page = web.input(page = 1)['page']
+            if not service or not tagged:
+                return render.topvoted()
             
             top_voted_questions = sopy.get_questions_by_tags(";".join([urllib.quote(tag.encode('utf-8')) for tag in tagged.split()]), service, page, pagesize = 30)
             questions = top_voted_questions[0]
             pagination = top_voted_questions[1]
             for question in questions:
-                result.append(Question(question['question_id'], "http://%s.com/questions/%d" % (service, question['question_id']), question['title'].replace('<', '&lt;'), question['tags'], utils.date_from(question['creation_date']), service))
+                result.append(Question(question['question_id'],
+                                       "http://%s.com/questions/%d" % (service, question['question_id']),
+                                       question['title'],
+                                       question['tags'],
+                                       utils.date_from(question['creation_date']),
+                                       service,
+                                       question['up_vote_count'],
+                                       question['down_vote_count'],
+                                       question['answer_count']
+                                       ))
             return render.topvoted_tagged(tagged, result, service, pagination)  
         except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
             logging.error(exception)

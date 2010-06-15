@@ -14,7 +14,7 @@ $def with (tagged, result, service, pagination)
 	        <a href="/topvoted"><img src="/images/search.png"/></a>
 	    </div>
              <p id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>top voted</i> questions <br>
-                 [$(tagged)]
+                 [<i>$(tagged)</i>]
              </p>
              <table cellpadding="2" cellspacing="0">
                     $for rown,question in enumerate(result):
@@ -25,10 +25,13 @@ $def with (tagged, result, service, pagination)
                         <td class="printer">
                             <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)"/>
                                 <img src="images/printer_black.png"/>
-                            </a>
+                            </a>                            
+                        </td>
+                        <td class="counters">
+                            [$question.get_votes()]<br>[$question.answer_count]
                         </td>    
                         <td class="title">
-                            <a target="_blank" href="$question.url"/>$question.title</a><br>
+                            <a target="_blank" href="$question.url"/>$question.title.replace('<', '&lt;')</a><br>
                             <span class="tag">
                                 [$(", ".join([tag for tag in question.tags_list]))]
                             </span>

@@ -1,3 +1,7 @@
+Version 0.8.1
+2010-06-15
+Added question's counters 
+
 Version 0.8
 2010-06-14
 Added code on Git-Hub

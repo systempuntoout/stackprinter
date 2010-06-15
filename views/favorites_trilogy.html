@@ -26,9 +26,12 @@ $def with (username, user_id, result, service, pagination)
                             <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)"/>
                                 <img src="images/printer_black.png"/>
                             </a>
+                        </td>
+                        <td class="counters">
+                            [$question.get_votes()]<br>[$question.answer_count]
                         </td>    
                         <td class="title">
-                            <a target="_blank" href="$question.url"/>$question.title</a><br>
+                            <a target="_blank" href="$question.url"/>$question.title.replace('<', '&lt;')</a><br>
                             <span class="tag">
                                 [$(", ".join([tag for tag in question.tags_list]))]
                             </span>

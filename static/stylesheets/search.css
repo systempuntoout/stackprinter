@@ -6,8 +6,7 @@ a:link, a:visited {
 
 .tag{
     font-family:Courier;
-    font-size:0.55em;
-    font-weigth:bold;
+    font-size:0.6em;
 }
 
 #back img{
@@ -43,10 +42,18 @@ td.printer img{
     height:15px; 
 }
 
+td.printer {
+    width:1%; 
+}
 td.title{
     text-align:left;
 }
-
+td.counters{
+    font-family:Courier;
+    font-size:0.6em;
+    text-align:center;
+    width:1%;
+}
 td.date{
     font-family:Courier;
     font-size:0.75em;
