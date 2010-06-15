@@ -52,7 +52,7 @@ def about():
         yield '', join_('                  <a target="_new" href="/docs/changelog.txt">Changelog</a><br>\n')
         yield '', join_('                  <a target="_new" href="/docs/todo.txt">ToDo</a><br>\n')
         yield '', join_('                  <a target="_new" href="http://stackapps.com/questions/179/stackprinter-the-stackoverflow-trilogy-printer-suite">Stack Apps</a><br>\n')
-        yield '', join_('                  Source code on Github<br>\n')
+        yield '', join_('                  <a target="_new" href="http://github.com/systempuntoout/stackprinter"/>Source code on Github</a><br>\n')
         yield '', join_('                  <img src="/images/systempuntooutmail.jpg"/>    \n')
         yield '', join_('              </div>                                 \n')
         yield '', join_('          </div>\n')
@@ -638,7 +638,7 @@ def oops():
 oops = CompiledTemplate(oops(), 'views/oops.html')
 
 
-def top_voted():
+def topvoted():
     loop = ForLoop()
     _dummy  = CompiledTemplate(lambda: None, "dummy")
     join_ = _dummy._join
@@ -718,7 +718,7 @@ def top_voted():
         yield '', join_('</html>\n')
     return __template__
 
-top_voted = CompiledTemplate(top_voted(), 'views/top_voted.html')
+topvoted = CompiledTemplate(topvoted(), 'views/topvoted.html')
 
 
 def topvoted_tagged():
