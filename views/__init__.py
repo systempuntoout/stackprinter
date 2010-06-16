@@ -652,7 +652,7 @@ def topvoted():
         yield '', join_('                function()\n')
         yield '', join_('                {   \n')
         yield '', join_('                    jQuery("#check_username").fadeOut(2000);            \n')
-        yield '', join_('                        if (jQuery.cookie("USERNAME") != null){\n')
+        yield '', join_('                        if (jQuery.cookie("TAGGED") != null){\n')
         yield '', join_('                            jQuery("#input_main").val(jQuery.cookie("TAGGED"));\n')
         yield '', join_('                        }\n')
         yield '', join_('                        else{\n')

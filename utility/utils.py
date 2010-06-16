@@ -1,9 +1,6 @@
 from datetime import datetime
 from lib import BeautifulSoup as Bs
-import urllib
 
-def urlencode(string):
-    return urllib.quote(string)
 
 def date_from(timestamp):
     """Format the given timestamp""" 
