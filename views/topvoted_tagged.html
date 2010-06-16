@@ -46,14 +46,14 @@ $def with (tagged, result, service, pagination)
                                 <tr>
                                     <td class="pagination_back">
                                         $if pagination.has_previous_entries():
-                                	        <a href="/topvoted?service=$(service)&tagged=$(urlencode(tagged))&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; back</a>
+                                	        <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; back</a>
                                     </td>
                                     <td class="pagination_info">
                                         Page: $pagination.page | Pagesize: $pagination.pagesize | Total questions : $pagination.total
                                     </td>
                                     <td class="pagination_more">
                                         $if pagination.has_more_entries():
-                                	           <a href="/topvoted?service=$(service)&tagged=$(urlencode(tagged))&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">more &raquo;</a>   
+                                	           <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">more &raquo;</a>   
                                     </td>
                                 </tr>
                             </table>

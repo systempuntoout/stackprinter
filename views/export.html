@@ -28,7 +28,7 @@ $def with (service, question , answers, pretty_links, printer)
 	    </div>         
         <div id="question-block">
           <div id="question-title">
-          	 <img width="30px" heigth="30px" src="/images/$(service).png"/>&nbsp;$question['title'].replace('<', '&lt;')<br>
+          	 <img width="30px" heigth="30px" src="/images/$(service).png"/>&nbsp;$htmlquote(question['title'])<br>
           </div>
           <div id="question-details">
                 [$(['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0])$(int(question['up_vote_count'])-int(question['down_vote_count']))] [$question['answer_count']]

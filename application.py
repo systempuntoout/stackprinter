@@ -17,7 +17,8 @@ web.render = render = web.template.render('views/',globals={'date_from':utils.da
                                                'supported_services': sopy.supported_services,
                                                'supported_services_keys': sopy.supported_services_keys,
                                                'commify': web.utils.commify,
-                                               'urlencode':utils.urlencode,
+                                               'urlquote':web.net.urlquote,
+                                               'htmlquote':web.net.htmlquote,
                                                'ERROR_MESSAGE' : UNICORN_MESSAGE_ERROR
                                                })
 def notfound():

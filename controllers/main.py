@@ -4,7 +4,6 @@ import lib.sopy as sopy
 import lib.deliciousapi as deliciousapi 
 import db.counter as counter
 import utility.utils as utils
-import urllib
 import logging
 import web
 import re
@@ -72,7 +71,7 @@ class Favorites:
                 if user_id:
                     users = sopy.get_users_by_id(int(user_id), service, page = 1, pagesize = 1)
                 else:
-                    users = sopy.get_users(urllib.quote(username.encode('utf-8')), service, pagesize = 50)
+                    users = sopy.get_users(web.net.urlquote(username), service, pagesize = 50)
                     
                 if len(users) > 1:
                     return render.favorites_user_selection(users, service)
@@ -128,7 +127,7 @@ class TopVoted:
             if not service or not tagged:
                 return render.topvoted()
             
-            top_voted_questions = sopy.get_questions_by_tags(";".join([urllib.quote(tag.encode('utf-8')) for tag in tagged.split()]), service, page, pagesize = 30)
+            top_voted_questions = sopy.get_questions_by_tags(";".join([web.net.urlquote(tag) for tag in tagged.split()]), service, page, pagesize = 30)
             questions = top_voted_questions[0]
             pagination = top_voted_questions[1]
             for question in questions:
