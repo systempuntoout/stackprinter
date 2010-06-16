@@ -44,26 +44,19 @@
                   <br>
                   <form  id="topvoted_form" action="/topvoted" method="POST">
                       <div id="input_container_topvoted">
-                          <table cellpadding="0" cellspacing="0">
-                              <tr valign=top>
-                                  <td align=center nowrap>
-                                     <span class="main">Tags</span>
-                                     <div id="input_wrapper">
-                                         <input maxlength="60" name="tagged" value="" size="40" id="input_main">
-                                     </div>
-                                     <div>                                       
-                                       <select id="service" name="service">
-                                           $for service_key in supported_services_keys:
-                                               <option  value="$(service_key)">$(supported_services[service_key])</option>
-                                      </select>
-                                      </div>
-                                      <div class="button">
-                                          <input id="topvoted_button" type="button" value="Get questions"/>
-                                      </div>                                        
-                                 
-                                  </td>                                    
-                              </tr>
-                          </table>
+                         <span class="main">Tags</span>
+                             <div id="input_wrapper">
+                                 <input maxlength="60" name="tagged" value="" size="40" id="input_main">
+                             </div>
+                         <div>                                       
+                               <select id="service" name="service">
+                                   $for service_key in supported_services_keys:
+                                       <option  value="$(service_key)">$(supported_services[service_key])</option>
+                              </select>
+                          </div>
+                          <div class="button">
+                              <input id="topvoted_button" type="button" value="Get questions"/>
+                          </div>
                       </div>
                   </form>                          
               </div>

@@ -75,25 +75,19 @@ $def with (counter)
               <br>
               <form id="question_form" action="/export" method="POST">
                   <div id="input_container_question">
-                      <table cellpadding="0" cellspacing="0">
-                          <tr valign=top>
-                              <td align=center nowrap>
-                                 <span class="main">Question id</span>
-                                 <div id="input_wrapper">
-                                     <input maxlength="10" name="question" title="StackPrinter" value="" size="12" id="input_main">
-                                 </div>
-                                 <div>                                       
-                                  <select id="service" name="service">
-                                      $for service_key in supported_services_keys:
-                                          <option  value="$(service_key)">$(supported_services[service_key])</option> 
-                                 </select>
-                                 </div>
-                                 <div class="button">
-                                 <input id="question_button" type="button" name="format" value="Print"/>
-                                 </div>
-                              </td>                                     
-                          </tr>
-                      </table>
+                     <span class="main">Question id</span>
+                     <div id="input_wrapper">
+                         <input maxlength="10" name="question" title="StackPrinter" value="" size="12" id="input_main">
+                     </div>
+                     <div>                                       
+                          <select id="service" name="service">
+                              $for service_key in supported_services_keys:
+                                  <option  value="$(service_key)">$(supported_services[service_key])</option> 
+                         </select>
+                     </div>
+                     <div class="button">
+                         <input id="question_button" type="button" name="format" value="Print"/>
+                     </div>
                   </div>
               </form>
               <p id="question_title">&nbsp;</p>

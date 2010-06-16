@@ -45,27 +45,20 @@ $def with (message = None)
                   <br>
                   <form  id="favorites_form" action="/favorites" method="POST">
                       <div id="input_container_favorites">
-                          <table cellpadding="0" cellspacing="0">
-                              <tr valign=top>
-                                  <td align=center nowrap>
-                                     <span class="main">Username</span>
-                                     <div id="input_wrapper">
-                                         <input maxlength="60" name="username" value="" size="20" id="input_main">
-                                     </div>
-                                     <div>                                       
-                                       <select id="service" name="service">
-                                           $for service_key in supported_services_keys:
-                                               <option  value="$(service_key)">$(supported_services[service_key])</option>
-                                           <option  value="delicious">Delicious</option> 
-                                      </select>
-                                      </div>
-                                      <div class="button">
-                                          <input id="favorites_button" type="button" value="Get questions"/>
-                                      </div>                                        
-                                 
-                                  </td>                                    
-                              </tr>
-                          </table>
+                         <span class="main">Username</span>
+                             <div id="input_wrapper">
+                                 <input maxlength="60" name="username" value="" size="20" id="input_main">
+                             </div>
+                         <div>                                       
+                               <select id="service" name="service">
+                                   $for service_key in supported_services_keys:
+                                       <option  value="$(service_key)">$(supported_services[service_key])</option>
+                                   <option  value="delicious">Delicious</option> 
+                              </select>
+                          </div>
+                          <div class="button">
+                              <input id="favorites_button" type="button" value="Get questions"/>
+                          </div>                                        
                       </div>
                   </form>
                   <p id="check_username">

@@ -61,17 +61,17 @@ a:visited {
 
 #input_container_question {
     margin: auto;
-    width:145px;
+    text-align:center;
 }
 
 #input_container_favorites {
     margin: auto;
-    width:186px;
+   text-align:center;
 }
 
 #input_container_topvoted {
     margin: auto;
-    width:337px;
+    text-align:center;
 }
 
 #input_wrapper {
