@@ -1,3 +1,8 @@
+Version 0.8.2
+2010-06-17
+Added last used combobox
+Official svg
+
 Version 0.8.1
 2010-06-15
 Added question's counters 

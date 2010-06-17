@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="/stylesheets/main.css">
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
         <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="/javascripts/jquery.numeric.js"></script>
         <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
         <script type="text/javascript">
         jQuery(
@@ -21,10 +20,14 @@
         		else{
         		    jQuery("#input_main").focus();
         		}
+        		if (jQuery.cookie("SERVICE_TOPVOTED") != null){
+        		    jQuery("#service").val(jQuery.cookie("SERVICE_TOPVOTED"));
+        		}
         		jQuery("#topvoted_button").click(function() {
         		    input = jQuery.trim(jQuery("#input_main").val())
                     if ( input != "") {
                             jQuery.cookie("TAGGED", input , { expires: 50 })
+                            jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })
                         	jQuery("#topvoted_form").submit();
                         }else{
                         	jQuery("input_main").focus();                      
@@ -46,7 +49,7 @@
                       <div id="input_container_topvoted">
                          <span class="main">Tags</span>
                              <div id="input_wrapper">
-                                 <input maxlength="60" name="tagged" value="" size="40" id="input_main">
+                                 <input maxlength="60" name="tagged" value="" size="30" id="input_main">
                              </div>
                          <div>                                       
                                <select id="service" name="service">

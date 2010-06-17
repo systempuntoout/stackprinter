@@ -13,9 +13,8 @@ $def with (username, user_id, result, service, pagination)
         <div id="back">
 	        <a href="/favorites"><img src="/images/search.png"/></a>
 	    </div>
-             <p id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>favorites</i> questions <br>
-                 <a target="_new" href="http://$(service).com/users/$(user_id)/$(username)">$(username)</a>
-             </p>
+             <div id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>favorites</i> questions <br></div>
+             <p id="input"><a target="_new" href="http://$(service).com/users/$(user_id)/$(username)">$(username)</a></p>
              <table cellpadding="2" cellspacing="0">
                     $for rown,question in enumerate(result):
                         $if rown % 2 == 0:

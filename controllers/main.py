@@ -93,7 +93,7 @@ class Favorites:
                                                ))
                     return render.favorites_trilogy(users[0]['display_name'], user_id, result, service, pagination)
                 else:
-                    render.favorites(message = NOT_FOUND_ERROR)    
+                    return render.favorites(message = NOT_FOUND_ERROR)    
             elif service == "delicious":
                     dapi = deliciousapi.DeliciousAPI()
                     meta = dapi.get_user(username, max_bookmarks = 100)

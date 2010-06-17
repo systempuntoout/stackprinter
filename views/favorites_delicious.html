@@ -13,10 +13,11 @@ $def with (username, result)
         <div id="back">
             <a href="/favorites"><img src="/images/search.png"/></a>
         </div>
-             <p id="title" class="main">
+             <div id="title" class="main">
                  <img src="/images/delicious.jpg"/>&nbsp;Delicious <i>stackoverflow</i> question <br>
-                 <a target="_new" href="http://www.delicious.com/$(username)/stackoverflow">$(username)</a>
-            </p>
+            </div>
+            <p id="input"><a target="_new" href="http://www.delicious.com/$(username)/stackoverflow">$(username)</a></p>
+            
             <table cellpadding="2" cellspacing="0">
             $for rown,question in enumerate(result):
                 $if rown % 2 == 0:<tr class="even">

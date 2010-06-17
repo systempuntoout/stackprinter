@@ -1,5 +1,5 @@
 .header {
-    margin-bottom:20px;
+    margin-bottom:40px;
 }
 
 .header_current {
@@ -35,6 +35,7 @@
     width:505px;
     font-family:Courier;
     font-size:0.8em;
+    margin-left:3px;
 }
 
 a:link {

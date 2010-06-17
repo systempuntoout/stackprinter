@@ -13,9 +13,9 @@ $def with (tagged, result, service, pagination)
         <div id="back">
 	        <a href="/topvoted"><img src="/images/search.png"/></a>
 	    </div>
-             <p id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>top voted</i> questions <br>
-                 [<i>$(tagged)</i>]
-             </p>
+             <div id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>top voted</i> questions </div>
+             <p id="input">$(tagged)</p>
+             
              <table cellpadding="2" cellspacing="0">
                     $for rown,question in enumerate(result):
                         $if rown % 2 == 0:

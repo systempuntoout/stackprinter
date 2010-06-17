@@ -4,11 +4,6 @@ a:link, a:visited {
  font-size:0.8em;
 }
 
-.tag{
-    font-family:Courier;
-    font-size:0.6em;
-}
-
 #back img{
     width:20px;
     height:20px;
@@ -17,13 +12,19 @@ a:link, a:visited {
 
 #title{
     margin-bottom:3px;
-    margin-top:5px;
     text-align:center;
 }
 
+#input{
+    margin-top:8px;
+    text-align:center;
+    margin-bottom:8px;
+    font-family:Courier;
+}
+
 #title img{
-    width:30px;
-    height:30px;
+    width:32px;
+    height:32px;
 }
 
 table {
@@ -61,7 +62,14 @@ td.date{
     text-align:right;
 }
 
+.tag{
+    font-family:Courier;
+    font-size:0.6em;
+}
+
 #not_found{
-    margin-top:60px;
+    margin-top:70px;
+    font-family:Courier;
     text-align:center;
+    font-weight:bold;
 }
