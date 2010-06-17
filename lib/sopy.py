@@ -90,6 +90,15 @@ def get_users(filter, service, page = 1, pagesize = 30, sort = 'reputation'):
     users = results['users']
     return users
 
+def get_tags(filter, service, page = 1, pagesize = 10, sort = 'popular'):
+    """
+    Get a list of tags filtered by text
+    """
+    path = "tags"
+    results = __fetch_results(path, service, filter= filter, page = page, pagesize = pagesize, sort = sort)
+    tags = results['tags']
+    return tags
+
 def get_users_by_id(user_id, service, page = 1, pagesize = 30, sort = 'reputation'):
     """
     Get a users of a given user_id

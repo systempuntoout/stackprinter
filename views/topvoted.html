@@ -6,27 +6,30 @@
         <meta name="keywords" content="printer friendly stack overflow">
         <title>StackPrinter</title> 
         <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/jquery.autocomplete.css">
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
         <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.autocomplete.min.js"></script>
         <script type="text/javascript">
         jQuery(
         	function()
         	{   
-        	    jQuery("#check_username").fadeOut(2000);   		
-        		if (jQuery.cookie("TAGGED") != null){
-        		    jQuery("#input_main").val(jQuery.cookie("TAGGED"));
-        		}
-        		else{
-        		    jQuery("#input_main").focus();
-        		}
+        	    jQuery("#input_main").autocomplete('tags', {
+                		multiple: true,
+                		matchContains: true,
+                		multipleSeparator:' ',
+                		extraParams: { service: jQuery("#service").val()}
+                	});
+                		
+        		jQuery("#input_main").focus();
+        		
         		if (jQuery.cookie("SERVICE_TOPVOTED") != null){
         		    jQuery("#service").val(jQuery.cookie("SERVICE_TOPVOTED"));
         		}
         		jQuery("#topvoted_button").click(function() {
         		    input = jQuery.trim(jQuery("#input_main").val())
                     if ( input != "") {
-                            jQuery.cookie("TAGGED", input , { expires: 50 })
                             jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })
                         	jQuery("#topvoted_form").submit();
                         }else{
@@ -49,7 +52,7 @@
                       <div id="input_container_topvoted">
                          <span class="main">Tags</span>
                              <div id="input_wrapper">
-                                 <input maxlength="60" name="tagged" value="" size="30" id="input_main">
+                                 <input maxlength="60" name="tagged" value="" style="text-align:left" size="40" id="input_main">
                              </div>
                          <div>                                       
                                <select id="service" name="service">

@@ -1,5 +1,6 @@
 Version 0.8.2
 2010-06-17
+Added auto completion on tags
 Added last used combobox
 Official svg
 

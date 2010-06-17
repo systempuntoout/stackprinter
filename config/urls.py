@@ -8,5 +8,7 @@ urls = (
   '/favorites', 'controllers.main.Favorites',
   '/topvoted', 'controllers.main.TopVoted',
   '/about', 'controllers.main.About',
-  '/JsonQuestion','controllers.ajax.JsonQuestion'
+  '/JsonQuestion','controllers.ajax.JsonQuestion',
+  '/tags','controllers.ajax.Tags'
+  
 )
