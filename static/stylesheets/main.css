@@ -124,34 +124,3 @@ a.nolines{text-decoration:none;}
     margin-top:25px;
     text-align: center;
 }
-
-#pagination{
-    margin-top:5px;
-}
-
-td.pagination_back {
-    font-family:Courier;
-    font-weight:bold;
-    margin-top:25px;
-    text-align: left;
-    width:20%;
-}
-
-td.pagination_info {
-    font-family:Courier;
-    font-size:0.8em;
-    font-weight:bold;
-    margin-top:25px;
-    text-align: center;
-    width:60%;
-}
-
-td.pagination_more {
-    font-family:Courier;
-    font-weight:bold;
-    margin-top:25px;
-    text-align: right;
-    width:20%;
-}
-
-

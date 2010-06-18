@@ -41,30 +41,30 @@
         </script>
   </head>
     <body>
-             <div id="main_container">
-                  <div class="logo">                           
-                    </div>
-                  <div class="header links">
-                      <a class="nolines" href="/">Home</a>|<a class="nolines" href="/favorites">Favorites</a>|<span class="header_current"><Favorites>TopVoted</span>|<a class="nolines" href="/about">About</a>
+     <div id="main_container">
+          <div class="logo">                           
+            </div>
+          <div class="header links">
+              <a class="nolines" href="/">Home</a>|<a class="nolines" href="/favorites">Favorites</a>|<span class="header_current"><Favorites>TopVoted</span>|<a class="nolines" href="/about">About</a>
+          </div>
+          <br>
+          <form  id="topvoted_form" action="/topvoted" method="POST">
+              <div id="input_container_topvoted">
+                 <span class="main">Tags</span>
+                     <div id="input_wrapper">
+                         <input maxlength="60" name="tagged" value="" style="text-align:left" size="40" id="input_main">
+                     </div>
+                 <div>                                       
+                       <select id="service" name="service">
+                           $for service_key in supported_services_keys:
+                               <option  value="$(service_key)">$(supported_services[service_key])</option>
+                      </select>
                   </div>
-                  <br>
-                  <form  id="topvoted_form" action="/topvoted" method="POST">
-                      <div id="input_container_topvoted">
-                         <span class="main">Tags</span>
-                             <div id="input_wrapper">
-                                 <input maxlength="60" name="tagged" value="" style="text-align:left" size="40" id="input_main">
-                             </div>
-                         <div>                                       
-                               <select id="service" name="service">
-                                   $for service_key in supported_services_keys:
-                                       <option  value="$(service_key)">$(supported_services[service_key])</option>
-                              </select>
-                          </div>
-                          <div class="button">
-                              <input id="topvoted_button" type="button" value="Get questions"/>
-                          </div>
-                      </div>
-                  </form>                          
+                  <div class="button">
+                      <input id="topvoted_button" type="button" value="Get questions"/>
+                  </div>
               </div>
+          </form>                          
+      </div>
   </body>
 </html>

@@ -44,17 +44,22 @@ $def with (tagged, result, service, pagination)
                             </table>
                             <table id="pagination">
                                 <tr>
-                                    <td class="pagination_back">
+                                    <td class="pagination_found">Found: $commify(pagination.total)</td>
+                                    <td class="pagination_page">
                                         $if pagination.has_previous_entries():
-                                	        <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; back</a>
-                                    </td>
-                                    <td class="pagination_info">
-                                        Page: $pagination.page | Pagesize: $pagination.pagesize | Total questions : $pagination.total
-                                    </td>
-                                    <td class="pagination_more">
+                                	        <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; prev&nbsp;&nbsp;</a>
+                                        $for page in pagination.get_pretty_pagination():
+                                            $if page != -1:
+                                                <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(page)&pagesize=$(pagination.pagesize)">
+                                                    $if page == pagination.page:|$(page)|    
+                                                    $else: $page 
+                                                </a>
+                                            $else:
+                                                $pagination.separator
                                         $if pagination.has_more_entries():
-                                	           <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">more &raquo;</a>   
+                                	           <a href="/topvoted?service=$(service)&tagged=$(urlquote(tagged))&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">&nbsp;&nbsp;next &raquo;</a>
                                     </td>
+                                    <td class="pagination_pagesize">Pagesize: $pagination.pagesize</td>
                                 </tr>
                             </table>
                     $else:

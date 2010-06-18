@@ -73,3 +73,34 @@ td.date{
     text-align:center;
     font-weight:bold;
 }
+
+
+#pagination{
+    margin-top:5px;
+}
+
+td.pagination_found {
+    font-family:Courier;
+    font-weight:bold;
+    margin-top:25px;
+    text-align: left;
+    font-size:0.8em;
+    width:20%;
+}
+
+td.pagination_page {
+    font-family:Courier;
+    font-weight:bold;
+    margin-top:25px;
+    text-align: center;
+    width:60%;
+}
+
+td.pagination_pagesize {
+    font-family:Courier;
+    font-weight:bold;
+    margin-top:25px;
+    text-align: right;
+    font-size:0.8em;
+    width:20%;
+}

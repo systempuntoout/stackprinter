@@ -127,7 +127,7 @@ class TopVoted:
             if not service or not tagged:
                 return render.topvoted()
             
-            top_voted_questions = sopy.get_questions_by_tags(";".join([web.net.urlquote(tag) for tag in tagged.split()]), service, page, pagesize = 30)
+            top_voted_questions = sopy.get_questions_by_tags(";".join([web.net.urlquote(tag) for tag in tagged.strip().split()]), service, page, pagesize = 30)
             questions = top_voted_questions[0]
             pagination = top_voted_questions[1]
             for question in questions:
@@ -141,7 +141,7 @@ class TopVoted:
                                        question['down_vote_count'],
                                        question['answer_count']
                                        ))
-            return render.topvoted_tagged(tagged, result, service, pagination)  
+            return render.topvoted_tagged(tagged.strip(), result, service, pagination)  
         except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
