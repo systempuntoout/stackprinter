@@ -24,6 +24,13 @@
                 		
         		jQuery("#input_main").focus();
         		
+                jQuery('#input_main').bind('keyup blur',function(){ 
+                    jQuery("#input_main").setOptions({
+                      extraParams: { service: jQuery("#service").val() }
+                    });  
+                  }
+                );
+        		
         		if (jQuery.cookie("SERVICE_TOPVOTED") != null){
         		    jQuery("#service").val(jQuery.cookie("SERVICE_TOPVOTED"));
         		}
