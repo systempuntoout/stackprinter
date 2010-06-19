@@ -33,7 +33,7 @@
                             jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })
                         	jQuery("#topvoted_form").submit();
                         }else{
-                        	jQuery("input_main").focus();                      
+                        	jQuery("#input_main").focus();                      
                         	return false;                                
                         }                                                    
                 });
@@ -61,7 +61,7 @@
                       </select>
                   </div>
                   <div class="button">
-                      <input id="topvoted_button" type="button" value="Get questions"/>
+                      <input type="image" id="topvoted_button" src="/images/getquestions.png" onmouseover="this.src='/images/getquestions_MouseOver.png';" onmouseout="this.src='/images/getquestions.png';" />
                   </div>
               </div>
           </form>                          

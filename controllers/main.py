@@ -30,6 +30,7 @@ class Export:
             service = web.input()['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
             printer =  web.input(printer = 'true')['printer']
+            format = web.input(format = 'HTML')['format'] #For future implementation
             
             question = sopy.get_question(int(question_id), service, body = True, comments = True, pagesize = 1)
             if not question:
