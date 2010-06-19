@@ -674,7 +674,7 @@ def topvoted():
         yield '', join_("                jQuery('#input_main').bind('keyup blur',function(){ \n")
         yield '', join_('                    jQuery("#input_main").setOptions({\n')
         yield '', join_('                      extraParams: { service: jQuery("#service").val() }\n')
-        yield '', join_('                    });  \n')
+        yield '', join_('                    }).flushCache();  \n')
         yield '', join_('                  }\n')
         yield '', join_('                );\n')
         yield '', join_('                        \n')

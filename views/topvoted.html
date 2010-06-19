@@ -27,7 +27,7 @@
                 jQuery('#input_main').bind('keyup blur',function(){ 
                     jQuery("#input_main").setOptions({
                       extraParams: { service: jQuery("#service").val() }
-                    });  
+                    }).flushCache();  
                   }
                 );
         		
