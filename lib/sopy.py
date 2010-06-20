@@ -13,6 +13,7 @@ try:
 except ImportError: 
     logging.error(KEY_TEMPLATE_ERROR)
 
+__api_version = '0.8'
 __default_page_size = 100
 __default_page = 1
 supported_services_keys = ["stackoverflow","meta.stackoverflow","serverfault","superuser","stackapps"]
@@ -140,6 +141,6 @@ def __build_url(path, service, **params):
     """
     query = ["%s=%s" % (key, params[key]) for key in params if params[key]]
     query_string = "&".join(query)
-    url = "http://api." + service +".com/0.8/" + path + "?"
+    url = "http://api.%s.com/%s/%s?" % (service, __api_version, path)
     url += query_string
     return url
