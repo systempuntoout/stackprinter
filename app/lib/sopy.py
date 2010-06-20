@@ -5,8 +5,8 @@ Python Stack Overflow library customized for Google App Engine
 """
 from django.utils import simplejson 
 from google.appengine.api import urlfetch
-from models.pagination import Pagination
-from config.constant import *
+from app.models.pagination import Pagination
+from app.config.constant import *
 import logging
 try:
     from key import api_key

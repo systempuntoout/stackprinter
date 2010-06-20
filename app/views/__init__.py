@@ -16,7 +16,7 @@ def about():
         yield '', join_('        <meta name="keywords" content="printer friendly stack overflow">\n')
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
         yield '', join_('         <div id="main_container">\n')
@@ -60,7 +60,7 @@ def about():
         yield '', join_('</html>\n')
     return __template__
 
-about = CompiledTemplate(about(), 'views/about.html')
+about = CompiledTemplate(about(), 'app/views/about.html')
 
 
 def export():
@@ -74,7 +74,7 @@ def export():
         yield '', join_('        <head>\n')
         yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
         yield '', join_('                <link rel="stylesheet" href="/stylesheets/export.css">\n')
-        yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('                <title>', escape_(question['title'], True), '</title>\n')
         yield '', join_('                <script type="text/javascript">\n')
         yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
@@ -160,7 +160,7 @@ def export():
         yield '', join_('</html>\n')
     return __template__
 
-export = CompiledTemplate(export(), 'views/export.html')
+export = CompiledTemplate(export(), 'app/views/export.html')
 
 
 def favorites():
@@ -178,7 +178,7 @@ def favorites():
         yield '', join_('        <meta name="keywords" content="printer friendly stack overflow">\n')
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>\n')
         yield '', join_('        <script type="text/javascript">\n')
@@ -244,7 +244,7 @@ def favorites():
         yield '', join_('</html>\n')
     return __template__
 
-favorites = CompiledTemplate(favorites(), 'views/favorites.html')
+favorites = CompiledTemplate(favorites(), 'app/views/favorites.html')
 
 
 def favorites_delicious():
@@ -262,7 +262,7 @@ def favorites_delicious():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
         yield '', join_('        <div id="back">\n')
@@ -281,7 +281,7 @@ def favorites_delicious():
                 yield '', join_('            ', '<tr>\n')
             yield '', join_('            ', '    <td class="printer">\n')
             yield '', join_('            ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
-            yield '', join_('            ', '            <img src="images/printer_black.png"/>\n')
+            yield '', join_('            ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('            ', '        </a>\n')
             yield '', join_('            ', '    </td>    \n')
             yield '', join_('            ', '    <td class="title">\n')
@@ -305,7 +305,7 @@ def favorites_delicious():
         yield '', join_('</html>\n')
     return __template__
 
-favorites_delicious = CompiledTemplate(favorites_delicious(), 'views/favorites_delicious.html')
+favorites_delicious = CompiledTemplate(favorites_delicious(), 'app/views/favorites_delicious.html')
 
 
 def favorites_trilogy():
@@ -323,7 +323,7 @@ def favorites_trilogy():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
         yield '', join_('        <div id="back">\n')
@@ -339,7 +339,7 @@ def favorites_trilogy():
                 yield '', join_('                    ', '<tr>\n')
             yield '', join_('                    ', '<td class="printer">\n')
             yield '', join_('                    ', '    <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
-            yield '', join_('                    ', '        <img src="images/printer_black.png"/>\n')
+            yield '', join_('                    ', '        <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('                    ', '    </a>\n')
             yield '', join_('                    ', '</td>\n')
             yield '', join_('                    ', '<td class="counters">\n')
@@ -388,7 +388,7 @@ def favorites_trilogy():
         yield '', join_('</html>\n')
     return __template__
 
-favorites_trilogy = CompiledTemplate(favorites_trilogy(), 'views/favorites_trilogy.html')
+favorites_trilogy = CompiledTemplate(favorites_trilogy(), 'app/views/favorites_trilogy.html')
 
 
 def favorites_user_selection():
@@ -407,7 +407,7 @@ def favorites_user_selection():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/scrollable.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.tools.min.js"></script>\n')
         yield '', join_('        <script>\n')
@@ -485,7 +485,7 @@ def favorites_user_selection():
         yield '', join_('</html>\n')
     return __template__
 
-favorites_user_selection = CompiledTemplate(favorites_user_selection(), 'views/favorites_user_selection.html')
+favorites_user_selection = CompiledTemplate(favorites_user_selection(), 'app/views/favorites_user_selection.html')
 
 
 def index():
@@ -503,7 +503,7 @@ def index():
         yield '', join_('        <meta name="keywords" content="printer friendly stack overflow"/>\n')
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css"/>\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
         yield '', join_('        <script type="text/javascript">\n')
         yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
         yield '', join_('            document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));\n')
@@ -599,7 +599,7 @@ def index():
         yield '', join_('</html>\n')
     return __template__
 
-index = CompiledTemplate(index(), 'views/index.html')
+index = CompiledTemplate(index(), 'app/views/index.html')
 
 
 def oops():
@@ -616,7 +616,7 @@ def oops():
         yield '', join_('        <meta name="keywords" content="printer friendly stack overflow">\n')
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
         yield '', join_('         <div id="home">\n')
@@ -635,7 +635,7 @@ def oops():
         yield '', join_('</html>\n')
     return __template__
 
-oops = CompiledTemplate(oops(), 'views/oops.html')
+oops = CompiledTemplate(oops(), 'app/views/oops.html')
 
 
 def topvoted():
@@ -654,7 +654,7 @@ def topvoted():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery.autocomplete.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.autocomplete.min.js"></script>\n')
@@ -724,7 +724,7 @@ def topvoted():
         yield '', join_('</html>\n')
     return __template__
 
-topvoted = CompiledTemplate(topvoted(), 'views/topvoted.html')
+topvoted = CompiledTemplate(topvoted(), 'app/views/topvoted.html')
 
 
 def topvoted_tagged():
@@ -742,7 +742,7 @@ def topvoted_tagged():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
         yield '', join_('        <div id="back">\n')
@@ -759,7 +759,7 @@ def topvoted_tagged():
                 yield '', join_('                    ', '<tr>\n')
             yield '', join_('                    ', '<td class="printer">\n')
             yield '', join_('                    ', '    <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
-            yield '', join_('                    ', '        <img src="images/printer_black.png"/>\n')
+            yield '', join_('                    ', '        <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('                    ', '    </a>                            \n')
             yield '', join_('                    ', '</td>\n')
             yield '', join_('                    ', '<td class="counters">\n')
@@ -808,5 +808,5 @@ def topvoted_tagged():
         yield '', join_('</html>\n')
     return __template__
 
-topvoted_tagged = CompiledTemplate(topvoted_tagged(), 'views/topvoted_tagged.html')
+topvoted_tagged = CompiledTemplate(topvoted_tagged(), 'app/views/topvoted_tagged.html')
 

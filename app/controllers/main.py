@@ -1,9 +1,9 @@
-from models.question import Question
-from config.constant import *
-import lib.sopy as sopy
-import lib.deliciousapi as deliciousapi 
-import db.counter as counter
-import utility.utils as utils
+from app.models.question import Question
+from app.config.constant import *
+import app.lib.sopy as sopy
+import app.lib.deliciousapi as deliciousapi 
+import app.db.counter as counter
+import app.utility.utils as utils
 import logging
 import web
 import re

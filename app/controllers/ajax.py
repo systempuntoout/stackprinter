@@ -1,6 +1,6 @@
 from google.appengine.api import memcache
-from config.constant import *
-import lib.sopy as sopy
+from app.config.constant import *
+import app.lib.sopy as sopy
 import web
 
 

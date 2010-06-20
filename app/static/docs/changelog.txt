@@ -1,7 +1,7 @@
 Version 0.8.3
 2010-06-18
 Better pagination
-Fixed button
+Fixed buttons
 
 Version 0.8.2
 2010-06-17

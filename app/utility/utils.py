@@ -1,5 +1,5 @@
 from datetime import datetime
-from lib import BeautifulSoup as Bs
+from app.lib import BeautifulSoup as Bs
 
 
 def date_from(timestamp):

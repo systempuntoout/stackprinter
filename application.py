@@ -1,18 +1,16 @@
 """
     StackPrinter: The StackOverflow Trilogy Printer Suite
 """
-from google.appengine.api import memcache
-from models.question import Question
-from config.urls import urls
-from config.constant import *
-import lib.sopy as sopy
-import utility.utils as utils
+from app.config.urls import urls
+from app.config.constant import *
+import app.lib.sopy as sopy
+import app.utility.utils as utils
 import logging
 import web
 
 logging.getLogger().setLevel(logging.ERROR)
     
-web.render = render = web.template.render('views/',globals={'date_from':utils.date_from,
+web.render = render = web.template.render('app/views/',globals={'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
                                                'supported_services': sopy.supported_services,
                                                'supported_services_keys': sopy.supported_services_keys,
