@@ -33,7 +33,7 @@ table {
     width:90%;
 }
 
-tr.even {
+tr.odd {
     background-color:#efefef;
 }
 

@@ -19,9 +19,8 @@ $def with (username, result)
             <p id="input"><a target="_new" href="http://www.delicious.com/$(username)/stackoverflow">$(username)</a></p>
             
             <table cellpadding="2" cellspacing="0">
-            $for rown,question in enumerate(result):
-                $if rown % 2 == 0:<tr class="even">
-                $else:<tr>
+            $for question in result:
+                <tr class="$loop.parity">
                     <td class="printer">
                         <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)"/>
                             <img title="Printer-Friendly" src="images/printer_black.png"/>
@@ -37,7 +36,8 @@ $def with (username, result)
                         [$(question.creation_date.strftime('%Y-%m-%d'))]
                     </td>
                 </tr>
-                $if rown == len(result) - 1: </table>
+                $if loop.last:
+                    </table>
             $else:
                 $if len(result) == 0:
                     <p id="not_found">
