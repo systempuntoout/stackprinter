@@ -254,6 +254,7 @@ def favorites_delicious():
     escape_ = _dummy._escape
 
     def __template__ (username, result):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
@@ -312,6 +313,7 @@ def favorites_trilogy():
     escape_ = _dummy._escape
 
     def __template__ (username, user_id, result, service, pagination):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
@@ -728,6 +730,7 @@ def topvoted_tagged():
     escape_ = _dummy._escape
 
     def __template__ (tagged, result, service, pagination):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
