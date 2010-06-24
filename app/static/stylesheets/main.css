@@ -128,3 +128,7 @@ a.nolines{text-decoration:none;}
     margin-top:25px;
     text-align: center;
 }
+
+.ac_loading {
+	background: white url('/images/indicator.gif') right center no-repeat;
+}

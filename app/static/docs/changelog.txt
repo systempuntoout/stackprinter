@@ -1,3 +1,7 @@
+Version 0.8.4
+2010-06-24
+Switched to API 0.9 version
+
 Version 0.8.3
 2010-06-18
 Better pagination

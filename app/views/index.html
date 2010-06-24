@@ -25,9 +25,11 @@ $def with (counter)
         function getQuestion(question) {
 		        if (jQuery.trim(question)!=''){
     		        jQuery('#question_title').html('&nbsp;');
+    		        jQuery('#input_main').addClass('ac_loading');
         		    var service = jQuery('#service').val();
         			jQuery.getJSON("/JsonQuestion?question="+question+"&service="+service, function(data){
                              jQuery('#question_title').text(data.title);
+                             jQuery('#input_main').removeClass('ac_loading');
                     });
              }
 		}

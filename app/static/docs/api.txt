@@ -13,10 +13,10 @@ format
 * exported format (HTML)
 * string 
 
-prettylinks
+prettylinks (optional)
 * shows a list of urls above the question\answers a la wikipedia
 * boolean true (default)
 
-printer
+printer (optional)
 * enables the print command when page is loaded
 * boolean true (default)

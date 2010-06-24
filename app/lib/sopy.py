@@ -13,7 +13,7 @@ try:
 except ImportError: 
     logging.error(KEY_TEMPLATE_ERROR)
 
-__api_version = '0.8'
+__api_version = '0.9'
 __default_page_size = 100
 __default_page = 1
 supported_services_keys = ["stackoverflow","meta.stackoverflow","serverfault","superuser","stackapps"]
