@@ -9,6 +9,7 @@ urls = (
   '/topvoted', 'app.controllers.main.TopVoted',
   '/about', 'app.controllers.main.About',
   '/JsonQuestion','app.controllers.ajax.JsonQuestion',
-  '/tags','app.controllers.ajax.Tags'
+  '/tags','app.controllers.ajax.Tags',
+  '/quicklook','app.controllers.ajax.Quicklook',
   
 )

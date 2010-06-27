@@ -43,6 +43,16 @@ td.printer img{
     height:15px; 
 }
 
+td.quicklook img{
+    border:0px;
+    width:18px;
+    height:15px; 
+}
+
+td.quicklook {
+    width:1%; 
+}
+
 td.printer {
     width:1%; 
 }
@@ -103,4 +113,34 @@ td.pagination_pagesize {
     text-align: right;
     font-size:0.8em;
     width:20%;
+}
+
+#question-block  {
+    padding-top:5px;    
+    padding-bottom:5px;
+    border-bottom:1px solid;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+#quicklook_question-title  {
+    text-align:center;
+    font-weight:bold;
+    font-size: 13pt;
+    margin-bottom:5px;
+}
+#quicklook_question-details  {
+    font-weight:bold;
+    font-size: 10pt;
+    margin-bottom:5px;
+}
+
+#quicklook_question-links {
+    font-size:0.9em;
+    margin-bottom:20px;
+}
+
+#quicklook_question  { 
+   font-size:11pt;
+   margin-left:13px;
 }
