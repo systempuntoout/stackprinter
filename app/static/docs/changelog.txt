@@ -1,4 +1,8 @@
 Version 0.8.5
+2010-06-29
+Changed About
+
+Version 0.8.5
 2010-06-27
 Added [Q]uicklook feature
 

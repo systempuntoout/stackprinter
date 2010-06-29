@@ -1,7 +1,7 @@
-StackPrinter: The Stack Overflow Trilogy Printer Suite
+StackPrinter: The Stack Exchange Printer Suite
 http://stackprinter.appspot.com
 
 INSTALL:
 Clone it 
 Copy webpy library on directory project (www.webpy.org)
-Run the project on Google App Engine.
+Run it on Google App Engine.

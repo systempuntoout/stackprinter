@@ -92,7 +92,7 @@ class Favorites:
                                                question['down_vote_count'],
                                                question['answer_count']
                                                ))
-                    return render.favorites_trilogy(users[0]['display_name'], user_id, result, service, pagination)
+                    return render.favorites_stackexchange(users[0]['display_name'], user_id, result, service, pagination)
                 else:
                     return render.favorites(message = NOT_FOUND_ERROR)    
             elif service == "delicious":

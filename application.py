@@ -1,5 +1,5 @@
 """
-    StackPrinter: The StackOverflow Trilogy Printer Suite
+    StackPrinter: The Stack Exchange Printer Suite
 """
 from app.config.urls import urls
 from app.config.constant import *
