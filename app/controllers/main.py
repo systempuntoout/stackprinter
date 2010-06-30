@@ -97,13 +97,16 @@ class Favorites:
                     return render.favorites(message = NOT_FOUND_ERROR)    
             elif service == "delicious":
                     dapi = deliciousapi.DeliciousAPI()
-                    meta = dapi.get_user(username, max_bookmarks = 100)
-                    bookmarks = meta.bookmarks
-                    for bookmark in bookmarks:
-                        match = re.search('http://(%s)\.com/questions/(\d+)/' % ("|".join(sopy.supported_services).replace(".","\.")), bookmark[0])
-                        if match:
-                            result.append(Question(match.group(2), bookmark[0], bookmark[2], bookmark[1], bookmark[4], match.group(1)))
-                    return render.favorites_delicious(username, result)
+                    try:
+                        meta = dapi.get_user(username, max_bookmarks = 100)
+                        bookmarks = meta.bookmarks
+                        for bookmark in bookmarks:
+                            match = re.search('http://(%s)\.com/questions/(\d+)/' % ("|".join(sopy.supported_services).replace(".","\.")), bookmark[0])
+                            if match:
+                                result.append(Question(match.group(2), bookmark[0], bookmark[2], bookmark[1], bookmark[4], match.group(1)))
+                        return render.favorites_delicious(username, result)
+                    except:
+                        return render.favorites(message = NOT_FOUND_ERROR)  
             else:
                 raise sopy.UnsupportedServiceError( service, UNSUPPORTED_SERVICE_ERROR)
         except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:

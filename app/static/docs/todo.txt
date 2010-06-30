@@ -1,4 +1,6 @@
-Last update: 2010-06-18
+Last update: 2010-06-30
+Any ideas?
+
 Known Bugs:
 *Google AppEngine drops the connection after 30 seconds from the Request; UrlFetch has a 
 deadline of 10 seconds too. In question with many answers and comments, sometimes StackPrinter
