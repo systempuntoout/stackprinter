@@ -16,12 +16,15 @@ except ImportError:
 __api_version = '0.9'
 __default_page_size = 100
 __default_page = 1
-supported_services_keys = ["stackoverflow","meta.stackoverflow","serverfault","superuser","stackapps"]
+#This should be updated when Stackauth will provide png with trasparent background 
+supported_services_keys = ["stackoverflow","meta.stackoverflow","serverfault","superuser","stackapps","webapps.stackexchange","meta.webapps.stackexchange"]
 supported_services = {"stackoverflow":"Stack Overflow", 
                       "meta.stackoverflow": "Meta Stack Overflow",
                       "serverfault" : "Server Fault", 
                       "superuser" : "Super User", 
-                      "stackapps" : "Stack Apps"}
+                      "stackapps" : "Stack Apps",
+                      "webapps.stackexchange" : "Web Apps",
+                      "meta.webapps.stackexchange" : "Meta Web Apps",}
 
 class ApiRequestError(Exception):
     def __init__(self, url, code, message):
