@@ -1,3 +1,7 @@
+Version 0.8.8
+2010-07-07
+Added link to original question
+
 Version 0.8.7
 2010-07-04
 Added webapps support

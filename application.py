@@ -18,7 +18,7 @@ web.render = render = web.template.render('app/views/', globals = {'date_from':u
                                                'urlquote':web.net.urlquote,
                                                'htmlquote':web.net.htmlquote,
                                                'ERROR_MESSAGE' : UNICORN_MESSAGE_ERROR
-                                               }, cache=True)
+                                               }, cache = True)
 def notfound():
     return web.notfound(render.oops(NOT_FOUND_ERROR))
 def internalerror():

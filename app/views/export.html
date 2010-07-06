@@ -32,7 +32,7 @@ $def with (service, question , answers, pretty_links, printer)
           </div>
           <div id="question-details">
                 [$(['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0])$(int(question['up_vote_count'])-int(question['down_vote_count']))] [$question['answer_count']]
-            	 $question.get('owner', {'display_name':'community_owned'})['display_name']
+            	 $question.get('owner', {'display_name':'community_owned'})['display_name'] 
           </div>
           <div id="question-details">
               [$date_from(float(question['creation_date']))]
@@ -42,6 +42,9 @@ $def with (service, question , answers, pretty_links, printer)
           $for tag in question['tags']:
               $tag
           ]
+          </div>
+          <div id="question-details">
+          [ http://$(service).com/questions/$(question['question_id']) ]
           </div>
           <div id="question">
           $if pretty_links:

@@ -103,7 +103,7 @@ def export():
         yield '', join_('          </div>\n')
         yield '', join_('          <div id="question-details">\n')
         yield '', join_('                [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ']\n')
-        yield '', join_('                 ', escape_(question.get('owner', {'display_name':'community_owned'})['display_name'], True), '\n')
+        yield '', join_('                 ', escape_(question.get('owner', {'display_name':'community_owned'})['display_name'], True), ' \n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div id="question-details">\n')
         yield '', join_('              [', escape_(date_from(float(question['creation_date'])), True), ']\n')
@@ -113,6 +113,9 @@ def export():
         for tag in loop.setup(question['tags']):
             yield '', join_('          ', escape_(tag, True), '\n')
         yield '', join_('          ]\n')
+        yield '', join_('          </div>\n')
+        yield '', join_('          <div id="question-details">\n')
+        yield '', join_('          [ http://', escape_((service), True), '.com/questions/', escape_((question['question_id']), True), ' ]\n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div id="question">\n')
         if pretty_links:
