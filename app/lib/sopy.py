@@ -13,7 +13,7 @@ try:
 except ImportError: 
     logging.error(KEY_TEMPLATE_ERROR)
 
-__api_version = '0.9'
+__api_version = '1.0'
 __default_page_size = 100
 __default_page = 1
 #This should be updated when Stackauth will provide png with trasparent background 
