@@ -1,3 +1,7 @@
+Version 0.9
+2010-07-09
+1.0 API Switch
+
 Version 0.8.9
 2010-07-09
 Added Gaming|Web Masters support
