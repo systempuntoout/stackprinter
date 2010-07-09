@@ -1,6 +1,6 @@
 Version 0.8.9
 2010-07-09
-Switch to 1.0 API woot!
+Added Gaming|Web Masters support
 
 Version 0.8.8
 2010-07-07
