@@ -1,7 +1,7 @@
-from app.models.question import Question
+from app.core.APIdownloader import StackExchangeDownloader
+from app.core.APIdownloader import DeliciousDownloader
 from app.config.constant import *
 import app.lib.sopy as sopy
-import app.lib.deliciousapi as deliciousapi 
 import app.db.counter as counter
 import app.utility.utils as utils
 import logging
@@ -30,13 +30,15 @@ class Export:
             service = web.input()['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
             printer =  web.input(printer = 'true')['printer']
-            format = web.input(format = 'HTML')['format'] #For future implementation
+            format = web.input(format = 'HTML')['format'] #For future implementations
             
-            question = sopy.get_question(int(question_id), service, body = True, comments = True, pagesize = 1)
+            se_downloader = StackExchangeDownloader(service)
+            question = se_downloader.get_question(question_id)
+            
             if not question:
                 return render.oops(NOT_FOUND_ERROR)
             else:
-                answers = sopy.get_answers(int(question_id), service, body = True, comments = True, pagesize = 50, sort = 'votes')
+                answers = se_downloader.get_answers(question_id)
             
             counter.increment()
             return render.export(service, question, answers, pretty_links == 'true', printer == 'true' )
@@ -57,53 +59,34 @@ class Favorites:
         try:
             service = web.input(service = None)['service']
             if not service:
-                return render.favorites()
-                
+                return render.favorites()      
             username = web.input(username = None)['username']
             page = web.input(page = 1)['page']
             user_id = web.input(userid = None)['userid']
             
-            result = []
             if service in sopy.supported_services:
                 if username:
                     match = re.search('.+\|(\d+)', username)
                     if match:
                         user_id = match.group(1)
+                se_downloader = StackExchangeDownloader(service)
                 if user_id:
-                    users = sopy.get_users_by_id(int(user_id), service, page = 1, pagesize = 1)
+                    users = se_downloader.get_users_by_id(user_id)
                 else:
-                    users = sopy.get_users(web.net.urlquote(username), service, pagesize = 50)
+                    users = se_downloader.get_users(username)
                     
                 if len(users) > 1:
                     return render.favorites_user_selection(users, service)
                 elif len(users) == 1:
-                    user_id = users[0]['user_id'] 
-                    favorite_questions = sopy.get_favorites_questions(user_id, service, page, pagesize= 30)
-                    questions = favorite_questions[0]
-                    pagination = favorite_questions[1]
-                    for question in questions:
-                        result.append(Question(question['question_id'],
-                                               "http://%s.com/questions/%d" % (service, question['question_id']),
-                                               question['title'],
-                                               question['tags'], 
-                                               utils.date_from(question['creation_date']),
-                                               service,
-                                               question['up_vote_count'],
-                                               question['down_vote_count'],
-                                               question['answer_count']
-                                               ))
+                    user_id = users[0]['user_id']
+                    result, pagination = se_downloader.get_favorites_questions(user_id, page)
                     return render.favorites_stackexchange(users[0]['display_name'], user_id, result, service, pagination)
                 else:
                     return render.favorites(message = NOT_FOUND_ERROR)    
             elif service == "delicious":
-                    dapi = deliciousapi.DeliciousAPI()
                     try:
-                        meta = dapi.get_user(username, max_bookmarks = 100)
-                        bookmarks = meta.bookmarks
-                        for bookmark in bookmarks:
-                            match = re.search('http://(%s)\.com/questions/(\d+)/' % ("|".join(sopy.supported_services).replace(".","\.")), bookmark[0])
-                            if match:
-                                result.append(Question(match.group(2), bookmark[0], bookmark[2], bookmark[1], bookmark[4], match.group(1)))
+                        delicious_downloader = DeliciousDownloader()
+                        result = delicious_downloader.get_favorites_questions(username)
                         return render.favorites_delicious(username, result)
                     except:
                         return render.favorites(message = NOT_FOUND_ERROR)  
@@ -128,23 +111,14 @@ class TopVoted:
             service = web.input(service = None)['service']
             tagged = web.input(tagged = None)['tagged']
             page = web.input(page = 1)['page']
-            if not service or not tagged:
+            if not service:
                 return render.topvoted()
-            
-            top_voted_questions = sopy.get_questions_by_tags(";".join([web.net.urlquote(tag) for tag in tagged.strip().split()]), service, page, pagesize = 30)
-            questions = top_voted_questions[0]
-            pagination = top_voted_questions[1]
-            for question in questions:
-                result.append(Question(question['question_id'],
-                                       "http://%s.com/questions/%d" % (service, question['question_id']),
-                                       question['title'],
-                                       question['tags'],
-                                       utils.date_from(question['creation_date']),
-                                       service,
-                                       question['up_vote_count'],
-                                       question['down_vote_count'],
-                                       question['answer_count']
-                                       ))
+                
+            se_downloader = StackExchangeDownloader(service)
+            if tagged:
+                result, pagination = se_downloader.get_questions_by_tags(tagged, page)
+            else:
+                result, pagination = se_downloader.get_questions(page)
             return render.topvoted_tagged(tagged.strip(), result, service, pagination)  
         except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
             logging.error(exception)

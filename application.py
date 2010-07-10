@@ -8,7 +8,7 @@ import app.utility.utils as utils
 import logging
 import web
 
-logging.getLogger().setLevel(logging.ERROR)
+logging.getLogger().setLevel(logging.DEBUG)
     
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,

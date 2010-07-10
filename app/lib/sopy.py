@@ -90,6 +90,15 @@ def get_questions_by_tags(tagged, service, page = 1, pagesize = 30, sort = 'vote
     questions = results["questions"]
     return questions, Pagination(results)
 
+def get_questions(service, page = 1, pagesize = 30, sort = 'votes'):
+    """
+    Get questions list sorted by votes
+    """
+    path = "questions" 
+    results = __fetch_results(path, service, page = page, pagesize = pagesize, sort = sort)
+    questions = results["questions"]
+    return questions, Pagination(results)
+
 def get_users(filter, service, page = 1, pagesize = 30, sort = 'reputation'):
     """
     Get a list of users filtered by display name

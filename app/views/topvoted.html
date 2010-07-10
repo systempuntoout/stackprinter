@@ -36,13 +36,8 @@
         		}
         		jQuery("#topvoted_button").click(function() {
         		    input = jQuery.trim(jQuery("#input_main").val())
-                    if ( input != "") {
-                            jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })
-                        	jQuery("#topvoted_form").submit();
-                        }else{
-                        	jQuery("#input_main").focus();                      
-                        	return false;                                
-                        }                                                    
+                    jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })
+                	jQuery("#topvoted_form").submit();                                                
                 });
         	});
         </script>
