@@ -18,7 +18,7 @@ __default_page_size = 100
 __default_page = 1
 #This should be updated when Stackauth will provide png with trasparent background 
 supported_services_keys = ["stackoverflow","meta.stackoverflow","serverfault","superuser","stackapps","webapps.stackexchange", "meta.webapps.stackexchange",\
-                            "gaming.stackexchange","meta.gaming.stackexchange","webmasters.stackexchange","meta.webmasters.stackexchange"]
+                            "gaming.stackexchange","meta.gaming.stackexchange","webmasters.stackexchange","meta.webmasters.stackexchange","cooking.stackexchange","meta.cooking.stackexchange"]
 supported_services = {"stackoverflow":"Stack Overflow", 
                       "meta.stackoverflow": "Meta Stack Overflow",
                       "serverfault" : "Server Fault", 
@@ -29,7 +29,11 @@ supported_services = {"stackoverflow":"Stack Overflow",
                       "gaming.stackexchange" : "Gaming",
                       "meta.gaming.stackexchange" : "Meta Gaming",
                       "webmasters.stackexchange" : "Pro Webmasters",
-                      "meta.webmasters.stackexchange" : "Meta Pro Webmasters"}
+                      "meta.gaming.stackexchange" : "Meta Gaming",
+                      "webmasters.stackexchange" : "Pro Webmasters",
+                      "meta.webmasters.stackexchange" : "Meta Pro Webmasters",
+                      "cooking.stackexchange" : "Cooking",
+                      "meta.cooking.stackexchange" : "Meta Cooking"}
 
 class ApiRequestError(Exception):
     def __init__(self, url, code, message):
