@@ -27,7 +27,7 @@ $def with (counter)
     		        jQuery('#question_title').html('&nbsp;');
     		        jQuery('#input_main').addClass('ac_loading');
         		    var service = jQuery('#service').val();
-        			jQuery.getJSON("/JsonQuestion?question="+question+"&service="+service, function(data){
+        			jQuery.getJSON("/question?question="+question+"&service="+service, function(data){
                              jQuery('#question_title').text(data.title);
                              jQuery('#input_main').removeClass('ac_loading');
                     });
@@ -83,8 +83,8 @@ $def with (counter)
                      </div>
                      <div>                                       
                           <select id="service" name="service">
-                              $for service_key in supported_services_keys:
-                                  <option  value="$(service_key)">$(supported_services[service_key])</option> 
+                              $for service_key in supported_services.keys:
+                                  <option  value="$(service_key)">$(supported_services.info[service_key]['name'])</option> 
                          </select>
                      </div>
                      <div class="button">

@@ -99,7 +99,7 @@ def export():
         yield '', join_('            </div>         \n')
         yield '', join_('        <div id="question-block">\n')
         yield '', join_('          <div id="question-title">\n')
-        yield '', join_('                 <img width="30px" heigth="30px" src="/images/', escape_((service), True), '.png"/>&nbsp;', escape_(htmlquote(question['title']), True), '<br>\n')
+        yield '', join_('                 <img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(question['title']), True), '<br>\n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div id="question-details">\n')
         yield '', join_('                [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ']\n')
@@ -228,8 +228,8 @@ def favorites():
         yield '', join_('                             </div>\n')
         yield '', join_('                         <div>                                       \n')
         yield '', join_('                               <select id="service" name="service">\n')
-        for service_key in loop.setup(supported_services_keys):
-            yield '', join_('                                   ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services[service_key]), True), '</option>\n')
+        for service_key in loop.setup(supported_services.keys):
+            yield '', join_('                                   ', '  <option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
         yield '', join_('                                   <option  value="delicious">Delicious</option> \n')
         yield '', join_('                              </select>\n')
         yield '', join_('                          </div>\n')
@@ -349,7 +349,7 @@ def favorites_stackexchange():
         yield '', join_('        <div id="back">\n')
         yield '', join_('                <a href="/favorites"><img src="/images/search.png"/></a>\n')
         yield '', join_('            </div>\n')
-        yield '', join_('             <div id="title" class="main"><img src="/images/', escape_((service), True), '.png"/>', escape_((supported_services[service]), True), '&nbsp;<i>favorites</i> questions <br></div>\n')
+        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>favorites</i> questions <br></div>\n')
         yield '', join_('             <p id="input"><a target="_new" href="http://', escape_((service), True), '.com/users/', escape_((user_id), True), '/', escape_((username), True), '">', escape_((username), True), '</a></p>\n')
         yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
         for question in loop.setup(result):
@@ -545,7 +545,7 @@ def index():
         yield '', join_("                        jQuery('#question_title').html('&nbsp;');\n")
         yield '', join_("                        jQuery('#input_main').addClass('ac_loading');\n")
         yield '', join_("                            var service = jQuery('#service').val();\n")
-        yield '', join_('                                jQuery.getJSON("/JsonQuestion?question="+question+"&service="+service, function(data){\n')
+        yield '', join_('                                jQuery.getJSON("/question?question="+question+"&service="+service, function(data){\n')
         yield '', join_("                             jQuery('#question_title').text(data.title);\n")
         yield '', join_("                             jQuery('#input_main').removeClass('ac_loading');\n")
         yield '', join_('                    });\n')
@@ -601,8 +601,8 @@ def index():
         yield '', join_('                     </div>\n')
         yield '', join_('                     <div>                                       \n')
         yield '', join_('                          <select id="service" name="service">\n')
-        for service_key in loop.setup(supported_services_keys):
-            yield '', join_('                              ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services[service_key]), True), '</option> \n')
+        for service_key in loop.setup(supported_services.keys):
+            yield '', join_('                              ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option> \n')
         yield '', join_('                         </select>\n')
         yield '', join_('                     </div>\n')
         yield '', join_('                     <div class="button">\n')
@@ -672,7 +672,7 @@ def quicklook():
     def __template__ (service, question):
         yield '', join_('<div id="quicklook_question-block">\n')
         yield '', join_('  <div id="quicklook_question-title">\n')
-        yield '', join_('         <img width="30px" heigth="30px" src="/images/', escape_((service), True), '.png"/>&nbsp;', escape_(htmlquote(question['title']), True), '<br>\n')
+        yield '', join_('         <img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(question['title']), True), '<br>\n')
         yield '', join_('  </div>\n')
         yield '', join_('  <div id="quicklook_question-details">\n')
         yield '', join_('        [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ' answers]\n')
@@ -763,8 +763,8 @@ def topvoted():
         yield '', join_('                     </div>\n')
         yield '', join_('                 <div>                                       \n')
         yield '', join_('                       <select id="service" name="service">\n')
-        for service_key in loop.setup(supported_services_keys):
-            yield '', join_('                           ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services[service_key]), True), '</option>\n')
+        for service_key in loop.setup(supported_services.keys):
+            yield '', join_('                           ', '  <option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
         yield '', join_('                      </select>\n')
         yield '', join_('                  </div>\n')
         yield '', join_('                  <div class="button">\n')
@@ -819,7 +819,7 @@ def topvoted_tagged():
         yield '', join_('        <div id="back">\n')
         yield '', join_('                <a href="/topvoted"><img src="/images/search.png"/></a>\n')
         yield '', join_('            </div>\n')
-        yield '', join_('             <div id="title" class="main"><img src="/images/', escape_((service), True), '.png"/>', escape_((supported_services[service]), True), '&nbsp;<i>top voted</i> questions </div>\n')
+        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>top voted</i> questions </div>\n')
         yield '', join_('             <p id="input">', escape_((tagged), True), '</p>\n')
         yield '', join_('             \n')
         yield '', join_('             <table cellpadding="2" cellspacing="0">\n')

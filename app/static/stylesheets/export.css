@@ -19,6 +19,14 @@ body {
     font-size: 13pt;
     margin-bottom:5px;
 }
+
+#question-title img {
+    width:32px;
+    height:32px;
+    margin-right:10px;
+    vertical-align:bottom;
+}
+
 #question-details  {
     font-weight:bold;
     font-size: 10pt;

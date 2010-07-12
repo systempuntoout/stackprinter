@@ -1,12 +1,11 @@
 from google.appengine.api import memcache
 from app.config.constant import *
 from app.core.APIdownloader import StackExchangeDownloader
+from app.core.APIdownloader import UnsupportedServiceError
 import app.lib.sopy as sopy
-import logging
-import web
+import logging, web
 
-
-class JsonQuestion:
+class Question:
     """
     Return a Json formatted question's title
     """
@@ -54,10 +53,11 @@ class Quicklook:
             
             se_downloader = StackExchangeDownloader(service)
             question = se_downloader.get_question_quicklook(question_id)
+
             if not question:
                 return render.oops(NOT_FOUND_ERROR)
             return render.quicklook(service, question)
-        except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
+        except (sopy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:

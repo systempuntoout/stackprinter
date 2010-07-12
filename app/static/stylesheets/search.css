@@ -25,6 +25,8 @@ a:link, a:visited {
 #title img{
     width:32px;
     height:32px;
+    margin-right:10px;
+    vertical-align:bottom;
 }
 
 table {
@@ -129,6 +131,14 @@ td.pagination_pagesize {
     font-size: 13pt;
     margin-bottom:5px;
 }
+
+#quicklook_question-title img{
+    width:32px;
+    height:32px;
+    margin-right:10px;
+    vertical-align:bottom;
+}
+
 #quicklook_question-details  {
     font-weight:bold;
     font-size: 10pt;

@@ -3,7 +3,7 @@
 """
 from app.config.urls import urls
 from app.config.constant import *
-import app.lib.sopy as sopy
+from app.core.APIdownloader import StackAuthDownloader
 import app.utility.utils as utils
 import logging
 import web
@@ -12,12 +12,11 @@ logging.getLogger().setLevel(logging.ERROR)
     
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
-                                               'supported_services': sopy.supported_services,
-                                               'supported_services_keys': sopy.supported_services_keys,
                                                'commify': web.utils.commify,
                                                'urlquote':web.net.urlquote,
                                                'htmlquote':web.net.htmlquote,
-                                               'ERROR_MESSAGE' : UNICORN_MESSAGE_ERROR
+                                               'supported_services': StackAuthDownloader.get_supported_services(),
+                                               'ERROR_MESSAGE' : UNICORN_MESSAGE_ERROR,
                                                }, cache = True)
 def notfound():
     return web.notfound(render.oops(NOT_FOUND_ERROR))

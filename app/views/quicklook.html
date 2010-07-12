@@ -1,7 +1,7 @@
 $def with (service, question)      
 <div id="quicklook_question-block">
   <div id="quicklook_question-title">
-  	 <img width="30px" heigth="30px" src="/images/$(service).png"/>&nbsp;$htmlquote(question['title'])<br>
+  	 <img src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(question['title'])<br>
   </div>
   <div id="quicklook_question-details">
         [$(['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0])$(int(question['up_vote_count'])-int(question['down_vote_count']))] [$question['answer_count'] answers]

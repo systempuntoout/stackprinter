@@ -32,7 +32,7 @@ $def with (username, user_id, result, service, pagination)
         <div id="back">
 	        <a href="/favorites"><img src="/images/search.png"/></a>
 	    </div>
-             <div id="title" class="main"><img src="/images/$(service).png"/>$(supported_services[service])&nbsp;<i>favorites</i> questions <br></div>
+             <div id="title" class="main"><img src="$(supported_services.info[service]['icon_url'])"/>$(supported_services.info[service]['name'])&nbsp;<i>favorites</i> questions <br></div>
              <p id="input"><a target="_new" href="http://$(service).com/users/$(user_id)/$(username)">$(username)</a></p>
              <table cellpadding="2" cellspacing="0">
                     $for question in result:

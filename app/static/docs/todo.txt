@@ -1,8 +1,8 @@
-Last update: 2010-07-11
-Add Stackauth sites 
-Refactor sopy and StackExchangeDownloader
-Add answers to [Q]uicklook
-Any ideas?
+Last update: 2010-07-12
+Rename sopy in sepy
+Use api_endpoint from supportes_services
+Combo with pictures?
+Add accepted answers to [Q]uicklook where available
 
 Known Bugs:
 *Google AppEngine drops the connection after 30 seconds from the Request; UrlFetch has a 

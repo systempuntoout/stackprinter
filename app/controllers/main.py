@@ -1,12 +1,11 @@
 from app.core.APIdownloader import StackExchangeDownloader
+from app.core.APIdownloader import UnsupportedServiceError
 from app.core.APIdownloader import DeliciousDownloader
 from app.config.constant import *
 import app.lib.sopy as sopy
 import app.db.counter as counter
 import app.utility.utils as utils
-import logging
-import web
-import re
+import logging, web, re
 
 render = web.render 
 
@@ -42,7 +41,7 @@ class Export:
             
             counter.increment()
             return render.export(service, question, answers, pretty_links == 'true', printer == 'true' )
-        except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
+        except (sopy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
@@ -91,8 +90,8 @@ class Favorites:
                     except:
                         return render.favorites(message = NOT_FOUND_ERROR)  
             else:
-                raise sopy.UnsupportedServiceError( service, UNSUPPORTED_SERVICE_ERROR)
-        except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
+                raise UnsupportedServiceError( service, UNSUPPORTED_SERVICE_ERROR)
+        except (sopy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
@@ -118,9 +117,9 @@ class TopVoted:
             if tagged:
                 result, pagination = se_downloader.get_questions_by_tags(tagged, page)
             else:
-                result, pagination = se_downloader.get_questions(page)
+                result, pagination = se_downloader.get_questions_by_votes(page)
             return render.topvoted_tagged(tagged.strip(), result, service, pagination)  
-        except (sopy.ApiRequestError, sopy.UnsupportedServiceError), exception:
+        except (sopy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:

@@ -1,5 +1,6 @@
 from datetime import datetime
 from app.lib import BeautifulSoup as Bs
+import re
 
 
 def date_from(timestamp):
@@ -24,3 +25,20 @@ def suppify_body(body):
                 link_tag.replaceWith( link_tag.prettify() + '<sup style="font-size:9px">[%d]</sup>' % count )          
                 count += 1
     return (soup,links_dict)
+
+class SupportedServices():
+    """Stackauth sites representation"""
+    def __init__(self):
+        self.keys = []
+        self.info = {}
+    
+def get_supported_services(sites):
+    """Return a SupportedServices object parsing /sites returned from Stackauth""" 
+    services_key_mapping_list = []
+    supported_services = SupportedServices()
+    for site in sites:
+        key = re.match('^http://(.*).com$',site['site_url']).group(1)
+        supported_services.keys.append(key)
+        services_key_mapping_list.append((key, site))
+    supported_services.info = dict(services_key_mapping_list)
+    return supported_services
