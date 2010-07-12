@@ -1,4 +1,5 @@
 from app.core.APIdownloader import StackExchangeDownloader
+from app.core.APIdownloader import StackAuthDownloader
 from app.core.APIdownloader import UnsupportedServiceError
 from app.core.APIdownloader import DeliciousDownloader
 from app.config.constant import *
@@ -63,7 +64,7 @@ class Favorites:
             page = web.input(page = 1)['page']
             user_id = web.input(userid = None)['userid']
             
-            if service in sopy.supported_services:
+            if service in StackAuthDownloader.get_supported_services().keys:
                 if username:
                     match = re.search('.+\|(\d+)', username)
                     if match:
