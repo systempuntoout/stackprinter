@@ -51,7 +51,7 @@ $def with (username, user_id, result, service, pagination)
                                 [$question.get_votes()]<br>[$question.answer_count]
                             </td>    
                             <td class="title">
-                                <a target="_blank" href="$question.url"/>$htmlquote(question.title.replace)</a><br>
+                                <a target="_blank" href="$question.url"/>$htmlquote(question.title)</a><br>
                                 <span class="tag">
                                     [$(", ".join([tag for tag in question.tags_list]))]
                                 </span>
