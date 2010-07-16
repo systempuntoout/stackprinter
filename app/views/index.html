@@ -41,9 +41,9 @@ $def with (counter)
                     if (jQuery.trim(jQuery("#input_main").val()) != "") {
                         	jQuery("#question_form").submit()
                         }else{
-                        	jQuery("#input_main").focus();                      
-                        	return false;                                
-                        }                                                    
+                        	jQuery("#input_main").focus();                                                     
+                        }
+                    return false;                                                     
                 });
                 jQuery('#input_main').bind('keypress', function(e) {
                     jQuery('#question_title').html('&nbsp;');
