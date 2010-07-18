@@ -11,5 +11,4 @@ urls = (
   '/question','app.controllers.ajax.Question',
   '/tags','app.controllers.ajax.Tags',
   '/quicklook','app.controllers.ajax.Quicklook',
-  
 )

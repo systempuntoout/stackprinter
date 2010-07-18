@@ -31,7 +31,14 @@ def get_question(question_id, service, body = False, comments = False, pagesize 
     path = "questions/%d" % question_id
     results = __fetch_results(path, service, body = body, comments = comments, pagesize = pagesize)
     return results
-    
+
+def get_answer(answer_id, service, body = False, comments = False, pagesize = 1):
+    """
+    Get the answer of a given answer_id 
+    """
+    path = "answers/%d" % answer_id
+    results = __fetch_results(path, service, body = body, comments = comments, pagesize = pagesize)
+    return results   
         
 def get_answers(question_id, service, page = 1, body = False, comments = False, pagesize = 100, sort = 'votes'):
     """

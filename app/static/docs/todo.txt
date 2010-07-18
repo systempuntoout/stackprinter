@@ -2,7 +2,7 @@ Last update: 2010-07-12
 Rename sopy in sepy
 Use api_endpoint from supportes_services
 Combo with pictures?
-Add accepted answers to [Q]uicklook where available
+Pdf export?
 
 Known Bugs:
 *Google AppEngine drops the connection after 30 seconds from the Request; UrlFetch has a 

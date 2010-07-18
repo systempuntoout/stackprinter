@@ -154,3 +154,14 @@ td.pagination_pagesize {
    font-size:11pt;
    margin-left:13px;
 }
+
+#quicklook_answer-details  {
+    font-weight:bold;
+    font-size: 10pt;
+    margin-bottom:5px;
+}
+
+#quicklook_answer  { 
+   font-size:11pt;
+   margin-left:13px;
+}

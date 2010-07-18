@@ -43,7 +43,7 @@ class Tags:
             
 class Quicklook:
     """
-    Quicklook question
+    Quicklook question and accepted_answer where available
     """
     def GET(self):
         try:
@@ -53,13 +53,19 @@ class Quicklook:
             
             se_downloader = StackExchangeDownloader(service)
             question = se_downloader.get_question_quicklook(question_id)
-
             if not question:
                 return render.oops(NOT_FOUND_ERROR)
-            return render.quicklook(service, question)
+                
+            if question.has_key('accepted_answer_id'):
+                accepted_answer = se_downloader.get_answer_quicklook(question['accepted_answer_id'])
+            else:
+                accepted_answer = None
+                
+            return render.quicklook(service, question, accepted_answer)
         except (sopy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
             logging.error(exception)
             return render.oops(GENERIC_ERROR)
+            

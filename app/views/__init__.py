@@ -325,11 +325,12 @@ def favorites_stackexchange():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
         yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript">\n')
+        yield '', join_('\n')
         yield '', join_('            function quicklook(question_id, service){\n')
         yield '', join_('                var jQuerydialog = jQuery(\'<div>loading <img src="/images/indicator.gif"/></div>\');\n')
         yield '', join_('                 jQuerydialog.dialog({\n')
@@ -669,7 +670,7 @@ def quicklook():
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (service, question):
+    def __template__ (service, question, accepted_answer):
         yield '', join_('<div id="quicklook_question-block">\n')
         yield '', join_('  <div id="quicklook_question-title">\n')
         yield '', join_('         <img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(question['title']), True), '<br>\n')
@@ -690,6 +691,18 @@ def quicklook():
         yield '', join_('  <div id="quicklook_question">\n')
         yield '', join_('      ', escape_(question['body'], True), '\n')
         yield '', join_('  </div>\n')
+        if accepted_answer is not None:
+            yield '', join_('  ', '  <hr>\n')
+            yield '', join_('  ', '  <div id="accepted_answer_block">\n')
+            yield '', join_('  ', '      <div id="quicklook_answer-details">\n')
+            yield '', join_('  ', '            [', escape_((['','+'][(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))>0]), True), escape_((int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count'])), True), ']\n')
+            yield '', join_('  ', '            [', escape_(date_from(float(accepted_answer['creation_date'])), True), ']     \n')
+            yield '', join_('  ', '            ', escape_(accepted_answer.get('owner', {'display_name':'community_owned'})['display_name'], True), ' [ACCEPTED]\n')
+            yield '', join_('  ', '      </div>\n')
+            yield '', join_('  ', '      <div id="quicklook_answer">\n')
+            yield '', join_('  ', '              ', escape_(accepted_answer['body'], True), '\n')
+            yield '', join_('  ', '      </div>\n')
+            yield '', join_('  ', '  </div>  \n')
         yield '', join_('</div>\n')
     return __template__
 
@@ -796,7 +809,7 @@ def topvoted_tagged():
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
         yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')

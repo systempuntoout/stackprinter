@@ -42,6 +42,13 @@ class StackExchangeDownloader():
             return question[0]
         else:
             return None
+    def get_answer_quicklook(self, answer_id):
+        results = sopy.get_answer(int(answer_id), self.service, body = True, comments = False, pagesize = 1)
+        answer = results["answers"]
+        if len(answer) > 0:
+            return answer[0]
+        else:
+            return None
             
     def get_questions_by_tags(self, tagged, page):
         questions_by_tags = []
