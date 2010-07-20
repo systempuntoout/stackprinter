@@ -2,7 +2,7 @@ from google.appengine.api import memcache
 from app.config.constant import *
 from app.core.APIdownloader import StackExchangeDownloader
 from app.core.APIdownloader import UnsupportedServiceError
-import app.lib.sopy as sopy
+import app.lib.sepy as sepy
 import logging, web
 
 class Question:
@@ -62,7 +62,7 @@ class Quicklook:
                 accepted_answer = None
                 
             return render.quicklook(service, question, accepted_answer)
-        except (sopy.ApiRequestError, UnsupportedServiceError), exception:
+        except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:

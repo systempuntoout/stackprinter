@@ -125,11 +125,22 @@ td.pagination_pagesize {
     margin-right:10%;
 }
 
+
+#quicklook_printer{
+    text-align:left; 
+}
+
+#quicklook_printer img{
+    border:0px;
+    width:17px;
+    height:17px; 
+}
+
 #quicklook_question-title  {
     text-align:center;
     font-weight:bold;
     font-size: 13pt;
-    margin-bottom:5px;
+    margin-bottom:15px;
 }
 
 #quicklook_question-title img{

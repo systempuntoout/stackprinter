@@ -1,7 +1,4 @@
-Last update: 2010-07-12
-Rename sopy in sepy
-Use api_endpoint from supportes_services
-Combo with pictures?
+Last update: 2010-07-20
 Pdf export?
 
 Known Bugs:

@@ -70,7 +70,7 @@ $def with (service, question , answers, pretty_links, printer)
                       [$date_from(float(answer['creation_date']))]     
                       $answer.get('owner', {'display_name':'community_owned'})['display_name']
                       $if bool(answer['accepted']):
-                          [ACCEPTED]
+                          [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]
                   </div>
                   <div class="answer">
                     $if pretty_links:  

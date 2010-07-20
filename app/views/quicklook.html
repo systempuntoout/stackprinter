@@ -1,5 +1,10 @@
 $def with (service, question, accepted_answer)      
 <div id="quicklook_question-block">
+  <div id="quicklook_printer">
+        <a target="_blank" href="/export?question=$(question['question_id'])&format=HTML&service=$(service)">
+            <img title="Printer-Friendly" src="images/printer_black.png"/>
+        </a>                            
+  </div>
   <div id="quicklook_question-title">
   	 <img src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(question['title'])<br>
   </div>
@@ -25,7 +30,7 @@ $def with (service, question, accepted_answer)
             <div id="quicklook_answer-details">
                   [$(['','+'][(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))>0])$(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))]
                   [$date_from(float(accepted_answer['creation_date']))]     
-                  $accepted_answer.get('owner', {'display_name':'community_owned'})['display_name'] [ACCEPTED]
+                  $accepted_answer.get('owner', {'display_name':'community_owned'})['display_name'] [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]
             </div>
             <div id="quicklook_answer">
                     $accepted_answer['body']
