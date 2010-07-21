@@ -5,7 +5,7 @@ api_version: 1
 
 handlers:
 - url: /test.*
-  #login: admin  # This is important if you deploy the test directory in production!
+  login: admin  # This is important if you deploy the test directory in production!
   script: gaeunit.py
 - url: /favicon.ico
   static_files: app/static/images/favicon.ico
