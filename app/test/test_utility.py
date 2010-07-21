@@ -17,10 +17,5 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEquals(suppify_body('<a href="">http://www.foo.it</a>')[1], {})
         self.assertEquals(suppify_body('<a hrek="http://www.foo.it">foo</a>')[1], {})
 
-def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(UtilityTestCase))  
-    return suite
-
 if __name__ == '__main__':
-    unittest.main(defaultTest='suite')
+    unittest.main()

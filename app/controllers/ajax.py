@@ -1,7 +1,7 @@
 from google.appengine.api import memcache
 from app.config.constant import *
-from app.core.APIdownloader import StackExchangeDownloader
-from app.core.APIdownloader import UnsupportedServiceError
+from app.core.stackprinterdownloader import StackExchangeDownloader
+from app.core.stackprinterdownloader import UnsupportedServiceError
 import app.lib.sepy as sepy
 import logging, web
 
