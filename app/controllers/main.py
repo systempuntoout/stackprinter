@@ -2,7 +2,7 @@ from app.core.stackprinterdownloader import StackExchangeDownloader
 from app.core.stackprinterdownloader import StackAuthDownloader
 from app.core.stackprinterdownloader import UnsupportedServiceError
 from app.core.stackprinterdownloader import DeliciousDownloader
-from app.config.constant import *
+from app.config.constant import NOT_FOUND_ERROR, GENERIC_ERROR, UNSUPPORTED_SERVICE_ERROR
 import app.lib.sepy as sepy
 import app.db.counter as counter
 import app.utility.utils as utils

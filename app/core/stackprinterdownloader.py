@@ -1,11 +1,23 @@
 from google.appengine.api import memcache
-from app.models.question import Question
-from app.models.pagination import Pagination
-from app.config.constant import *
+from app.config.constant import UNSUPPORTED_SERVICE_ERROR
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
 import app.utility.utils as utils
 import web, re, logging
+
+class Question(object):
+    def __init__(self, question_id, url, title, tags_list, creation_date, service, up_vote_count = 0, down_vote_count = 0, answer_count = 0 ):
+        self.question_id = question_id
+        self.url = url
+        self.title = title
+        self.tags_list = tags_list
+        self.creation_date = creation_date
+        self.service = service
+        self.up_vote_count = up_vote_count
+        self.down_vote_count = down_vote_count
+        self.answer_count = answer_count
+    def get_votes(self):
+        return '%s%d' % (['','+'][self.up_vote_count-self.down_vote_count > 0],self.up_vote_count-self.down_vote_count)
 
 class UnsupportedServiceError(Exception):
     def __init__(self, service, message):
@@ -56,7 +68,7 @@ class StackExchangeDownloader():
         questions_by_tags = []
         results = self.retriever.get_questions_by_tags(";".join([web.net.urlquote(tag) for tag in tagged.strip().split()]), self.api_endpoint, page, pagesize = 30)
         questions = results["questions"]
-        pagination = Pagination(results)
+        pagination = utils.Pagination(results)
         for question in questions:
             questions_by_tags.append(Question(question['question_id'],
                                    "http://%s.com/questions/%d" % (self.service, question['question_id']),
@@ -74,7 +86,7 @@ class StackExchangeDownloader():
         questions_by_votes = []
         results = self.retriever.get_questions(self.api_endpoint, page, pagesize = 30)
         questions = results["questions"]
-        pagination = Pagination(results)
+        pagination = utils.Pagination(results)
         for question in questions:
             questions_by_votes.append(Question(question['question_id'],
                                    "http://%s.com/questions/%d" % (self.service, question['question_id']),
@@ -115,7 +127,7 @@ class StackExchangeDownloader():
         favorites_questions = []
         results = self.retriever.get_favorites_questions(user_id, self.api_endpoint, page, pagesize= 30)
         questions = results["questions"]
-        pagination = Pagination(results)
+        pagination = utils.Pagination(results)
         for question in questions:
             favorites_questions.append(Question(question['question_id'],
                                    "http://%s.com/questions/%d" % (self.service, question['question_id']),

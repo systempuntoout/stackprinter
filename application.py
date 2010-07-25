@@ -2,7 +2,7 @@
     StackPrinter: The Stack Exchange Printer Suite
 """
 from app.config.urls import urls
-from app.config.constant import *
+from app.config.constant import UNICORN_MESSAGE_ERROR, NOT_FOUND_ERROR, SERVER_ERROR
 from app.core.stackprinterdownloader import StackAuthDownloader
 import app.utility.utils as utils
 import logging

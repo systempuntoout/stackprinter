@@ -5,8 +5,7 @@ Python Stack Exchange library customized for Google App Engine
 """
 from django.utils import simplejson 
 from google.appengine.api import urlfetch
-from app.models.pagination import Pagination
-from app.config.constant import *
+from app.config.constant import KEY_TEMPLATE_ERROR
 import logging
 try:
     from key import api_key
