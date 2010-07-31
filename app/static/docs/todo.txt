@@ -1,9 +1,10 @@
-Last update: 2010-07-20
+Last update: 2010-07-31
+Print optimization with Gae TaskQueue
 Pdf export?
 
 Known Bugs:
 *Google AppEngine drops the connection after 30 seconds from the Request; UrlFetch has a 
-deadline of 10 seconds too. In question with many answers and comments, sometimes StackPrinter
-can't download all the data in the 30 seconds time and return a fantastic error 500.
+deadline of 10 seconds too. In questions with many answers and comments, sometimes StackPrinter
+can't download all the data in the 30 seconds deadline and returns a fantastic Error 500.
 
 

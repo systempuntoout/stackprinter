@@ -53,6 +53,7 @@ class PaginationTestCase(unittest.TestCase):
         self.assertEquals(Pagination(result).get_pretty_pagination(), [1, -1, 8, 9 , 10])
         result = {'total':100,'page':10,'pagesize':10}
         self.assertEquals(Pagination(result).get_pretty_pagination(), [1, -1, 8, 9 , 10])
+        
     def test_total_pages(self):
         result = {'total':0,'page':1,'pagesize':10}
         self.assertEquals(Pagination(result).total_pages, 0)
