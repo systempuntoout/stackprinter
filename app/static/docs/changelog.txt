@@ -1,3 +1,7 @@
+Version 0.9.4
+2010-08-21
+App cache
+
 Version 0.9.3
 2010-07-18
 Added accepted answers to [Q]uicklook where available
