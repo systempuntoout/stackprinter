@@ -1,5 +1,6 @@
 from google.appengine.api import memcache
-from app.config.constant import UNSUPPORTED_SERVICE_ERROR
+from google.appengine.api import urlfetch
+from app.config.constant import UNSUPPORTED_SERVICE_ERROR 
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
 import app.utility.utils as utils
@@ -99,8 +100,9 @@ class StackExchangeDownloader():
                                    question['answer_count']
                                    ))
         return (questions_by_votes, pagination)     
-           
-    def get_answers(self, question_id):  
+    """     
+    Deprecated: syncronous answers download  
+    def get_answers(self, question_id): 
         answers = []
         page = 1
         while True:
@@ -111,6 +113,43 @@ class StackExchangeDownloader():
                 break
             else:
                 page = page +1 
+        return answers"""
+    
+    def get_answers(self, question_id):  
+        answers_chunk_dict = {}
+        answers = []
+        page = 1
+        pagesize = 50
+        total_answers = int(self.retriever.get_answers(int(question_id), self.api_endpoint, body = False, comments = False, pagesize = 0)['total'])   
+        if total_answers <= pagesize:
+            results = self.retriever.get_answers(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+            answers = results["answers"]
+        else:
+            #Async calls
+            def handle_result(rpc, page):
+                result = rpc.get_result()
+                response = sepy.handle_response(result)
+                answers_chunk = response["answers"]
+                answers_chunk_dict[page] = answers_chunk
+
+            def create_callback(rpc, page):
+                return lambda: handle_result(rpc, page)
+            rpcs = []
+            while True:
+                rpc = urlfetch.create_rpc(deadline = 10)
+                rpc.callback = create_callback(rpc, page)
+                self.retriever.get_answers(int(question_id), self.api_endpoint, rpc = rpc, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+                rpcs.append(rpc)
+                if pagesize * page > total_answers:
+                    break
+                else:
+                    page = page +1   
+            for rpc in rpcs:
+                rpc.wait()
+            page_keys = answers_chunk_dict.keys()
+            page_keys.sort()
+            for key in page_keys:
+                answers= answers + answers_chunk_dict[key]
         return answers
         
     def get_users_by_id(self, user_id):   

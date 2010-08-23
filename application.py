@@ -9,8 +9,6 @@ import app.utility.utils as utils
 import logging
 import web
 
-logging.getLogger().setLevel(logging.ERROR)
-    
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
                                                'commify': web.utils.commify,
@@ -30,6 +28,7 @@ app.internalerror = internalerror
 
 def main():
     #StackPrinter boot
+    logging.getLogger().setLevel(logging.ERROR)
     application = app.wsgifunc()
     run_wsgi_app(application)
 

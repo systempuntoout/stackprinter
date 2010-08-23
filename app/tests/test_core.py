@@ -14,7 +14,7 @@ class StackprinterDownloaderTestCase(unittest.TestCase):
     
     def setUp(self):
         self.spdownloader = StackExchangeDownloader('stackoverflow') 
-        self.spdownloader.retriever = MockRetriever() #Remove comment to test ONLINE
+        #self.spdownloader.retriever = MockRetriever() #Uncomment to test OFFLINE
         
     def test_get_question(self):     
         assert self.spdownloader.get_question(9) is not None
@@ -50,6 +50,11 @@ class StackprinterDownloaderTestCase(unittest.TestCase):
     def test_get_answers(self):
         assert len(self.spdownloader.get_answers(656155)) == 3
         assert self.spdownloader.get_answers(656155)[0]['title'] != ''
+        assert len(self.spdownloader.get_answers(9033)) == 303
+        assert len(self.spdownloader.get_answers(656155)) == 3
+        assert len(self.spdownloader.get_answers(37671)) == 51
+        assert len(self.spdownloader.get_answers(209015)) == 49
+        assert len(self.spdownloader.get_answers(347584)) == 50
         
     def test_get_users_by_id(self):   
         assert len(self.spdownloader.get_users_by_id(130929)) == 1

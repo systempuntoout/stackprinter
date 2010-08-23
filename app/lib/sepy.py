@@ -3,7 +3,7 @@
 """
 Python Stack Exchange library customized for Google App Engine
 """
-from django.utils import simplejson 
+import app.lib.simplejson as simplejson 
 from google.appengine.api import urlfetch
 from app.config.constant import KEY_TEMPLATE_ERROR
 import logging
@@ -39,12 +39,12 @@ def get_answer(answer_id, api_endpoint, body = False, comments = False, pagesize
     results = __fetch_results(path, api_endpoint, body = body, comments = comments, pagesize = pagesize)
     return results   
         
-def get_answers(question_id, api_endpoint, page = 1, body = False, comments = False, pagesize = 100, sort = 'votes'):
+def get_answers(question_id, api_endpoint, rpc = None, page = 1, body = False, comments = False, pagesize = 100, sort = 'votes'):
     """
     Get the answers list of a given question_id 
     """
     path = "questions/%d/answers" % question_id
-    results = __fetch_results(path, api_endpoint, body = body, page = page, comments = comments, pagesize = pagesize, sort = sort)
+    results = __fetch_results(path, api_endpoint, rpc = rpc, body = body, page = page, comments = comments, pagesize = pagesize, sort = sort)
     return results
 
 def get_favorites_questions(user_id, api_endpoint, page = 1, body = False, comments = False, pagesize = 100, sort = 'added'):
@@ -103,7 +103,7 @@ def get_sites():
     response = simplejson.loads(results.content)
     return response
 
-def __fetch_results(path, api_endpoint, **url_params):
+def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
     """
     Fetch results
     """
@@ -112,29 +112,41 @@ def __fetch_results(path, api_endpoint, **url_params):
         "pagesize": __default_page_size,
         "page": __default_page
         }
-
     params.update(url_params)
 
     url = __build_url(path, api_endpoint, **params)
     
-    results = __gae_fetch(url)
+    results = __gae_fetch(url, rpc = rpc)
+    if rpc:
+        pass
+    else:
+        return handle_response(results)
+
+def __build_url(path, api_endpoint, **params):
+    """
+    Builds the API URL for fetching results.
+    """
+    query = ["%s=%s" % (key, params[key]) for key in params if (params[key] or key == 'pagesize') ]
+    query_string = "&".join(query)
+    url = "%s/%s/%s?" % (api_endpoint, __api_version, path)
+    url += query_string
+    return url
+    
+def __gae_fetch(url, rpc = None):
+    if rpc:
+        return urlfetch.make_fetch_call(rpc, url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'})
+    else:
+        return urlfetch.fetch(url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}, deadline = 10)
+
+
+def handle_response(results):
+    """
+    Load results in JSON
+    """
     response = simplejson.loads(results.content)
     if "error" in response:
         error = response["error"]
         code = error["code"]
         message = error["message"]
         raise ApiRequestError(url, code, message)
-    return response
-
-def __build_url(path, api_endpoint, **params):
-    """
-    Builds the API URL for fetching results.
-    """
-    query = ["%s=%s" % (key, params[key]) for key in params if params[key]]
-    query_string = "&".join(query)
-    url = "%s/%s/%s?" % (api_endpoint, __api_version, path)
-    url += query_string
-    return url
-    
-def __gae_fetch(url):
-    return urlfetch.fetch(url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}, deadline = 10)
+    return response    

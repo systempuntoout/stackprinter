@@ -1,3 +1,7 @@
+Version 0.9.5
+2010-08-23
+Performance boost with asyncronous download
+
 Version 0.9.4
 2010-08-21
 App cache
