@@ -1,6 +1,6 @@
 Version 0.9.5
 2010-08-23
-Performance boost with asyncronous download
+Performance boost with asynchronous download
 
 Version 0.9.4
 2010-08-21

@@ -12,20 +12,7 @@ $def with (tagged, result, service, pagination)
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
-        <script type="text/javascript">
-            function quicklook(question_id, service){
-    	        var jQuerydialog = jQuery('<div>loading <img src="/images/indicator.gif"/></div>');
-    	         jQuerydialog.dialog({
-    				title: '[Q]uicklook',
-    				width: '650px',
-    				modal: true,
-    				position: ['center', 95]});
-    			jQuerydialog.load('/quicklook?question='+ question_id +'&service='+service,'', function (responseText, textStatus, XMLHttpRequest) {
-                	}
-                );
-                return false;
-    	    }
-        	</script>
+        <script type="text/javascript" src="/javascripts/main.js"></script>
   </head>
     <body>
         <div id="back">
