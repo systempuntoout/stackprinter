@@ -1,3 +1,7 @@
+Version 0.9.6
+2010-08-31
+Added answer number
+
 Version 0.9.5
 2010-08-23
 Performance boost with asynchronous download

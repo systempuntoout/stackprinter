@@ -55,6 +55,12 @@ body {
    padding-top:7px;
 }
 
+.answer-pagenumber  { 
+   text-align:right;
+   font-size:7px;
+   margin-bottom:1px;
+}
+
 .comment {
    font-size:9pt;
    margin-bottom:1px;    

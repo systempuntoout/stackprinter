@@ -21,6 +21,9 @@ $def with (service, question , answers, pretty_links, printer)
                 document.body.offsetHeight;window.print()
         };
         </script>
+        <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+        <script type="text/javascript">clicky.init(250663);</script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>
   </head>
 	<body onload="Print()">
 	    <div id="home">
@@ -65,7 +68,7 @@ $def with (service, question , answers, pretty_links, printer)
                         ($comment['score'])    
                     $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'})['display_name']</b>                   
                 </div>
-              $for answer in answers:
+              $for answer_number, answer  in enumerate(answers):
                   <div class="answer-details">
                       [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
                       [$date_from(float(answer['creation_date']))]     
@@ -90,6 +93,7 @@ $def with (service, question , answers, pretty_links, printer)
                            ($comment['score'])    
                       $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'})['display_name']</b>     
                       </div>
+                  <div class="answer-pagenumber">$int(answer_number+1)</div>
       </div>
   </body>
 </html>
