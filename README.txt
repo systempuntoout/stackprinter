@@ -1,5 +1,5 @@
 StackPrinter: The Stack Exchange Printer Suite
-http://stackprinter.appspot.com
+http://www.stackprinter.com
 
 INSTALL:
 Clone it 
