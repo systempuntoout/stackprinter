@@ -99,7 +99,7 @@ $def with (counter)
               <div class="links">                           
                 <ul id="links_block">
                     <li><a href="http://userscripts.org/scripts/source/77298.user.js" >StackPrinter GreaseMonkey script</a></li>
-                    <li><a href="javascript:(function(){var re = new RegExp('^http://(.*?)\.com/questions/([0-9]+)/');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open('http://stackprinter.appspot.com/export?format=HTML&service='+service+'&question='+questionid)}else{alert('Attention: question id not found!')}})()">Bookmarklet</a></li>
+                    <li><a href="javascript:(function(){var re = new RegExp('^http://(.*?)\.com/questions/([0-9]+)/');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open('http://www.stackprinter.com/export?format=HTML&service='+service+'&question='+questionid)}else{alert('Attention: question id not found!')}})()">Bookmarklet</a></li>
                     <li>Questions printed so far: <b>$(counter)</b> </li>
                 </ul>
               </div>                                 
