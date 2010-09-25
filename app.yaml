@@ -16,6 +16,9 @@ handlers:
 - url: /crossdomain.xml
   static_files: app/static/docs/crossdomain.xml
   upload: app/static/docs/crossdomain.xml
+- url: /sitemap.xml
+  static_files: app/static/docs/sitemap.xml
+  upload: app/static/docs/sitemap.xml
 - url: /javascripts
   static_dir: app/static/javascripts
 - url: /stylesheets

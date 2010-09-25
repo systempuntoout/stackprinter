@@ -523,6 +523,7 @@ def index():
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
         yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
         yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <meta name="google-site-verification" content="Gje2eDNJYqM29mwtIs3LrR-28OBbtntH1YiNHkPS9yY" />\n')
         yield '', join_('        <title>StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css"/>\n')
         yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
