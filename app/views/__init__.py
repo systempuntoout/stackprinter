@@ -630,7 +630,7 @@ def index():
         yield '', join_('              <p id="question_title">&nbsp;</p>\n')
         yield '', join_('              <div class="links">                           \n')
         yield '', join_('                <ul id="links_block">\n')
-        yield '', join_('                    <li><b>Sample</b> : <a target="_blank" href="/export?format=HTML&service=stackoverflow&question=3800707&printer=false"/>What is negative code ?</a>\n')
+        yield '', join_('                    <li><b>Sample</b>:  <a target="_blank" href="/export?format=HTML&service=stackoverflow&question=3800707&printer=false"/>What is negative code ?</a>\n')
         yield '', join_('                    <li><a href="http://userscripts.org/scripts/show/77298" >StackPrinter GreaseMonkey script</a></li>\n')
         yield '', join_('                    <li><a href="javascript:(function(){var re = new RegExp(\'^http://(.*?)\\.com/questions/([0-9]+)/\');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open(\'http://www.stackprinter.com/export?format=HTML&service=\'+service+\'&question=\'+questionid)}else{alert(\'Attention: question id not found!\')}})()">Bookmarklet</a></li>\n')
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
