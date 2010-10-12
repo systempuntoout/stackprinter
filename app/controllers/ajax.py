@@ -4,6 +4,9 @@ from app.core.stackprinterdownloader import StackExchangeDownloader
 from app.core.stackprinterdownloader import UnsupportedServiceError
 import app.lib.sepy as sepy
 import logging, web
+from google.appengine.ext import ereporter
+
+ereporter.register_logger()
 
 class Question:
     """

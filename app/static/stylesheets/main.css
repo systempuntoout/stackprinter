@@ -129,6 +129,12 @@ a.nolines{text-decoration:none;}
     text-align: center;
 }
 
+#appengine_logo{
+    margin-top:25px;
+    text-align:center;
+    
+}
+
 .ac_loading {
 	background: white url('/images/indicator.gif') right center no-repeat;
 }

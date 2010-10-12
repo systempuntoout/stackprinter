@@ -27,6 +27,9 @@ handlers:
   static_dir: app/static/images
 - url: /docs
   static_dir: app/static/docs
+- url: /_ereporter
+  script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
+  login: admin
 - url: /.*
   script: application.py
   

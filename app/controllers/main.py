@@ -7,6 +7,9 @@ import app.lib.sepy as sepy
 import app.db.counter as counter
 import app.utility.utils as utils
 import logging, web, re
+from google.appengine.ext import ereporter
+
+ereporter.register_logger()
 
 render = web.render 
 
