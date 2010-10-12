@@ -1,3 +1,7 @@
+Version 0.9.7
+2010-10-12
+Sample, logo
+
 Version 0.9.6
 2010-08-31
 Added answer number
