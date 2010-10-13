@@ -45,6 +45,18 @@ td.printer img{
     height:15px; 
 }
 
+td.service_logo img{
+    border:0px;
+    width:25px;
+    height:25px; 
+}
+
+td.service_name{
+    font-family:Courier;
+    font-size:0.6em;
+    text-align:center;
+    width:10%;
+}
 td.quicklook img{
     border:0px;
     width:18px;
@@ -58,6 +70,11 @@ td.quicklook {
 td.printer {
     width:1%; 
 }
+
+td.service_logo {
+    width:1%; 
+}
+
 td.title{
     text-align:left;
 }
@@ -68,6 +85,13 @@ td.counters{
     width:1%;
 }
 td.date{
+    font-family:Courier;
+    font-size:0.75em;
+    font-weight:bold;
+    text-align:right;
+}
+
+td.counter{
     font-family:Courier;
     font-size:0.75em;
     font-weight:bold;

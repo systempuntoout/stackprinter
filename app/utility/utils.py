@@ -108,3 +108,5 @@ class Pagination(object):
                 pagination.append(-1)
         pagination.append(self.total_pages)
         return pagination
+
+    

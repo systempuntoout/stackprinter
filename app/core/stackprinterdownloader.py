@@ -194,7 +194,7 @@ class StackAuthDownloader():
         else:
             results = sepy.get_sites()
             supported_services = utils.get_supported_services(results['api_sites'])
-            memcache.add("supported_services", supported_services, 7200) #Recheck at least every two hours
+            memcache.add("supported_services", supported_services, 14400) #Recheck at least every four hours
             return supported_services
         
 class DeliciousDownloader():  

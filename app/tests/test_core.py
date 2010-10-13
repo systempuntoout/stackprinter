@@ -14,7 +14,7 @@ class StackprinterDownloaderTestCase(unittest.TestCase):
     
     def setUp(self):
         self.spdownloader = StackExchangeDownloader('stackoverflow') 
-        #self.spdownloader.retriever = MockRetriever() #Uncomment to test OFFLINE
+        self.spdownloader.retriever = MockRetriever() #Uncomment to test ONLINE
         
     def test_get_question(self):     
         assert self.spdownloader.get_question(9) is not None

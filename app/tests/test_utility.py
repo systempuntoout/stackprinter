@@ -70,5 +70,6 @@ class PaginationTestCase(unittest.TestCase):
         result = {'total':21,'page':1,'pagesize':10}
         self.assertEquals(Pagination(result).total_pages, 3)
 
+       
 if __name__ == '__main__':
     unittest.main()

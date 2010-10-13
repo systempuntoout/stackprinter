@@ -1,3 +1,7 @@
+Version 0.9.8
+2010-10-13
+TopPrinted stats
+
 Version 0.9.7
 2010-10-12
 Sample, logo

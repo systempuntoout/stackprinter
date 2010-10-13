@@ -4,7 +4,8 @@ from app.core.stackprinterdownloader import UnsupportedServiceError
 from app.core.stackprinterdownloader import DeliciousDownloader
 from app.config.constant import NOT_FOUND_ERROR, GENERIC_ERROR, UNSUPPORTED_SERVICE_ERROR
 import app.lib.sepy as sepy
-import app.db.counter as counter
+import app.db.counter as dbcounter
+import app.db.question as dbquestion
 import app.utility.utils as utils
 import logging, web, re
 from google.appengine.ext import ereporter
@@ -18,7 +19,7 @@ class Index:
     Homepage
     """
     def GET(self):
-        questions_printed = web.utils.commify(counter.get_count())
+        questions_printed = web.utils.commify(dbcounter.get_count())
         return render.index(questions_printed)
 
 class Export:
@@ -43,7 +44,13 @@ class Export:
             else:
                 answers = se_downloader.get_answers(question_id)
             
-            counter.increment()
+            try:
+                #Stats
+                dbcounter.increment()
+                dbquestion.store(question['question_id'], service, question['title'], question['tags'])
+            except:
+                logging.error(exception) #If it fails it's ok, just log and go on
+                
             return render.export(service, question, answers, pretty_links == 'true', printer == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
@@ -126,6 +133,21 @@ class TopVoted:
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
+        except Exception, exception:
+                logging.error(exception)
+                return render.oops(GENERIC_ERROR)
+
+class TopPrinted:
+    """
+    Show a lists of top printed questions 
+    """
+    def POST(self):
+        return self.GET()
+    def GET(self):
+        try:
+            result = []
+            result = dbquestion.get_top_printed()
+            return render.topprinted(result)  
         except Exception, exception:
                 logging.error(exception)
                 return render.oops(GENERIC_ERROR)

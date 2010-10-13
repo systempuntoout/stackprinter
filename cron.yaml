@@ -1,5 +1,5 @@
 cron:
 - description: Daily exception report
-  url: /_ereporter?sender=michele.trimarchi@gmail.com&delete=true
+  url: /_ereporter?sender=systempuntoout@gmail.com&to=systempuntoout@gmail.com&delete=true
   schedule: every day 00:00
   timezone: Europe/Rome
