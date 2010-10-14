@@ -20,3 +20,7 @@ prettylinks (optional)
 printer (optional)
 * enables the print command when page is loaded
 * boolean true (default)
+
+linktohome (optional)
+* show the link to the homepage on the upper left corner
+* boolean true (default)

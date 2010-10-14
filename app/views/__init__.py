@@ -69,7 +69,7 @@ def export():
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (service, question , answers, pretty_links, printer):
+    def __template__ (service, question , answers, pretty_links, printer, link_to_home):
         yield '', join_('<html>\n')
         yield '', join_('        <head>\n')
         yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
@@ -98,7 +98,8 @@ def export():
         yield '', join_('  </head>\n')
         yield '', join_('        <body onload="Print()">\n')
         yield '', join_('            <div id="home">\n')
-        yield '', join_('                <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
+        if link_to_home:
+            yield '', join_('                ', '<a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
         yield '', join_('                <a href="http://www.stackprinter.com/export?format=HTML&service=', escape_(service, True), '&printer=false&question=', escape_((question['question_id']), True), '"><img title="Link to this printed question" width="20px" height="20px" border="0" src="/images/Share.gif"/></a>\n')
         yield '', join_('            </div>         \n')
         yield '', join_('        <div id="question-block">\n')
@@ -303,7 +304,7 @@ def favorites_delicious():
         for question in loop.setup(result):
             yield '', join_('            ', '<tr class="', escape_(loop.parity, True), '">\n')
             yield '', join_('            ', '    <td class="printer">\n')
-            yield '', join_('            ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
+            yield '', join_('            ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
             yield '', join_('            ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('            ', '        </a>\n')
             yield '', join_('            ', '    </td>\n')
@@ -368,7 +369,7 @@ def favorites_stackexchange():
         for question in loop.setup(result):
             yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
             yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
             yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('                    ', '        </a>\n')
             yield '', join_('                    ', '    </td>\n')
@@ -694,7 +695,7 @@ def quicklook():
     def __template__ (service, question, accepted_answer):
         yield '', join_('<div id="quicklook_question-block">\n')
         yield '', join_('  <div id="quicklook_printer">\n')
-        yield '', join_('        <a target="_blank" href="/export?question=', escape_((question['question_id']), True), '&format=HTML&service=', escape_((service), True), '">\n')
+        yield '', join_('        <a target="_blank" href="/export?question=', escape_((question['question_id']), True), '&format=HTML&service=', escape_((service), True), '&linktohome=false">\n')
         yield '', join_('            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
         yield '', join_('        </a>                            \n')
         yield '', join_('  </div>\n')
@@ -766,7 +767,7 @@ def topprinted():
         for question in loop.setup(result):
             yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
             yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
             yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('                    ', '        </a>\n')
             yield '', join_('                    ', '    </td>\n')
@@ -776,7 +777,7 @@ def topprinted():
             yield '', join_('                    ', '        </a>\n')
             yield '', join_('                    ', '    </td>\n')
             yield '', join_('                    ', '    <td class="service_logo">\n')
-            yield '', join_('                    ', '        <img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/>\n')
+            yield '', join_('                    ', '        <a target="_blank" href="', escape_((supported_services.info[question.service]['site_url']), True), '"><img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/></a>\n')
             yield '', join_('                    ', '    </td>\n')
             yield '', join_('                    ', '    <td class="service_name">\n')
             yield '', join_('                    ', '        [', escape_((supported_services.info[question.service]['name']), True), ']    \n')
@@ -920,7 +921,7 @@ def topvoted_tagged():
         for question in loop.setup(result):
             yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
             yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '"/>\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
             yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
             yield '', join_('                    ', '        </a>                            \n')
             yield '', join_('                    ', '    </td>\n')

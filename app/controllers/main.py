@@ -34,6 +34,7 @@ class Export:
             service = web.input()['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
             printer =  web.input(printer = 'true')['printer']
+            link_to_home = web.input(linktohome = 'true')['linktohome']
             format = web.input(format = 'HTML')['format'] #For future implementations
             
             se_downloader = StackExchangeDownloader(service)
@@ -51,12 +52,12 @@ class Export:
             except:
                 logging.error(exception) #If it fails it's ok, just log and go on
                 
-            return render.export(service, question, answers, pretty_links == 'true', printer == 'true' )
+            return render.export(service, question, answers, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
-            logging.error(exception)
+            logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
       
 class Favorites:
@@ -106,8 +107,8 @@ class Favorites:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
-                logging.error(exception)
-                return render.oops(GENERIC_ERROR)
+            logging.exception("Generic exception")
+            return render.oops(GENERIC_ERROR)
 
 class TopVoted:
     """
@@ -134,8 +135,8 @@ class TopVoted:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
-                logging.error(exception)
-                return render.oops(GENERIC_ERROR)
+            logging.exception("Generic exception")
+            return render.oops(GENERIC_ERROR)
 
 class TopPrinted:
     """
@@ -149,8 +150,8 @@ class TopPrinted:
             result = dbquestion.get_top_printed()
             return render.topprinted(result)  
         except Exception, exception:
-                logging.error(exception)
-                return render.oops(GENERIC_ERROR)
+            logging.exception("Generic exception")
+            return render.oops(GENERIC_ERROR)
 
 class About:
     """

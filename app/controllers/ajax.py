@@ -69,6 +69,6 @@ class Quicklook:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
-            logging.error(exception)
+            logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
             
