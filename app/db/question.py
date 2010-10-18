@@ -1,6 +1,6 @@
 from google.appengine.ext import db
 
-RANKING_SIZE = 100
+RANKING_SIZE = 300
 
 class PrintedQuestionModel(db.Model):
     question_id = db.IntegerProperty()
