@@ -63,6 +63,39 @@ def about():
 about = CompiledTemplate(about(), 'app/views/about.html')
 
 
+def admin():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (result):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('         <div>\n')
+        yield '', join_('             <p> STACKPRINTER ADMIN CONSOLE</p>\n')
+        yield '', join_('             <ul>\n')
+        yield '', join_('                 <li><a href="/admin?action=quota">API quota </a></li>\n')
+        yield '', join_('                 <li><a href="/admin?action=memcachestats">Memcache stats </a></li>\n')
+        yield '', join_('                 <li><a href="/admin?action=memcacheflush">Memcache flush </a></li>\n')
+        yield '', join_('             </ul>       \n')
+        yield '', join_('             \n')
+        yield '', join_('             <p><b>Result:</b></p>\n')
+        for key in loop.setup(result.keys()):
+            yield '', join_('             ', '* ', escape_(("%s - %s" % (key, result[key])), True), '<br>                        \n')
+        yield '', join_('         </div>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+admin = CompiledTemplate(admin(), 'app/views/admin.html')
+
+
 def export():
     loop = ForLoop()
     _dummy  = CompiledTemplate(lambda: None, "dummy")

@@ -30,8 +30,8 @@ class Export:
         return self.GET()
     def GET(self):
         try:
-            question_id = web.input()['question']
-            service = web.input()['service']
+            question_id = web.input(question = None)['question']
+            service = web.input(service = None)['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
             printer =  web.input(printer = 'true')['printer']
             link_to_home = web.input(linktohome = 'true')['linktohome']

@@ -30,6 +30,9 @@ handlers:
 - url: /_ereporter
   script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
   login: admin
+- url: /admin
+  script: application.py
+  login: admin  
 - url: /.*
   script: application.py
   

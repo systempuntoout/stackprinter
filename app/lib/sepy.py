@@ -120,7 +120,7 @@ def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
     if rpc:
         pass
     else:
-        return handle_response(results)
+        return handle_response(results, url)
 
 def __build_url(path, api_endpoint, **params):
     """
@@ -139,7 +139,7 @@ def __gae_fetch(url, rpc = None):
         return urlfetch.fetch(url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}, deadline = 10)
 
 
-def handle_response(results):
+def handle_response(results, url = None):
     """
     Load results in JSON
     """

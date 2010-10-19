@@ -128,7 +128,7 @@ class StackExchangeDownloader():
             #Async calls
             def handle_result(rpc, page):
                 result = rpc.get_result()
-                response = sepy.handle_response(result)
+                response = sepy.handle_response(result,url = '/answers?page%s' % page) #TODO:find a way to pass the complete url
                 answers_chunk = response["answers"]
                 answers_chunk_dict[page] = answers_chunk
 

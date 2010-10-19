@@ -1,0 +1,22 @@
+$def with (result)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  </head>
+    <body>
+         <div>
+             <p> STACKPRINTER ADMIN CONSOLE</p>
+             <ul>
+                 <li><a href="/admin?action=quota">API quota </a></li>
+                 <li><a href="/admin?action=memcachestats">Memcache stats </a></li>
+                 <li><a href="/admin?action=memcacheflush">Memcache flush </a></li>
+             </ul>       
+             
+             <p><b>Result:</b></p>
+             $for key in result.keys():
+                 * $("%s - %s" % (key, result[key]))<br>                        
+         </div>
+  </body>
+</html>
