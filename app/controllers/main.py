@@ -49,7 +49,7 @@ class Export:
                 #Stats
                 dbcounter.increment()
                 dbquestion.store(question['question_id'], service, question['title'], question['tags'])
-            except:
+            except Exception, exception:
                 logging.error(exception) #If it fails it's ok, just log and go on
                 
             return render.export(service, question, answers, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
