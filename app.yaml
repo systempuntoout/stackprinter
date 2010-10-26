@@ -5,7 +5,7 @@ api_version: 1
 
 handlers:
 - url: /test.*
-  login: admin  # This is important if you deploy the test directory in production!
+  login: admin  
   script: gaeunit.py
 - url: /favicon.ico
   static_files: app/static/images/favicon.ico
@@ -30,7 +30,7 @@ handlers:
 - url: /_ereporter
   script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
   login: admin
-- url: /admin
+- url: /admin.*
   script: application.py
   login: admin  
 - url: /.*

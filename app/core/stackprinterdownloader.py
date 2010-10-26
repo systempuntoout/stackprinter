@@ -196,6 +196,13 @@ class StackAuthDownloader():
             supported_services = utils.get_supported_services(results['api_sites'])
             memcache.add("supported_services", supported_services, 14400) #Recheck at least every four hours
             return supported_services
+    
+    @staticmethod    
+    def renew_auth_token():
+        """ Get a new AuthToken storing it"""
+        token = sepy.get_auth_token()['auth_token']['auth_token']
+        return utils.TokenManager.store_auth_token(token)
+
         
 class DeliciousDownloader():  
     def get_favorites_questions(self, username):

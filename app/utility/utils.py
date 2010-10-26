@@ -1,5 +1,7 @@
 from datetime import datetime
 from app.lib import BeautifulSoup as Bs
+from app.db.token import Token
+from google.appengine.api import memcache
 import re
 
 
@@ -109,4 +111,25 @@ class Pagination(object):
         pagination.append(self.total_pages)
         return pagination
 
-    
+class TokenManager():
+    @staticmethod
+    def store_auth_token(auth_token_value):
+        """Save the passed token to datastore and to memcache"""
+        if Token(key_name = 'authtoken', value = auth_token_value).put():
+            memcache.set('authtoken', auth_token_value)
+            return True
+        else:
+            return False
+    @staticmethod
+    def get_auth_token():
+        """Get the auth token from memcache and from datastore if necessary saving again to memcache """
+        auth_token_value = memcache.get('authtoken')
+        if not auth_token_value:
+            entity = Token.get_by_key_name(key_names = 'authtoken')
+            if entity:
+                auth_token_value= entity.value
+                memcache.set('authtoken', auth_token_value)
+            else:
+                auth_token_value = None
+        return auth_token_value
+

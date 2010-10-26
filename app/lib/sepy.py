@@ -5,16 +5,22 @@ Python Stack Exchange library customized for Google App Engine
 """
 import app.lib.simplejson as simplejson 
 from google.appengine.api import urlfetch
-from app.config.constant import KEY_TEMPLATE_ERROR
+from google.appengine.api.labs import taskqueue
+from app.config.constant import KEY_TEMPLATE_ERROR, API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
+from app.utility.utils import TokenManager
+from datetime import datetime
+import urllib
 import logging
 try:
-    from key import api_key
+    from key import api_key, api_private_key
 except ImportError: 
     logging.error(KEY_TEMPLATE_ERROR)
 
 __api_version = '1.0'
 __default_page_size = 100
 __default_page = 1
+__headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}
+
 
 class ApiRequestError(Exception):
     def __init__(self, url, code, message):
@@ -22,7 +28,17 @@ class ApiRequestError(Exception):
         self.url = url
         self.code = code
         self.message = message
-
+        self.api_error_watchdog()
+    def api_error_watchdog(self):
+        """ Take the proper action for a give code error"""
+        if self.code == API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED:
+            try:
+                taskqueue.add(url='/admin/authtokenrenewal', 
+                              method = 'GET', 
+                              name = datetime.now().strftime('Auth%d-%H-%M')) #one task per minute
+            except (taskqueue.TaskAlreadyExistsError, taskqueue.TombstonedTaskError):
+                  pass
+            
 def get_question(question_id, api_endpoint, body = False, comments = False, pagesize = 1):
     """
     Get the question of a given question_id 
@@ -99,7 +115,16 @@ def get_sites():
     """
     Get a list of Stack Exchange sites using Stackauth service
     """
-    results = __gae_fetch('http://stackauth.com/sites')
+    results = __gae_fetch('http://stackauth.com/%s/sites' % __api_version)
+    response = simplejson.loads(results.content)
+    return response
+
+def get_auth_token():
+    """
+    Get the auth Token for authentication using Stackauth service
+    """
+    payload_data = api_private_key
+    results = __gae_fetch(url = 'http://stackauth.com/%s/auth?key=%s' % (__api_version, api_key), method = urlfetch.POST, payload = payload_data )
     response = simplejson.loads(results.content)
     return response
 
@@ -107,11 +132,18 @@ def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
     """
     Fetch results
     """
+    
     params = {
         "key": api_key,
         "pagesize": __default_page_size,
         "page": __default_page
         }
+    
+    #Inject the auth token if valorized
+    auth_token = TokenManager.get_auth_token()
+    if auth_token:
+        params['auth'] = auth_token
+    
     params.update(url_params)
 
     url = __build_url(path, api_endpoint, **params)
@@ -132,11 +164,11 @@ def __build_url(path, api_endpoint, **params):
     url += query_string
     return url
     
-def __gae_fetch(url, rpc = None):
+def __gae_fetch(url, rpc = None, payload = None, method = urlfetch.GET):
     if rpc:
-        return urlfetch.make_fetch_call(rpc, url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'})
+        return urlfetch.make_fetch_call(rpc, url, headers = __headers, payload = payload, method = method)
     else:
-        return urlfetch.fetch(url, headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}, deadline = 10)
+        return urlfetch.fetch(url,  headers = __headers, deadline = 10, payload = payload, method = method)
 
 
 def handle_response(results, url = None):

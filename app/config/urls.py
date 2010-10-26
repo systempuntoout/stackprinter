@@ -13,4 +13,5 @@ urls = (
   '/tags','app.controllers.ajax.Tags',
   '/quicklook','app.controllers.ajax.Quicklook',
   '/admin','app.controllers.admin.Admin',
+  '/admin/authtokenrenewal','app.controllers.admin.AuthTokenRenewal',
 )
