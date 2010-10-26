@@ -30,7 +30,7 @@ class ApiRequestError(Exception):
         self.message = message
         self.api_error_watchdog()
     def api_error_watchdog(self):
-        """ Take the proper action for a give code error"""
+        """ Take the proper action for a given code error"""
         if self.code == API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED:
             try:
                 taskqueue.add(url='/admin/authtokenrenewal', 
@@ -124,7 +124,9 @@ def get_auth_token():
     Get the auth Token for authentication using Stackauth service
     """
     payload_data = api_private_key
-    results = __gae_fetch(url = 'http://stackauth.com/%s/auth?key=%s' % (__api_version, api_key), method = urlfetch.POST, payload = payload_data )
+    results = __gae_fetch(url = 'http://stackauth.com/%s/auth?key=%s' % (__api_version, api_key),
+                          method = urlfetch.POST, 
+                          payload = payload_data )
     response = simplejson.loads(results.content)
     return response
 

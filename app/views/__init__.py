@@ -571,6 +571,8 @@ def index():
         yield '', join_('<html xmlns="http://www.w3.org/1999/xhtml">\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta name="msvalidate.01" content="B1898196AA6A9934D5A056A346AF7EAF" />\n')
+        yield '', join_('        <meta name="google-site-verification" content="Gje2eDNJYqM29mwtIs3LrR-28OBbtntH1YiNHkPS9yY" />\n')
+        yield '', join_('        <meta name="google-site-verification" content="m05zkgXk41nY4dXLheGpLdTiTnx-JduC2XOamAra_6Q" />\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
         yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite. StackPrinter offers a detailed Printer-friendly rendering of Stack Exchange questions, answers and comments. ">\n')
         yield '', join_('        <meta name="keywords" content="printer-friendly stackoverflow stackapps stackexchange">\n')
