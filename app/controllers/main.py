@@ -37,6 +37,10 @@ class Export:
             link_to_home = web.input(linktohome = 'true')['linktohome']
             format = web.input(format = 'HTML')['format'] #For future implementations
             
+            #Check for malformed urls
+            if not service or not question_id:
+                return Index().GET()
+            
             se_downloader = StackExchangeDownloader(service)
             question = se_downloader.get_question(question_id)
             
@@ -44,7 +48,7 @@ class Export:
                 return render.oops(NOT_FOUND_ERROR)
             else:
                 answers = se_downloader.get_answers(question_id)
-            
+
             try:
                 #Stats
                 dbcounter.increment()

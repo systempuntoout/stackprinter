@@ -6,11 +6,15 @@ Python Stack Exchange library customized for Google App Engine
 import app.lib.simplejson as simplejson 
 from google.appengine.api import urlfetch
 from google.appengine.api.labs import taskqueue
-from app.config.constant import KEY_TEMPLATE_ERROR, API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
+from app.config.constant import KEY_TEMPLATE_ERROR
+from app.config.constant import API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
+from app.config.constant import API_ERROR_THROTTLING
 from app.utility.utils import TokenManager
 from datetime import datetime
 import urllib
 import logging
+import os
+
 try:
     from key import api_key, api_private_key
 except ImportError: 
@@ -20,7 +24,7 @@ __api_version = '1.0'
 __default_page_size = 100
 __default_page = 1
 __headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}
-
+__debug = os.environ['SERVER_SOFTWARE'].startswith('Dev')
 
 class ApiRequestError(Exception):
     def __init__(self, url, code, message):
@@ -141,10 +145,11 @@ def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
         "page": __default_page
         }
     
-    #Inject the auth token if valorized
-    auth_token = TokenManager.get_auth_token()
-    if auth_token:
-        params['auth'] = auth_token
+    #Inject the auth token if valorized 
+    if not __debug:
+        auth_token = TokenManager.get_auth_token()
+        if auth_token:
+            params['auth'] = auth_token
     
     params.update(url_params)
 
@@ -177,7 +182,12 @@ def handle_response(results, url = None):
     """
     Load results in JSON
     """
-    response = simplejson.loads(results.content)
+    #When request is throttled, API simply closes the door without any response
+    try:
+        response = simplejson.loads(results.content)
+    except simplejson.JSONDecodeError:
+        raise ApiRequestError(url, None, API_ERROR_THROTTLING)
+        
     if "error" in response:
         error = response["error"]
         code = error["code"]
