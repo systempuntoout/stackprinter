@@ -41,7 +41,7 @@ class WorkerTestCase(unittest.TestCase):
         question = ['dict1']
         question_id = 1
         service = 'foo'
-        deferred_store_question_to_cache(question_id, service, questions)
+        deferred_store_question_to_cache(question_id, service, question)
         question_from_cache = dbquestion.get_question(question_id, service)
         self.assertEquals(question, question_from_cache)
 
