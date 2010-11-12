@@ -132,4 +132,3 @@ class TokenManager():
             else:
                 auth_token_value = None
         return auth_token_value
-

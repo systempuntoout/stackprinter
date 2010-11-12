@@ -1,9 +1,13 @@
 from google.appengine.api import memcache
 from google.appengine.api import urlfetch
-from app.config.constant import UNSUPPORTED_SERVICE_ERROR 
+from google.appengine.ext import deferred
+from app.config.constant import UNSUPPORTED_SERVICE_ERROR
+from app.config.constant import CODE_API_ERROR_THROTTLING 
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
 import app.utility.utils as utils
+import app.utility.worker as worker
+import app.db.question as dbquestion
 import web, re, logging
 
 class Question(object):
@@ -35,13 +39,23 @@ class StackExchangeDownloader():
         self.retriever = sepy
         
     def get_question(self, question_id):  
-        results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
-        question = results["questions"]
-        if len(question) > 0:
-            return question[0]
-        else:
-            return None
-    
+        try:
+            results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
+            question = results["questions"]
+            if len(question) > 0:
+                deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
+                return question[0]
+            else:
+                return None
+        except sepy.ApiRequestError, exception:
+            #If request has been throttled, try to get question from cache
+            if exception.code == CODE_API_ERROR_THROTTLING:
+                question = dbquestion.get_question(question_id, self.service)
+                #None if question is not in cache
+                if question:
+                    return question
+            raise
+                    
     def get_question_title(self, question_id):  
         results = self.retriever.get_question(int(question_id), self.api_endpoint, pagesize = 1)
         question = results["questions"]
@@ -57,6 +71,7 @@ class StackExchangeDownloader():
             return question[0]
         else:
             return None
+            
     def get_answer_quicklook(self, answer_id):
         results = self.retriever.get_answer(int(answer_id), self.api_endpoint, body = True, comments = False, pagesize = 1)
         answer = results["answers"]
@@ -120,36 +135,47 @@ class StackExchangeDownloader():
         answers = []
         page = 1
         pagesize = 50
-        total_answers = int(self.retriever.get_answers(int(question_id), self.api_endpoint, body = False, comments = False, pagesize = 0)['total'])   
-        if total_answers <= pagesize:
-            results = self.retriever.get_answers(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
-            answers = results["answers"]
-        else:
-            #Async calls
-            def handle_result(rpc, page):
-                result = rpc.get_result()
-                response = sepy.handle_response(result,url = '/answers?page%s' % page) #TODO:find a way to pass the complete url
-                answers_chunk = response["answers"]
-                answers_chunk_dict[page] = answers_chunk
+        try:
+            total_answers = int(self.retriever.get_answers(int(question_id), self.api_endpoint, body = False, comments = False, pagesize = 0)['total'])   
+            if total_answers <= pagesize:
+                results = self.retriever.get_answers(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+                answers = results["answers"]
+            else:
+                def handle_result(rpc, page):
+                    result = rpc.get_result()
+                    response = sepy.handle_response(result,url = '/answers?page%s' % page) #TODO:find a way to pass the complete url
+                    answers_chunk = response["answers"]
+                    answers_chunk_dict[page] = answers_chunk
 
-            def create_callback(rpc, page):
-                return lambda: handle_result(rpc, page)
-            rpcs = []
-            while True:
-                rpc = urlfetch.create_rpc(deadline = 10)
-                rpc.callback = create_callback(rpc, page)
-                self.retriever.get_answers(int(question_id), self.api_endpoint, rpc = rpc, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
-                rpcs.append(rpc)
-                if pagesize * page > total_answers:
-                    break
-                else:
-                    page = page +1   
-            for rpc in rpcs:
-                rpc.wait()
-            page_keys = answers_chunk_dict.keys()
-            page_keys.sort()
-            for key in page_keys:
-                answers= answers + answers_chunk_dict[key]
+                def create_callback(rpc, page):
+                    return lambda: handle_result(rpc, page)
+                rpcs = []
+                while True:
+                    rpc = urlfetch.create_rpc(deadline = 10)
+                    rpc.callback = create_callback(rpc, page)
+                    self.retriever.get_answers(int(question_id), self.api_endpoint, rpc = rpc, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+                    rpcs.append(rpc)
+                    if pagesize * page > total_answers:
+                        break
+                    else:
+                        page = page +1   
+                for rpc in rpcs:
+                    rpc.wait()
+                page_keys = answers_chunk_dict.keys()
+                page_keys.sort()
+                for key in page_keys:
+                    answers= answers + answers_chunk_dict[key]
+            #cache it to db
+            deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
+        except sepy.ApiRequestError, exception:
+            #If request has been throttled, try to get answers from cache
+            if exception.code == CODE_API_ERROR_THROTTLING:
+                answers = dbquestion.get_answers(question_id, self.service)
+                #answers could be an empty list for questions without answers
+                #None if answers is not in cache
+                if answers is not None:
+                    return answers
+            raise
         return answers
         
     def get_users_by_id(self, user_id):   

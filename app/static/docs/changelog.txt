@@ -1,3 +1,7 @@
+Version 0.9.9
+2010-11-12
+Cache for throttled request
+
 Version 0.9.8
 2010-10-13
 TopPrinted stats

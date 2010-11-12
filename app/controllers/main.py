@@ -52,7 +52,7 @@ class Export:
             try:
                 #Stats
                 dbcounter.increment()
-                dbquestion.store(question['question_id'], service, question['title'], question['tags'])
+                dbquestion.store_printed_question(question['question_id'], service, question['title'], question['tags'])
             except Exception, exception:
                 logging.error(exception) #If it fails it's ok, just log and go on
                 
@@ -151,7 +151,7 @@ class TopPrinted:
     def GET(self):
         try:
             result = []
-            result = dbquestion.get_top_printed()
+            result = dbquestion.get_top_printed_question()
             return render.topprinted(result)  
         except Exception, exception:
             logging.exception("Generic exception")

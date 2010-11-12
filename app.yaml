@@ -1,5 +1,5 @@
 application: stackprinter
-version: 1
+version: 1.1
 runtime: python
 api_version: 1
 
@@ -27,6 +27,9 @@ handlers:
   static_dir: app/static/images
 - url: /docs
   static_dir: app/static/docs
+- url: /_ah/queue/deferred
+  script: $PYTHON_LIB/google/appengine/ext/deferred/handler.py
+  login: admin
 - url: /_ereporter
   script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
   login: admin

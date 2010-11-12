@@ -9,6 +9,7 @@ from google.appengine.api.labs import taskqueue
 from app.config.constant import KEY_TEMPLATE_ERROR
 from app.config.constant import API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
 from app.config.constant import API_ERROR_THROTTLING
+from app.config.constant import CODE_API_ERROR_THROTTLING
 from app.utility.utils import TokenManager
 from datetime import datetime
 import urllib
@@ -186,8 +187,8 @@ def handle_response(results, url = None):
     try:
         response = simplejson.loads(results.content)
     except simplejson.JSONDecodeError:
-        raise ApiRequestError(url, None, API_ERROR_THROTTLING)
-        
+        raise ApiRequestError(url, CODE_API_ERROR_THROTTLING, API_ERROR_THROTTLING) 
+    
     if "error" in response:
         error = response["error"]
         code = error["code"]
