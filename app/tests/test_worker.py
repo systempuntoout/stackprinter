@@ -45,9 +45,9 @@ class WorkerTestCase(unittest.TestCase):
         question_from_cache = dbquestion.get_question(question_id, service)
         self.assertEquals(question, question_from_cache)
 
-        question = self.spdownloader.question(3940165)
-        deferred_store_question_to_cache(3940165, 'stackoverflow', answers)
-        question_from_cache = dbquestion.get_answers(3940165, 'stackoverflow')
+        question = self.spdownloader.get_question(3940165)
+        deferred_store_question_to_cache(3940165, 'stackoverflow', question)
+        question_from_cache = dbquestion.get_question(3940165, 'stackoverflow')
         self.assertEquals(question, question_from_cache)
        
 if __name__ == '__main__':
