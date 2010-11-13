@@ -23,4 +23,4 @@ def deferred_store_answers_to_cache(question_id, service, answers_data):
                                 chunk_id = chunk_id,
                                 data = answers_data[chunk_index:chunk_index + CHUNK_SIZE]).put()
     except Exception, ex:
-        logging.error(ex)
+        logging.error("Can't store answers of question_id : %s" % question_id)

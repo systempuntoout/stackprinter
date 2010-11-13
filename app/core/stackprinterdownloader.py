@@ -43,7 +43,11 @@ class StackExchangeDownloader():
             results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
             question = results["questions"]
             if len(question) > 0:
-                deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
+                try:
+                    #cache it to db
+                    deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
+                except:
+                    pass
                 return question[0]
             else:
                 return None
@@ -165,8 +169,12 @@ class StackExchangeDownloader():
                 page_keys.sort()
                 for key in page_keys:
                     answers= answers + answers_chunk_dict[key]
-            #cache it to db
-            deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
+            
+            try:
+                #cache it to db (does not work in exceptional case where payload is bigger than 1MByte)
+                deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
+            except:
+                logging.error("Can't defer answers of question_id : %s" % question_id)
         except sepy.ApiRequestError, exception:
             #If request has been throttled, try to get answers from cache
             if exception.code == CODE_API_ERROR_THROTTLING:
