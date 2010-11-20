@@ -37,7 +37,7 @@ class Export:
             link_to_home = web.input(linktohome = 'true')['linktohome']
             format = web.input(format = 'HTML')['format'] #For future implementations
             
-            #Check for malformed urls
+            #Check for malformed request
             if not service or not question_id:
                 return Index().GET()
             
@@ -54,7 +54,7 @@ class Export:
                 dbcounter.increment()
                 dbquestion.store_printed_question(question['question_id'], service, question['title'], question['tags'])
             except Exception, exception:
-                logging.error(exception) #If it fails it's ok, just log and go on
+                logging.error(exception) #Just log and go ahead
                 
             return render.export(service, question, answers, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
@@ -66,18 +66,19 @@ class Export:
       
 class Favorites:
     """
-    Show a lists of favorites questions from different supported services
+    Show a list of favorites questions from different supported services
     """
     def POST(self):
         return self.GET()
     def GET(self):
         try:
-            service = web.input(service = None)['service']
-            if not service:
-                return render.favorites()      
+            service = web.input(service = None)['service']     
             username = web.input(username = None)['username']
             page = web.input(page = 1)['page']
             user_id = web.input(userid = None)['userid']
+            
+            if not service:
+                return render.favorites()
             
             if service in StackAuthDownloader.get_supported_services().keys:
                 if username:
@@ -116,7 +117,7 @@ class Favorites:
 
 class TopVoted:
     """
-    Show a lists of questions filtered by tags
+    Show a list of questions filtered by tags
     """
     def POST(self):
         return self.GET()
@@ -130,10 +131,12 @@ class TopVoted:
                 return render.topvoted()
                 
             se_downloader = StackExchangeDownloader(service)
+            
             if tagged:
                 result, pagination = se_downloader.get_questions_by_tags(tagged, page)
             else:
                 result, pagination = se_downloader.get_questions_by_votes(page)
+                
             return render.topvoted_tagged(tagged.strip(), result, service, pagination)  
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
@@ -144,10 +147,8 @@ class TopVoted:
 
 class TopPrinted:
     """
-    Show a lists of top printed questions 
+    Show a list of top printed questions 
     """
-    def POST(self):
-        return self.GET()
     def GET(self):
         try:
             result = []

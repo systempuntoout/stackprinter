@@ -44,20 +44,23 @@ class StackExchangeDownloader():
             question = results["questions"]
             if len(question) > 0:
                 try:
-                    #cache it to db
                     deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
                 except:
-                    pass
+                    logging.error("%s - defer error trying to store question_id : %s" % (self.service, question_id))
                 return question[0]
             else:
                 return None
         except sepy.ApiRequestError, exception:
-            #If request has been throttled, try to get question from cache
             if exception.code == CODE_API_ERROR_THROTTLING:
                 question = dbquestion.get_question(question_id, self.service)
-                #None if question is not in cache
+                #question is None if not in cache
                 if question:
                     return question
+            raise
+        except urlfetch.DownloadError, exception:
+            question = dbquestion.get_question(question_id, self.service)
+            if question:
+                return question
             raise
                     
     def get_question_title(self, question_id):  
@@ -120,7 +123,7 @@ class StackExchangeDownloader():
                                    ))
         return (questions_by_votes, pagination)     
     """     
-    Deprecated: syncronous answers download  
+    Deprecated: synchronous answers download  
     def get_answers(self, question_id): 
         answers = []
         page = 1
@@ -171,20 +174,25 @@ class StackExchangeDownloader():
                     answers= answers + answers_chunk_dict[key]
             
             try:
-                #cache it to db (does not work in exceptional case where payload is bigger than 1MByte)
+                #cache it to db (does not work for payload bigger than 1MByte)
                 deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
             except:
-                logging.error("Can't defer answers of question_id : %s" % question_id)
+                logging.error("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
+                
+            return answers
+            
         except sepy.ApiRequestError, exception:
-            #If request has been throttled, try to get answers from cache
             if exception.code == CODE_API_ERROR_THROTTLING:
                 answers = dbquestion.get_answers(question_id, self.service)
-                #answers could be an empty list for questions without answers
-                #None if answers is not in cache
+                #answers: empty list for questions without answers or None if not in cache
                 if answers is not None:
                     return answers
             raise
-        return answers
+        except urlfetch.DownloadError, exception:
+            answers = dbquestion.get_answers(question_id, self.service)
+            if answers is not None:
+                return answers
+            raise
         
     def get_users_by_id(self, user_id):   
         results = self.retriever.get_users_by_id(int(user_id), self.api_endpoint, page = 1, pagesize = 1)
@@ -228,7 +236,7 @@ class StackAuthDownloader():
         else:
             results = sepy.get_sites()
             supported_services = utils.get_supported_services(results['api_sites'])
-            memcache.add("supported_services", supported_services, 14400) #Recheck at least every four hours
+            memcache.set("supported_services", supported_services, 14400) #Recheck at least every four hours
             return supported_services
     
     @staticmethod    
