@@ -61,6 +61,7 @@ class Export:
             logging.error(exception)
             return render.oops(exception.message)
         except Exception, exception:
+            logging.error("%s - Generic exception on question_id: %s" % (service, question_id))
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
       

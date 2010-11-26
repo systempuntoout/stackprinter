@@ -1,7 +1,7 @@
 from google.appengine.ext import db
 import pickle
 
-RANKING_SIZE = 300
+RANKING_SIZE = 500
 
 class PickleProperty(db.Property):
      data_type = db.Blob

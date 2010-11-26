@@ -42,7 +42,7 @@ class StackExchangeDownloader():
         try:
             results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
             question = results["questions"]
-            if len(question) > 0:
+            if len(question) > 0 and question[0].has_key('title'):
                 try:
                     deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
                 except:
@@ -66,7 +66,7 @@ class StackExchangeDownloader():
     def get_question_title(self, question_id):  
         results = self.retriever.get_question(int(question_id), self.api_endpoint, pagesize = 1)
         question = results["questions"]
-        if len(question) > 0:
+        if len(question) > 0 and question[0].has_key('title') :
             return question[0]['title']
         else:
             return None
@@ -74,7 +74,7 @@ class StackExchangeDownloader():
     def get_question_quicklook(self, question_id):
         results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = False, pagesize = 1)
         question = results["questions"]
-        if len(question) > 0:
+        if len(question) > 0 and question[0].has_key('title'):
             return question[0]
         else:
             return None
