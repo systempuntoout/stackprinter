@@ -46,7 +46,7 @@ class StackExchangeDownloader():
                 try:
                     deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
                 except:
-                    logging.error("%s - defer error trying to store question_id : %s" % (self.service, question_id))
+                    logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
                 return question[0]
             else:
                 return None
@@ -177,7 +177,7 @@ class StackExchangeDownloader():
                 #cache it to db (does not work for payload bigger than 1MByte)
                 deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
             except:
-                logging.error("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
+                logging.info("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
                 
             return answers
             
