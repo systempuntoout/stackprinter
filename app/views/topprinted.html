@@ -5,7 +5,7 @@ $def with (result)
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">
         <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">
-        <title>TopPrinted - StackPrinter</title> 
+        <title>Top Printed - StackPrinter</title> 
         <link rel="stylesheet" href="/stylesheets/search.css">
         <link rel="stylesheet" href="/stylesheets/main.css">
         <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
@@ -18,7 +18,7 @@ $def with (result)
              <div id="back">
 	            <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>
 	         </div>
-             <div id="title" class="main"><i>TopPrinted</i> questions</div>
+             <div id="title" class="main"><i>Top Printed</i> questions</div>
              <table cellpadding="2" cellspacing="0">
                     $for question in result:
                         <tr class="$loop.parity">
@@ -28,9 +28,12 @@ $def with (result)
                                 </a>
                             </td>
                             <td class="quicklook">
-                                <a onclick="javascript:quicklook($(question.question_id),'$(question.service)');return false;" href="#"/>
-                                    <img title="Quicklook" src="images/quicklook.png"/>
-                                </a>
+                                $if question.deleted:
+                                    <img title="Deleted" src="images/deleted.png"/>
+                                $else:
+                                    <a onclick="javascript:quicklook($(question.question_id),'$(question.service)');return false;" href="#"/>
+                                        <img title="Quicklook" src="images/quicklook.png"/>
+                                    </a>
                             </td>
                             <td class="service_logo">
                                 <a target="_blank" href="$(supported_services.info[question.service]['site_url'])"><img src="$(supported_services.info[question.service]['icon_url'])"/></a>

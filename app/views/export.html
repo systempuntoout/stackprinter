@@ -1,10 +1,10 @@
-$def with (service, question , answers, pretty_links, printer, link_to_home)
+$def with (service, post, pretty_links, printer, link_to_home)
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/stylesheets/export.css">
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-		<title>$question['title']</title>
+		<title>$post.question['title']</title>
 		<script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -29,47 +29,49 @@ $def with (service, question , answers, pretty_links, printer, link_to_home)
 	    <div id="home">
 	        $if link_to_home:
 	            <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>
-	        <a href="http://www.stackprinter.com/export?format=HTML&service=$service&printer=false&question=$(question['question_id'])"><img title="Link to this printed question" width="20px" height="20px" border="0" src="/images/Share.gif"/></a>
+	        <a href="http://www.stackprinter.com/export?format=HTML&service=$service&printer=false&question=$(post.question['question_id'])"><img title="Link to this printed question" width="20px" height="20px" border="0" src="/images/Share.gif"/></a>
 	    </div>         
         <div id="question-block">
           <div id="question-title">
-          	 <img src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(question['title'])<br>
+          	 <img src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(post.question['title'])<br>
           </div>
           <div id="question-details">
-                [$(['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0])$(int(question['up_vote_count'])-int(question['down_vote_count']))] [$question['answer_count']]
-            	 $question.get('owner', {'display_name':'community_owned'})['display_name'] 
+                [$(['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0])$(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))] [$post.question['answer_count']]
+            	 $post.question.get('owner', {'display_name':'community_owned'})['display_name'] 
           </div>
           <div id="question-details">
-              [$date_from(float(question['creation_date']))]
+              [$date_from(float(post.question['creation_date']))]
           </div>
           <div id="question-details">
           [
-          $for tag in question['tags']:
+          $for tag in post.question['tags']:
               $tag
           ]
           </div>
           <div id="question-details">
-          [ http://$(service).com/questions/$(question['question_id']) ]
+          [ http://$(service).com/questions/$(post.question['question_id'])]
+          $if post.is_deleted():
+              [ <img height="10px" width="10px" title="Deleted" src="images/deleted.png"/> DELETED]
           </div>
           <div id="question">
           $if pretty_links:
               $code:
-                  (sup_question_body,sup_question_links) = suppify_body(question['body'])
+                  (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
               $sup_question_body
               <div id="question-links">
               $for key in sup_question_links.keys():
                   [$(key)] $(sup_question_links[key])<br>
               </div>
           $else:
-              $question['body']
+              $post.question['body']
           </div>
-          	$for comment in question['comments']:
+          	$for comment in post.question['comments']:
                 <div class="comment">
                     $if int(comment['score']) > 0:
                         ($comment['score'])    
                     $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'})['display_name']</b>                   
                 </div>
-              $for answer_number, answer  in enumerate(answers):
+              $for answer_number, answer  in enumerate(post.answers):
                   <div class="answer-details">
                       [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
                       [$date_from(float(answer['creation_date']))]     

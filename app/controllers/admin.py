@@ -4,6 +4,8 @@ from app.lib.key import api_key
 from google.appengine.api import memcache
 from app.core.stackprinterdownloader import StackAuthDownloader
 from app.utility.utils import TokenManager
+from google.appengine.ext import deferred
+import app.utility.worker as worker
 
 render = web.render 
 
@@ -24,7 +26,10 @@ class Admin:
         elif action =='memcachestats':
             result = memcache.get_stats()        
         elif action =='memcacheflush':
-            result['result'] = memcache.flush_all()    
+            result['result'] = memcache.flush_all()
+        elif action =='normalize':
+            deferred.defer(worker.normalize_printed_question)    
+            result['result'] = True
         return render.admin(result)
 
 class AuthTokenRenewal:

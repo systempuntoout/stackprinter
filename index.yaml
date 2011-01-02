@@ -14,3 +14,9 @@ indexes:
   properties:
   - name: id_service
   - name: chunk_id
+
+- kind: PrintedQuestionModel
+  properties:
+  - name: deleted
+  - name: counter
+    direction: desc

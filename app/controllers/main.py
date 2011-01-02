@@ -42,21 +42,12 @@ class Export:
                 return Index().GET()
             
             se_downloader = StackExchangeDownloader(service)
-            question = se_downloader.get_question(question_id)
+            post = se_downloader.get_post(question_id)
             
-            if not question:
+            if post is None:
                 return render.oops(NOT_FOUND_ERROR)
-            else:
-                answers = se_downloader.get_answers(question_id)
-
-            try:
-                #Stats
-                dbcounter.increment()
-                dbquestion.store_printed_question(question['question_id'], service, question['title'], question['tags'])
-            except Exception, exception:
-                logging.error(exception) #Just log and go ahead
                 
-            return render.export(service, question, answers, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
+            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
@@ -155,6 +146,19 @@ class TopPrinted:
             result = []
             result = dbquestion.get_top_printed_question()
             return render.topprinted(result)  
+        except Exception, exception:
+            logging.exception("Generic exception")
+            return render.oops(GENERIC_ERROR)
+
+class Deleted:
+    """
+    Show a list of deleted questions 
+    """
+    def GET(self):
+        try:
+            result = []
+            result = dbquestion.get_deleted_question()
+            return render.deleted(result)  
         except Exception, exception:
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)

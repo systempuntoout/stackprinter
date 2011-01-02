@@ -1,7 +1,7 @@
 from google.appengine.ext import db
 import pickle
 
-RANKING_SIZE = 500
+RANKING_SIZE = 3000
 
 class PickleProperty(db.Property):
      data_type = db.Blob
@@ -21,6 +21,7 @@ class PrintedQuestionModel(db.Model):
     title = db.StringProperty()
     tags = db.ListProperty(str)
     counter = db.IntegerProperty()
+    deleted = db.BooleanProperty()
     
     def get_url(self):
         return "http://%s.com/questions/%d" % (self.service, self.question_id)
@@ -35,18 +36,23 @@ class CachedQuestionModel(db.Model):
     data = PickleProperty()
     last_modified = db.DateTimeProperty(auto_now = True)
 
-def store_printed_question(question_id, service, title, tags):
+def store_printed_question(question_id, service, title, tags, deleted):
     def _store_TX():
         entity = PrintedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ) )
         if entity:
             entity.counter = entity.counter + 1
+            entity.deleted = deleted
             entity.put()
         else:
             PrintedQuestionModel(key_name = '%s_%s' % (question_id, service ), question_id = question_id,\
-                                 service = service, title = title, tags = tags, counter = 1).put()
+                                 service = service, title = title, tags = tags, counter = 1, deleted = deleted).put()
     db.run_in_transaction(_store_TX)
 def get_top_printed_question():
     query = PrintedQuestionModel.all().order('-counter')
+    return query.fetch(RANKING_SIZE)
+
+def get_deleted_question():
+    query = PrintedQuestionModel.all().filter('deleted =', True).order('-counter')
     return query.fetch(RANKING_SIZE)
 
 def get_question(question_id, service):

@@ -6,6 +6,7 @@ urls = (
   '/', 'app.controllers.main.Index',
   '/export', 'app.controllers.main.Export',
   '/topprinted', 'app.controllers.main.TopPrinted',
+  '/deleted', 'app.controllers.main.Deleted',
   '/favorites', 'app.controllers.main.Favorites',
   '/topvoted', 'app.controllers.main.TopVoted',
   '/about', 'app.controllers.main.About',

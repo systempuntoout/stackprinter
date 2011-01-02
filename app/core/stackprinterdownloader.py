@@ -10,6 +10,20 @@ import app.utility.worker as worker
 import app.db.question as dbquestion
 import web, re, logging
 
+
+class Post(object):
+    def __init__(self, question, answers):
+        self.question = question
+        self.answers = answers
+        self.deleted = False
+    def is_printable(self):
+        if self.question is None or self.answers is None:
+            return False
+        else:
+            return True
+    def is_deleted(self):
+        return self.deleted
+            
 class Question(object):
     def __init__(self, question_id, url, title, tags_list, creation_date, service, up_vote_count = 0, down_vote_count = 0, answer_count = 0 ):
         self.question_id = question_id
@@ -39,29 +53,16 @@ class StackExchangeDownloader():
         self.retriever = sepy
         
     def get_question(self, question_id):  
-        try:
-            results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
-            question = results["questions"]
-            if len(question) > 0 and question[0].has_key('title'):
-                try:
-                    deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
-                except:
-                    logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
-                return question[0]
-            else:
-                return None
-        except sepy.ApiRequestError, exception:
-            if exception.code == CODE_API_ERROR_THROTTLING:
-                question = dbquestion.get_question(question_id, self.service)
-                #question is None if not in cache
-                if question:
-                    return question
-            raise
-        except urlfetch.DownloadError, exception:
-            question = dbquestion.get_question(question_id, self.service)
-            if question:
-                return question
-            raise
+        results = self.retriever.get_question(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = 1)
+        question = results["questions"]
+        if len(question) > 0 and question[0].has_key('title'):
+            try:
+                deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
+            except:
+                logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
+            return question[0]
+        else:
+            return None
                     
     def get_question_title(self, question_id):  
         results = self.retriever.get_question(int(question_id), self.api_endpoint, pagesize = 1)
@@ -142,57 +143,44 @@ class StackExchangeDownloader():
         answers = []
         page = 1
         pagesize = 50
-        try:
-            total_answers = int(self.retriever.get_answers(int(question_id), self.api_endpoint, body = False, comments = False, pagesize = 0)['total'])   
-            if total_answers <= pagesize:
-                results = self.retriever.get_answers(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
-                answers = results["answers"]
-            else:
-                def handle_result(rpc, page):
-                    result = rpc.get_result()
-                    response = sepy.handle_response(result,url = '/answers?page%s' % page) #TODO:find a way to pass the complete url
-                    answers_chunk = response["answers"]
-                    answers_chunk_dict[page] = answers_chunk
+        
+        total_answers = int(self.retriever.get_answers(int(question_id), self.api_endpoint, body = False, comments = False, pagesize = 0)['total'])   
+        if total_answers <= pagesize:
+            results = self.retriever.get_answers(int(question_id), self.api_endpoint, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+            answers = results["answers"]
+        else:
+            def handle_result(rpc, page):
+                result = rpc.get_result()
+                response = sepy.handle_response(result,url = '/answers?page%s' % page) #TODO:find a way to pass the complete url
+                answers_chunk = response["answers"]
+                answers_chunk_dict[page] = answers_chunk
 
-                def create_callback(rpc, page):
-                    return lambda: handle_result(rpc, page)
-                rpcs = []
-                while True:
-                    rpc = urlfetch.create_rpc(deadline = 10)
-                    rpc.callback = create_callback(rpc, page)
-                    self.retriever.get_answers(int(question_id), self.api_endpoint, rpc = rpc, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
-                    rpcs.append(rpc)
-                    if pagesize * page > total_answers:
-                        break
-                    else:
-                        page = page +1   
-                for rpc in rpcs:
-                    rpc.wait()
-                page_keys = answers_chunk_dict.keys()
-                page_keys.sort()
-                for key in page_keys:
-                    answers= answers + answers_chunk_dict[key]
+            def create_callback(rpc, page):
+                return lambda: handle_result(rpc, page)
+            rpcs = []
+            while True:
+                rpc = urlfetch.create_rpc(deadline = 10)
+                rpc.callback = create_callback(rpc, page)
+                self.retriever.get_answers(int(question_id), self.api_endpoint, rpc = rpc, body = True, comments = True, pagesize = pagesize, page = page, sort = 'votes')
+                rpcs.append(rpc)
+                if pagesize * page > total_answers:
+                    break
+                else:
+                    page = page +1   
+            for rpc in rpcs:
+                rpc.wait()
+            page_keys = answers_chunk_dict.keys()
+            page_keys.sort()
+            for key in page_keys:
+                answers= answers + answers_chunk_dict[key]
+        
+        try:
+            #cache it to db (does not work for payload bigger than 1MByte)
+            deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
+        except:
+            logging.info("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
             
-            try:
-                #cache it to db (does not work for payload bigger than 1MByte)
-                deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
-            except:
-                logging.info("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
-                
-            return answers
-            
-        except sepy.ApiRequestError, exception:
-            if exception.code == CODE_API_ERROR_THROTTLING:
-                answers = dbquestion.get_answers(question_id, self.service)
-                #answers: empty list for questions without answers or None if not in cache
-                if answers is not None:
-                    return answers
-            raise
-        except urlfetch.DownloadError, exception:
-            answers = dbquestion.get_answers(question_id, self.service)
-            if answers is not None:
-                return answers
-            raise
+        return answers
         
     def get_users_by_id(self, user_id):   
         results = self.retriever.get_users_by_id(int(user_id), self.api_endpoint, page = 1, pagesize = 1)
@@ -227,6 +215,37 @@ class StackExchangeDownloader():
         tags = results['tags']
         return "\n".join([tag['name'] for tag in tags ])
    
+    def get_post(self, question_id):
+       """
+          Return a post object representing the question and the answers list 
+          Return None if question/answers are not found from Api call or db cache (deleted questions)
+       """
+       try:
+           question = self.get_question(question_id)
+           if question:
+               post = Post(self.get_question(question_id), self.get_answers(question_id))    
+           else: #StackPrinter loves the legendary deleted questions and tries to get them from the datastore
+               post = Post(dbquestion.get_question(question_id, self.service),
+                           dbquestion.get_answers(question_id, self.service))
+               post.deleted = True
+       except (sepy.ApiRequestError, urlfetch.DownloadError): 
+            post = Post(dbquestion.get_question(question_id, self.service),
+                        dbquestion.get_answers(question_id, self.service)) 
+            if not post.is_printable():
+                raise
+            
+       if post.is_printable():
+           deferred.defer(worker.deferred_store_print_statistics,
+                          post.question['question_id'], 
+                          self.service, 
+                          post.question['title'], 
+                          post.question['tags'],
+                          post.deleted)
+           return post
+       else:
+           return None
+           
+           
 class StackAuthDownloader():    
     @staticmethod    
     def get_supported_services():

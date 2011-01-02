@@ -1,5 +1,7 @@
 from app.db.question import CachedQuestionModel, CachedAnswersModel
 import logging
+import app.db.counter as dbcounter
+import app.db.question as dbquestion
 
 CHUNK_SIZE = 150
 
@@ -27,3 +29,16 @@ def deferred_store_answers_to_cache(question_id, service, answers_data):
                                 data = answers_data[chunk_index:chunk_index + CHUNK_SIZE]).put()
     except Exception, ex:
         logging.info("%s - db error trying to store answers of question_id : %s" % (service, question_id))
+
+def deferred_store_print_statistics(question_id, service, title, tags, deleted):
+    try:
+        #Stats
+        dbcounter.increment()
+        dbquestion.store_printed_question(question_id, service, title, tags, deleted)
+    except Exception, exception:
+        logging.error(exception) 
+        
+def normalize_printed_question():
+    for printed_question in dbquestion.PrintedQuestionModel.all():
+        printed_question.deleted = False
+        printed_question.put()

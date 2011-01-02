@@ -188,7 +188,6 @@ def handle_response(results, url = None):
         response = simplejson.loads(results.content)
     except simplejson.JSONDecodeError:
         raise ApiRequestError(url, CODE_API_ERROR_THROTTLING, API_ERROR_THROTTLING) 
-    
     if "error" in response:
         error = response["error"]
         code = error["code"]
