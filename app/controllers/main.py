@@ -146,7 +146,8 @@ class TopPrinted:
             result = []
             page = web.input(page = 1)['page']
             result = dbquestion.get_top_printed_questions(page)
-            return render.topprinted(result, int(page), dbquestion.TOP_PRINTED_PAGINATION_SIZE)  
+            count = dbquestion.get_top_printed_count()
+            return render.topprinted(result, int(page), dbquestion.TOP_PRINTED_PAGINATION_SIZE, count)  
         except Exception, exception:
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)

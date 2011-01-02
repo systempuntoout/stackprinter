@@ -1,4 +1,4 @@
-$def with (result, page , pagesize)
+$def with (result, page , pagesize, count)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
@@ -55,7 +55,7 @@ $def with (result, page , pagesize)
                             </table>
                             <table id="pagination">
                                 <tr>
-                                    <td class="pagination_found"></td>
+                                    <td class="pagination_found">Found: $commify(count)</td>
                                     <td class="pagination_page">
                                         $if page > 1:
                                 	        <a href="/topprinted?page=$(page-1)">&laquo; prev&nbsp;&nbsp;</a>

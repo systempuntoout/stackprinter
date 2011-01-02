@@ -1,4 +1,6 @@
 from google.appengine.ext import db
+from google.appengine.ext.db import stats
+import logging
 import pickle
 
 TOP_PRINTED_PAGINATION_SIZE = 300
@@ -51,6 +53,16 @@ def store_printed_question(question_id, service, title, tags, deleted):
 def get_top_printed_questions(page):
     query = PrintedQuestionModel.all().order('-counter')
     return query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
+
+def get_top_printed_count():
+    try:
+        kind_stats = stats.KindStat().all().filter("kind_name =", "PrintedQuestionModel").get()
+        count = kind_stats.count
+    except Exception, ex:
+        logging.error(ex)
+        count = PrintedQuestionModel.all().count()
+    return count
+    
 
 def get_deleted_questions():
     query = PrintedQuestionModel.all().filter('deleted =', True).order('-counter')

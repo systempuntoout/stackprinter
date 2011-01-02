@@ -848,7 +848,7 @@ def topprinted():
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (result, page , pagesize):
+    def __template__ (result, page , pagesize, count):
         yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
@@ -905,7 +905,7 @@ def topprinted():
                 yield '', join_('                    ', '</table>\n')
                 yield '', join_('                    ', '<table id="pagination">\n')
                 yield '', join_('                    ', '    <tr>\n')
-                yield '', join_('                    ', '        <td class="pagination_found"></td>\n')
+                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(count), True), '</td>\n')
                 yield '', join_('                    ', '        <td class="pagination_page">\n')
                 if page > 1:
                     yield '', join_('                                ', '    <a href="/topprinted?page=', escape_((page-1), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')

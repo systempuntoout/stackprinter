@@ -5,7 +5,7 @@ Python Stack Exchange library customized for Google App Engine
 """
 import app.lib.simplejson as simplejson 
 from google.appengine.api import urlfetch
-from google.appengine.api.labs import taskqueue
+from google.appengine.api.taskqueue import taskqueue
 from app.config.constant import KEY_TEMPLATE_ERROR
 from app.config.constant import API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
 from app.config.constant import API_ERROR_THROTTLING
