@@ -1,4 +1,4 @@
-$def with (result)
+$def with (result, page , pagesize)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
@@ -51,6 +51,21 @@ $def with (result)
                                     [$(question.counter)]
                             </td>
                         </tr>
+                        $if loop.last:
+                            </table>
+                            <table id="pagination">
+                                <tr>
+                                    <td class="pagination_found"></td>
+                                    <td class="pagination_page">
+                                        $if page > 1:
+                                	        <a href="/topprinted?page=$(page-1)">&laquo; prev&nbsp;&nbsp;</a>
+                                        
+                                        $if len(result) >= pagesize:
+                                	           <a href="/topprinted?page=$(page+1)">&nbsp;&nbsp;next &raquo;</a>
+                                    </td>
+                                    <td class="pagination_pagesize">Pagesize: $pagesize</td>
+                                </tr>
+                            </table>
                     $else:
                         $if len(result) == 0:
                             <p id="not_found">

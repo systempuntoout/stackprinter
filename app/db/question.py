@@ -1,7 +1,8 @@
 from google.appengine.ext import db
 import pickle
 
-RANKING_SIZE = 3000
+TOP_PRINTED_PAGINATION_SIZE = 300
+DELETED_PAGINATION_SIZE = 1000
 
 class PickleProperty(db.Property):
      data_type = db.Blob
@@ -47,13 +48,13 @@ def store_printed_question(question_id, service, title, tags, deleted):
             PrintedQuestionModel(key_name = '%s_%s' % (question_id, service ), question_id = question_id,\
                                  service = service, title = title, tags = tags, counter = 1, deleted = deleted).put()
     db.run_in_transaction(_store_TX)
-def get_top_printed_question():
+def get_top_printed_questions(page):
     query = PrintedQuestionModel.all().order('-counter')
-    return query.fetch(RANKING_SIZE)
+    return query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
 
-def get_deleted_question():
+def get_deleted_questions():
     query = PrintedQuestionModel.all().filter('deleted =', True).order('-counter')
-    return query.fetch(RANKING_SIZE)
+    return query.fetch(DELETED_PAGINATION_SIZE)
 
 def get_question(question_id, service):
     entity = CachedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ))

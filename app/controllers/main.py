@@ -144,8 +144,9 @@ class TopPrinted:
     def GET(self):
         try:
             result = []
-            result = dbquestion.get_top_printed_question()
-            return render.topprinted(result)  
+            page = web.input(page = 1)['page']
+            result = dbquestion.get_top_printed_questions(page)
+            return render.topprinted(result, int(page), dbquestion.TOP_PRINTED_PAGINATION_SIZE)  
         except Exception, exception:
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
@@ -157,7 +158,7 @@ class Deleted:
     def GET(self):
         try:
             result = []
-            result = dbquestion.get_deleted_question()
+            result = dbquestion.get_deleted_questions()
             return render.deleted(result)  
         except Exception, exception:
             logging.exception("Generic exception")
