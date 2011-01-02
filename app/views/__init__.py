@@ -222,7 +222,7 @@ def export():
         yield '', join_('          <div id="question-details">\n')
         yield '', join_('          [ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
         if post.is_deleted():
-            yield '', join_('          ', '[ <img height="10px" width="10px" title="Deleted" src="images/deleted.png"/> DELETED]\n')
+            yield '', join_('          ', '[DELETED]\n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div id="question">\n')
         if pretty_links:

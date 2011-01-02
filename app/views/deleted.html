@@ -1,0 +1,52 @@
+$def with (result)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">
+        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">
+        <title>Deleted - StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/search.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/javascripts/main.js"></script>     
+  </head>
+    <body>
+             <div id="back">
+	            <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>
+	         </div>
+             <div id="title" class="main"><i>Deleted</i> questions</div>
+             <table cellpadding="2" cellspacing="0">
+                    $for question in result:
+                        <tr class="$loop.parity">
+                            <td class="printer">
+                                <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)&linktohome=false"/>
+                                    <img title="Printer-Friendly" src="images/printer_black.png"/>
+                                </a>
+                            </td>
+                            <td class="service_logo">
+                                <a target="_blank" href="$(supported_services.info[question.service]['site_url'])"><img src="$(supported_services.info[question.service]['icon_url'])"/></a>
+                            </td>
+                            <td class="service_name">
+                                [$(supported_services.info[question.service]['name'])]    
+                            </td>    
+                            <td class="title">
+                                <a target="_blank" href="$question.get_url()"/>$htmlquote(question.title)</a><br>
+                                <span class="tag">
+                                    [$(", ".join([tag for tag in question.tags]))]
+                                </span>
+                            </td>
+                            <td class="counter">
+                                    [$(question.counter)]
+                            </td>
+                        </tr>
+                    $else:
+                        $if len(result) == 0:
+                            <p id="not_found">
+                                No questions found
+                            </p>
+  </body>
+</html>
