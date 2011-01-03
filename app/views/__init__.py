@@ -39,7 +39,7 @@ def about():
         yield '', join_('                  <b>Favorites:</b><br>\n')
         yield '', join_('                  Supported services:<br> \n')
         yield '', join_('                  1. The Stack Exchange Network<br>\n')
-        yield '', join_("                  Retrieves and lets you print all the favorites users's questions<br>\n")
+        yield '', join_("                  Retrieves and lets you print all the favorites users' questions<br>\n")
         yield '', join_('                  <br>\n')
         yield '', join_('                  2. Delicious<br>\n')
         yield '', join_('                  Retrieves the latest 100 questions of a given Delicious username with <i>stackoverflow</i> tag (<a href="http://meta.stackoverflow.com/questions/47162/save-question-to-delicious-greasemonkey-script">more info</a>).<br>                \n')
