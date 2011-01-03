@@ -28,7 +28,7 @@ def about():
         yield '', join_('              <div class="about">\n')
         yield '', join_('                  <br>\n')
         yield '', join_('                  <b>Printer-Friendly:</b><br>\n')
-        yield '', join_('                  Using <a href="http://www.stackexchange.com/sites">Stack Exchange</a> Network <a href="http://stackapps.com/questions/1/api-documentation-and-help">API</a> produces an essential printable view of a given <i>question id</i> with:<br>\n')
+        yield '', join_('                  Using the <a href="http://www.stackexchange.com/sites">Stack Exchange</a> Network <a href="http://stackapps.com/questions/1/api-documentation-and-help">API</a> produces an essential printable view of a given <i>question id</i> with:<br>\n')
         yield '', join_('                  * All the answers<br> \n')
         yield '', join_('                  * All the comments<br>\n')
         yield '', join_('                  <br>\n')
