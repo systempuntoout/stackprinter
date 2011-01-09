@@ -15,5 +15,5 @@ urls = (
   '/quicklook','app.controllers.ajax.Quicklook',
   '/admin','app.controllers.admin.Admin',
   '/admin/authtokenrenewal','app.controllers.admin.AuthTokenRenewal',
-  '/ah/warmup','app.controllers.admin.Warmup',
+  '/_ah/warmup','app.controllers.admin.Warmup',
 )
