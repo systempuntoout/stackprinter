@@ -40,5 +40,4 @@ def deferred_store_print_statistics(question_id, service, title, tags, deleted):
         
 def normalize_printed_question():
     for printed_question in dbquestion.PrintedQuestionModel.all():
-        printed_question.deleted = False
-        printed_question.put()
+        pass

@@ -6,6 +6,7 @@ from app.core.stackprinterdownloader import StackAuthDownloader
 from app.utility.utils import TokenManager
 from google.appengine.ext import deferred
 import app.utility.worker as worker
+import app.db.question as dbquestion
 
 render = web.render 
 
@@ -13,6 +14,9 @@ class Admin:
     """
     Admin homepage
     """
+    def POST(self):
+        return self.GET()
+        
     def GET(self):
         result = {}
         action = web.input(action = None)['action']
@@ -30,6 +34,13 @@ class Admin:
         elif action =='normalize':
             deferred.defer(worker.normalize_printed_question)    
             result['result'] = True
+        elif action =='delete':
+            service = web.input(service = None)['service']
+            question_id = web.input(question_id = None)['question_id']
+            result['printed_question_deletion'] = dbquestion.delete_printed_question(question_id,service)
+            result['question_deletion'] = dbquestion.delete_question(question_id,service)
+            result['answers_deletion'] = dbquestion.delete_answers(question_id,service)
+            
         return render.admin(result)
 
 class AuthTokenRenewal:
@@ -40,3 +51,10 @@ class AuthTokenRenewal:
         result = {}
         result['result'] = StackAuthDownloader.renew_auth_token()
         return render.admin(result)
+        
+class Warmup:
+    """
+    Warming Requests for avoiding latency
+    """
+    def GET(self):
+        pass

@@ -1,5 +1,8 @@
-Last update: 2011-01-01
+Last update: 2011-01-08
 Retrieve the hottest weekly questions
+Fix printing with TeX
+Memcache to avoid Api calls
+
 
 
 

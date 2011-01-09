@@ -10,3 +10,7 @@
         );
         return false;
     }
+    
+function Print(){
+    document.body.offsetHeight;window.print()
+};

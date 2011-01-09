@@ -14,8 +14,15 @@ $def with (result)
                  <li><a href="/admin?action=authkey">API quota auth key </a></li>
                  <li><a href="/admin?action=memcachestats">Memcache stats </a></li>
                  <li><a href="/admin?action=memcacheflush">Memcache flush </a></li>
-                 <li><a href="/admin?action=normalize">Normalize </a></li>
+                 <li><a href="/admin?action=normalize">Normalize </a></li>                 
                  <li><a href="/admin/authtokenrenewal">Auth Token renewal </a></li>
+                 <li><form action = "/admin" method="POST">  
+                     <input type="hidden" name="action" value="delete"/>
+                     question_id:<input type="text" name="question_id"/>
+                     service :<input type="text" name="service"/>
+                     <input type="submit" value="Delete printed and cached Q/A"/>
+                   </form>
+                 </li>
              </ul>       
              
              <p><b>Result:</b></p>

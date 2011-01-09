@@ -50,6 +50,15 @@ def store_printed_question(question_id, service, title, tags, deleted):
             PrintedQuestionModel(key_name = '%s_%s' % (question_id, service ), question_id = question_id,\
                                  service = service, title = title, tags = tags, counter = 1, deleted = deleted).put()
     db.run_in_transaction(_store_TX)
+
+def delete_printed_question(question_id, service):
+    question_to_delete = PrintedQuestionModel.all().filter('question_id = ',int(question_id)).filter('service =',service).get()
+    if question_to_delete:
+        question_to_delete.delete()    
+        return True
+    else:
+        return "None"
+        
 def get_top_printed_questions(page):
     query = PrintedQuestionModel.all().order('-counter')
     return query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
@@ -62,7 +71,6 @@ def get_top_printed_count():
         logging.error(ex)
         count = PrintedQuestionModel.all().count()
     return count
-    
 
 def get_deleted_questions():
     query = PrintedQuestionModel.all().filter('deleted =', True).order('-counter')
@@ -85,5 +93,26 @@ def get_answers(question_id, service):
     else:
         if entry_found:
             return answers
+        else:
+            return None
+
+def delete_question(question_id, service):
+    entity = CachedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ))
+    if entity:
+        entity.delete()
+        return True
+    else:
+        return None
+
+def delete_answers(question_id, service):
+    answers = []
+    entry_found = False
+    answers_chunks = CachedAnswersModel.all().filter('id_service =', '%s_%s' % (question_id, service )).order('chunk_id')
+    for answers_chunk in answers_chunks:
+        answers_chunk.delete()
+        entry_found = True
+    else:
+        if entry_found:
+            return True
         else:
             return None

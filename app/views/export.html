@@ -5,27 +5,23 @@ $def with (service, post, pretty_links, printer, link_to_home)
 		<link rel="stylesheet" href="/stylesheets/export.css">
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 		<title>$post.question['title']</title>
-		<script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-            try {
-                var pageTracker = _gat._getTracker("UA-4276204-5");
-                pageTracker._trackPageview();
-            } catch(err) {}
-        </script>
-	    <script>
-        function Print(){
-            $if printer:
-                document.body.offsetHeight;window.print()
-        };
-        </script>
-        <script src="http://static.getclicky.com/js" type="text/javascript"></script>
-        <script type="text/javascript">clicky.init(250663);</script>
-        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>
-  </head>
-	<body onload="Print()">
+		<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="/javascripts/main.js"></script>
+		$if service in TEX_ENABLED_SERVICES:
+		    <script type="text/javascript" src="/javascripts/mathjax.js"></script>
+		    $if printer:
+		        <script>
+		            MathJax.Hub.Queue(function () {
+		                Print();
+		            });
+		        </script>
+		$else:
+		    $if printer:
+		        <script>
+		            jQuery(document).ready(function(){Print();});
+                </script>
+    </head>
+	<body>
 	    <div id="home">
 	        $if link_to_home:
 	            <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>
@@ -111,5 +107,18 @@ $def with (service, post, pretty_links, printer, link_to_home)
             src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
             </script>
         </div>
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-4276204-5");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
+	    <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+        <script type="text/javascript">clicky.init(250663);</script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>
   </body>
 </html>

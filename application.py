@@ -3,6 +3,7 @@
 """
 from app.config.urls import urls
 from app.config.constant import UNICORN_MESSAGE_ERROR, NOT_FOUND_ERROR, SERVER_ERROR
+from app.config.constant import TEX_ENABLED_SERVICES
 from app.core.stackprinterdownloader import StackAuthDownloader
 from google.appengine.ext.webapp.util import run_wsgi_app
 import app.utility.utils as utils
@@ -16,6 +17,7 @@ web.render = render = web.template.render('app/views/', globals = {'date_from':u
                                                'htmlquote':web.net.htmlquote,
                                                'supported_services': StackAuthDownloader.get_supported_services(),
                                                'ERROR_MESSAGE' : UNICORN_MESSAGE_ERROR,
+                                               'TEX_ENABLED_SERVICES' : TEX_ENABLED_SERVICES,
                                                }, cache = True)
 def notfound():
     return web.notfound(render.oops(NOT_FOUND_ERROR))
