@@ -8,12 +8,12 @@ $def with (service, post, pretty_links, printer, link_to_home)
 		<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="/javascripts/main.js"></script>
 		$if service in TEX_ENABLED_SERVICES:
-		    <script type="text/javascript" src="/javascripts/mathjax.js"></script>
+		    <script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js">
+		            MathJax.Hub.Config({extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/noUndefined.js", "TeX/AMSsymbols.js"],showProcessingMessages: false, messageStyle: "none","HTML-CSS": { preferredFont: "TeX", imageFont: null, availableFonts: ["STIX","TeX"], webFont: "TeX" },jax: ["input/TeX","output/HTML-CSS"],TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } }});MathJax.Hub.Startup.onload();
+		    </script>
 		    $if printer:
 		        <script>
-		            MathJax.Hub.Queue(function () {
-		                Print();
-		            });
+		            MathJax.Hub.Queue(Print)
 		        </script>
 		$else:
 		    $if printer:

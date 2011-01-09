@@ -47,7 +47,7 @@ def about():
         yield '', join_('                  <b>Top Voted:</b><br>\n')
         yield '', join_('                  Retrieves and lets you print the top voted questions by tags<br><br>\n')
         yield '', join_('                  <b>Top Printed:</b><br>\n')
-        yield '', join_('                    Ttop voted StackPrinter questions list<br><br>\n')
+        yield '', join_('                    Top voted questions list<br><br>\n')
         yield '', join_('                  <b>Info:</b><br>\n')
         yield '', join_('                  <a target="_new" href="/docs/changelog.txt">Changelog</a>/<a target="_new" href="/docs/todo.txt">ToDo</a><br>\n')
         yield '', join_('                  <a target="_new" href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">More info on Stack Apps</a><br>\n')
@@ -185,12 +185,12 @@ def export():
         yield '', join_('                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
         if service in TEX_ENABLED_SERVICES:
-            yield '', join_('                ', '<script type="text/javascript" src="/javascripts/mathjax.js"></script>\n')
+            yield '', join_('                ', '<script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js">\n')
+            yield '', join_('                ', '        MathJax.Hub.Config({extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/noUndefined.js", "TeX/AMSsymbols.js"],showProcessingMessages: false, messageStyle: "none","HTML-CSS": { preferredFont: "TeX", imageFont: null, availableFonts: ["STIX","TeX"], webFont: "TeX" },jax: ["input/TeX","output/HTML-CSS"],TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } }});MathJax.Hub.Startup.onload();\n')
+            yield '', join_('                ', '</script>\n')
             if printer:
                 yield '', join_('                ', '<script>\n')
-                yield '', join_('                ', '    MathJax.Hub.Queue(function () {\n')
-                yield '', join_('                ', '        Print();\n')
-                yield '', join_('                ', '    });\n')
+                yield '', join_('                ', '    MathJax.Hub.Queue(Print)\n')
                 yield '', join_('                ', '</script>\n')
         else:
             if printer:
