@@ -41,7 +41,10 @@ handlers:
   login: admin
 - url: /admin.*
   script: application.py
-  login: admin  
+  login: admin 
+- url: /ah/warmup
+  script: application.py
+  login: admin 
 - url: /.*
   script: application.py
   
