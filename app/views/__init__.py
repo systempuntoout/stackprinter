@@ -186,11 +186,11 @@ def export():
         yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
         if service in TEX_ENABLED_SERVICES:
             yield '', join_('                ', '<script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js">\n')
-            yield '', join_('                ', '        MathJax.Hub.Config({extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/noUndefined.js", "TeX/AMSsymbols.js"],showProcessingMessages: false, messageStyle: "none","HTML-CSS": { preferredFont: "TeX", imageFont: null, availableFonts: ["STIX","TeX"], webFont: "TeX" },jax: ["input/TeX","output/HTML-CSS"],TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } }});MathJax.Hub.Startup.onload();\n')
+            yield '', join_('                ', '        MathJax.Hub.Config({extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/noUndefined.js", "TeX/AMSsymbols.js"],"HTML-CSS": { preferredFont: "TeX", imageFont: null, availableFonts: ["STIX","TeX"], webFont: "TeX" },jax: ["input/TeX","output/HTML-CSS"],TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } }});MathJax.Hub.Startup.onload();\n')
             yield '', join_('                ', '</script>\n')
             if printer:
                 yield '', join_('                ', '<script>\n')
-                yield '', join_('                ', '    MathJax.Hub.Queue(Print)\n')
+                yield '', join_('                ', '    MathJax.Hub.Queue(["Delay",MathJax.Callback,700],Print)\n')
                 yield '', join_('                ', '</script>\n')
         else:
             if printer:
