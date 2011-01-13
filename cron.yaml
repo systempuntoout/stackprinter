@@ -7,3 +7,8 @@ cron:
   url: /admin/authtokenrenewal
   schedule: every 6 hours
   timezone: Europe/Rome
+- description: Sunday morning top questions retriever
+  url: /admin/topquestionsretriever
+  schedule: every sunday 12:00
+  timezone: Europe/Rome
+  

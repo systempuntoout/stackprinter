@@ -93,6 +93,7 @@ def admin():
         yield '', join_('                     <input type="submit" value="Delete printed and cached Q/A"/>\n')
         yield '', join_('                   </form>\n')
         yield '', join_('                 </li>\n')
+        yield '', join_('                 <li><a href="/admin/topquestionsretriever">Top Question Retriever</a></li>\n')
         yield '', join_('             </ul>       \n')
         yield '', join_('             \n')
         yield '', join_('             <p><b>Result:</b></p>\n')

@@ -1,0 +1,4 @@
+queue:
+- name: retriever
+  rate: 1/m
+  bucket_size: 1

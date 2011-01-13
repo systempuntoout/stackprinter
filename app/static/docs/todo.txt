@@ -1,7 +1,6 @@
 Last update: 2011-01-08
-Retrieve the hottest weekly questions
-Fix printing with TeX
-Memcache to avoid Api calls
+Some better caching when bots hammer 
+Store votes/answers on top printed
 
 
 

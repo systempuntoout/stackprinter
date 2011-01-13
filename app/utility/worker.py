@@ -5,6 +5,7 @@ import app.db.question as dbquestion
 
 CHUNK_SIZE = 150
 
+
 def deferred_store_question_to_cache(question_id, service, question_data):
     try:
         CachedQuestionModel(key_name = '%s_%s' % (question_id, service ), data = question_data).put()
@@ -38,6 +39,6 @@ def deferred_store_print_statistics(question_id, service, title, tags, deleted):
     except Exception, exception:
         logging.error(exception) 
         
-def normalize_printed_question():
+def deferred_normalize_printed_question():
     for printed_question in dbquestion.PrintedQuestionModel.all():
         pass

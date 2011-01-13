@@ -1,5 +1,5 @@
 UNICORN_MESSAGE_ERROR = "..for the love it bears to fair maidens forgets its ferocity and wildness.. "
-GENERIC_ERROR = "Ooooops!"
+GENERIC_ERROR = "Ooooops, It works on my machine. Please try again later."
 NOT_FOUND_ERROR = "Not found!"
 SERVER_ERROR = "Server problem"
 UNSUPPORTED_SERVICE_ERROR = "Unsupported service"

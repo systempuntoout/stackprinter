@@ -1,3 +1,7 @@
+Version 0.9.9.3
+2011-01-13
+TopQuestions retriever
+
 Version 0.9.9.2
 2011-01-08
 Top Printed promoted

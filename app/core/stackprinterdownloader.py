@@ -2,7 +2,6 @@ from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 from google.appengine.ext import deferred
 from app.config.constant import UNSUPPORTED_SERVICE_ERROR
-from app.config.constant import CODE_API_ERROR_THROTTLING 
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
 import app.utility.utils as utils
@@ -87,6 +86,12 @@ class StackExchangeDownloader():
             return answer[0]
         else:
             return None
+    
+    def get_questions_by_hotness(self, page = 1 , pagesize = 30, sort = 'week'):
+        questions_by_hotness = []
+        results = self.retriever.get_questions(self.api_endpoint, page, pagesize, sort)
+        questions = results["questions"]
+        return questions
             
     def get_questions_by_tags(self, tagged, page):
         questions_by_tags = []
@@ -235,12 +240,16 @@ class StackExchangeDownloader():
                 raise
             
        if post.is_printable():
-           deferred.defer(worker.deferred_store_print_statistics,
-                          post.question['question_id'], 
-                          self.service, 
-                          post.question['title'], 
-                          post.question['tags'],
-                          post.deleted)
+           try:
+               deferred.defer(worker.deferred_store_print_statistics,
+                                 post.question['question_id'], 
+                                 self.service, 
+                                 post.question['title'], 
+                                 post.question['tags'],
+                                 post.deleted)
+           except:
+               logging.info("%s - defer error trying to store print statistics : %s" % (self.service, question_id))
+           
            return post
        else:
            return None
