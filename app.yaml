@@ -33,6 +33,8 @@ handlers:
   static_dir: app/static/images
 - url: /docs
   static_dir: app/static/docs
+- url: /deleted
+  static_dir: app/static/deleted
 - url: /_ah/queue/deferred
   script: $PYTHON_LIB/google/appengine/ext/deferred/handler.py
   login: admin

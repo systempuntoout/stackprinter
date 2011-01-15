@@ -33,11 +33,10 @@ def deferred_store_answers_to_cache(question_id, service, answers_data):
 
 def deferred_store_print_statistics(question_id, service, title, tags, deleted):
     try:
-        #Stats
         dbcounter.increment()
         dbquestion.store_printed_question(question_id, service, title, tags, deleted)
     except Exception, exception:
-        logging.error(exception) 
+        logging.exception("db error trying to store stats") 
         
 def deferred_normalize_printed_question():
     for printed_question in dbquestion.PrintedQuestionModel.all():
