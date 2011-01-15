@@ -4,7 +4,6 @@ from app.lib.key import api_key
 from google.appengine.api import memcache
 from app.core.stackprinterdownloader import StackAuthDownloader,StackExchangeDownloader
 from app.utility.utils import TokenManager
-from google.appengine.ext import deferred
 import app.utility.worker as worker
 from google.appengine.api.taskqueue import taskqueue
 import app.db.question as dbquestion
