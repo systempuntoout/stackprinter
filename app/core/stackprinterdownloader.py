@@ -228,7 +228,7 @@ class StackExchangeDownloader():
        try:
            question = self.get_question(question_id)
            if question:
-               post = Post(self.get_question(question_id), self.get_answers(question_id))    
+               post = Post(question, self.get_answers(question_id))    
            else: #StackPrinter loves the legendary deleted questions and tries to get them from the datastore
                post = Post(dbquestion.get_question(question_id, self.service),
                            dbquestion.get_answers(question_id, self.service))
