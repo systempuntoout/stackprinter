@@ -22,7 +22,7 @@ class Question:
                 se_downloader = StackExchangeDownloader(service)
                 title = se_downloader.get_question_title(question_id)
                 memcache.add("%s%s" % (str(question_id), service), title, 7200)
-            return '{"title":"%s"}' % title.replace('"','\\"')
+            return '{"title":"%s"}' % title.replace('"','\\"').replace('\\','\\\\')
         except Exception :
             return '{"title":"%s"}' % NOT_FOUND_ERROR
             
