@@ -229,7 +229,7 @@ class StackExchangeDownloader():
            question = self.get_question(question_id)
            if question:
                post = Post(question, self.get_answers(question_id))    
-           else: #StackPrinter loves the legendary deleted questions and tries to get them from the datastore
+           else: #StackPrinter loves the legendary deleted questions 
                post = Post(dbquestion.get_question(question_id, self.service),
                            dbquestion.get_answers(question_id, self.service))
                post.deleted = True
