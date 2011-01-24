@@ -43,7 +43,7 @@ def store_printed_question(question_id, service, title, tags, deleted):
     def _store_TX():
         entity = PrintedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ) )
         if entity:
-            entity.counter = entity.counter + 1
+            entity.counter += 1
             if entity.deleted and not deleted:
                 #don't exhume ghosts
                 pass
