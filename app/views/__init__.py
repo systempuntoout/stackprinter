@@ -598,7 +598,7 @@ def favorites_user_selection():
         yield '', join_('                  <div class="logo">                           \n')
         yield '', join_('                    </div>\n')
         yield '', join_('                  <div class="header links">\n')
-        yield '', join_('                      <a class="nolines" href="/">Home</a>|<span class="header_current">Favorites</span>|<a class="nolines" href="/topvoted">TopVoted</a>|<a class="nolines" href="/about">About</a>\n')
+        yield '', join_('                      <a class="nolines" href="/">Home</a>|<span class="header_current">Favorites</span>|<a class="nolines" href="/topvoted">TopVoted</a>|<a class="nolines" href="/topprinted">TopPrinted</a>|<a class="nolines" href="/about">About</a>\n')
         yield '', join_('                  </div>\n')
         yield '', join_('                  <div id="user_selection_container">\n')
         yield '', join_('                      <div id="result"><a href="/favorites"><img style="border:0;height:15px;width:15px"src="/images/search.png"></a>&nbsp;', escape_((len(users)), True), ' users found</div>\n')
