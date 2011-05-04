@@ -24,7 +24,7 @@ except ImportError:
 __api_version = '1.0'
 __default_page_size = 100
 __default_page = 1
-__headers = {'User-Agent': 'StackPrinter','Accept-encoding': 'gzip, deflate'}
+__headers = {'User-Agent': 'StackPrinter'}
 __debug = os.environ['SERVER_SOFTWARE'].startswith('Dev')
 
 class ApiRequestError(Exception):

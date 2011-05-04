@@ -9,7 +9,7 @@ import app.utility.worker as worker
 from google.appengine.api.taskqueue import taskqueue
 import app.db.question as dbquestion
 
-VOTES_ENTRY_LEVEL = 15
+VOTES_ENTRY_LEVEL = 10
 
 render = web.render 
 
