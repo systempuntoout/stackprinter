@@ -38,7 +38,7 @@ class Export:
             format = web.input(format = 'HTML')['format'] #For future implementations
             
             #Check for malformed request
-            if not service or not question_id:
+            if not service or not question_id or not question_id.isdigit():
                 return Index().GET()
             
             se_downloader = StackExchangeDownloader(service)
