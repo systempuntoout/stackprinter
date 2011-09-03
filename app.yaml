@@ -9,6 +9,8 @@ builtins:
 inbound_services:
 - warmup
 
+default_expiration: "5d"
+
 handlers:
 - url: /test.*
   login: admin  
