@@ -3,6 +3,8 @@ from app.lib import BeautifulSoup as Bs
 from app.db.token import Token
 from google.appengine.api import memcache
 import re
+import logging
+import web
 
 
 def date_from(timestamp):
@@ -132,3 +134,40 @@ class TokenManager():
             else:
                 auth_token_value = None
         return auth_token_value
+
+def memcached(key, cache_time, key_suffix_calc_func = None, namespace = None, bypass = None):
+    """
+     Cache to memcache
+    """
+    def wrap(func):
+        def cached_func(*args, **kw):        
+            key_with_suffix = key
+
+            if key_suffix_calc_func:
+                key_suffix = key_suffix_calc_func(*args, **kw)
+                if key_suffix:
+                    key_with_suffix = '%s:%s' % (key, key_suffix)
+            if bypass and bypass(*args, **kw):   
+                value = func(*args, **kw)
+            else:
+                value = memcache.get(key_with_suffix, namespace)
+                if not value:
+                    value = func(*args, **kw)
+                    memcache.set(key_with_suffix, value, cache_time, namespace)
+            return value            
+        return cached_func
+    return wrap
+    
+CACHE = {}
+def cachepage():
+    """
+       Instance caching
+    """
+    def decorator(func):
+        def proxyfunc(self, *args, **kw):
+            url = web.ctx.get('fullpath')
+            if url not in CACHE:
+                CACHE[url] = func(self, *args, **kw)
+            return CACHE[url]
+        return proxyfunc
+    return decorator

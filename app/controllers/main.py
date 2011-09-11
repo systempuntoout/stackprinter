@@ -7,8 +7,10 @@ import app.lib.sepy as sepy
 import app.db.counter as dbcounter
 import app.db.question as dbquestion
 import app.utility.utils as utils
+from app.utility.utils import cachepage
 import logging, web, re
 from google.appengine.ext import ereporter
+import os
 
 ereporter.register_logger()
 
@@ -18,6 +20,7 @@ class Index:
     """
     Homepage
     """
+    @cachepage()
     def GET(self):
         questions_printed = web.utils.commify(dbcounter.get_count())
         return render.index(questions_printed)
@@ -27,9 +30,13 @@ class Export:
     Export question to a printer friendly view
     """
     def POST(self):
-        return self.GET()
+        question_id = web.input(question = None)['question']
+        service = web.input(service = None)['service']
+        return web.redirect('/export?question=%s&service=%s' % (question_id, service))
+   
     def GET(self):
         try:
+            
             question_id = web.input(question = None)['question']
             service = web.input(service = None)['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
@@ -42,7 +49,20 @@ class Export:
                 return Index().GET()
             
             se_downloader = StackExchangeDownloader(service)
-            post = se_downloader.get_post(question_id)
+            
+            #Everything that comes outside the stackprinter homepage, stackoverflow and stackexchange is now heavily cached
+            
+            bypass_cache = False
+            referrer = os.environ.get("HTTP_REFERER")
+            if referrer:
+                try:
+                    referrer_key = re.match('^http://(.*).com',referrer).group(1)
+                    if referrer_key in StackAuthDownloader.get_supported_services().keys or referrer in ('http://www.stackprinter.com/','http://stackprinter.appspot.com/'):
+                        bypass_cache = True
+                except:
+                    pass
+
+            post = se_downloader.get_post(question_id, bypass_cache)
             
             if post is None:
                 return render.oops(NOT_FOUND_ERROR)
@@ -141,6 +161,7 @@ class TopPrinted:
     """
     Show a list of top printed questions 
     """
+    @cachepage()
     def GET(self):
         try:
             result = []
@@ -156,6 +177,7 @@ class Deleted:
     """
     Show a list of deleted questions 
     """
+    @cachepage()
     def GET(self):
         try:
             result = []
@@ -169,5 +191,6 @@ class About:
     """
     About StackPrinter
     """
+    @cachepage()
     def GET(self):
         return render.about()

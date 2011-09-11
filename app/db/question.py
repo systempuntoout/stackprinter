@@ -1,9 +1,10 @@
 from google.appengine.ext import db
 from google.appengine.ext.db import stats
+from app.utility.utils import memcached
 import logging
 import pickle
 
-TOP_PRINTED_PAGINATION_SIZE = 300
+TOP_PRINTED_PAGINATION_SIZE = 50
 DELETED_PAGINATION_SIZE = 1000
 
 class PickleProperty(db.Property):
@@ -62,7 +63,8 @@ def delete_printed_question(question_id, service):
         return True
     else:
         return "None"
-        
+
+@memcached('get_top_printed_questions', 3600*24*10, lambda page : page)        
 def get_top_printed_questions(page):
     query = PrintedQuestionModel.all().order('-counter')
     return query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
@@ -76,6 +78,7 @@ def get_top_printed_count():
         count = PrintedQuestionModel.all().count()
     return count
 
+@memcached('get_deleted_questions', 3600*24*10) 
 def get_deleted_questions():
     query = PrintedQuestionModel.all().filter('deleted =', True).order('-counter')
     return query.fetch(DELETED_PAGINATION_SIZE)

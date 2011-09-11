@@ -79,6 +79,10 @@ a:link {
     text-align:center;
 }
 
+#donate  { 
+    float:right;
+}
+
 @media print{
     #question-block  {
         margin-top:0px;
@@ -92,6 +96,10 @@ a:link {
     }
     
     #adsense {
+        display:none;
+    }
+    
+    #donate {
         display:none;
     }
 

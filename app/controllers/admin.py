@@ -70,7 +70,7 @@ class TopQuestionsRetriever:
         if service_parameter:
             se_downloader = StackExchangeDownloader(service_parameter)
             if question_id_parameter:
-                se_downloader.get_post(question_id_parameter)
+                se_downloader.get_post(question_id_parameter, False)
             else:
                 questions = se_downloader.get_questions_by_hotness(pagesize = pagesize_parameter, 
                                                                    sort = sort_parameter)

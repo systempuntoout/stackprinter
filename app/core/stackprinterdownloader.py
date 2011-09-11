@@ -5,6 +5,7 @@ from app.config.constant import UNSUPPORTED_SERVICE_ERROR
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
 import app.utility.utils as utils
+from app.utility.utils import memcached
 import app.utility.worker as worker
 import app.db.question as dbquestion
 import web, re, logging
@@ -219,8 +220,9 @@ class StackExchangeDownloader():
         results = self.retriever.get_tags(tag_filter, self.api_endpoint, page = 1, pagesize = 10)
         tags = results['tags']
         return "\n".join([tag['name'] for tag in tags ])
-   
-    def get_post(self, question_id):
+    
+    @memcached('get_post', 3600*24*20, lambda self, question_id, bypass_cache : question_id, None, lambda self, question_id, bypass_cache : bypass_cache)
+    def get_post(self, question_id, bypass_cache = False):
        """
           Return a post object representing the question and the answers list 
           Return None if question/answers are not found from Api call or db cache (deleted questions)
