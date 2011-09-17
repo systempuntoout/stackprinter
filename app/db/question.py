@@ -1,8 +1,11 @@
-from google.appengine.ext import db
-from google.appengine.ext.db import stats
-from app.utility.utils import memcached
 import logging
 import pickle
+
+from google.appengine.ext import db
+from google.appengine.ext.db import stats
+from google.appengine.api import memcache
+
+from app.utility.utils import memcached
 
 TOP_PRINTED_PAGINATION_SIZE = 50
 DELETED_PAGINATION_SIZE = 1000
@@ -67,7 +70,16 @@ def delete_printed_question(question_id, service):
 @memcached('get_top_printed_questions', 3600*24*10, lambda page : page)        
 def get_top_printed_questions(page):
     query = PrintedQuestionModel.all().order('-counter')
-    return query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
+    
+    bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)-1))
+    if bookmark:
+        query.with_cursor(start_cursor = bookmark)
+        fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
+    else:
+        fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
+    memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
+    
+    return fetched_questions
 
 def get_top_printed_count():
     try:

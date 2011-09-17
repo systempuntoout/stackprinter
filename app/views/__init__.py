@@ -204,6 +204,7 @@ def export():
         yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
         yield '', join_('                <link rel="stylesheet" href="/stylesheets/export.css">\n')
         yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('                <link rel="canonical" href="http://www.stackprinter.com/export?service=', escape_(service, True), '&question=', escape_((post.question['question_id']), True), '&printer=false&linktohome=true"/>\n')
         yield '', join_('                <title>', escape_(post.question['title'], True), '</title>\n')
         yield '', join_('                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
