@@ -8,6 +8,10 @@ from google.appengine.ext import deferred
 import app.utility.worker as worker
 from google.appengine.api.taskqueue import taskqueue
 import app.db.question as dbquestion
+import app.db.sitemap as dbsitemap
+
+
+deferred.deferred._TASKQUEUE_HEADERS['X-AppEngine-FailFast'] = 'True'
 
 VOTES_ENTRY_LEVEL = 10
 
@@ -43,7 +47,6 @@ class Admin:
             result['printed_question_deletion'] = dbquestion.delete_printed_question(question_id,service)
             result['question_deletion'] = dbquestion.delete_question(question_id,service)
             result['answers_deletion'] = dbquestion.delete_answers(question_id,service)
-            
         return render.admin(result)
 
 class AuthTokenRenewal:

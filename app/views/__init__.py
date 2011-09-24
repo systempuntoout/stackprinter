@@ -261,6 +261,20 @@ def export():
         if post.is_deleted():
             yield '', join_('          ', '[DELETED]\n')
         yield '', join_('          </div>\n')
+        if service not in TEX_ENABLED_SERVICES:
+            yield '', join_('          ', '<div id="adsense">\n')
+            yield '', join_('          ', '        <script type="text/javascript"><!--\n')
+            yield '', join_('          ', '        google_ad_client = "pub-3296756901484166";\n')
+            yield '', join_('          ', '        /* 728x90, created 9/8/11 */\n')
+            yield '', join_('          ', '        google_ad_slot = "7129208720";\n')
+            yield '', join_('          ', '        google_ad_width = 728;\n')
+            yield '', join_('          ', '        google_ad_height = 90;\n')
+            yield '', join_('          ', '        //-->\n')
+            yield '', join_('          ', '        </script>\n')
+            yield '', join_('          ', '        <script type="text/javascript"\n')
+            yield '', join_('          ', '        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n')
+            yield '', join_('          ', '        </script>\n')
+            yield '', join_('          ', '</div>\n')
         yield '', join_('          <div id="question">\n')
         if pretty_links:
             (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
@@ -278,20 +292,6 @@ def export():
                 yield '', join_('                    ', '(', escape_(comment['score'], True), ')    \n')
             yield '', join_('                ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'})['display_name'], True), '</b>                   \n')
             yield '', join_('                ', '</div>\n')
-        if service not in TEX_ENABLED_SERVICES:
-            yield '', join_('            ', '<div id="adsense">\n')
-            yield '', join_('            ', '        <script type="text/javascript"><!--\n')
-            yield '', join_('            ', '        google_ad_client = "pub-3296756901484166";\n')
-            yield '', join_('            ', '        /* 728x90, created 9/8/11 */\n')
-            yield '', join_('            ', '        google_ad_slot = "7129208720";\n')
-            yield '', join_('            ', '        google_ad_width = 728;\n')
-            yield '', join_('            ', '        google_ad_height = 90;\n')
-            yield '', join_('            ', '        //-->\n')
-            yield '', join_('            ', '        </script>\n')
-            yield '', join_('            ', '        <script type="text/javascript"\n')
-            yield '', join_('            ', '        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n')
-            yield '', join_('            ', '        </script>\n')
-            yield '', join_('            ', '</div>\n')
         for answer_number, answer  in loop.setup(enumerate(post.answers)):
             yield '', join_('              ', '<div class="answer-details">\n')
             yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
@@ -890,6 +890,49 @@ def quicklook():
     return __template__
 
 quicklook = CompiledTemplate(quicklook(), 'app/views/quicklook.html')
+
+
+def sitemap_index():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (sitemaps):
+        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
+        yield '', join_('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for sitemap in loop.setup(sitemaps):
+            yield '', join_('  ', '<sitemap>\n')
+            yield '', join_('  ', '    <loc>http://www.stackprinter.com/sitemap_', escape_((sitemap.key().id()), True), '.xml</loc>\n')
+            yield '', join_('  ', '    <lastmod>', escape_((sitemap.last_modified.strftime("%Y-%m-%d")), True), '</lastmod>\n')
+            yield '', join_('  ', '</sitemap>\n')
+        yield '', join_('</sitemapindex>\n')
+    return __template__
+
+sitemap_index = CompiledTemplate(sitemap_index(), 'app/views/sitemap_index.xml')
+
+
+def sitemap_questions():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (questions):
+        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
+        yield '', join_('<urlset\n')
+        yield '', join_('      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n')
+        yield '', join_('      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n')
+        yield '', join_('      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n')
+        yield '', join_('http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n')
+        for question in loop.setup(questions):
+            yield '', join_('  ', '<url>\n')
+            yield '', join_('  ', '  <loc>http://www.stackprinter.com/export?service=', escape_((question.split('_')[1]), True), '&amp;question=', escape_((question.split('_')[0]), True), '&amp;printer=false&amp;linktohome=true</loc>\n')
+            yield '', join_('  ', '</url>\n')
+        yield '', join_('</urlset>\n')
+    return __template__
+
+sitemap_questions = CompiledTemplate(sitemap_questions(), 'app/views/sitemap_questions.xml')
 
 
 def topprinted():

@@ -17,4 +17,6 @@ urls = (
   '/admin/authtokenrenewal','app.controllers.admin.AuthTokenRenewal',
   '/admin/topquestionsretriever','app.controllers.admin.TopQuestionsRetriever',
   '/_ah/warmup','app.controllers.admin.Warmup',
+  '/sitemap_(\d+).xml', 'app.controllers.main.Sitemap',
+  '/sitemap_index.xml', 'app.controllers.main.SitemapIndex',
 )

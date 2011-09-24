@@ -1,0 +1,9 @@
+$def with (sitemaps)
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  $for sitemap in sitemaps:
+  <sitemap>
+      <loc>http://www.stackprinter.com/sitemap_$(sitemap.key().id()).xml</loc>
+      <lastmod>$(sitemap.last_modified.strftime("%Y-%m-%d"))</lastmod>
+  </sitemap>
+</sitemapindex>

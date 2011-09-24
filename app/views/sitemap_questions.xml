@@ -1,0 +1,12 @@
+$def with (questions)
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  $for question in questions:
+    <url>
+      <loc>http://www.stackprinter.com/export?service=$(question.split('_')[1])&amp;question=$(question.split('_')[0])&amp;printer=false&amp;linktohome=true</loc>
+    </url>
+</urlset>

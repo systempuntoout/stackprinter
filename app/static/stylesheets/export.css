@@ -43,9 +43,17 @@ body {
    margin-left:13px;
 }
 
+#question img  { 
+    max-width:100%;   
+}
+
 .answer  { 
    font-size: 10pt;
    margin-left:13px;
+}
+
+.answer img { 
+    max-width:100%;
 }
 
 .answer-details  { 
@@ -71,14 +79,6 @@ a:link {
    text-decoration: underline;
 }
 
-#adsense  {
-    padding-top:15px;    
-    padding-bottom:5px;
-    margin-left:10%;
-    margin-right:10%;
-    text-align:center;
-}
-
 #donate  { 
     float:right;
 }
@@ -93,6 +93,11 @@ a:link {
     
     #home {
         display:none;
+    }
+    
+    pre {
+        font-size: 11px;
+        width: auto;
     }
     
     #adsense {

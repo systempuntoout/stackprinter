@@ -2,7 +2,9 @@ queue:
 - name: default
   rate: 1/s
   bucket_size: 1
+  max_concurrent_requests : 1
     
 - name: retriever
   rate: 1/m
   bucket_size: 1
+  max_concurrent_requests : 1

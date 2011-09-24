@@ -6,6 +6,7 @@ from google.appengine.ext.db import stats
 from google.appengine.api import memcache
 
 from app.utility.utils import memcached
+import app.db.sitemap as dbsitemap
 
 TOP_PRINTED_PAGINATION_SIZE = 50
 DELETED_PAGINATION_SIZE = 1000
@@ -44,7 +45,6 @@ class CachedQuestionModel(db.Model):
     last_modified = db.DateTimeProperty(auto_now = True)
 
 def store_printed_question(question_id, service, title, tags, deleted):
-    def _store_TX():
         entity = PrintedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ) )
         if entity:
             entity.counter += 1
@@ -57,7 +57,7 @@ def store_printed_question(question_id, service, title, tags, deleted):
         else:
             PrintedQuestionModel(key_name = '%s_%s' % (question_id, service ), question_id = question_id,\
                                  service = service, title = title, tags = tags, counter = 1, deleted = deleted).put()
-    db.run_in_transaction(_store_TX)
+            dbsitemap.Sitemap.update_last_sitemap( '%s_%s' % (question_id, service ))
 
 def delete_printed_question(question_id, service):
     question_to_delete = PrintedQuestionModel.all().filter('question_id = ',int(question_id)).filter('service =',service).get()

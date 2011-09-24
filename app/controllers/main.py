@@ -1,3 +1,9 @@
+import os
+import logging, re
+
+from google.appengine.ext import ereporter
+
+import web
 from app.core.stackprinterdownloader import StackExchangeDownloader
 from app.core.stackprinterdownloader import StackAuthDownloader
 from app.core.stackprinterdownloader import UnsupportedServiceError
@@ -6,11 +12,10 @@ from app.config.constant import NOT_FOUND_ERROR, GENERIC_ERROR, UNSUPPORTED_SERV
 import app.lib.sepy as sepy
 import app.db.counter as dbcounter
 import app.db.question as dbquestion
+import app.db.sitemap as dbsitemap
 import app.utility.utils as utils
 from app.utility.utils import cachepage
-import logging, web, re
-from google.appengine.ext import ereporter
-import os
+
 
 ereporter.register_logger()
 
@@ -36,7 +41,7 @@ class Export:
    
     def GET(self):
         try:
-            
+            #return render.oops("..OFFLINE FOR MAINTENANCE..")
             question_id = web.input(question = None)['question']
             service = web.input(service = None)['service']
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
@@ -186,6 +191,23 @@ class Deleted:
         except Exception, exception:
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
+
+class Sitemap:
+      """
+      Sitemap
+      """
+      def GET(self, id):
+          web.header('Content-type', 'text/xml')
+          return dbsitemap.Sitemap.get_sitemap_by_id(int(id))
+          
+class SitemapIndex:
+    """
+    Sitemap Index
+    """
+    def GET(self):
+        web.header('Content-type', 'text/xml')
+        sitemaps = dbsitemap.Sitemap.get_sitemaps() 
+        return render.sitemap_index(sitemaps)
 
 class About:
     """

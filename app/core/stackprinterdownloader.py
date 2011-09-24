@@ -1,6 +1,10 @@
+import re, logging
+
 from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 from google.appengine.ext import deferred
+
+import web 
 from app.config.constant import UNSUPPORTED_SERVICE_ERROR
 import app.lib.sepy as sepy
 import app.lib.deliciousapi as deliciousapi 
@@ -8,8 +12,8 @@ import app.utility.utils as utils
 from app.utility.utils import memcached
 import app.utility.worker as worker
 import app.db.question as dbquestion
-import web, re, logging
 
+deferred.deferred._TASKQUEUE_HEADERS['X-AppEngine-FailFast'] = 'True'
 
 class Post(object):
     def __init__(self, question, answers):
