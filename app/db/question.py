@@ -44,6 +44,13 @@ class CachedQuestionModel(db.Model):
     data = PickleProperty()
     last_modified = db.DateTimeProperty(auto_now = True)
 
+def increment_printed_question_counter(question_id, service):
+    entity = PrintedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ) )
+    if entity:
+        entity.counter += 1
+        entity.put()
+
+
 def store_printed_question(question_id, service, title, tags, deleted):
         entity = PrintedQuestionModel.get_by_key_name(key_names = '%s_%s' % (question_id, service ) )
         if entity:
@@ -75,12 +82,18 @@ def get_top_printed_questions(page):
     if bookmark:
         query.with_cursor(start_cursor = bookmark)
         fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
+        memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
     else:
-        fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE, offset = (TOP_PRINTED_PAGINATION_SIZE * (int(page)-1) ))
-    memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
+        if page == 1:
+            fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
+            memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
+        else:
+            #Without cursors return nothing, offset consumes too much Datastore reads
+            fetched_questions = []
     
     return fetched_questions
 
+@memcached('get_top_printed_count', 3600*24*10)
 def get_top_printed_count():
     try:
         kind_stats = stats.KindStat().all().filter("kind_name =", "PrintedQuestionModel").get()
@@ -105,7 +118,7 @@ def get_question(question_id, service):
 def get_answers(question_id, service):
     answers = []
     entry_found = False
-    answers_chunks = CachedAnswersModel.all().filter('id_service =', '%s_%s' % (question_id, service )).order('chunk_id')
+    answers_chunks = CachedAnswersModel.all().filter('id_service =', '%s_%s' % (question_id, service )).order('chunk_id').fetch(100)
     for answers_chunk in answers_chunks:
         answers = answers + answers_chunk.data
         entry_found = True

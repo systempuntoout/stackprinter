@@ -1,0 +1,3287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+        <head>
+                <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+                <link rel="stylesheet" href="/stylesheets/export.css"/>
+                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+                <link rel="canonical" href="http://www.stackprinter.com/export?service=stackoverflow&amp;question=2187&amp;printer=false&amp;linktohome=true"/>
+                <title>Essential Programming Tools</title>
+                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/javascripts/main.js"></script>
+                <script type="text/javascript">
+                    jQuery(document).ready(function(){Print();});
+                </script>
+    </head>
+        <body>
+            <div id="home">
+                <a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>
+                <a href="http://www.stackprinter.com/export?format=HTML&amp;service=stackoverflow&amp;printer=false&amp;question=2187"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>
+            </div>
+            <div id="donate">
+                <p style="margin-bottom:3px;">App Engine <a class="link" href="http://groups.google.com/group/google-appengine/browse_frm/thread/a1b7c68db2243932/e70dab7082473730?pli=1">hosting</a> help</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <p>
+            <input type="hidden" name="cmd" value="_s-xclick"/>
+            <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYABstDutTNVcANU/nT7NpbMDiaPvMJUeDp2yewhFhEU+687+vIKdvxAjhgX+vOWsRg8gMv3Pm6Nqv1QjaiE3DiSMgv8b5J8AVAN+jQ4a+JIIhb7b4gEOC4jOCtUtsfl2D6f8WKm+KAcbtd//NnIvVnEvdLK7uTCopJz2fBjM0qLCjELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIlWGnM1hdRmKAgZjlTyM3ZMo1xsq9CjDDjpSkQujQ0Ktm86zPMaHwj/UfPny0P/4oI1KwZCav+vJyne9s/uwDi4bUt9WfrjFFDSHFghhUQtmZBx89nSKHW7bWA9TNdqLJjRIvv9buqSEUml/wuZLnpolZWAFPU55P0aKZWaBs2TrCkGS+AtW51n1F5P+L46GQ/cKpoBMRnNSixr2RdRXE292D76CCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTExMDkwNjE5MjgxM1owIwYJKoZIhvcNAQkEMRYEFD+tUt+yG8OxfXB2S5x5tqI7MzrfMA0GCSqGSIb3DQEBAQUABIGAUgWW0ALv5oZi7WU0FlldUradlmuon5NystLaVHqsF8ZXP4VP6YhuUcU0kkZldqwUSvQWp2ou2YgKcladJSuApj7ClwMyXOO13ThVgPXPH0nStjItaPjN8JBebKbMoT7GJJBVJfEcYM30RJn2JNxY88LYB5oXajkBySowVNoQzZA=-----END PKCS7-----
+            "/>
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" style="border:0"/>
+            <img alt="" src="https://www.paypalobjects.com/it_IT/i/scr/PayPal.gif" width="1" height="1" style="border:0"/>
+            </p>
+            </form>
+            
+            </div>         
+        <div id="question-block">
+          <div id="question-title">
+                 <img alt="Stack Overflow" src="http://sstatic.net/stackoverflow/img/apple-touch-icon.png"/>Essential Programming Tools<br/>
+          </div>
+          <div class="question-details">
+                [+124] [122]
+                 Mat 
+          </div>
+          <div class="question-details">
+              [2008-08-05 12:36:44]
+          </div>
+          <div class="question-details">
+          [
+          tools
+          development
+          polls
+          ]
+          </div>
+          <div class="question-details">
+          [ http://stackoverflow.com/questions/2187]
+          [DELETED]
+          </div>
+          <div id="adsense">
+                  <script type="text/javascript"><!--
+                  google_ad_client = "pub-3296756901484166";
+                  /* 728x90, created 9/8/11 */
+                  google_ad_slot = "7129208720";
+                  google_ad_width = 728;
+                  google_ad_height = 90;
+                  //-->
+                  </script>
+                  <script type="text/javascript"
+                  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                  </script>
+          </div>
+          <div id="question">
+          <p>We all have different needs due to the platform and/or stack we work with, and simple programmer preference is famous for starting religious wars.</p>
+<p>However, in each area there is usually a <strong>set</strong> of tools that get recommended over and over, even though people might individually prefer one member over the others.  Unix text mode code editors, for example, is an extremely contentious issue but no one can deny that most people will choose either vi or emacs.</p>
+<p>So, without criticising the alternatives, recommend me developement tools.  Text editors for different platforms, version control systems, bug trackers, database engines, templating systems... whatever!  What do you enjoy using every day?</p>
+<p>I'll edit together the answers as a list of <strong>highly recommended</strong> tools in each area.  Please don't start discussing which is the best ;)</p>
+
+          <div id="question-links">
+          </div>
+          </div>
+                <div class="comment">
+                    It&#39;s an interesting question but it&#39;s a bit broad. I might be a desktop developmer in VB6, you might be a PHP/Javascript web dev, and him over there might be doing embedded systems in C. Not to mention telecoms in Erlang, iPhone dev in whatever the heck it is, etc etc - <b> MarkJ</b>                   
+                </div>
+                <div class="comment">
+                    I thought we already had a site for subjective questions. - <b> rubayeet</b>                   
+                </div>
+                <div class="comment">
+                    @rubayeet, I believe this question predates that site. - <b> Constantin</b>                   
+                </div>
+                <div class="comment">
+                    @Constantin - agreed, but to my knowledge subjective questions were always discouraged here. - <b> rubayeet</b>                   
+                </div>
+              <div class="answer-details">
+                  [+122]
+                  [2008-08-05 12:46:06]     
+                  maclema
+              </div>
+              <div class="answer">
+                <p>If you're doing a lot of Javascript, the FireBug plugin for Firefox is a must!</p>
+<p><a href="http://getfirebug.com/" rel="nofollow">http://getfirebug.com/</a></p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+               (1)    
+              I would recommend it for HTML/CSS work also. - <b> James McMahon</b>     
+              </div>
+              <div class="comment">
+               (1)    
+              It&#39;s great for jQuery! - <b> Michael Robinson</b>     
+              </div>
+              <div class="comment">
+              Note that Chrome&#39;s developer tools are very similar to firebug. - <b> Tikhon Jelvis</b>     
+              </div>
+              <div class="comment">
+              @Tikhon also known as Webkit&#39;s Web Inspector, it&#39;s still quite different from firebug having its advantages but mostly people prefer firebug because of inspector&#39;s <a href="http://jayrobinson.org/2009/12/05/webkit-web-inspector-vs-firefox-firebug/" rel="nofollow">disadvantages</a>. - <b> Cawas</b>     
+              </div>
+              <div class="answer-pagenumber">1</div>
+              <div class="answer-details">
+                  [+83]
+                  [2008-08-05 12:38:18]     
+                  GateKiller
+              </div>
+              <div class="answer">
+                <p><strong><a href="http://stackoverflow.com" rel="nofollow">
+Stack Overflow
+</a><sup style="font-size:9px">[1]</sup></strong></p>
+  
+                [1] http://stackoverflow.com<br/>
+                <br/>
+              </div>
+              <div class="comment">
+               (1)    
+              Your tool should be on top of the list.. - <b> Syed Tayyab Ali</b>     
+              </div>
+              <div class="comment">
+               (8)    
+              -1 for abject crony-ism... - <b> MagicAndi</b>     
+              </div>
+              <div class="comment">
+               (10)    
+              +1 for abject cronyism. - <b> Rob Lachlan</b>     
+              </div>
+              <div class="comment">
+              +1 for posting as link =p - <b> Garet Claborn</b>     
+              </div>
+              <div class="comment">
+              +2 for awesomeness and -1 for lack of unicorns. - <b> Cawas</b>     
+              </div>
+              <div class="answer-pagenumber">2</div>
+              <div class="answer-details">
+                  [+64]
+                  [2008-08-05 12:45:21]     
+                  Marek Grzenkowicz
+              </div>
+              <div class="answer">
+                <p>The <a href="http://www.hanselman.com/blog/ScottHanselmans2007UltimateDeveloperAndPowerUsersToolListForWindows.aspx" rel="nofollow">
+Scott Hanselman's 2007 Ultimate Developer and Power Users Tool List for Windows
+</a>
+<sup style="font-size:9px">[1]</sup> may give you some ideas.</p>  
+                [1] http://www.hanselman.com/blog/ScottHanselmans2007UltimateDeveloperAndPowerUsersToolListForWindows.aspx<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">3</div>
+              <div class="answer-details">
+                  [+64]
+                  [2008-08-14 19:55:34]     
+                  farmerchris
+              </div>
+              <div class="answer">
+                <p>Another one-up for SysInternals. You can mount their tool repository as a shared drive:  </p>
+<pre><code>\\live.sysinternals.com\Tools
+</code></pre>
+<p>I just copy over all the files into C:\Program Files\Bin, then add that to my PATH.</p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              Wow, thanks for sharing this - <b> Jonas Gulle</b>     
+              </div>
+              <div class="comment">
+              These tools are <i>unbelievably</i> useful on Windows.  I didn&#39;t realise you could see them with a plain old UNC path! - <b> j_random_hacker</b>     
+              </div>
+              <div class="comment">
+              I literally LIVE off of procmon.exe some days. Never thought I&#39;d learn as much as that little beauty has taught me... :D. - <b> KSimons</b>     
+              </div>
+              <div class="answer-pagenumber">4</div>
+              <div class="answer-details">
+                  [+30]
+                  [2008-08-05 12:43:27]     
+                  Karl Seguin
+              </div>
+              <div class="answer">
+                <p>Generally:</p>
+<ol>
+<li>Subversion or Git, Tortoise</li>
+<li>Mantis</li>
+<li>3SqlLite (I use it almost exclusively for prototypes and demos)</li>
+<li>MySQL  - For the price, it's stupidly amazing</li>
+</ol>
+<p>For me (keeping in mind that I mostly do .NET):</p>
+<ol>
+<li>VS.NET is far beyond any other editor</li>
+<li>Resharper is a must-have add-in for .NET programmers</li>
+<li>Reflector to look inside dlls</li>
+<li>SnippetCompiler</li>
+<li>My text editor of choice is EditPadPro</li>
+<li>IntelliJ for my Java (Resharper and Intellij are so alike it's easy to switch between the two)</li>
+<li>Red-Gate SQL [Data] Compare</li>
+<li>DotTrace .NET profiler</li>
+<li>jProbe Java profiler</li>
+<li>Reflector (.NET decompiler)</li>
+<li>Cavaj (Java decompiler)</li>
+<li>NAnt/Ant, Cruisecontrol</li>
+</ol>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              +1 for resharper, I feel like I&#39;m banging rocks together without it - <b> mgroves</b>     
+              </div>
+              <div class="answer-pagenumber">5</div>
+              <div class="answer-details">
+                  [+26]
+                  [2008-08-31 11:30:26]     
+                  Matthew Watson
+              </div>
+              <div class="answer">
+                <p>The only <strong>must have</strong> is version control and file backup It doesn't really matter which version control you use as long as you have some way to track what changes have been made to the system.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">6</div>
+              <div class="answer-details">
+                  [+23]
+                  [2008-08-05 12:39:35]     
+                  John Downey
+              </div>
+              <div class="answer">
+                <p>I could probably not live without <a href="http://winmerge.org/" rel="nofollow">
+WinMerge
+</a>
+<sup style="font-size:9px">[1]</sup> on Windows. It is a GUI diff/merging program that can generate standard unified diff patches. It also has a couple of cool plugins that let you diff zip files and MS Office documents.</p>  
+                [1] http://winmerge.org/<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              WinMerge is truly the next best thing if you don&#39;t want to pay for Beyond Compare. - <b> Chris Noe</b>     
+              </div>
+              <div class="comment">
+              KDiff3 is also excellent, but it only works with text files. - <b> Hosam Aly</b>     
+              </div>
+              <div class="answer-pagenumber">7</div>
+              <div class="answer-details">
+                  [+19]
+                  [2008-09-17 11:37:47]     
+                  Epaga
+              </div>
+              <div class="answer">
+                <p>Can't believe I'm seeing Trac (<a href="http://trac.edgewall.com" rel="nofollow">http://trac.edgewall.com</a>) so seldomly, it's such a great tool: combines and integrates Wiki, Bug Tracking, SVN, and Project Planning, plus it has a bazillion plugins: <a href="http://trac-hacks.org" rel="nofollow">http://trac-hacks.org</a></p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              +1 for trac-hacks - <b> Cawas</b>     
+              </div>
+              <div class="comment">
+              I&#39;ve worked at 2 places that used Trac, and it was indeed very cool.  Looking back, the popularity of Trac seems to have followed the rise and fall of SVN.  There&#39;s a TracMercurial plugin, but from reading the page (even today) it doesn&#39;t seem terribly performant or featureful.  Every day I do things with &#39;hg&#39; (the command-line tool) that I don&#39;t see how to do with TracMercurial, and I don&#39;t think that was true with SVN when I used Trac.  I think there&#39;s a future for Trac, if (and only if) they can make it work great with DVCSs. - <b> Ken</b>     
+              </div>
+              <div class="answer-pagenumber">8</div>
+              <div class="answer-details">
+                  [+12]
+                  [2008-08-05 13:02:19]     
+                  Brett Veenstra
+              </div>
+              <div class="answer">
+                <p>.NET Dev:</p>
+<ul>
+<li>Visual Studio 2010 (can target .NET 2.0 - 4.0)</li>
+<li>Resharper</li>
+<li>MbUnit (backwards compatible with NUnit)</li>
+<li>FogBugz for work tracking</li>
+<li>Subversion for source control</li>
+<li>Red Gate SQL Toolkit</li>
+<li>Google</li>
+<li>Rhino Mocks</li>
+<li>Nant</li>
+<li>KDiff for diff/merging</li>
+<li>MS SQL Express (or go Developer Edition if you have MSDN)</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">9</div>
+              <div class="answer-details">
+                  [+11]
+                  [2008-08-18 18:35:08]     
+                  Steven Dick
+              </div>
+              <div class="answer">
+                <p>Continuous build: <a href="https://hudson.dev.java.net/" rel="nofollow">
+Hudson
+</a><sup style="font-size:9px">[1]</sup></p>
+<p>Seriously, the guys who put Hudson together did a great job.  It's a single WAR (Java Web ARchive) file that contains an embedded web server and allows you to setup a continuous build server with a single command.</p>
+<p>The web interface is great with good feedback through the use of AJAX.</p>
+<p>This thing puts a smile on developers' faces when I show it to them.  It's that good.</p>
+<p>Issue tracking: <a href="http://www.atlassian.com/software/jira/" rel="nofollow">
+Jira
+</a><sup style="font-size:9px">[2]</sup></p>
+<p>The best issue tracking tool I've used in 15 years.  Developers and managers like it.  Web-based with a clean interface.</p>
+  
+                [1] https://hudson.dev.java.net/<br/>
+                [2] http://www.atlassian.com/software/jira/<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              I was on a project that used Hudson and I thought it was great. - <b> Nosredna</b>     
+              </div>
+              <div class="answer-pagenumber">10</div>
+              <div class="answer-details">
+                  [+11]
+                  [2008-08-05 13:04:58]     
+                  Mat
+              </div>
+              <div class="answer">
+                <p><strong>IDEs and Text Editors</strong></p>
+<p>Visual Studio<br />
+Eclipse<br />
+EditPadPro<br />
+EditPlus<br />
+Notepad++<br />
+Notepad2<br />
+SlickEdit<br />
+FireBug  </p>
+<p><strong>Diff/Merge</strong></p>
+<p>BeyondCompare<br />
+WinMerge  </p>
+<p><strong>Source Control</strong></p>
+<p>Subversion<br />
+Git<br />
+Bazaar<br />
+Mercurial<br />
+SVK<br />
+TortoiseSVN  </p>
+<p><strong>Build</strong></p>
+<p>FinalBuilder<br />
+NAnt</p>
+<p><strong>Bug/Issue Tracking</strong></p>
+<p>Mantis<br />
+FogBugz<br />
+Trac  </p>
+<p><strong>Learning/Research</strong></p>
+<p>Not going to list a ton of sites but just going to go with the suggestion of <strong>The Internet</strong>.  And, really, that one applies to most things in modern life and not just software development.</p>
+<p>(Going to have trouble keeping up! Will do linking later.)</p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              I find your lack of faith in vim/emacs disturbing :) - <b> ldigas</b>     
+              </div>
+              <div class="comment">
+              If you use Trac (<a href="http://trac.edgewall.org/" rel="nofollow">trac.edgewall.org</a>) you should have a look at Agilo for Scrum (<a href="http://www.agile42.com/cms/pages/" rel="nofollow">agile42.com/cms/pages</a>) It&#39;s not only useful when you are doing Scrum but is also providing a nice interface. - <b> Doro</b>     
+              </div>
+              <div class="comment">
+              Sorry the right link for Agilo is: <a href="http://www.agile42.com/cms/pages/agilo/" rel="nofollow">agile42.com/cms/pages/agilo</a> - <b> Doro</b>     
+              </div>
+              <div class="answer-pagenumber">11</div>
+              <div class="answer-details">
+                  [+10]
+                  [2008-08-05 13:01:05]     
+                  happyappa
+              </div>
+              <div class="answer">
+                <ul>
+<li><p><strong>Source Control:</strong> <a href="http://subversion.tigris.org/" rel="nofollow">
+Subversion
+</a>
+<sup style="font-size:9px">[1]</sup> </p></li>
+<li><p><strong>Source Control GUI:</strong> <a href="http://tortoisesvn.tigris.org/" rel="nofollow">
+TortoiseSVN
+</a>
+<sup style="font-size:9px">[2]</sup> </p></li>
+<li><p><strong>Text Editor:</strong> <a href="http://www.ultraedit.com/" rel="nofollow">
+UltraEdit
+</a>
+<sup style="font-size:9px">[3]</sup> </p></li>
+<li><p><strong>IDE:</strong> <a href="http://www.eclipse.org/" rel="nofollow">
+Eclipse
+</a>
+<sup style="font-size:9px">[4]</sup>, <a href="http://www.oracle.com/technology/products/jdev" rel="nofollow">
+JDeveloper
+</a>
+<sup style="font-size:9px">[5]</sup> </p></li>
+<li><p><strong>Oracle Development:</strong> <a href="http://www.allroundautomations.nl/plsqldev.html" rel="nofollow">
+PLSQL Developer
+</a>
+<sup style="font-size:9px">[6]</sup>, <a href="http://www.toadsoft.com/" rel="nofollow">
+TOAD
+</a><sup style="font-size:9px">[7]</sup></p></li>
+<li><p><strong>SFTP/SSH:</strong> <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="nofollow">
+PuTTY
+</a>
+<sup style="font-size:9px">[8]</sup>, <a href="http://www.attachmate.com/Products/Host+Connectivity/PC+X+Server/rsx/" rel="nofollow">
+Reflection X Suite
+</a>
+<sup style="font-size:9px">[9]</sup>, <a href="http://filezilla-project.org/" rel="nofollow">
+FileZilla
+</a><sup style="font-size:9px">[10]</sup></p></li>
+<li><p><strong>RSS:</strong> Google RSS Reader</p></li>
+<li><p><strong>Web Debugging Proxy:</strong> <a href="http://www.fiddler2.com/fiddler2/" rel="nofollow">
+Fiddler
+</a><sup style="font-size:9px">[11]</sup></p></li>
+<li><p><strong>Local Development Apache Web Server and MySQL DB:</strong> <a href="http://www.apachefriends.org/en/xampp.html" rel="nofollow">
+XAMPP
+</a><sup style="font-size:9px">[12]</sup></p></li>
+</ul>
+  
+                [1] http://subversion.tigris.org/<br/>
+                [2] http://tortoisesvn.tigris.org/<br/>
+                [3] http://www.ultraedit.com/<br/>
+                [4] http://www.eclipse.org/<br/>
+                [5] http://www.oracle.com/technology/products/jdev<br/>
+                [6] http://www.allroundautomations.nl/plsqldev.html<br/>
+                [7] http://www.toadsoft.com/<br/>
+                [8] http://www.chiark.greenend.org.uk/~sgtatham/putty/<br/>
+                [9] http://www.attachmate.com/Products/Host+Connectivity/PC+X+Server/rsx/<br/>
+                [10] http://filezilla-project.org/<br/>
+                [11] http://www.fiddler2.com/fiddler2/<br/>
+                [12] http://www.apachefriends.org/en/xampp.html<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              +1 for PLSQL Developer. awesome mature well-though tool for experts. dont want to miss it. - <b> mhaller</b>     
+              </div>
+              <div class="comment">
+              +1 for Fiddler. - <b> David Young</b>     
+              </div>
+              <div class="answer-pagenumber">12</div>
+              <div class="answer-details">
+                  [+9]
+                  [2008-08-14 19:33:53]     
+                  Wilka
+              </div>
+              <div class="answer">
+                <p>I find <a href="http://www.testdriven.net/" rel="nofollow" title="excanvas">
+TestDriven.NET
+</a>
+<sup style="font-size:9px">[1]</sup> indispensable when unit testing with .NET. It's by far the best test running tool I've used. It's great when you just need to run a single test in the VS debugger. Just right click on the method in the IDE and choose "<a href="http://www.testdriven.net/images/content_vs2.png" rel="nofollow">
+Test with -> debugger
+</a>
+<sup style="font-size:9px">[2]</sup>".</p>
+  
+                [1] http://www.testdriven.net/<br/>
+                [2] http://www.testdriven.net/images/content_vs2.png<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              FYI -- you can also run single tests with the &#39;Test View&#39; that comes with Visual Studio.  Just right click on a test in that view and select &#39;Debug selection&#39; or &#39;Run selection&#39; - <b> Dan Esparza</b>     
+              </div>
+              <div class="answer-pagenumber">13</div>
+              <div class="answer-details">
+                  [+8]
+                  [2008-08-05 12:59:10]     
+                  UberAlex
+              </div>
+              <div class="answer">
+                <p>For Java, there are loads of great tools for development. </p>
+<p>A lot of people are still holdouts and use text editors like <a href="http://www.vim.org" rel="nofollow">
+Vim. Anecdotally, they are power users who use things like search/replace and the macro tools to do tasks transparently.
+</a><sup style="font-size:9px">[1]</sup></p>
+<p>There are two great IDEs for Java: <a href="http://www.eclipse.org" rel="nofollow">
+Eclipse
+</a>
+<sup style="font-size:9px">[2]</sup>, and Sun's <a href="http://www.netbeans.org" rel="nofollow">
+NetBeans
+</a>
+<sup style="font-size:9px">[3]</sup>. Both tools are particularly hot for doing J2EE development, since they can set up and run your tomcat and glassfish servers and manage deployment.</p>
+<p>I'v never managed to get TDD going for myself, but I think a lot of people will like <a href="http://junit.sourceforge.net" rel="nofollow">
+JUnit
+</a>
+<sup style="font-size:9px">[4]</sup>.</p>
+<p>One thing I don't like in most IDEs is their XML support. For that I use the <a href="http://www.freexmleditor.com" rel="nofollow">
+Exchanger
+</a>
+<sup style="font-size:9px">[5]</sup> XML editor. It's a pity it hasn't been updated in a while.</p>
+<p>There is, imo, no excuse for not having some sort of version management. Currently, I use Subversion. On OSX, I really like <a href="http://www.versionsapp.com/" rel="nofollow">
+Version
+</a>
+<sup style="font-size:9px">[6]</sup>, and windows has unparalleled integration with <a href="http://tortoisesvn.tigris.org" rel="nofollow">
+TortoiseSVN
+</a>
+<sup style="font-size:9px">[7]</sup>.</p>
+<p>I think the future is probably in Distributed Version control, so something like Git might be worth reading up on <a href="http://www-cs-students.stanford.edu/%7Eblynn/gitmagic/index.html" rel="nofollow">
+(guide here)
+</a><sup style="font-size:9px">[8]</sup></p>
+<p>Virtual Machines can make a big difference to testing stuff, since they can let you break things or set up distributed systems locally. We use <a href="http://www.xen.org" rel="nofollow">
+Xen
+</a>
+<sup style="font-size:9px">[9]</sup> for our servers, and I am trying <a href="http://www.virtualbox.org" rel="nofollow">
+Virtualbox
+</a>
+<sup style="font-size:9px">[10]</sup> for local testing on my mac. </p>
+<p>Finally, I'd say that the GNU utils (grep, tail, pipe, sort, etc) are indispensable for diagnosing problems. I'd recommend looking at things like <a href="http://www.cygwin.com/" rel="nofollow">
+cygwin
+</a>
+<sup style="font-size:9px">[11]</sup> or the windows powershell to try and get them if you're in windows.</p>  
+                [1] http://www.vim.org<br/>
+                [2] http://www.eclipse.org<br/>
+                [3] http://www.netbeans.org<br/>
+                [4] http://junit.sourceforge.net<br/>
+                [5] http://www.freexmleditor.com<br/>
+                [6] http://www.versionsapp.com/<br/>
+                [7] http://tortoisesvn.tigris.org<br/>
+                [8] http://www-cs-students.stanford.edu/%7Eblynn/gitmagic/index.html<br/>
+                [9] http://www.xen.org<br/>
+                [10] http://www.virtualbox.org<br/>
+                [11] http://www.cygwin.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">14</div>
+              <div class="answer-details">
+                  [+8]
+                  [2008-08-05 12:39:32]     
+                  Adhip Gupta
+              </div>
+              <div class="answer">
+                <p><a href="http://www.nunit.org/index.php" rel="nofollow">
+NUnit
+</a>
+<sup style="font-size:9px">[1]</sup> for .NET Unit Test Cases.
+<a href="http://nant.sourceforge.net/" rel="nofollow">
+NAnt
+</a>
+<sup style="font-size:9px">[2]</sup> for .NET automated builds.</p>
+<p>Will update the post as soon as I can think of other required tools!</p>  
+                [1] http://www.nunit.org/index.php<br/>
+                [2] http://nant.sourceforge.net/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">15</div>
+              <div class="answer-details">
+                  [+7]
+                  [2008-08-05 13:03:33]     
+                  PabloG
+              </div>
+              <div class="answer">
+                <p><a href="http://clipx.org" rel="nofollow">
+ClipX
+</a>
+<sup style="font-size:9px">[1]</sup> for multiple clipboard support in any program, not only inside Visual Studio</p>
+<p><a href="http://www.bayden.com/SlickRun/" rel="nofollow">
+SlickRun
+</a>
+<sup style="font-size:9px">[2]</sup> for quick command execution</p>
+<p><a href="http://www.donationcoder.com/Software/Mouser/findrun/index.html" rel="nofollow">
+Find and Run Robot
+</a>
+<sup style="font-size:9px">[3]</sup> for fast desktop/start menu search or filesystem search with Locate32 plugin</p>
+<p><a href="http://www.autohotkey.com/" rel="nofollow">
+AutoHotkey
+</a>
+<sup style="font-size:9px">[4]</sup> for keyboard remappings, with my own keyboard mappings, </p><p>
+F4+F4    To close any window</p><p>
+Alt+Alt    To open Find and Run Robot process list (similar to Alt+Tab but with filters)</p><p>
+Alt+1    Send active window to half up screen (useful for comparisons in one monitor)</p><p>
+Alt+2    Send active window to half down screen</p><p>
+Alt+0    Switch active window to monitor 1-2</p><p>
+...</p><p></p>
+<p><a href="http://www.autohotkey.com/docs/scripts/MouseGestures.htm" rel="nofollow">
+MouseGestures
+</a>
+<sup style="font-size:9px">[5]</sup> (AutoHotkey script) to enable mouse gestures across applications</p>  
+                [1] http://clipx.org<br/>
+                [2] http://www.bayden.com/SlickRun/<br/>
+                [3] http://www.donationcoder.com/Software/Mouser/findrun/index.html<br/>
+                [4] http://www.autohotkey.com/<br/>
+                [5] http://www.autohotkey.com/docs/scripts/MouseGestures.htm<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              I&#39;m crazy of FARR too. - <b> Emmanuel Caradec</b>     
+              </div>
+              <div class="answer-pagenumber">16</div>
+              <div class="answer-details">
+                  [+7]
+                  [2008-08-27 20:28:59]     
+                  Doug
+              </div>
+              <div class="answer">
+                <p>Linux (Gnome):<br />
+<strong><a href="http://meld.sourceforge.net/" rel="nofollow">
+Meld
+</a><sup style="font-size:9px">[1]</sup></strong> is a great tool that I've been enjoying recently. </p>
+<p>From their homepage:<br />
+Meld is a visual diff and merge tool. You can compare two or three files and edit them in place (diffs update dynamically). You can compare two or three folders and launch file comparisons. You can browse and view a working copy from popular version control systems such such as CVS, Subversion, Bazaar-ng and Mercurial. </p>
+  
+                [1] http://meld.sourceforge.net/<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              meld is excellent, i&#39;m eagerly awaiting a windows port someday - <b> Matt Joiner</b>     
+              </div>
+              <div class="answer-pagenumber">17</div>
+              <div class="answer-details">
+                  [+7]
+                  [2008-09-18 13:55:37]     
+                  slicedlime
+              </div>
+              <div class="answer">
+                <p>If you're coding with Visual Studio, <a href="http://www.wholetomato.com/" rel="nofollow">
+Visual Assist X
+</a>
+<sup style="font-size:9px">[1]</sup> is one of the best addons you could ever find.</p>
+  
+                [1] http://www.wholetomato.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">18</div>
+              <div class="answer-details">
+                  [+6]
+                  [2008-08-31 17:59:08]     
+                  Steve Steiner
+              </div>
+              <div class="answer">
+                <p><a href="http://technet.microsoft.com/en-us/sysinternals/bb545027.aspx" rel="nofollow">
+<strong>
+ Procexp
+</strong>
+and
+<strong>
+ Procmon
+</strong>
+</a>
+<sup style="font-size:9px">[1]</sup> are critical sysinternals tools for diagnosing tricky configuration problems with assemblies, dlls, registry entries, and the file system.  If you are a windows dev and the sysinternal tools are not part of your toolbox and you are cheating yourself.</p>
+<p><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=9aeaa970-f281-4fb0-aba1-d59d7ed09772&amp;DisplayLang=en" rel="nofollow">
+<strong>
+ Fxcop
+</strong>
+</a>
+<sup style="font-size:9px">[2]</sup> for managed code and <a href="http://www.microsoft.com/whdc/devtools/tools/prefast.mspx" rel="nofollow">
+<strong>
+ Prefast
+</strong>
+</a>
+<sup style="font-size:9px">[3]</sup> for VC++ code (particularly with SAL annotations) are incredibly helpful for setting a standard code quality bar and keeping it across a team. If your app requires it this can be critical for writing secure code.</p>
+<p><strong>VMware</strong> and <strong>Hyper-V</strong> are incredibly useful for setting up and isolating difficult bugs.</p>
+<p>Obviously the <strong>VS debugger</strong> (disclosure .. I worked on the vs debugger).  With the VS debugger there are <strong>data visualizers</strong> that can be incredibly helpful for specifc tasks. Josh Smith's <a href="http://www.codeproject.com/KB/macros/MoleForVisualStudioEdit.aspx" rel="nofollow">
+<strong>
+ "Mole"
+</strong>
+</a>
+<sup style="font-size:9px">[4]</sup> for debugging WPF is a good example and I believe there is a 3rd party visualizer for datasets that is much better then the default one.</p>
+<p>For deep debugging of the clr you need to use <a href="http://msdn.microsoft.com/en-us/library/bb190764.aspx" rel="nofollow">
+<strong>
+ SOS
+</strong>
+</a>
+<sup style="font-size:9px">[5]</sup>, which has support in VS, but is often used from windbg.</p>
+<p>For trapping production problems and debugging offline you should implement <a href="http://msdn.microsoft.com/en-us/library/ms680369.aspx" rel="nofollow">
+<strong>
+ minidump support
+</strong>
+</a>
+<sup style="font-size:9px">[6]</sup> in your app.</p>
+  
+                [1] http://technet.microsoft.com/en-us/sysinternals/bb545027.aspx<br/>
+                [2] http://www.microsoft.com/downloads/details.aspx?FamilyID=9aeaa970-f281-4fb0-aba1-d59d7ed09772&amp;DisplayLang=en<br/>
+                [3] http://www.microsoft.com/whdc/devtools/tools/prefast.mspx<br/>
+                [4] http://www.codeproject.com/KB/macros/MoleForVisualStudioEdit.aspx<br/>
+                [5] http://msdn.microsoft.com/en-us/library/bb190764.aspx<br/>
+                [6] http://msdn.microsoft.com/en-us/library/ms680369.aspx<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              Could you edit your answer to <i>highlight</i> product names? - <b> J.F. Sebastian</b>     
+              </div>
+              <div class="answer-pagenumber">19</div>
+              <div class="answer-details">
+                  [+5]
+                  [2008-08-28 13:40:18]     
+                  Joseph Pecoraro
+              </div>
+              <div class="answer">
+                <p>Some Mac Applications for Web Development.</p>
+<p>If there is no $/€ amount listed assume the application is free.  My "must haves" are always the top listed one in the group (with the exception of Coda because I haven't purchased it so I don't know).  The rest listed are all other very popular applications used by others.</p>
+<p>Local Server:</p>
+<ul>
+<li><a href="http://www.mamp.info/en/index.php" rel="nofollow">
+MAMP
+</a>
+<sup style="font-size:9px">[1]</sup> - contains Apache, MySQL, SQLite, PHP, and phpMyAdmin</li>
+<li><a href="http://sourceforge.net/projects/locomotive" rel="nofollow">
+Locomotive
+</a>
+<sup style="font-size:9px">[2]</sup> - contains a Ruby on Rails stack</li>
+<li><a href="http://bitnami.org/stack/rubystack" rel="nofollow">
+Ruby Stack
+</a>
+<sup style="font-size:9px">[3]</sup> - contains a Ruby on Rails stack</li>
+</ul>
+<p>Editors:</p>
+<ul>
+<li><a href="http://macromates.com/" rel="nofollow">
+TextMate
+</a>
+<sup style="font-size:9px">[4]</sup> - €39</li>
+<li><a href="http://www.barebones.com/" rel="nofollow">
+BBEdit
+</a>
+<sup style="font-size:9px">[5]</sup> - $49+</li>
+<li><a href="http://smultron.sourceforge.net/" rel="nofollow">
+Smultron
+</a><sup style="font-size:9px">[6]</sup></li>
+<li><a href="http://www.barebones.com/products/textwrangler/index.shtml" rel="nofollow">
+TextWrangler
+</a><sup style="font-size:9px">[7]</sup></li>
+</ul>
+<p>IDEs:</p>
+<ul>
+<li><a href="http://www.panic.com/coda/" rel="nofollow">
+Coda
+</a>
+<sup style="font-size:9px">[8]</sup> - $99</li>
+</ul>
+<p>FTP:</p>
+<ul>
+<li><a href="http://extendmac.com/flow/" rel="nofollow">
+Flow
+</a>
+<sup style="font-size:9px">[9]</sup> - $29</li>
+<li><a href="http://www.panic.com/transmit/" rel="nofollow">
+Transmit
+</a>
+<sup style="font-size:9px">[10]</sup> - $29 </li>
+<li><a href="http://cyberduck.ch/" rel="nofollow">
+Cyberduck
+</a><sup style="font-size:9px">[11]</sup></li>
+</ul>
+<p>Graphics:</p>
+<ul>
+<li><a href="http://www.pixelmator.com/" rel="nofollow">
+Pixelmator
+</a>
+<sup style="font-size:9px">[12]</sup> - $59</li>
+</ul>
+<p>Styles:</p>
+<ul>
+<li><a href="http://macrabbit.com/cssedit/" rel="nofollow">
+CSSEdit
+</a>
+<sup style="font-size:9px">[13]</sup> - €30</li>
+<li><a href="http://www.culturedcode.com/xyle/" rel="nofollow">
+Xyle Scope
+</a>
+<sup style="font-size:9px">[14]</sup> - $30</li>
+<li><a href="http://www.omnidea.it/en/software/rulers/index.html" rel="nofollow">
+Rulers
+</a><sup style="font-size:9px">[15]</sup></li>
+</ul>
+<p>General Development Tools:</p>
+<ul>
+<li>Terminal - Lets face it, the terminal rocks</li>
+<li><a href="http://ditchnet.org/aquapath/" rel="nofollow">
+AquaPath
+</a>
+<sup style="font-size:9px">[16]</sup> - XPath testing</li>
+<li><a href="http://ditchnet.org/xslpalette/" rel="nofollow">
+XSLPalette
+</a>
+<sup style="font-size:9px">[17]</sup> - XSL testing</li>
+<li><a href="http://www.mozilla.com/en-US/firefox/?from=getfirefox" rel="nofollow">
+Firefox
+</a>
+<sup style="font-size:9px">[18]</sup> with <a href="http://getfirebug.com/" rel="nofollow">
+Firebug
+</a>
+<sup style="font-size:9px">[19]</sup> - great debugging</li>
+<li><a href="http://ktd.club.fr/programmation/latexit_en.php" rel="nofollow">
+LaTeXiT
+</a>
+<sup style="font-size:9px">[20]</sup> - when LaTeX is needed, this is awesome</li>
+</ul>
+<p>Source Control:</p>
+<ul>
+<li>There are a number of SVN clients but most of the good ones are in beta/pre-release, and the free ones are easy to find.  As always you can use the Command Line for any of these.</li>
+<li><a href="http://git.or.cz/" rel="nofollow">
+git
+</a>
+<sup style="font-size:9px">[21]</sup> and <a href="https://github.com/" rel="nofollow">
+github
+</a><sup style="font-size:9px">[22]</sup></li>
+<li>svn (builtin) and <a href="http://www.versionsapp.com/" rel="nofollow">
+Versions
+</a>
+<sup style="font-size:9px">[23]</sup> or <a href="http://www.lachoseinteractive.net/en/community/subversion/svnx/features/?sid=5b77041c88bfadb684348d7f139dd7f1" rel="nofollow">
+SVNx
+</a><sup style="font-size:9px">[24]</sup></li>
+</ul>
+<p>Browsers:</p>
+<ul>
+<li>As a web Developer you should be able to test with all the popular browsers.</li>
+<li><a href="http://webkit.org/" rel="nofollow">
+Safari/WebKit
+</a><sup style="font-size:9px">[25]</sup></li>
+<li><a href="http://www.mozilla.com/en-US/firefox/?from=getfirefox" rel="nofollow">
+Firefox
+</a><sup style="font-size:9px">[26]</sup></li>
+<li><a href="http://www.opera.com/" rel="nofollow">
+Opera
+</a><sup style="font-size:9px">[27]</sup></li>
+</ul>
+<p>Windows Emulators: <em>(you should get these for cheaper almost always)</em></p>
+<ul>
+<li><a href="http://www.vmware.com/products/fusion/" rel="nofollow">
+VMWare Fusion
+</a>
+<sup style="font-size:9px">[28]</sup> - $80 - Windows apps right next to your OS X apps</li>
+<li><a href="http://www.parallels.com/en/products/desktop/" rel="nofollow">
+Parallels
+</a>
+<sup style="font-size:9px">[29]</sup> - $80 - Another popular emulator</li>
+</ul>
+<p>Utilities: <em>(for everyday things to improve productivity)</em></p>
+<ul>
+<li><a href="http://www.blacktree.com/" rel="nofollow">
+QuickSilver
+</a>
+<sup style="font-size:9px">[30]</sup> - Application Launcher, Shortcuts, Hotkeys, an <em>absolute must have</em></li>
+<li><a href="http://www.obdev.at/products/launchbar/index.html" rel="nofollow">
+LaunchBar
+</a>
+<sup style="font-size:9px">[31]</sup> - $20 - Alternative app launcher</li>
+<li><a href="http://smileonmymac.com/TextExpander/" rel="nofollow">
+TextExpander
+</a>
+<sup style="font-size:9px">[32]</sup> - Word Expansion anywhere (typing "nname" => "Joseph Pecoraro")</li>
+</ul>
+<p>Gosh, I know I missed a bunch but I think this is a good foundation for listing <em>applications</em>.  To go along with this you really need links to documentation websites, etc. but that is really outside the bounds of the question.</p>
+<p>I hope you bought a mac!</p>
+  
+                [1] http://www.mamp.info/en/index.php<br/>
+                [2] http://sourceforge.net/projects/locomotive<br/>
+                [3] http://bitnami.org/stack/rubystack<br/>
+                [4] http://macromates.com/<br/>
+                [5] http://www.barebones.com/<br/>
+                [6] http://smultron.sourceforge.net/<br/>
+                [7] http://www.barebones.com/products/textwrangler/index.shtml<br/>
+                [8] http://www.panic.com/coda/<br/>
+                [9] http://extendmac.com/flow/<br/>
+                [10] http://www.panic.com/transmit/<br/>
+                [11] http://cyberduck.ch/<br/>
+                [12] http://www.pixelmator.com/<br/>
+                [13] http://macrabbit.com/cssedit/<br/>
+                [14] http://www.culturedcode.com/xyle/<br/>
+                [15] http://www.omnidea.it/en/software/rulers/index.html<br/>
+                [16] http://ditchnet.org/aquapath/<br/>
+                [17] http://ditchnet.org/xslpalette/<br/>
+                [18] http://www.mozilla.com/en-US/firefox/?from=getfirefox<br/>
+                [19] http://getfirebug.com/<br/>
+                [20] http://ktd.club.fr/programmation/latexit_en.php<br/>
+                [21] http://git.or.cz/<br/>
+                [22] https://github.com/<br/>
+                [23] http://www.versionsapp.com/<br/>
+                [24] http://www.lachoseinteractive.net/en/community/subversion/svnx/features/?sid=5b77041c88bfadb684348d7f139dd7f1<br/>
+                [25] http://webkit.org/<br/>
+                [26] http://www.mozilla.com/en-US/firefox/?from=getfirefox<br/>
+                [27] http://www.opera.com/<br/>
+                [28] http://www.vmware.com/products/fusion/<br/>
+                [29] http://www.parallels.com/en/products/desktop/<br/>
+                [30] http://www.blacktree.com/<br/>
+                [31] http://www.obdev.at/products/launchbar/index.html<br/>
+                [32] http://smileonmymac.com/TextExpander/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">20</div>
+              <div class="answer-details">
+                  [+5]
+                  [2008-08-05 13:01:13]     
+                  Matthew Schinckel
+              </div>
+              <div class="answer">
+                <p>MacOS X.</p>
+<ul>
+<li>Xcode - Editor/IDE (Objective C, C, Java)</li>
+<li>SubEthaEdit - Editor (bash, python, prolog)</li>
+<li>Changes - Diff/merge program</li>
+<li>Mercurial - SCM</li>
+<li>Trac - Ticket management</li>
+<li>Fluid - SingleSiteBrowser (Trac lives in it's own application!)</li>
+</ul>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">21</div>
+              <div class="answer-details">
+                  [+5]
+                  [2008-08-05 12:45:35]     
+                  Lasse V. Karlsen
+              </div>
+              <div class="answer">
+                <p>These are the ones I use every day, on Windows:</p>
+<p>Source Control: <a href="http://subversion.tigris.org" rel="nofollow">
+Subversion
+</a>
+<sup style="font-size:9px">[1]</sup>, <a href="http://tortoisesvn.tigris.org" rel="nofollow">
+TortoiseSVN
+</a>
+<sup style="font-size:9px">[2]</sup>, <a href="http://www.visualsvn.com" rel="nofollow">
+VisualSVN
+</a>
+<sup style="font-size:9px">[3]</sup> <br />
+Command Prompt Replacement: <a href="http://www.jpsoft.com" rel="nofollow">
+Take Command
+</a>
+<sup style="font-size:9px">[4]</sup> <br />
+Build Control: <a href="http://www.finalbuilder.com/" rel="nofollow">
+FinalBuilder
+</a>
+<sup style="font-size:9px">[5]</sup> <br />
+Text Editor: <a href="http://notepad-plus.sourceforge.net/uk/site.htm" rel="nofollow">
+Notepad++
+</a>
+<sup style="font-size:9px">[6]</sup> <br />
+File/Folder Comparison Tool: <a href="http://www.scootersoftware.com/" rel="nofollow">
+Beyond Compare 3
+</a>
+<sup style="font-size:9px">[7]</sup> <br />
+IDE: <a href="http://msdn.microsoft.com/en-us/vstudio/default.aspx" rel="nofollow">
+Visual Studio 2005/2008
+</a>
+<sup style="font-size:9px">[8]</sup> <br />
+Scripting: <a href="http://www.python.org/" rel="nofollow">
+Python
+</a>
+<sup style="font-size:9px">[9]</sup>, <a href="http://activestate.com/Products/komodo_ide/index.mhtml" rel="nofollow">
+Komodo
+</a>
+<sup style="font-size:9px">[10]</sup> </p>  
+                [1] http://subversion.tigris.org<br/>
+                [2] http://tortoisesvn.tigris.org<br/>
+                [3] http://www.visualsvn.com<br/>
+                [4] http://www.jpsoft.com<br/>
+                [5] http://www.finalbuilder.com/<br/>
+                [6] http://notepad-plus.sourceforge.net/uk/site.htm<br/>
+                [7] http://www.scootersoftware.com/<br/>
+                [8] http://msdn.microsoft.com/en-us/vstudio/default.aspx<br/>
+                [9] http://www.python.org/<br/>
+                [10] http://activestate.com/Products/komodo_ide/index.mhtml<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">22</div>
+              <div class="answer-details">
+                  [+5]
+                  [2008-09-18 14:09:23]     
+                  kms
+              </div>
+              <div class="answer">
+                <p>Topics in <a href="http://www.pragprog.com/the-pragmatic-programmer" rel="nofollow">
+Pragmatic Programmer
+</a>
+<sup style="font-size:9px">[1]</sup> related to tools:</p>
+<ul>
+<li>Learn a Text Manipulation Language</li>
+<li>Use a Single Editor Well</li>
+<li>Don’t Use Manual Procedures</li>
+<li>Costly Tools Don’t Produce Better Designs</li>
+<li>Write Code That Writes Code</li>
+<li>Always Use Source Code Control</li>
+<li>Use the Power of Command Shells</li>
+</ul>
+<p>Grab the book for the details.</p>
+  
+                [1] http://www.pragprog.com/the-pragmatic-programmer<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">23</div>
+              <div class="answer-details">
+                  [+5]
+                  [2008-09-18 13:54:51]     
+                  Serhat Özgel
+              </div>
+              <div class="answer">
+                <p>RockScroll: <a href="http://www.hanselman.com/blog/IntroducingRockScroll.aspx" rel="nofollow">http://www.hanselman.com/blog/IntroducingRockScroll.aspx</a></p>
+<p><img src="http://www.hanselman.com/blog/content/binary/WindowsLiveWriter/IntroducingRockScroll_C29C/RockScroll_5.png" alt="alt text" /></p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">24</div>
+              <div class="answer-details">
+                  [+4]
+                  [2009-01-15 10:12:30]     
+                  Guillaume
+              </div>
+              <div class="answer">
+                <p>A brain, paper and pen</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">25</div>
+              <div class="answer-details">
+                  [+4]
+                  [2008-08-14 20:51:38]     
+                  Pascal
+              </div>
+              <div class="answer">
+                <p>For Regular Expressions:<br /></p>
+<ul>
+<li><a href="http://www.fileformat.info/tool/regex.htm" rel="nofollow">
+Testing Regular Expressions
+</a><sup style="font-size:9px">[1]</sup></li>
+<li><a href="http://txt2re.com/" rel="nofollow">
+Regular Expression generator
+</a>
+<sup style="font-size:9px">[2]</sup> which generates regular expressions from any text you type in.</li>
+</ul>
+  
+                [1] http://www.fileformat.info/tool/regex.htm<br/>
+                [2] http://txt2re.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">26</div>
+              <div class="answer-details">
+                  [+4]
+                  [2008-08-28 13:05:08]     
+                  KiwiBastard
+              </div>
+              <div class="answer">
+                <p>.NET related:</p>
+<ul>
+<li>Resharper </li>
+<li>Agent Smith Plugin for R#</li>
+</ul>
+<p>Delphi related:</p>
+<ul>
+<li>Model Maker code Explorer</li>
+</ul>
+<p>Xcode related:</p>
+<ul>
+<li>Instruments is my favourite programming tool!</li>
+</ul>
+<p>Javascript:</p>
+<ul>
+<li>Aptana IDE</li>
+</ul>
+<p>Misc:</p>
+<ul>
+<li>big fan of Netbeans for Java and Rails coding</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">27</div>
+              <div class="answer-details">
+                  [+4]
+                  [2008-09-02 15:49:33]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>Even when working all day long in Visual Studio, emacs is a must-have, if for no other reason than its macros.  </p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              You can configure VS to easily edit the file in Emacs -- just add emacsclientw.exe to Tools-&gt;External Tools.
+
+I&#39;ve used this for years, but as of v2008, VS will <i>frequently</i> ignore on-disk changes and it&#39;s FRUSTRATING.
+
+Has anyone else seen this problem, and have any way to fix it? - <b> NVRAM</b>     
+              </div>
+              <div class="answer-pagenumber">28</div>
+              <div class="answer-details">
+                  [+4]
+                  [2008-09-13 07:37:52]     
+                  Sébastien RoccaSerra
+              </div>
+              <div class="answer">
+                <p>Here's what I use everyday:</p>
+<ul>
+<li>Firefox,</li>
+<li><a href="http://ourcomments.org/Emacs/EmacsW32.html" rel="nofollow">
+EmacsW32
+</a>
+<sup style="font-size:9px">[1]</sup> (with Vi emulation),</li>
+<li><a href="http://www.jetbrains.com/idea/" rel="nofollow">
+IntelliJ
+</a>
+<sup style="font-size:9px">[2]</sup> for Java,</li>
+<li><a href="http://orgmode.org/" rel="nofollow">
+Org Mode
+</a>
+<sup style="font-size:9px">[3]</sup> for project planning</li>
+<li><a href="http://www.ghisler.com/index.htm" rel="nofollow">
+TotalCommander
+</a>
+<sup style="font-size:9px">[4]</sup> (NortonCommander-like file manager)</li>
+<li><a href="http://www.perforce.com/" rel="nofollow">
+Perforce
+</a>
+<sup style="font-size:9px">[5]</sup> &amp; Subversion (integrated in Emacs &amp; IntelliJ)</li>
+<li><a href="http://play.typeracer.com/" rel="nofollow">
+TypeRacer
+</a>
+<sup style="font-size:9px">[6]</sup> &amp; <a href="http://www.goodtyping.com/" rel="nofollow">
+GoodTyping
+</a>
+<sup style="font-size:9px">[7]</sup> to inmprove my bad typing</li>
+<li><a href="http://www.miranda-im.org/" rel="nofollow">
+Miranda IM
+</a>
+<sup style="font-size:9px">[8]</sup> to hear what others have to say</li>
+<li>A <a href="http://en.wikipedia.org/wiki/Pencil" rel="nofollow">
+pencil
+</a>
+<sup style="font-size:9px">[9]</sup> and a <a href="http://en.wikipedia.org/wiki/Notebook" rel="nofollow">
+notebook
+</a>
+<sup style="font-size:9px">[10]</sup> to carry around and write things down</li>
+</ul>
+<p>Here's what I use often:</p>
+<ul>
+<li><a href="http://www.oracle.com/technology/products/database/sql_developer/index.html" rel="nofollow">
+SQL Developer
+</a>
+<sup style="font-size:9px">[11]</sup> to probe the DB</li>
+<li><a href="http://www.squeak.org" rel="nofollow">
+Squeak
+</a>
+<sup style="font-size:9px">[12]</sup> with the <a href="http://wiki.squeak.org/squeak/227" rel="nofollow">
+RefactoringBrowser
+</a>
+<sup style="font-size:9px">[13]</sup> to do some quick &amp; testable class design</li>
+<li><a href="http://www.cygwin.com/" rel="nofollow">
+Cygwin
+</a>
+<sup style="font-size:9px">[14]</sup> to automate some tasks</li>
+</ul>
+<p>There is probably better out there, but that's what we use:</p>
+<ul>
+<li>Bugzilla to track bugs</li>
+<li><a href="http://office.microsoft.com/fr-fr/visio/default.aspx" rel="nofollow">
+Microsoft Visio
+</a>
+<sup style="font-size:9px">[15]</sup> to review graphic specs</li>
+</ul>
+  
+                [1] http://ourcomments.org/Emacs/EmacsW32.html<br/>
+                [2] http://www.jetbrains.com/idea/<br/>
+                [3] http://orgmode.org/<br/>
+                [4] http://www.ghisler.com/index.htm<br/>
+                [5] http://www.perforce.com/<br/>
+                [6] http://play.typeracer.com/<br/>
+                [7] http://www.goodtyping.com/<br/>
+                [8] http://www.miranda-im.org/<br/>
+                [9] http://en.wikipedia.org/wiki/Pencil<br/>
+                [10] http://en.wikipedia.org/wiki/Notebook<br/>
+                [11] http://www.oracle.com/technology/products/database/sql_developer/index.html<br/>
+                [12] http://www.squeak.org<br/>
+                [13] http://wiki.squeak.org/squeak/227<br/>
+                [14] http://www.cygwin.com/<br/>
+                [15] http://office.microsoft.com/fr-fr/visio/default.aspx<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">29</div>
+              <div class="answer-details">
+                  [+3]
+                  [2008-08-05 12:57:55]     
+                  Antonio Haley
+              </div>
+              <div class="answer">
+                <p>To help with traversing through code in a command line environment ctags and cscope make life a lot easier.</p>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">30</div>
+              <div class="answer-details">
+                  [+3]
+                  [2011-03-11 05:27:22]     
+                  Alan Peabody
+              </div>
+              <div class="answer">
+                <p>One or more large whiteboards and camera to snapshot ideas before you move on to the next.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">31</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-09-24 11:45:03]     
+                  Odilon Redo
+              </div>
+              <div class="answer">
+                <p>First, find a good <strong>multi-file text editor / IDE</strong> and stick with it, learn all you can about it and extend it to your needs. Choose carefully because moving is tough once you've become familiar with one. Key features to look for:</p>
+<ul>
+<li>regular expression find/replace</li>
+<li>user macros</li>
+<li>unicode support</li>
+<li>inbuilt multi-file search</li>
+<li>multi-language syntax highlighting</li>
+<li>community / continued support from developers</li>
+<li>tools support (i.e. customizable launching of other programs like diffs etc)</li>
+</ul>
+<p>As my main <strong>text editor</strong>, I love <a href="http://www.textpad.com/" rel="nofollow">
+TextPad
+</a>
+<sup style="font-size:9px">[1]</sup> but it costs a little and doesn't have proper Unicode support. Notepad++ is a good and portable alternative. I use <a href="http://www.portablefreeware.com/?id=649" rel="nofollow">
+Notepad2
+</a>
+<sup style="font-size:9px">[2]</sup> to open single text files because it's very fast and Unicode-smart. </p>
+<p><a href="http://www.aptana.com/" rel="nofollow">
+Aptana
+</a>
+<sup style="font-size:9px">[3]</sup> is quite wonderful for all your <strong>web development</strong> needs - and is available on Linux too. Especially good if you find code auto-completion useful or are used to Eclipse.</p>
+<p>Use Firefox and learn to use <a href="http://getfirebug.com/" rel="nofollow">
+Firebug
+</a>
+<sup style="font-size:9px">[4]</sup>. It will make your web development life so much easier. Oh, and don't forget to get <a href="http://getfirebug.com/lite.html" rel="nofollow">
+Firebug Lite
+</a>
+<sup style="font-size:9px">[5]</sup> as a bookmarklet for getting some of those features with IE, Opera, etc. Install the <a href="https://addons.mozilla.org/en-US/firefox/addon/60" rel="nofollow">
+Web Developer
+</a>
+<sup style="font-size:9px">[6]</sup> extension too which has useful "view cookies", "CSS off", "images off" features etc.</p>
+<p>To <strong>manage</strong> your own development, I like <a href="http://www.portablefreeware.com/?id=1273" rel="nofollow">
+DevProject Manager
+</a>
+<sup style="font-size:9px">[7]</sup>. Others have covered source control in detail elsewhere on this page, but I like <a href="http://subversion.tigris.org/" rel="nofollow">
+Subversion
+</a>
+<sup style="font-size:9px">[8]</sup>.</p>
+<p>A good <strong>diff</strong> utility is vital, especially for managing releases across servers. <a href="http://portableapps.com/apps/utilities/winmerge_portable" rel="nofollow">
+WinMerge
+</a>
+<sup style="font-size:9px">[9]</sup> is great and is available as a Portable App. The best thing about it is that you can navigate directories for changes (like Windows Explorer with diffs visible for all the files - changed/same/new).</p>
+<p><a href="http://portableapps.com/apps/internet/filezilla_portable" rel="nofollow">
+Filezilla
+</a>
+<sup style="font-size:9px">[10]</sup> is a good and portable <strong>FTP client</strong>, or you could try the <a href="http://fireftp.mozdev.org/" rel="nofollow">
+FireFTP
+</a>
+<sup style="font-size:9px">[11]</sup> Firefox extension.</p>
+<p>I'd also recommend the following handy utilities:</p>
+<ul>
+<li><a href="http://www.albert.nu/Programs/Renamer/" rel="nofollow">
+Renamer
+</a>
+<sup style="font-size:9px">[12]</sup> (useful Explorer-integrated <strong>file renamer</strong>)</li>
+<li><a href="http://www.mythicsoft.com/agentransack/" rel="nofollow">
+Agent Ransack
+</a>
+<sup style="font-size:9px">[13]</sup> (a wonderful <strong>file-searching</strong> utility)</li>
+<li><a href="http://www.slysoft.com/en/virtual-clonedrive.html" rel="nofollow">
+Virtual CloneDrive
+</a>
+<sup style="font-size:9px">[14]</sup> (mount ISO disk images as <strong>virtual drives</strong>)</li>
+</ul>
+<p>Certain little tools make everything that little bit easier (all these are XP/Vista): </p>
+<ul>
+<li><a href="http://www.stevemiller.net/puretext/" rel="nofollow">
+PureText
+</a>
+<sup style="font-size:9px">[15]</sup> (paste text without fonts or other formatting via "Windows key+V")</li>
+<li><a href="http://jgpaiva.donationcoders.com/gridmove.html" rel="nofollow">
+GridMove
+</a>
+<sup style="font-size:9px">[16]</sup> (break your screen space into parts like having several mini-monitors)</li>
+<li><a href="http://www.xneat.com/" rel="nofollow">
+XNeat
+</a>
+<sup style="font-size:9px">[17]</sup> (move taskbar items around,change process priorities, transparencies)</li>
+</ul>
+  
+                [1] http://www.textpad.com/<br/>
+                [2] http://www.portablefreeware.com/?id=649<br/>
+                [3] http://www.aptana.com/<br/>
+                [4] http://getfirebug.com/<br/>
+                [5] http://getfirebug.com/lite.html<br/>
+                [6] https://addons.mozilla.org/en-US/firefox/addon/60<br/>
+                [7] http://www.portablefreeware.com/?id=1273<br/>
+                [8] http://subversion.tigris.org/<br/>
+                [9] http://portableapps.com/apps/utilities/winmerge_portable<br/>
+                [10] http://portableapps.com/apps/internet/filezilla_portable<br/>
+                [11] http://fireftp.mozdev.org/<br/>
+                [12] http://www.albert.nu/Programs/Renamer/<br/>
+                [13] http://www.mythicsoft.com/agentransack/<br/>
+                [14] http://www.slysoft.com/en/virtual-clonedrive.html<br/>
+                [15] http://www.stevemiller.net/puretext/<br/>
+                [16] http://jgpaiva.donationcoders.com/gridmove.html<br/>
+                [17] http://www.xneat.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">32</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-09-30 05:08:57]     
+                  Mark A. Nicolosi
+              </div>
+              <div class="answer">
+                <p>From a Gnome user's perspective...</p>
+<ul>
+<li>App Launcher: <a href="http://do.davebsd.com/" rel="nofollow">
+Gnome Do
+</a><sup style="font-size:9px">[1]</sup></li>
+<li>Text Editor: <a href="http://www.vim.org/" rel="nofollow">
+Vim/GVim
+</a><sup style="font-size:9px">[2]</sup></li>
+<li>Notes: <a href="http://www.gnome.org/projects/tomboy/" rel="nofollow">
+Tomboy
+</a><sup style="font-size:9px">[3]</sup></li>
+<li>Todo: <a href="http://www.pimlico-project.org/tasks.html" rel="nofollow">
+Tasks
+</a><sup style="font-size:9px">[4]</sup></li>
+<li>Language: C#/.NET with <a href="http://www.mono-project.com/Main_Page" rel="nofollow">
+Mono
+</a><sup style="font-size:9px">[5]</sup></li>
+<li>Unit Testing: <a href="http://www.nunit.org/index.php" rel="nofollow">
+NUnit
+</a><sup style="font-size:9px">[6]</sup></li>
+<li>Build: <a href="http://en.wikipedia.org/wiki/GNU_build_system" rel="nofollow">
+Autotools
+</a>
+<sup style="font-size:9px">[7]</sup> (out of tradition)</li>
+<li>VCS: <a href="http://git.or.cz/" rel="nofollow">
+Git
+</a><sup style="font-size:9px">[8]</sup></li>
+<li>Browser: <a href="http://www.gnome.org/projects/epiphany/" rel="nofollow">
+Epiphany
+</a>
+<sup style="font-size:9px">[9]</sup> (if I were a web developer, I'd probably use Firefox with Firebug)</li>
+<li>Shell: <a href="http://www.gnu.org/software/bash/" rel="nofollow">
+Bash
+</a>
+<sup style="font-size:9px">[10]</sup> (I'd like to try out <a href="http://www.zsh.org/" rel="nofollow">
+Zsh
+</a>
+<sup style="font-size:9px">[11]</sup>, though)</li>
+<li>IM: <a href="http://www.pidgin.im/" rel="nofollow">
+Pidgin
+</a>
+<sup style="font-size:9px">[12]</sup> (<a href="http://live.gnome.org/Empathy" rel="nofollow">
+Empathy
+</a>
+<sup style="font-size:9px">[13]</sup> looks cool, but last time I tried it, it was missing some features)</li>
+<li>Drawings/Mockups: <a href="http://www.inkscape.org/" rel="nofollow">
+Inkscape
+</a><sup style="font-size:9px">[14]</sup></li>
+<li>Music: <a href="http://www.gnome.org/projects/rhythmbox/" rel="nofollow">
+Rhythmbox
+</a><sup style="font-size:9px">[15]</sup></li>
+<li>Email: <a href="http://mail.google.com/" rel="nofollow">
+GMail
+</a><sup style="font-size:9px">[16]</sup></li>
+<li>RSS: <a href="http://www.google.com/reader" rel="nofollow">
+Google Reader
+</a><sup style="font-size:9px">[17]</sup></li>
+</ul>
+  
+                [1] http://do.davebsd.com/<br/>
+                [2] http://www.vim.org/<br/>
+                [3] http://www.gnome.org/projects/tomboy/<br/>
+                [4] http://www.pimlico-project.org/tasks.html<br/>
+                [5] http://www.mono-project.com/Main_Page<br/>
+                [6] http://www.nunit.org/index.php<br/>
+                [7] http://en.wikipedia.org/wiki/GNU_build_system<br/>
+                [8] http://git.or.cz/<br/>
+                [9] http://www.gnome.org/projects/epiphany/<br/>
+                [10] http://www.gnu.org/software/bash/<br/>
+                [11] http://www.zsh.org/<br/>
+                [12] http://www.pidgin.im/<br/>
+                [13] http://live.gnome.org/Empathy<br/>
+                [14] http://www.inkscape.org/<br/>
+                [15] http://www.gnome.org/projects/rhythmbox/<br/>
+                [16] http://mail.google.com/<br/>
+                [17] http://www.google.com/reader<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">33</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-08-05 12:50:50]     
+                  Dan Herbert
+              </div>
+              <div class="answer">
+                <p>Personally, I prefer the following tools, depending on the language I'm developing for:</p>
+<ul>
+<li>Eclipse for development in PHP, Java, or other popular more open languages. There are lots of great plugins and configurations you can set to make it just right for your liking.</li>
+<li>Git as a Source Control Management (SCM) tool. I like it because it is a decentralized system that is very standalone. I can use it for solo projects and my entire repository is stored with my code with no need for an extra database or server to set up. It also can work well with groups of people. There is a plugin that allows it to work with a subversion server or client so that you can operate with existing SCM systems. The downside to Git is that it can be tough for a beginner to understand at first (higher initial learning curve)</li>
+<li>Winmerge for File diffs. I find this tool to be one of the best Open Source apps I've ever used. It's very well polished and makes it easy to view differences on files.</li>
+<li>Notepad2 for just simple file editing on Windows. I find it to be a good replacement for Notepad that comes with Windows. It includes syntax highlighting for many languages, along with other neat features that make it great for a lightweight text editor.</li>
+</ul>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">34</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-08-05 12:53:58]     
+                  Nick Berardi
+              </div>
+              <div class="answer">
+                <p>I have actually put together a list of my favorite tools on my blog:</p>
+<p><a href="http://www.coderjournal.com/essential-software/" rel="nofollow">http://www.coderjournal.com/essential-software/</a></p>
+<p>Then there is always Scott's list, which is way more complete than mine:</p>
+<p><a href="http://www.hanselman.com/tools/" rel="nofollow">http://www.hanselman.com/tools/</a></p>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">35</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-08-06 13:56:04]     
+                  Zack Peterson
+              </div>
+              <div class="answer">
+                <p>Similar question: <a href="http://stackoverflow.com/questions/3376" rel="nofollow">
+What are your must-have tools?
+</a><sup style="font-size:9px">[1]</sup></p>  
+                [1] http://stackoverflow.com/questions/3376<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">36</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-09-11 01:22:33]     
+                  sherbang
+              </div>
+              <div class="answer">
+                <p><a href="http://git.or.cz" rel="nofollow">
+Git
+</a>
+<sup style="font-size:9px">[1]</sup> for version control. Works great by itself, or as a svn client with git-svn.</p>
+  
+                [1] http://git.or.cz<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">37</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-08-28 13:10:22]     
+                  aku
+              </div>
+              <div class="answer">
+                <p>I like these free utilities: </p>
+<ul>
+<li><a href="http://bluemars.org/clipx/" rel="nofollow">
+ClipX
+</a>
+<sup style="font-size:9px">[1]</sup> - very nice clipboard manager</li>
+<li><a href="http://ccollomb.free.fr/unlocker" rel="nofollow">
+Unlocker
+</a>
+<sup style="font-size:9px">[2]</sup> - must have Explorer extension.</li>
+<li><a href="http://www.sliver.com/dotnet/SnippetCompiler" rel="nofollow">
+Snippet Compiler
+</a>
+<sup style="font-size:9px">[3]</sup> - compile your .NET snippets without loading MSVS</li>
+<li><a href="http://technet.microsoft.com/en-us/sysinternals/bb896653.aspx" rel="nofollow">
+Process Explorer
+</a>
+<sup style="font-size:9px">[4]</sup> - great replacement for Task Manager</li>
+<li><a href="http://www.microsoft.com/windows/products/winfamily/desktopsearch/default.mspx" rel="nofollow">
+Windows Desktop Search
+</a>
+<sup style="font-size:9px">[5]</sup> - instantly find documents, e-mail, attachments, etc. Plus nice quick launch functionality (like in standalone program launchers)</li>
+</ul>
+  
+                [1] http://bluemars.org/clipx/<br/>
+                [2] http://ccollomb.free.fr/unlocker<br/>
+                [3] http://www.sliver.com/dotnet/SnippetCompiler<br/>
+                [4] http://technet.microsoft.com/en-us/sysinternals/bb896653.aspx<br/>
+                [5] http://www.microsoft.com/windows/products/winfamily/desktopsearch/default.mspx<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">38</div>
+              <div class="answer-details">
+                  [+2]
+                  [2008-08-14 20:09:56]     
+                  Leonardo
+              </div>
+              <div class="answer">
+                <p>My list of daily used applications:</p>
+<ul>
+<li><a href="http://www.sourcegear.com/diffmerge/" rel="nofollow" title="excanvas">
+SourceGear's DiffMerge
+</a>
+<sup style="font-size:9px">[1]</sup> for, well, diff and merge ;)</li>
+<li><a href="http://www.editpadpro.com/" rel="nofollow">
+JGsoft's EditPad Pro
+</a>
+<sup style="font-size:9px">[2]</sup> as THE text editor</li>
+<li><a href="http://filezilla-project.org/" rel="nofollow">
+FileZilla Client
+</a>
+<sup style="font-size:9px">[3]</sup> for FTP </li>
+<li><a href="http://www.x1.com/" rel="nofollow">
+X1 Enterprise Client
+</a>
+<sup style="font-size:9px">[4]</sup> (file indexing)</li>
+<li><a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="nofollow">
+Putty
+</a>
+<sup style="font-size:9px">[5]</sup> (telnet and ssh client)</li>
+<li><a href="http://www.skype.com/intl/en/" rel="nofollow">
+Skype
+</a>
+<sup style="font-size:9px">[6]</sup> (VoIP and chat)</li>
+</ul>
+<p>They are not necessarily the best in their fields, but as they say: "pick one tool, take the time to learn it, and squeeze it". </p>
+<p>Ok, nobody says that.</p>
+  
+                [1] http://www.sourcegear.com/diffmerge/<br/>
+                [2] http://www.editpadpro.com/<br/>
+                [3] http://filezilla-project.org/<br/>
+                [4] http://www.x1.com/<br/>
+                [5] http://www.chiark.greenend.org.uk/~sgtatham/putty/<br/>
+                [6] http://www.skype.com/intl/en/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">39</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-29 05:58:41]     
+                  Jiaaro
+              </div>
+              <div class="answer">
+                <p>now we know that stack overflow needs a merge feature ;)</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">40</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-31 18:12:30]     
+                  Roddy
+              </div>
+              <div class="answer">
+                <p>Well, I know that this is unlikely to be believed, but that's fine by me:-</p>
+<p>The C++Builder IDE from <a href="http://www.codegear.com" rel="nofollow">
+Codegear
+</a>
+<sup style="font-size:9px">[1]</sup> gives me such a great head-start on developing Windows GUI applications that I'm almost unwilling to recommend it in case my competitors catch on. </p>
+<p>It's not perfect, but the combination of C++, two-way visual RAD design, a well tried and tested application framework (VCL) and slews of third-party components (basically, all Delphi components since ~1995) hit a sweet spot for me.</p>
+<p>Otherwise, +1 for for the usual suspects: SVN, TortoiseSVN, Fogbugz, Winmerge.</p>
+  
+                [1] http://www.codegear.com<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">41</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-28 13:05:29]     
+                  jinsungy
+              </div>
+              <div class="answer">
+                <p>Two apps I use frequently are..</p>
+<p>-SQL Prompt from Red-Gate software (Intellisense for SQL)</p>
+<p>-Notepad++</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">42</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-28 13:05:59]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>MZ Tools and Smart Indenter for Excel development...even if it's not a "proper" language it's nice to write nice code in it!</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">43</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-28 13:03:23]     
+                  Craig
+              </div>
+              <div class="answer">
+                <ul>
+<li>SQL Prompt from Red-Gate.  Man I
+love that thing. </li>
+<li>Fiddler 2.  A must for web development. </li>
+<li>ReSharper.  Just pure sweetness.</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">44</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-28 13:06:13]     
+                  Niyaz
+              </div>
+              <div class="answer">
+                <p><strong>It depends.</strong></p>
+<p>You should consider answering the following questions:</p>
+<ol>
+<li>What development do you do?</li>
+<li>What kind of projects are you working on?</li>
+<li>Do you need some design tools?</li>
+<li>What is your budget?</li>
+<li>What is your system configuration?</li>
+</ol>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">45</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-28 13:06:31]     
+                  Rob Cooper
+              </div>
+              <div class="answer">
+                <ul>
+<li>A good launcher - I use <a href="http://www.launchy.net/" rel="nofollow">
+Launchy
+</a>
+<sup style="font-size:9px">[1]</sup> Make sure you get the Weby plugin as well.</li>
+<li>Code snippet editor for VS (obv if you dev in VS) I use <a href="http://www.codeplex.com/snippy" rel="nofollow">
+Snippy
+</a>
+<sup style="font-size:9px">[2]</sup>.</li>
+<li>Good notepad, I personally use <a href="http://editra.org/index.php" rel="nofollow">
+Editra
+</a>
+<sup style="font-size:9px">[3]</sup>.</li>
+<li><a href="http://www.getpaint.net/" rel="nofollow">
+Paint.NET
+</a>
+<sup style="font-size:9px">[4]</sup> - Its awesome, donate if you like it!</li>
+<li>A Sync tool for all the odd files that you like to keep with you (supporting shortcuts for Launchy etc.. I actually use <a href="https://www.mesh.com/Welcome/Welcome.aspx" rel="nofollow">
+Live Mesh
+</a>
+<sup style="font-size:9px">[5]</sup>.</li>
+</ul>
+  
+                [1] http://www.launchy.net/<br/>
+                [2] http://www.codeplex.com/snippy<br/>
+                [3] http://editra.org/index.php<br/>
+                [4] http://www.getpaint.net/<br/>
+                [5] https://www.mesh.com/Welcome/Welcome.aspx<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">46</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-11 01:30:23]     
+                  sherbang
+              </div>
+              <div class="answer">
+                <p>A good <a href="http://en.wikipedia.org/wiki/REPL" rel="nofollow">
+REPL
+</a>
+<sup style="font-size:9px">[1]</sup>:<br />
+When programming in python I <em>live</em> in <a href="http://ipython.scipy.org/moin/" rel="nofollow">
+ipython
+</a>
+<sup style="font-size:9px">[2]</sup> and am constantly testing things out next to my editor.<br />
+When programming in Java <a href="http://www.beanshell.org/" rel="nofollow">
+beanshell
+</a>
+<sup style="font-size:9px">[3]</sup> gets plenty of use.<br />
+When I write PHP I miss having an easy shell to work in.<br />
+Edit, save, run, debug, edit takes a lot longer.</p>
+  
+                [1] http://en.wikipedia.org/wiki/REPL<br/>
+                [2] http://ipython.scipy.org/moin/<br/>
+                [3] http://www.beanshell.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">47</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-15 13:30:54]     
+                  schwerwolf
+              </div>
+              <div class="answer">
+                <p>I write code in Perl and C.</p>
+<p>Debugging:<br />
+<strong>gdb</strong> - for C debugging<br />
+<strong>perl</strong> - for perl debugging</p>
+<p>Editing:<br />
+<strong>vim</strong> - I try to never use the mouse. Some prefer Emacs. It's a matter of tradition for me. I typically use vim when I want to focus on a task that I'm familiar with. I use Visual Studio when I absolutely need the context-completion and object-browsing.<br />
+<strong>MS VS2005</strong> - Microsoft has the best context-completion and object-browsing I've ever used.<br />
+<strong>Viemu</strong> - Sometimes I want vim in visual studio- this is the only tool I know of that provides this capability. However, I've realized that one of the reasons I use vim is to decrease the amount of screen clutter. Viemu doesn't help with that much.</p>
+<p>Diffing:<br />
+<strong>kdiff3</strong> - I don't know how I'd survive without a decent merging and diffing tool. This does the job reasonably well. It's gui-based but you can construct merges using keyboard shortcuts. That's a boon.</p>
+<p>Documenting:<br />
+<strong>MediaWiki</strong> - If it's not in the source code, we use a wiki. This is a good solution for non-deliverable document control.</p>
+<p>Bug Tracking:<br />
+<strong>Trac</strong> - for small shops, this integrates bug tracking and revision control reasonable well.</p>
+<p>Revision Control:<br />
+<strong>Subversion</strong> - Very well supported in the industry. Almost as ubiquitous as CVS. The only feature it's missing is merge-tracking. I understand that's a feature planned for a future version.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">48</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-05 13:21:22]     
+                  Kevin
+              </div>
+              <div class="answer">
+                <ol>
+<li><a href="http://bluemars.org/clipx/" rel="nofollow">
+ClipX
+</a><sup style="font-size:9px">[1]</sup></li>
+<li><a href="http://crimsoneditor.com/" rel="nofollow">
+Crimson Editor
+</a><sup style="font-size:9px">[2]</sup></li>
+<li><a href="http://www.cs.toronto.edu/%7Eiheckman/allsnap/" rel="nofollow">
+allSnap
+</a><sup style="font-size:9px">[3]</sup></li>
+<li><a href="http://filezilla-project.org/" rel="nofollow">
+FileZilla
+</a><sup style="font-size:9px">[4]</sup></li>
+<li>Firebug</li>
+<li>Photoshop</li>
+<li><a href="http://www.freedownloadscenter.com/Web_Authoring/HTML_Color_Pickers/Colour_Spy.html" rel="nofollow">
+Colour Spy
+</a><sup style="font-size:9px">[5]</sup></li>
+</ol>  
+                [1] http://bluemars.org/clipx/<br/>
+                [2] http://crimsoneditor.com/<br/>
+                [3] http://www.cs.toronto.edu/%7Eiheckman/allsnap/<br/>
+                [4] http://filezilla-project.org/<br/>
+                [5] http://www.freedownloadscenter.com/Web_Authoring/HTML_Color_Pickers/Colour_Spy.html<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">49</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-05 13:22:18]     
+                  Mat
+              </div>
+              <div class="answer">
+                <p>I figured that since there are lots of good answers here that I would make my own answer, mark it as The Answer, and edit it up with everyones suggestions.  All fine except I can't accept my own answer... Not really sure what to do about that.</p>  
+                <br/>
+              </div>
+              <div class="comment">
+              Summarize the answer in the question text like <a href="http://beta.stackoverflow.com/questions/18557/how-does-stackoverflow-work-the-unofficial-faq" rel="nofollow" title="how does stackoverflow work the unofficial faq">beta.stackoverflow.com/questions/18557/&hellip;</a> did - <b> David Schmitt</b>     
+              </div>
+              <div class="answer-pagenumber">50</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-17 17:15:16]     
+                  Robin Robinson
+              </div>
+              <div class="answer">
+                <ul>
+<li>Resharper - must!!!</li>
+<li>Just started using VisualSVN. (Seems to make some of Resharper's refactorings a lot easier when using Subversion.)</li>
+<li>We actually use <a href="http://www.unfuddle.com" rel="nofollow" title="InfoQ">
+www.unfuddle.com
+</a>
+<sup style="font-size:9px">[1]</sup> for our subversion reposity.  We are a small team working from 2 different locations.</li>
+<li>GhostDoc for VS 2008</li>
+</ul>
+  
+                [1] http://www.unfuddle.com<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">51</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-08-14 19:57:19]     
+                  Patrik
+              </div>
+              <div class="answer">
+                <p>These are the tools I use every day.</p>
+<ol>
+<li>Visual Studio 2008</li>
+<li>Visual Studio Team System 2008 Team Explorer</li>
+<li>SQL Server 2005</li>
+<li>WIX</li>
+<li>Sandcastle</li>
+<li>Notepad++</li>
+<li>"The Internets"</li>
+</ol>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              Where can I find these &quot;Internets&quot;? - <b> spoulson</b>     
+              </div>
+              <div class="comment">
+              I&#39;ll take two :) - <b> ldigas</b>     
+              </div>
+              <div class="answer-pagenumber">52</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-10-07 23:14:08]     
+                  AtliB
+              </div>
+              <div class="answer">
+                <p>Some of my favorites:</p>
+<ul>
+<li>SlickRun (launcher - a must!)</li>
+<li>Directory Opus (Explorer replacement on steroids)</li>
+<li>Compare It! from grigsoft.com (for file comparison)</li>
+<li>TortoiseSVN (GUI client on top of Subversion)</li>
+<li>SnagIt (screenshots)</li>
+<li>Notepad++</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">53</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-25 13:16:36]     
+                  heisen
+              </div>
+              <div class="answer">
+                <p>On Linux, C, C++, Java</p>
+<ul>
+<li>Editor : emacs with mode/plugin like ECB (code browser), Cedet (ide), JDEE (Java specific ide), modes for Verilog, VHDL, you name it  </li>
+<li>Debugger : gdb with ddd</li>
+<li>Compiler tool : gcc</li>
+<li>Repository : TkSVN, TkCVS, SVN, CVS</li>
+<li>Memory : Rational Purify, Valgrind</li>
+<li>Code coverage : Rational PureCoverage, gcov</li>
+<li>Profiler : Rational Quantify, gprof</li>
+<li>Unit test : CppUnit</li>
+<li>Code Review : ReviewBoard</li>
+<li>Compare codes : Tkdiff, diff</li>
+<li>Help at your finger tips - man</li>
+<li>Roll your own : Shell Scripting, Perl, Tcl, Python</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">54</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-26 16:15:04]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>Expresso is good but RegexBuddy is much more usable.</p>
+<p><a href="http://www.regexbuddy.com/" rel="nofollow">
+Regex Buddy Link
+</a><sup style="font-size:9px">[1]</sup></p>
+  
+                [1] http://www.regexbuddy.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">55</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-10-24 11:09:15]     
+                  yeradis
+              </div>
+              <div class="answer">
+                <p>Hello and good day for everyone</p>
+<p>If you plan to play with XML i recommend the use of XMLSpy Enterprise Edition<br />
+If you plan to play with databases i recommend the use o AquaFold Aqua Data Studio<br />
+if you plan to play with UML i recommend you to use Enterprise Architect<br />
+If you plan to play with java i recommend you the use Netbeans<br />
+If you plan to play with OS compatibility a i recommend you to use VirtualBox<br />
+If you plan to play with php i recommend you to use Delphi for php<br />
+if you plan to play with the web i recommend you to use Google Chrome<br />
+If you plan to play with .NET framework i recommend you to use Sharpdevelop  , Visual Studio better <br /></p>
+<p>Thats all
+With no more....
+bye bye</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">56</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-12-07 21:35:08]     
+                  kushin
+              </div>
+              <div class="answer">
+                <p>Thanks, a lot of nice tools listed here. Time to try some of them. Here are what I use currently. </p>
+<ul>
+<li>Text Editing: Ultra-edit </li>
+<li>Browser: Chromium </li>
+<li>Note Management: Evernote</li>
+<li>IDE: VS 2008 </li>
+<li>Compare/Diff: Beyond compare </li>
+<li>Remote Server Manager: RoyalTS</li>
+<li>JS Debugging: Firebug</li>
+<li>Python: Wing IDE</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">57</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-12-07 22:16:49]     
+                  nzpcmad
+              </div>
+              <div class="answer">
+                <p>For .Net, look <a href="http://stackoverflow.com/questions/180939/net-must-have-development-tools">
+here in SO
+</a>
+<sup style="font-size:9px">[1]</sup>:</p>
+<p>Summary:</p>
+<ul>
+<li><a href="http://www.red-gate.com/products/reflector/" rel="nofollow">
+Reflector
+</a>
+<sup style="font-size:9px">[2]</sup>      12</li>
+<li><a href="http://www.jetbrains.com/resharper/" rel="nofollow">
+Resharper
+</a>
+<sup style="font-size:9px">[3]</sup>               9</li>
+<li><a href="http://www.nunit.org/index.php" rel="nofollow">
+NUnit
+</a>
+<sup style="font-size:9px">[4]</sup> + TestDriven.Net       7</li>
+<li><a href="http://technet.microsoft.com/en-us/sysinternals/bb896653.aspx" rel="nofollow">
+Process Explorer
+</a>
+<sup style="font-size:9px">[5]</sup> (other Sysinternals)    3</li>
+<li><a href="http://devexpress.com/Products/Visual_Studio_Add-in/Refactoring/" rel="nofollow">
+Refactor Pro
+</a>
+<sup style="font-size:9px">[6]</sup>                                   3</li>
+<li><a href="http://msdn.microsoft.com/en-us/library/default.aspx" rel="nofollow">
+MSDN Library
+</a>
+<sup style="font-size:9px">[7]</sup>  2</li>
+<li><a href="http://www.linqpad.net/" rel="nofollow">
+LinqPad
+</a>
+<sup style="font-size:9px">[8]</sup>                              2</li>
+<li><a href="http://confluence.public.thoughtworks.org/display/CCNET/Welcome+to+CruiseControl.NET" rel="nofollow">
+Cruisecontrol.net
+</a>
+<sup style="font-size:9px">[9]</sup> 		         2</li>
+<li><a href="http://www.sliver.com/dotnet/SnippetCompiler/" rel="nofollow">
+SnippetCompiler
+</a>
+<sup style="font-size:9px">[10]</sup> 2</li>
+<li><a href="http://info.vmware.com" rel="nofollow">
+VMWare
+</a>
+<sup style="font-size:9px">[11]</sup>                                 2</li>
+<li><a href="http://ayende.com/projects/rhino-mocks.aspx" rel="nofollow">
+RhinoMocks
+</a>
+<sup style="font-size:9px">[12]</sup>        2</li>
+<li><a href="http://www.devexpress.com/Products/Visual_Studio_Add-in/Coding_Assistance/" rel="nofollow">
+CodeRush
+</a>
+<sup style="font-size:9px">[13]</sup>    				2</li>
+<li><a href="http://www.fiddlertool.com/fiddler/" rel="nofollow">
+Fiddler
+</a>
+<sup style="font-size:9px">[14]</sup>                   2</li>
+<li>PowerCommands for VS 2008 		1</li>
+<li>Sandcastle    			1</li>
+<li>SQL Profiler  			1</li>
+<li>Redgate ANTS profiler     		1</li>
+<li>NCover    				1</li>
+<li>VisualSVN     			1</li>
+<li>Rubber Ducky  			1</li>
+<li>WinMerge  				1</li>
+<li>NAnt  				1</li>
+<li>ViEmu                                         1</li>
+<li>AnkhSVN                                       1</li>
+<li>dotTrace Profiler                             1</li>
+<li>BeyondCompare                                 1</li>
+<li>DPack VS Plugin                               1</li>
+<li>PowerShell                                    1</li>
+<li>WCF Trace Viewer (SDK)                        1   </li>
+<li>xUnit.net                                     1</li>
+<li>SourceGear DiffMerge                          1</li>
+<li>Ghostdoc                                      1</li>
+<li>Expression Studio                             1 </li>
+<li>XAML Pad                                      1 </li>
+<li>KaXaml                                        1 </li>
+<li>Blender for 3D modeling                       1 </li>
+<li>Snoop a WPF tool                              1 </li>
+<li>DiffMerge                                     1</li>
+<li>DPack                                         1</li>
+</ul>
+<p>For .Java, look <a href="http://stackoverflow.com/questions/210755/java-must-have-development-tools">
+here in SO
+</a>
+<sup style="font-size:9px">[15]</sup>:</p>
+<p>Summary:</p>
+<ul>
+<li><a href="http://www.jetbrains.com/idea/" rel="nofollow">
+IntelliJ IDEA
+</a>
+<sup style="font-size:9px">[16]</sup> 3</li>
+<li><a href="https://hudson.dev.java.net/" rel="nofollow">
+Hudson
+</a>
+<sup style="font-size:9px">[17]</sup> 3</li>
+<li><a href="http://www.atlassian.com/software/jira/" rel="nofollow">
+JIRA
+</a>
+<sup style="font-size:9px">[18]</sup> 3</li>
+<li><a href="http://www.ej-technologies.com/products/jprofiler/overview.html" rel="nofollow">
+JProfiler
+</a>
+<sup style="font-size:9px">[19]</sup> 2</li>
+<li><a href="http://cobertura.sourceforge.net/" rel="nofollow">
+Cobertura
+</a>
+<sup style="font-size:9px">[20]</sup> 2</li>
+<li><a href="http://maven.apache.org/" rel="nofollow">
+Maven
+</a>
+<sup style="font-size:9px">[21]</sup> 2</li>
+<li><a href="http://www.junit.org/" rel="nofollow">
+JUnit
+</a>
+<sup style="font-size:9px">[22]</sup>, preferably along with a mocking framework (e.g. Mockito, EasyMock) 2</li>
+<li><a href="http://ant.apache.org/" rel="nofollow">
+ANT
+</a>
+<sup style="font-size:9px">[23]</sup> + CI server 2 </li>
+<li><a href="http://www.yourkit.com/" rel="nofollow">
+yourkit
+</a>
+<sup style="font-size:9px">[24]</sup> profiler 2</li>
+<li><a href="http://profiler.netbeans.org/" rel="nofollow">
+NetBeans profiler
+</a>
+<sup style="font-size:9px">[25]</sup> 1</li>
+<li></li></ul>  
+                [1] http://stackoverflow.com/questions/180939/net-must-have-development-tools<br/>
+                [2] http://www.red-gate.com/products/reflector/<br/>
+                [3] http://www.jetbrains.com/resharper/<br/>
+                [4] http://www.nunit.org/index.php<br/>
+                [5] http://technet.microsoft.com/en-us/sysinternals/bb896653.aspx<br/>
+                [6] http://devexpress.com/Products/Visual_Studio_Add-in/Refactoring/<br/>
+                [7] http://msdn.microsoft.com/en-us/library/default.aspx<br/>
+                [8] http://www.linqpad.net/<br/>
+                [9] http://confluence.public.thoughtworks.org/display/CCNET/Welcome+to+CruiseControl.NET<br/>
+                [10] http://www.sliver.com/dotnet/SnippetCompiler/<br/>
+                [11] http://info.vmware.com<br/>
+                [12] http://ayende.com/projects/rhino-mocks.aspx<br/>
+                [13] http://www.devexpress.com/Products/Visual_Studio_Add-in/Coding_Assistance/<br/>
+                [14] http://www.fiddlertool.com/fiddler/<br/>
+                [15] http://stackoverflow.com/questions/210755/java-must-have-development-tools<br/>
+                [16] http://www.jetbrains.com/idea/<br/>
+                [17] https://hudson.dev.java.net/<br/>
+                [18] http://www.atlassian.com/software/jira/<br/>
+                [19] http://www.ej-technologies.com/products/jprofiler/overview.html<br/>
+                [20] http://cobertura.sourceforge.net/<br/>
+                [21] http://maven.apache.org/<br/>
+                [22] http://www.junit.org/<br/>
+                [23] http://ant.apache.org/<br/>
+                [24] http://www.yourkit.com/<br/>
+                [25] http://profiler.netbeans.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">58</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-12-18 16:59:49]     
+                  Patrick Smacchia - NDepend dev
+              </div>
+              <div class="answer">
+                <p><a href="http://www.NDepend.com" rel="nofollow">
+NDepend
+</a>
+<sup style="font-size:9px">[1]</sup>: It is a static code analyzer that will let you  explore your code base, and write quality and design rules.</p>
+<p>See all feature of NDepend here <a href="http://www.ndepend.com/Features.aspx" rel="nofollow">http://www.ndepend.com/Features.aspx</a>:
+<br /> -  Code Query Language (CQL)
+<br /> -  Compare Builds
+<br /> -  82 code metrics
+<br /> -  Manage Complexity and Dependencies
+<br /> -  Detect Dependency Cycles
+<br /> -  Harness Test Coverage Data
+<br /> -  Enforce Immutability and Purity
+<br /> -  Warnings about the health of your Build Process
+<br /> -  Generate custom report from your Build Process
+<br /> -  Diagrams
+<br /> -  Facilities to cope with real-world environment</p>
+  
+                [1] http://www.NDepend.com<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">59</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-12-18 17:20:19]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>One tool that I always miss on Windows is a good window manager.  I suppose this is one reason why Windows (and Mac) developers tend to like IDEs better than old Unix folks.</p>
+<p>On Linux I prefer Blackbox -- it's features fit my work style, and it tends to stay out of my way.</p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              I used to have a tabbed file manager with built in editor based on SciTE/Scintilla (which is a great tool..) I wish I could find the name!! - <b> Garet Claborn</b>     
+              </div>
+              <div class="answer-pagenumber">60</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-20 05:07:21]     
+                  Terhorst
+              </div>
+              <div class="answer">
+                <p>My recommendations aren't specifically programming tools, but they help organize my workspace while I'm getting things done.</p>
+<p><a href="http://www.winsplit-revolution.com/" rel="nofollow">
+WinSplit Revolution
+</a>
+<sup style="font-size:9px">[1]</sup> -- I like to be able to quickly maximize, tile, and organize my windows with a quick keystroke or two. I threw together a little script to do the same thing in Linux because I could find nothing like it. I can't stand working for long on computers that don't have something like this now.</p>
+<p><a href="http://virtuawin.sourceforge.net/" rel="nofollow">
+VirtuaWin
+</a>
+<sup style="font-size:9px">[2]</sup> -- Virtual desktops for Windows that actually work half-decently. Not an incredibly slow piece of junk like Microsoft's official powertoy. </p>
+<p><a href="http://launchy.net/" rel="nofollow">
+Launchy
+</a>
+<sup style="font-size:9px">[3]</sup> -- Launch programs via keyboard. I use <a href="http://do.davebsd.com/" rel="nofollow">
+Gnome Do
+</a>
+<sup style="font-size:9px">[4]</sup> on Linux, but it's not as good.</p>
+  
+                [1] http://www.winsplit-revolution.com/<br/>
+                [2] http://virtuawin.sourceforge.net/<br/>
+                [3] http://launchy.net/<br/>
+                [4] http://do.davebsd.com/<br/>
+                <br/>
+              </div>
+              <div class="comment">
+              just downloaded WinSplit and it&#39;s awesome. - <b> Sylverdrag</b>     
+              </div>
+              <div class="answer-pagenumber">61</div>
+              <div class="answer-details">
+                  [+1]
+                  [2008-09-15 22:07:30]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>On Linux(Ubuntu):</p>
+<ul>
+<li><a href="http://ultimatepp.org" rel="nofollow">
+Ultimate++
+</a>
+<sup style="font-size:9px">[1]</sup>(TheIde) - gui toolkit + IDE</li>
+<li><a href="http://www.gnome.org/projects/gedit/" rel="nofollow">
+gedit
+</a>
+<sup style="font-size:9px">[2]</sup> - source editor</li>
+<li><a href="http://www.vim.org/" rel="nofollow">
+vim
+</a>
+<sup style="font-size:9px">[3]</sup> - source editor (when using CLI)</li>
+<li><a href="http://subversion.tigris.org" rel="nofollow">
+Subversion
+</a><sup style="font-size:9px">[4]</sup></li>
+<li><a href="http://sqlite.org" rel="nofollow">
+SQLite
+</a><sup style="font-size:9px">[5]</sup></li>
+<li><a href="http://gcc.gnu.org/" rel="nofollow">
+GCC
+</a><sup style="font-size:9px">[6]</sup></li>
+</ul>
+<p>On Windows(Vista):</p>
+<ul>
+<li>Ultimate++(TheIde) - gui toolkit + IDE</li>
+<li><a href="http://notepad-plus.sourceforge.net/" rel="nofollow">
+Notepad++
+</a>
+<sup style="font-size:9px">[7]</sup> - source editor</li>
+<li>Subversion</li>
+<li><a href="http://www.codeblocks.org/" rel="nofollow">
+CodeBlocks
+</a>
+<sup style="font-size:9px">[8]</sup> (sometimes)</li>
+<li><a href="http://mingw.org" rel="nofollow">
+MinGW
+</a>
+<sup style="font-size:9px">[9]</sup> and <a href="http://www.microsoft.com/Express/" rel="nofollow">
+MSC
+</a>
+<sup style="font-size:9px">[10]</sup> compilers</li>
+</ul>
+  
+                [1] http://ultimatepp.org<br/>
+                [2] http://www.gnome.org/projects/gedit/<br/>
+                [3] http://www.vim.org/<br/>
+                [4] http://subversion.tigris.org<br/>
+                [5] http://sqlite.org<br/>
+                [6] http://gcc.gnu.org/<br/>
+                [7] http://notepad-plus.sourceforge.net/<br/>
+                [8] http://www.codeblocks.org/<br/>
+                [9] http://mingw.org<br/>
+                [10] http://www.microsoft.com/Express/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">62</div>
+              <div class="answer-details">
+                  [+1]
+                  [2009-01-15 10:12:05]     
+                  bowsie
+              </div>
+              <div class="answer">
+                <p>For development process tools we use some of the Atlassian products (FishEye repository browsing, Crucible peer reviewing tool, Confluence wiki) and Hudson - which (echoing sentiments above) is on of the greatest development aids I have ever used.</p>
+<p>JIRA is the best issue management tool I have ever used, but am still a fan of XPlanner in certain cases.</p>
+<p>The more they integrate the better.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">63</div>
+              <div class="answer-details">
+                  [+1]
+                  [2009-06-20 23:37:11]     
+                  opensas
+              </div>
+              <div class="answer">
+                <p>ide: visual studio / netbeans (zip file!, almost portable)</p>
+<p>editor: notepad++ (portable)</p>
+<p>file comparison: winmerge (portable)</p>
+<p>source control: subversion, tortoise</p>
+<p>ticket control: redmine</p>
+<p>file manager: free commander (portable)</p>
+<p>explorer: IE, FF (portable), chrome (portable)</p>
+<p>FF plugins: firebug, web developer, xmarks</p>
+<p>sites: STACKOVERFLOW!!!, gotapi</p>
+<p>miscelaneous: launchy (can't live without it!)</p>
+<p>virtualization: virtual box (I have a machine image for every environment)</p>
+<p>office: openoffice (portable)</p>
+<p>lamp stack: xammp (portable!)</p>
+<p>disk usage: windirstat (portable), scanner (portable)</p>
+<p>pdf viewer: foxit (portable), sumatrapdf (portable)</p>
+<p>uncompressor: 7-zip portable</p>
+<p>M$ sql comparison tool: sql delta</p>
+<p>M$ sql management: visual studio sql manager</p>
+<p>mysql</p>
+<p>mysql management: phpmyadmin, manager provided with mysql</p>
+<p>as you may have noticed, I have a special predilection for portable applications...</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">64</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-06-20 23:52:25]     
+                  mnuzzo
+              </div>
+              <div class="answer">
+                <p>I use the Eclipse IDE for Java development with the Subclipse plug-in for revision control of group projects and SVN as the actual revision control program.  For C/C++ and python development on Linux I prefer to use gedit.  For Ruby development on any platform and C/C++ and Python development on Windows, I prefer to use Scite.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">65</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-07-16 07:09:19]     
+                  zeroDivisible
+              </div>
+              <div class="answer">
+                <p>When I am learning algorithms / data structures / programming there are two tools, which are invaluable to me - <strong>Microsoft Excel</strong> and <strong>Idle</strong> (Python GUI). </p>
+<p>You may laugh - but proving simple things in Excel and using Idle as <em>pimped</em> calculator really speeds my learning process.</p>
+  
+                <br/>
+              </div>
+              <div class="comment">
+              Honestly I&#39;m not a big fan of Excel, but it does have various uses as a programmers tool. Quickly seeing equations work out on data is nice. <a href="http://www.gamasutra.com/view/feature/3563/microsoft_excel_revolutionary_3d_.php" rel="nofollow">You may find this interesting</a>. Crazy. - <b> Garet Claborn</b>     
+              </div>
+              <div class="answer-pagenumber">66</div>
+              <div class="answer-details">
+                  [0]
+                  [2010-04-06 17:00:55]     
+                  Rob Tanzola
+              </div>
+              <div class="answer">
+                <p><a href="http://www.wireshark.org/" rel="nofollow">
+Wireshark
+</a>
+<sup style="font-size:9px">[1]</sup> when you need to know what is actually on the wire. Lots of filtering options and support for a large number of protocols.</p>
+  
+                [1] http://www.wireshark.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">67</div>
+              <div class="answer-details">
+                  [0]
+                  [2010-04-06 17:21:17]     
+                  IAbstract
+              </div>
+              <div class="answer">
+                <ul>
+<li>GCC</li>
+<li>QEMU</li>
+<li>gedit</li>
+<li>RapidSVN</li>
+</ul>
+<p>I've dropped all the eye candy. I've decided to rough it for a while.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">68</div>
+              <div class="answer-details">
+                  [0]
+                  [2010-07-21 14:43:48]     
+                  Vanwaril
+              </div>
+              <div class="answer">
+                <p>I don't see many Unix-platform Development tools here besides the standard vim, emacs, shell utilities, versioning, etc.</p>
+<p>Besides those, there are a few really powerful tools out there:</p>
+<ul>
+<li><p><strong>cscope</strong> -- Lets you search through LARGE directories worth of code quickly and easily, and even lets you run a find-replace across the whole thing.  Best used with C</p></li>
+<li><p><strong>quilt</strong> -- While DVCS is really important, patching has another niche altogether.  With quilt, you can easily maintain a series of patches, letting it automatically keep track of the changes you've made and diff them, and later let you roll-back or roll-ahead, and all you need to do to get the changes to someone else is give them the patch-files!</p></li>
+<li><p><strong>qemu</strong> -- A <em>really</em> powerful virtual machine.  One really beautiful thing about it is the --nographic option, which lets you run a virtual machine <em>in just text!</em></p></li>
+<li><p><strong>guake</strong> -- Just an example, though there are other Quake-style terminals that drop down and really let you get to the command-line and back from GUI really quickly.</p></li>
+<li><p><strong>xchat</strong> -- No, really. Almost any open-source project has dev's on an IRC, and the easiest way to find something out is to ping them!</p></li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">69</div>
+              <div class="answer-details">
+                  [0]
+                  [2011-03-11 05:00:20]     
+                  Garet Claborn
+              </div>
+              <div class="answer">
+                <ul>
+<li><a href="http://www.codeblocks.org" rel="nofollow">
+Code::Blocks
+</a>
+<sup style="font-size:9px">[1]</sup> Great cross-platform IDE, could use plugin updates but is very extendable. Can come with MinGW but works with many compilers.</li>
+<li><a href="http://www.codecutter.net/tools/quincy/" rel="nofollow">
+Quincy 2005
+</a>
+<sup style="font-size:9px">[2]</sup> Quick and easy small C++ projects (I like MinGW alot...)</li>
+<li><a href="http://www.sourceforge.net/" rel="nofollow">
+SourceForge
+</a>
+<sup style="font-size:9px">[3]</sup> Uh,.. It's source forge.</li>
+<li>I second StackOverflow, it's StackOverflow. and google.</li>
+<li><a href="http://www.scintilla.org/SciTE.html" rel="nofollow">
+SciTE
+</a>
+<sup style="font-size:9px">[4]</sup> easily works with many languages, cross-platform, opensource, condensed IDE that you can easily add anything at all too or quickly edit.</li>
+<li><a href="http://www.7-zip.org" rel="nofollow">
+7-zip
+</a><sup style="font-size:9px">[5]</sup></li>
+<li>Sometimes MS Paint when I'm looking at a whole bunch of char values o_O;;</li>
+<li>Whitespace remover + Code rebeautifier (many work well)</li>
+<li><a href="http://www.fltk.org" rel="nofollow">
+FLTK
+</a>
+<sup style="font-size:9px">[6]</sup> with FLUID. "Fast, light toolkit" for cross-platform GUI, FLUID for making a GUI quickly. C++ library.</li>
+<li>A separate partition or <em>external drive</em> for dev.</li>
+<li>Hexdecimal calculator, ASCII tables, other boring things.</li>
+<li>Printed version of [your language]'s quick-spec</li>
+<li><a href="http://www.gremedy.com/" rel="nofollow">
+gDebbuger
+</a>
+<sup style="font-size:9px">[7]</sup> for OpenGL / OpenCL dev, profiling and debugging</li>
+<li><strong>A whiteboard with multicolored markers and dry eraser</strong></li>
+<li>Collection of bitwise operations and tricks</li>
+<li>Code-friendly friends</li>
+<li>Good music playlists and streaming videos to watch on break</li>
+<li>Snacks, coffee and cigarette =( oh noes</li>
+</ul>
+  
+                [1] http://www.codeblocks.org<br/>
+                [2] http://www.codecutter.net/tools/quincy/<br/>
+                [3] http://www.sourceforge.net/<br/>
+                [4] http://www.scintilla.org/SciTE.html<br/>
+                [5] http://www.7-zip.org<br/>
+                [6] http://www.fltk.org<br/>
+                [7] http://www.gremedy.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">70</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-01-15 10:28:32]     
+                  Adam Hawes
+              </div>
+              <div class="answer">
+                <ul>
+<li>Vim - no matter how many IDEs companies make me try and use I still wind up cutting all the code in Vim and only using the IDE to manage the compilation.  Vim is very nice, very scriptable and a charm to use remotely.</li>
+<li>iTerm on Mac, Gnome-Terminal on Linux  Any terminal with tabs that lets me configure shift-left and shift-right to be next and previous tab.  The number of times that's helped me rapidly switch back and forward between two pieces of code or code and output to diagnose problems.  I am still looking for a decent Windows terminal app.</li>
+<li>Emacs - I used to be an Emacs boy but changed to Vim recently.  Matter of preference but all the same pros as Vim, different syntax and keyboard shortcuts.  Good to know both editors in case you get stuck with one of them.</li>
+<li>Redmine (<a href="http://redmine.org" rel="nofollow">http://redmine.org</a>) - I love this tool.  SVN/GIT/Bazzar/Mercurial integration, ticket tracker, wiki, workflow all rolled into one pretty tight tool.</li>
+<li>Decent Diff/Merge tool.  I was spoiled by the tool in ClearCase when for code review/merge.  I haven't found a tool quite as useable (or as ugly) since.</li>
+<li>Vim - can't stress it enough</li>
+<li>Good reference book for your language(s) of choice - no matter how many online resources there are I can guarantee that the Net will be down at 10 minutes to crunch time and you need to look up some obscure language feature in a hurry.</li>
+</ul>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">71</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-02-01 08:02:31]     
+                  unigogo
+              </div>
+              <div class="answer">
+                <p>The 1st step to design the web page is to design layout. The <a href="http://www.pagecolumn.com/" rel="nofollow">
+layout generators
+</a>
+<sup style="font-size:9px">[1]</sup> will save your time.</p>
+  
+                [1] http://www.pagecolumn.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">72</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-02-08 21:40:42]     
+                  tbone
+              </div>
+              <div class="answer">
+                <p>LLBLGen for code generation, it is brilliant.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">73</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-06-17 16:59:11]     
+                  Kevin Horgan
+              </div>
+              <div class="answer">
+                <p>Source Control    : Subversion</p>
+<p>Bug tracking      : FogBugz</p>
+<p>Text Editing      : Ultra Edit and vi </p>
+<p>SQL Editor        : Aqua Data Studio</p>
+<p>Cocoa/ Objective C : XCode</p>
+<p>FTP               : FileZilla</p>
+<p>Browser           : Safari / Opera</p>
+<p>...and a decent spreadsheet package (Excel) to match and concatenate delimited
+lists of data together and parse as SQL commands...:)</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">74</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-16 03:51:06]     
+                  Blinky
+              </div>
+              <div class="answer">
+                <p>Cygwin or, if in Vista Ultimate, the Unix Subsystem.  Mostly for the purpose of having access to grep.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">75</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-16 03:56:18]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>VIM, putty, firebug, firefox.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">76</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-17 06:43:56]     
+                  Dara Kong
+              </div>
+              <div class="answer">
+                <p>Here's what I use daily for console development on a windows machine.</p>
+<p>Source Control: TortoiseSVN</p>
+<p>IDE: Visual Studio 2005</p>
+<p>IDE Addin: Visual Assist X</p>
+<p>Diff/Merge: Beyond Compare</p>
+<p>Wiki: Trac</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">77</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-18 14:35:30]     
+                  Bergeroy
+              </div>
+              <div class="answer">
+                <p>For PHP development, I use <a href="http://www.nusphere.com/products/phped.htm" rel="nofollow">
+NuSphere PhpED
+</a>
+<sup style="font-size:9px">[1]</sup>.</p>
+  
+                [1] http://www.nusphere.com/products/phped.htm<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">78</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-18 14:40:43]     
+                  Steve Moyer
+              </div>
+              <div class="answer">
+                <p>An automated build and test environment ... For Java, I use</p>
+<ul>
+<li>Subversion</li>
+<li>Maven</li>
+<li>Continuum</li>
+<li>Archiva</li>
+<li>JUnit</li>
+<li>JWebUnit</li>
+<li>JUnitPerf</li>
+</ul>
+<p>Everything is built, deployed and tested upon every checkin!</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">79</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-20 04:56:07]     
+                  Andy Lester
+              </div>
+              <div class="answer">
+                <ul>
+<li><a href="http://www.vim.org" rel="nofollow">
+vim
+</a>
+<sup style="font-size:9px">[1]</sup> and my .vimrc</li>
+<li><a href="http://petdance.com/ack/" rel="nofollow">
+ack
+</a>
+<sup style="font-size:9px">[2]</sup>, a better grep for programmers</li>
+<li>Subversion, although we're using Bazaar on Drizzle and I like it plenty</li>
+<li>A well-stocked <a href="http://www.aim.com/" rel="nofollow">
+AIM
+</a>
+<sup style="font-size:9px">[3]</sup> buddy list</li>
+</ul>
+  
+                [1] http://www.vim.org<br/>
+                [2] http://petdance.com/ack/<br/>
+                [3] http://www.aim.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">80</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-22 01:12:24]     
+                  Sam Stokes
+              </div>
+              <div class="answer">
+                <ul>
+<li>multiple (aka virtual) desktops - truly indispensable for me.  I like to keep a lot of windows open, and find it much easier to spatially organise them than have to Alt-Tab through fifteen things to get to a particular window.  Most *nix WMs do these; for Windows, others have pointed out <a href="http://virtuawin.sourceforge.net/" rel="nofollow">
+VirtuaWin
+</a>
+<sup style="font-size:9px">[1]</sup>, which is lightweight, configurable and works pretty well.</li>
+<li>vim/gvim</li>
+<li>bash - achieve useful tasks that no GUI can do with a (mildly cryptic) one-line shell script</li>
+<li>sed, awk, grep, find et al - be as expressive in my programming environment as I want to be in my programs</li>
+</ul>
+  
+                [1] http://virtuawin.sourceforge.net/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">81</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-17 12:13:48]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>2 spring to mind for me...<a href="http://www.pspad.com/" rel="nofollow">
+PSPad
+</a>
+<sup style="font-size:9px">[1]</sup> for editing and <a href="http://www.gaijin.at/dldevproject.php" rel="nofollow">
+DevProject Manager
+</a>
+<sup style="font-size:9px">[2]</sup> for storing code snippets</p>
+  
+                [1] http://www.pspad.com/<br/>
+                [2] http://www.gaijin.at/dldevproject.php<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">82</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-24 21:54:53]     
+                  torial
+              </div>
+              <div class="answer">
+                <p>Agent Ransack is a tool I use for searching many files for contents in Windows.  It is fast, and powerful.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">83</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-25 11:40:34]     
+                  Keltia
+              </div>
+              <div class="answer">
+                <p>I'm mostly developing on FreeBSD but use Mac OS X as my main desktop so I use <a href="http://macromates.com/" rel="nofollow" title="TextMate">
+TextMate
+</a>
+<sup style="font-size:9px">[1]</sup> for text editing and various UNIX utilities coming from <a href="http://macports.org" rel="nofollow" title="MacPorts">
+MacPorts
+</a>
+<sup style="font-size:9px">[2]</sup>.  I use <a href="http://www.vmware.com/products/fusion/" rel="nofollow" title="Fusion">
+Fusion
+</a>
+<sup style="font-size:9px">[3]</sup> for creating &amp; managing FreeBSD VMs.  My version control system of choice is <a href="http://selenic.com/mercurial/" rel="nofollow" title="Mercurial">
+Mercurial
+</a>
+<sup style="font-size:9px">[4]</sup>, a decentralized vcs.  Scripting is done in <a href="http://ruby-lang.org/" rel="nofollow" title="Ruby">
+Ruby
+</a>
+<sup style="font-size:9px">[5]</sup>.</p>
+<p>Being a Ruby fan, I'd recommend <a href="http://redmine.org/" rel="nofollow" title="Redmine">
+Redmine
+</a>
+<sup style="font-size:9px">[6]</sup> for bug tracking/releasing/forge.  It is evolving quite rapidly and has the same feature set as Trac.</p>
+  
+                [1] http://macromates.com/<br/>
+                [2] http://macports.org<br/>
+                [3] http://www.vmware.com/products/fusion/<br/>
+                [4] http://selenic.com/mercurial/<br/>
+                [5] http://ruby-lang.org/<br/>
+                [6] http://redmine.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">84</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-25 12:22:03]     
+                  Dror Helper
+              </div>
+              <div class="answer">
+                <p>When Developing software for Linux I discovered something shocking: There is no such thing as "Essential" tool. you can write code using simple text editor and debug the program by writing logs. And your understanding of the program would probably increase.</p>
+<p>However since most of use need to maximize our output in order to create value to our companies every tool that its cost is less then the time it saves should be considered <em>essential</em>.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">85</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-01-14 05:18:55]     
+                  bo
+              </div>
+              <div class="answer">
+                <p>Beyondcompare<br />
+EditPlus<br />
+Firefox<br />
+Miranda IM<br />
+MyBase<br />
+EverNote  </p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">86</div>
+              <div class="answer-details">
+                  [0]
+                  [2009-01-15 09:49:08]     
+                  Sam
+              </div>
+              <div class="answer">
+                <p>My current development tool list:
+
+<li>Visual studio 2008</li>
+<li>Resharper</li>
+<li>Powershell</li>
+<li>SQL 2005 </li>
+<li>MYSQL</li>
+<li>Firefox + Firebug</li>
+<li>Google</li></p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">87</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-12-15 02:54:59]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>UltraEdit for ASCII editing</p>
+<p>MyEclipseIDE, VS2005</p>
+<p>JUnit, Ant, Subversion &amp; TortoiseSVN</p>
+<p>Sun Glassfish Server</p>
+<p>MySQL</p>
+<p>PuTTY, FileZilla</p>
+<p>Newsgator for RSS reeds</p>
+<p>Fiddler for HTTP debugging</p>
+<p>I also use Sun's VirtualBox for having different developer setups (java, .NET) without cramming everything into one.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">88</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-11-30 04:52:24]     
+                  Software Monkey
+              </div>
+              <div class="answer">
+                <p>Shameless self plug: I also find my own <a href="http://www.SoftwareMonkey.org/Program" rel="nofollow">
+RefactorBuddy
+</a>
+<sup style="font-size:9px">[1]</sup> invaluable.</p>
+<p>And without reservation, <a href="http://proguard.sourceforge.net" rel="nofollow">
+ProGuard
+</a>
+<sup style="font-size:9px">[2]</sup> Java code  obfuscator/shrinker.</p>
+  
+                [1] http://www.SoftwareMonkey.org/Program<br/>
+                [2] http://proguard.sourceforge.net<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">89</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-26 16:23:31]     
+                  Marcin
+              </div>
+              <div class="answer">
+                <p>As I do all my programming these days as just noodling around, I only use Squeak for stuff, and if I need to achieve anything it will usually involve cygwin commandline tools or Xemacs for text processing.</p>
+<p>A sensible alternative for all of those might be something like bigloo + xemacs.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">90</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-25 15:03:15]     
+                  FrankS
+              </div>
+              <div class="answer">
+                <p>Best Regular Expression Editor I know for Windows is <a href="http://www.ultrapico.com/Expresso.htm" rel="nofollow">
+Expresso
+</a>
+<sup style="font-size:9px">[1]</sup>.
+It has a designer and even more important, an automated analyzer, that can easily be used for documentation of complex regexp snytax.</p>
+<p>For merging I also use <a href="http://www.sourcegear.com/diffmerge/" rel="nofollow">
+SourceGear DiffMerge
+</a>
+<sup style="font-size:9px">[2]</sup>. And the rest of the tools includes a good Text Editor and a good IDE.</p>
+  
+                [1] http://www.ultrapico.com/Expresso.htm<br/>
+                [2] http://www.sourcegear.com/diffmerge/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">91</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-10-10 12:33:45]     
+                  thijs
+              </div>
+              <div class="answer">
+                <p>I'd say something like VMWare or Virtual PC would be a good start. Although it isn't as fast as raw hardware you'll gain time when you want to start clean or when you want to try out something new.
+Also switching between projects with different tools (versions of visual studio, source control, frameworks, factories &amp; generators) is much faster!</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">92</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-10-06 12:30:42]     
+                  Caroline Orr
+              </div>
+              <div class="answer">
+                <p>I'm very happy with Subversion + Trac for integrated source code control, repository browser, issue tracker and wiki. I run it on an Apache web server which also provides the authentication mechanism. Trac is very easy to set up and use.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">93</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-14 19:49:36]     
+                  mabwi
+              </div>
+              <div class="answer">
+                <p>MySQL Workbench is pretty amazing.  It's a way to set up your tables/and stuff visually, produce pretty charts to tape to your wall, and it has a nice export tool, for full create scripts, and will also read previous exports to create an ALTER script based on Diffs.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">94</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-27 20:21:17]     
+                  John Channing
+              </div>
+              <div class="answer">
+                <p>I am a huge fan of <a href="http://www.microsoft.com/windowsserver2003/technologies/management/powershell/default.mspx" rel="nofollow">
+Powershell
+</a>
+<sup style="font-size:9px">[1]</sup>.  Don't be fooled by the administrator tools credentials, if you do development in .Net or want a OO scripting language on your Windows box that puts the UNIX equivalents to shame, this is it.  I also use <a href="http://www.vim.org/" rel="nofollow">
+GVim
+</a>
+<sup style="font-size:9px">[2]</sup> and <a href="http://notepad-plus.sourceforge.net/uk/site.htm" rel="nofollow">
+Notepad++
+</a>
+<sup style="font-size:9px">[3]</sup> on a daily basis.</p>
+  
+                [1] http://www.microsoft.com/windowsserver2003/technologies/management/powershell/default.mspx<br/>
+                [2] http://www.vim.org/<br/>
+                [3] http://notepad-plus.sourceforge.net/uk/site.htm<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">95</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-05 13:08:57]     
+                  Bernard
+              </div>
+              <div class="answer">
+                <p>I personally just bought a copy of <a href="http://www.slickedit.com/" rel="nofollow">
+SlickEdit
+</a>
+<sup style="font-size:9px">[1]</sup>. Great editor (vim emulation + integrated IDE features = yes please!), expensive, can be kinda clunky. <a href="http://www.scootersoftware.com/" rel="nofollow">
+Beyond Compare
+</a>
+<sup style="font-size:9px">[2]</sup> is a great diff tool. As far as version control, I like <a href="http://git.or.cz/" rel="nofollow">
+Git
+</a>
+<sup style="font-size:9px">[3]</sup>, but <a href="http://subversion.tigris.org/" rel="nofollow">
+SVN
+</a>
+<sup style="font-size:9px">[4]</sup> is great and widespread. I need a good shell, and <a href="http://www.fishshell.org/" rel="nofollow">
+fish
+</a>
+<sup style="font-size:9px">[5]</sup> is my favourite. </p>  
+                [1] http://www.slickedit.com/<br/>
+                [2] http://www.scootersoftware.com/<br/>
+                [3] http://git.or.cz/<br/>
+                [4] http://subversion.tigris.org/<br/>
+                [5] http://www.fishshell.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">96</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-06 14:01:09]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>File/Folder comparison: <a href="http://www.scootersoftware.com/" rel="nofollow">
+Beyond Compare
+</a>
+<sup style="font-size:9px">[1]</sup> (not free).  I used WinMerge years ago but it didn't have folder comparisons at the time.</p>  
+                [1] http://www.scootersoftware.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">97</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-06 14:03:33]     
+                  Dan
+              </div>
+              <div class="answer">
+                <p>If you are using Visual studio, you have to get <strong>Reshaper</strong></p>
+<p>Visual studio is essentially an incomplete product without it. I cannont stess this enough.</p>
+<p><a href="http://www.jetbrains.com/resharper/" rel="nofollow">http://www.jetbrains.com/resharper/</a></p>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">98</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-06 14:10:38]     
+                  graham.reeds
+              </div>
+              <div class="answer">
+                <p>Want:
+Visual Studio 2005
+Subversion
+NSIS</p>
+<p>Have:
+Visual C++ 6
+PVCS 5
+InstallShield 5.5</p>
+<p>Yes, the average age of my development tools is 14 years...</p>  
+                <br/>
+              </div>
+              <div class="comment">
+              You poor bastard. - <b> TraumaPony</b>     
+              </div>
+              <div class="answer-pagenumber">99</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-06 14:22:58]     
+                  Matthew Ruston
+              </div>
+              <div class="answer">
+                <p>IDE: <a href="http://www.oracle.com/technology/products/jdev/index.html" rel="nofollow">
+Oracle JDeveloper
+</a>
+<sup style="font-size:9px">[1]</sup> </p>
+<p>It was essentially forced upon me by my job, but now I adore it. It's my first stop for Java/JSP/JSF work (it can also do PHP with a plugin). The zero-configuration embedded application server is also quite awesome.</p>
+<p>Also, another vote for <a href="http://www.scootersoftware.com/" rel="nofollow">
+Beyond Compare
+</a>
+<sup style="font-size:9px">[2]</sup>. I just discovered it a few weeks ago when Jeff Atwood blogged about it.</p>  
+                [1] http://www.oracle.com/technology/products/jdev/index.html<br/>
+                [2] http://www.scootersoftware.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">100</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-09 18:47:20]     
+                  Gerald Bortis
+              </div>
+              <div class="answer">
+                <p><a href="http://winmerge.org/" rel="nofollow">
+WinMerge
+</a>
+<sup style="font-size:9px">[1]</sup> for diff/merge and <a href="http://tortoisesvn.tigris.org/" rel="nofollow">
+TortoiseSVN
+</a>
+<sup style="font-size:9px">[2]</sup> for CM are the first things I install after Eclipse.</p>  
+                [1] http://winmerge.org/<br/>
+                [2] http://tortoisesvn.tigris.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">101</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-05 12:45:49]     
+                  saniul
+              </div>
+              <div class="answer">
+                <p><a href="http://en.wikipedia.org/wiki/Bash" rel="nofollow">
+Bash
+</a>
+<sup style="font-size:9px">[1]</sup>, <a href="http://en.wikipedia.org/wiki/Sed" rel="nofollow">
+sed
+</a>
+<sup style="font-size:9px">[2]</sup>, <a href="http://en.wikipedia.org/wiki/Awk" rel="nofollow">
+awk
+</a>
+<sup style="font-size:9px">[3]</sup> for little shell scripting</p>
+<ul>
+<li>Visual Studio + Expression Studio - .NET development and design on Windows</li>
+<li>Monodevelop - .NET on Linux</li>
+<li>Eclipse - Java, Crossplatform</li>
+</ul>  
+                [1] http://en.wikipedia.org/wiki/Bash<br/>
+                [2] http://en.wikipedia.org/wiki/Sed<br/>
+                [3] http://en.wikipedia.org/wiki/Awk<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">102</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-05 12:46:41]     
+                  Ronnie
+              </div>
+              <div class="answer">
+                <p>Beyond Compare is essential for comparisons of files, folders local or remote (ftp). It is awesome!</p>
+<p>Check it out at <a href="http://www.scootersoftware.com/" rel="nofollow">http://www.scootersoftware.com/</a></p>  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">103</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-15 14:20:25]     
+                  Cory Engebretson
+              </div>
+              <div class="answer">
+                <p>For a good list of available tools, check out <a href="http://www.hanselman.com/blog/ScottHanselmans2007UltimateDeveloperAndPowerUsersToolListForWindows.aspx" rel="nofollow">
+Scott Hanselman's recommendations.
+</a><sup style="font-size:9px">[1]</sup></p>
+<p>In practice I don't see how you could really use all of those tools well. Here is a pared down list of what I use in my 2 separate development environments since I split my time roughly in half between C# and Python.  About half of these tools are free.</p>
+<ul>
+<li>SVN (Tortoise, anksvn, subvert for Eclipse.  Die StarTeam, die!)</li>
+<li>GridMode (cut down on window positioning time, long live the keyboard!)</li>
+<li>TaskSwitchXP Pro (no Vista for me)</li>
+<li>Cygwin (Used mainly for grep and scp)</li>
+<li>ReflectionX</li>
+<li>GVIM (yes, I'm a vi guy)</li>
+<li>Excel (todo lists, occasional code generation)</li>
+<li>Outlook + SpamBayes + Lookout (makes Outlook a little less painful)</li>
+<li>Toad for Oracle (Nice tool, but I wish the ER diagrams were more display friendly)</li>
+<li><p>Visio (Used for ER diagrams mainly, but I wouldn't recommend it.)</p></li>
+<li><p>Eclipse + Pydev + viPlugin (I'm hooked on debugging in an IDE)</p></li>
+<li><p>Ant for automated builds and remote deployments</p></li>
+<li><p>Visual Studio 2008 + viEmu</p></li>
+</ul>
+<p>Missing Tools </p>
+<ul>
+<li>Bug/Issue Tracking DB (I can't currently justify the overhead for myself)</li>
+</ul>
+  
+                [1] http://www.hanselman.com/blog/ScottHanselmans2007UltimateDeveloperAndPowerUsersToolListForWindows.aspx<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">104</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-15 14:42:34]     
+                  sleep-er
+              </div>
+              <div class="answer">
+                <p>kdiff3 - works in linux and windows</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">105</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-15 14:43:30]     
+                  sleep-er
+              </div>
+              <div class="answer">
+                <p>trac - a great way to view your svn tree + wiki + bug tracking</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">106</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-15 15:14:45]     
+                  community_owned
+              </div>
+              <div class="answer">
+                <p>Windows XP and later:</p>
+<p>Programmer's Editor:</p>
+<p>On Windows XP and later, I recommend TextPad.  It is an excellent low-cost editor, which supports multiple language configurations and good but limited integration with 3rd party tools</p>
+<p>I also use UltraEdit-32 from IDM Computer Solutions.  It is not as good for multi-language development, but it supports editing files accessible with FTP.</p>
+<p>UNIX/Linux remote sessions: puTTY is an excellent free program for this.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">107</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-13 04:04:42]     
+                  Crippeoblade
+              </div>
+              <div class="answer">
+                <p>rssbandit - rss reader</p>
+<p><a href="http://www.teamcti.com/trayit/trayit.htm" rel="nofollow">
+trayit
+</a>
+<sup style="font-size:9px">[1]</sup> - for minimizing windows to tray. Hate having too many on taskbar</p>
+  
+                [1] http://www.teamcti.com/trayit/trayit.htm<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">108</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-13 06:17:22]     
+                  khebbie
+              </div>
+              <div class="answer">
+                <p>For .Net:</p>
+<p><a href="http://www.linqpad.net/" rel="nofollow">http://www.linqpad.net/</a></p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">109</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-04 01:17:49]     
+                  Frank
+              </div>
+              <div class="answer">
+                <p>I am a big fan of <a href="http://www.zabkat.com/" rel="nofollow">
+xplorer2
+</a>
+<sup style="font-size:9px">[1]</sup>, it makes navigating the file system more programmer friendly. I am sure everyone will agree that using the search capability in Windows XP is infuriating; Xplorer2 allows you to search across directories and inside files, although not quite grep it is very useful. It comes with a nice lightweight replacement of notepad.</p>
+  
+                [1] http://www.zabkat.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">110</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-07 01:00:03]     
+                  Tomas Kohl
+              </div>
+              <div class="answer">
+                <p>Eclipse PDT for PHP development on Linux.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">111</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-07 02:03:07]     
+                  Robert
+              </div>
+              <div class="answer">
+                <p>Of the tools I have seen on the list that haven't been mentioned one of my favorites is "Dave's Quick Search Deskbar" which can be found at <a href="http://dqsd.net/" rel="nofollow">http://dqsd.net/</a> it's ability to use switched shortcuts for things like MSDN and the MS Knowledgebase Q articles are outstanding. There are probably 30 of the shortcuts I use constantly when programming and well over 200 odd searches ranging from FedEx Tracking number search.</p>
+<p>For quick and dirty UI prototypes I have found I am using the Pencil Firefox add on which is a handy SVG Image editor. There are enough stock UI widgets built in I can make an interface in 3 or 4 minutes to send off as a .PNG for a decent approximation. Pencil can be found at <a href="http://www.evolus.vn/Pencil/" rel="nofollow">
+Pencil Homepage
+</a><sup style="font-size:9px">[1]</sup></p>
+  
+                [1] http://www.evolus.vn/Pencil/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">112</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-08 06:24:30]     
+                  Geir-Tore Lindsve
+              </div>
+              <div class="answer">
+                <p>In addition to many of the above, I'm a big fan of <a href="http://www.maxivista.com/" rel="nofollow" title="MaxiVista">
+MaxiVista
+</a>
+<sup style="font-size:9px">[1]</sup>. I use it with two laptops each with an external monitor, and uses it in two scenarios:
+1. Extending the screen so that I can use four monitors simultaneously, or
+2. Control the secondary computer with the same keyboard/mouse as I use on my primary computer just by moving the cursor over to the next monitor.</p>
+  
+                [1] http://www.maxivista.com/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">113</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-08 06:37:53]     
+                  Sara Chipps
+              </div>
+              <div class="answer">
+                <p>REsharper
+Paint.NET
+Fiddler
+Notepad++</p>
+<p>are my main goto's</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">114</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-09 13:48:23]     
+                  Stradas
+              </div>
+              <div class="answer">
+                <p>While programming I use <strong>snagit</strong> and <strong>evernote</strong>. </p>
+<p><a href="http://www.techsmith.com/" rel="nofollow">
+Snagit
+</a>
+<sup style="font-size:9px">[1]</sup> is great for screen prints.  You can set it up to hot-key captures into a stack of screen captures with a name that counts up.  I like to use them to keep a chronology of runs of some of my output.  (Techsmith also makes Camtasia studio. A must have for demos.) </p>
+<p><a href="http://www.evernote.com" rel="nofollow">
+Evernote
+</a>
+<sup style="font-size:9px">[2]</sup> is a great notepad program that creates a continuous tape of just about anything.  I paste code into it all the time.  It has a nice little search filter.  It is pretty cool to grab a copy of the website you are developing each time you change it.  Great way to show changes without much work.</p>
+  
+                [1] http://www.techsmith.com/<br/>
+                [2] http://www.evernote.com<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">115</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-09 13:54:55]     
+                  Nick Fortescue
+              </div>
+              <div class="answer">
+                <p>I'd second IntelliJ IDEA as a Java IDE. I keep on trying others but going back to IDEA. Built in refactoring, almost psychic code completion, good debugging, good integration with almost every popular tool, and usability which has clearly been thought about.</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">116</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-11 01:04:31]     
+                  stevechol
+              </div>
+              <div class="answer">
+                <p>For the Mac:</p>
+<p>Textmate</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">117</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-09-11 01:21:00]     
+                  sherbang
+              </div>
+              <div class="answer">
+                <p><a href="http://www.vim.org/" rel="nofollow">
+GVim
+</a>
+<sup style="font-size:9px">[1]</sup> - I've tried to use other editors and larger IDEs and such, and keep coming back to good old gvim.</p>
+  
+                [1] http://www.vim.org/<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">118</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-28 13:06:07]     
+                  Thomas Owens
+              </div>
+              <div class="answer">
+                <p>Environments: Eclipse (C/C++, Java, PHP, Ruby, Rails), EiffelStudio (Eiffel), Visual Studio (.NET), Expression Studio (.NET design)</p>
+<p>Text Editors: jEdit</p>
+<p>Shells: Cygwin, PowerShell, Unix command line tools for Windows</p>
+<p>Compilers: MinGW (Windows, C/C++)</p>
+<p>Version Control: TortoiseSVN (SVN), TortoiseCVS (CVS)</p>
+<p>Mathematics: R (statistics), Octave, Maxima, Singular CAS (still comparing the functionality of the last 3...I'll probably choose 1)</p>
+<p>Art: GIMP, Inkscape (Scalable Vector Graphics)</p>
+  
+                <br/>
+              </div>
+              <div class="answer-pagenumber">119</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-28 13:32:18]     
+                  Adam Haile
+              </div>
+              <div class="answer">
+                <p><a href="http://www.slickedit.com/content/view/441" rel="nofollow">
+Slick Edit Gadgets
+</a>
+<sup style="font-size:9px">[1]</sup> are a great addon to VS...I particularly like the line count.  And they are free!  The full versions I nice too, but may not be worth the cost for everyone.</p>
+<p><a href="http://www.codeplex.com/VSWindowManager" rel="nofollow">
+VSWindowManager
+</a>
+<sup style="font-size:9px">[2]</sup> is a great tool for keeping window "Profiles" in Visual Studio.  I use it all the time for switching between full window text editing and the usual window with Solution Explorer, Errors, Output, etc.</p>
+<p><a href="http://wwww.visualsvn.com" rel="nofollow">
+VisualSVN
+</a>
+<sup style="font-size:9px">[3]</sup> For VS Subversion integration...if you use VS <em>and</em> work in a subversion environment, this is hands down the best $50 you can spend.  The time and sanity saved is worth every penny.  I even bought it for work myself because they were too cheap to get it for me...I like it that much.</p>
+  
+                [1] http://www.slickedit.com/content/view/441<br/>
+                [2] http://www.codeplex.com/VSWindowManager<br/>
+                [3] http://wwww.visualsvn.com<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">120</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-28 14:20:29]     
+                  JosephStyons
+              </div>
+              <div class="answer">
+                <p>There are many, but there are some that I find myself installing before I even get started:</p>
+<p>I have found <a href="http://www.copernic.com/en/products/agent/download.html" rel="nofollow">
+Copernic
+</a>
+<sup style="font-size:9px">[1]</sup> to be much better than Windows Live Search, even under Vista.</p>
+<p>If you have > 1 monitor, then <a href="http://www.realtimesoft.com/ultramon/download.asp" rel="nofollow">
+Ultramon
+</a>
+<sup style="font-size:9px">[2]</sup> is indispensable.</p>
+<p>In Firefox, <a href="http://www.mousegestures.org/index.html" rel="nofollow">
+Mouse Gestures
+</a>
+<sup style="font-size:9px">[3]</sup>.</p>
+  
+                [1] http://www.copernic.com/en/products/agent/download.html<br/>
+                [2] http://www.realtimesoft.com/ultramon/download.asp<br/>
+                [3] http://www.mousegestures.org/index.html<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">121</div>
+              <div class="answer-details">
+                  [0]
+                  [2008-08-28 14:22:06]     
+                  JosephStyons
+              </div>
+              <div class="answer">
+                <p>There are many, but there are some that I find myself installing before I even get started:</p>
+<p>I have found <a href="http://www.copernic.com/en/products/agent/download.html" rel="nofollow">
+Copernic
+</a>
+<sup style="font-size:9px">[1]</sup> to be much better than Windows Live Search, even under Vista.</p>
+<p>If you have > 1 monitor, then <a href="http://www.realtimesoft.com/ultramon/download.asp" rel="nofollow">
+Ultramon
+</a>
+<sup style="font-size:9px">[2]</sup> is indispensable.</p>
+<p>In Firefox, <a href="http://www.mousegestures.org/index.html" rel="nofollow">
+Mouse Gestures
+</a>
+<sup style="font-size:9px">[3]</sup>.</p>
+  
+                [1] http://www.copernic.com/en/products/agent/download.html<br/>
+                [2] http://www.realtimesoft.com/ultramon/download.asp<br/>
+                [3] http://www.mousegestures.org/index.html<br/>
+                <br/>
+              </div>
+              <div class="answer-pagenumber">122</div>
+      </div>
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-4276204-5");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
+            <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+        <script type="text/javascript">clicky.init(250663);</script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>
+  </body>
+</html>

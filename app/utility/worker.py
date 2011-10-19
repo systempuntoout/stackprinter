@@ -37,7 +37,14 @@ def deferred_store_print_statistics(question_id, service, title, tags, deleted):
         dbquestion.store_printed_question(question_id, service, title, tags, deleted)
     except Exception, exception:
         logging.exception("db error trying to store stats") 
-        
+
+def deferred_static_counters(question_id, service):
+    try:
+        dbcounter.increment()
+        dbquestion.increment_printed_question_counter(question_id, service)
+    except Exception, exception:
+        logging.exception("db error trying to store stats")
+      
 def deferred_normalize_printed_question():
     for printed_question in dbquestion.PrintedQuestionModel.all():
         pass

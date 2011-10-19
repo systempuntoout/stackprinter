@@ -153,7 +153,8 @@ def memcached(key, cache_time, key_suffix_calc_func = None, namespace = None, by
                 value = memcache.get(key_with_suffix, namespace)
                 if not value:
                     value = func(*args, **kw)
-                    memcache.set(key_with_suffix, value, cache_time, namespace)
+                    if value:
+                        memcache.set(key_with_suffix, value, cache_time, namespace)
             return value            
         return cached_func
     return wrap

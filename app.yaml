@@ -5,6 +5,7 @@ api_version: 1
 
 builtins:
 - datastore_admin: on
+- appstats: off
 
 inbound_services:
 - warmup
@@ -35,8 +36,8 @@ handlers:
   static_dir: app/static/images
 - url: /docs
   static_dir: app/static/docs
-- url: /deleted
-  static_dir: app/static/deleted
+- url: /questions
+  static_dir: app/static/questions
 - url: /_ah/queue/deferred
   script: $PYTHON_LIB/google/appengine/ext/deferred/handler.py
   login: admin

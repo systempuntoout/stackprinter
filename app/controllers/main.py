@@ -2,6 +2,7 @@ import os
 import logging, re
 
 from google.appengine.ext import ereporter
+from google.appengine.ext import deferred
 
 import web
 from app.core.stackprinterdownloader import StackExchangeDownloader
@@ -14,7 +15,9 @@ import app.db.counter as dbcounter
 import app.db.question as dbquestion
 import app.db.sitemap as dbsitemap
 import app.utility.utils as utils
+import app.utility.worker as worker
 from app.utility.utils import cachepage
+from app.config import urls
 
 
 ereporter.register_logger()
@@ -37,7 +40,7 @@ class Export:
     def POST(self):
         question_id = web.input(question = None)['question']
         service = web.input(service = None)['service']
-        return web.redirect('/export?question=%s&service=%s' % (question_id, service))
+        return web.seeother('/export?question=%s&service=%s' % (question_id, service))
    
     def GET(self):
         try:
@@ -52,6 +55,11 @@ class Export:
             #Check for malformed request
             if not service or not question_id or not question_id.isdigit():
                 return Index().GET()
+            
+            #Check for static questions
+            if "%s_%s" % (service,question_id) in urls.static_questions:
+                deferred.defer(worker.deferred_static_counters, question_id, service)
+                return web.redirect(urls.static_questions["%s_%s" % (service,question_id)])
             
             se_downloader = StackExchangeDownloader(service)
             
@@ -166,7 +174,6 @@ class TopPrinted:
     """
     Show a list of top printed questions 
     """
-    @cachepage()
     def GET(self):
         try:
             result = []
