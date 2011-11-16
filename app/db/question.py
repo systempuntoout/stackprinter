@@ -89,6 +89,7 @@ def get_top_printed_questions(page):
             memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
         else:
             #Without cursors return nothing, offset consumes too much Datastore reads
+            memcache.delete("%s:%s" % ('get_top_printed_questions', int(page)-1))
             fetched_questions = []
     
     return fetched_questions
