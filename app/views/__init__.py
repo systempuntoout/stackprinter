@@ -210,8 +210,14 @@ def export():
         yield '', join_('                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
         yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
         if service in TEX_ENABLED_SERVICES:
-            yield '', join_('                ', '<script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js">\n')
-            yield '', join_('                ', '        MathJax.Hub.Config({extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/noUndefined.js", "TeX/AMSsymbols.js"],"HTML-CSS": { preferredFont: "TeX", imageFont: null, availableFonts: ["STIX","TeX"], webFont: "TeX" },jax: ["input/TeX","output/HTML-CSS"],TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } }});MathJax.Hub.Startup.onload();\n')
+            yield '', join_('                ', '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">\n')
+            yield '', join_('                ', '\n')
+            yield '', join_('                ', '        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },\n')
+            yield '', join_('                ', '                         tex2jax: { inlineMath: [ ["', '$', '", "', '$', '"], ["\\\\\\\\(","\\\\\\\\)"] ], displayMath: [ ["', '$', '$', '","', '$', '$', '"], ["\\\\[", "\\\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },\n')
+            yield '', join_('                ', '                         TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },\n')
+            yield '', join_('                ', '                         messageStyle: "none"\n')
+            yield '', join_('                ', '        });\n')
+            yield '', join_('                ', 'MathJax.Hub.Startup.onload();\n')
             yield '', join_('                ', '</script>\n')
             if printer:
                 yield '', join_('                ', '<script type="text/javascript">\n')
