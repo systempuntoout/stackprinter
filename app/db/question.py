@@ -73,25 +73,26 @@ def delete_printed_question(question_id, service):
         return True
     else:
         return "None"
-
-@memcached('get_top_printed_questions', 3600*24*10, lambda page : page)        
-def get_top_printed_questions(page):
-    query = PrintedQuestionModel.all().order('-counter')
     
-    bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)-1))
-    if bookmark:
-        query.with_cursor(start_cursor = bookmark)
-        fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
-        memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
-    else:
-        if page == 1:
+def get_top_printed_questions(page):
+    fetched_questions = memcache.get('get_top_printed_questions')
+    bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)))
+    if not fetched_questions and not bookmark:
+        query = PrintedQuestionModel.all().order('-counter')
+        bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)-1))
+        if bookmark:
+            query.with_cursor(start_cursor = bookmark)
             fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
             memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
         else:
-            #Without cursors return nothing, offset consumes too much Datastore reads
-            memcache.delete("%s:%s" % ('get_top_printed_questions', int(page)-1))
-            fetched_questions = []
-    
+            if page == 1:
+                fetched_questions = query.fetch(TOP_PRINTED_PAGINATION_SIZE)
+                memcache.set("%s:%s" % ('get_top_printed_questions_cursor', page), query.cursor())
+            else:
+                #Without cursors return nothing, offset consumes too much Datastore reads
+                fetched_questions = []
+        if fetched_questions:
+            memcache.set('get_top_printed_questions',fetched_questions)
     return fetched_questions
 
 @memcached('get_top_printed_count', 3600*24*10)
