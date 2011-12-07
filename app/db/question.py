@@ -93,6 +93,8 @@ def get_top_printed_questions(page):
                 fetched_questions = []
         if fetched_questions:
             memcache.set('get_top_printed_questions',fetched_questions)
+    if fetched_questions is None:
+        fetched_questions = []
     return fetched_questions
 
 @memcached('get_top_printed_count', 3600*24*10)
