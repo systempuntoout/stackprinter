@@ -75,7 +75,7 @@ def delete_printed_question(question_id, service):
         return "None"
     
 def get_top_printed_questions(page):
-    fetched_questions = memcache.get('get_top_printed_questions')
+    fetched_questions = memcache.get('get_top_printed_questions:%s' % int(page))
     bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)))
     if not fetched_questions and not bookmark:
         query = PrintedQuestionModel.all().order('-counter')
@@ -92,7 +92,7 @@ def get_top_printed_questions(page):
                 #Without cursors return nothing, offset consumes too much Datastore reads
                 fetched_questions = []
         if fetched_questions:
-            memcache.set('get_top_printed_questions',fetched_questions)
+            memcache.set('get_top_printed_questions:%s' % int(page),fetched_questions)
     if fetched_questions is None:
         fetched_questions = []
     return fetched_questions
