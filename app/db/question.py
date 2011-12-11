@@ -77,7 +77,7 @@ def delete_printed_question(question_id, service):
 def get_top_printed_questions(page):
     fetched_questions = memcache.get('get_top_printed_questions:%s' % int(page))
     bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)))
-    if not fetched_questions and not bookmark:
+    if not fetched_questions or not bookmark:
         query = PrintedQuestionModel.all().order('-counter')
         bookmark = memcache.get("%s:%s" % ('get_top_printed_questions_cursor', int(page)-1))
         if bookmark:
@@ -93,8 +93,6 @@ def get_top_printed_questions(page):
                 fetched_questions = []
         if fetched_questions:
             memcache.set('get_top_printed_questions:%s' % int(page),fetched_questions)
-    if fetched_questions is None:
-        fetched_questions = []
     return fetched_questions
 
 @memcached('get_top_printed_count', 3600*24*10)
