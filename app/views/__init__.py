@@ -45,7 +45,7 @@ def about():
         yield '', join_('                    Top voted questions list<br/><br/>\n')
         yield '', join_('                  <b>Info:</b><br/>\n')
         yield '', join_('                  <a target="_new" href="/docs/changelog.txt">Changelog</a>/<a target="_new" href="/docs/todo.txt">ToDo</a>/<a target="_new" href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Stack Apps</a><br/>\n')
-        yield '', join_('                  <a target="_new" href="http://github.com/systempuntoout/stackprinter"/>Source code on Github</a><br/>\n')
+        yield '', join_('                  <a target="_new" href="http://github.com/systempuntoout/stackprinter"/>Source code on Github</a>/<a target="_new" href="/docs/privacy.txt">Privacy</a><br/>\n')
         yield '', join_('                  <img src="/images/systempuntooutmail.jpg"/><br/><br/>\n')
         yield '', join_('              </div>                                 \n')
         yield '', join_('          </div>\n')
