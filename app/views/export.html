@@ -34,7 +34,7 @@ $def with (service, post, pretty_links, printer, link_to_home)
 	        $if link_to_home:
 	            <a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>
 	        <a href="http://www.stackprinter.com/export?format=HTML&amp;service=$service&amp;printer=false&amp;question=$(post.question['question_id'])"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>
-	    </div>       
+	    </div> 
         <div id="question-block">
           <div id="question-title">
           	 <img alt="$(supported_services.info[service]['name'])" src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(post.question['title'])<br/>

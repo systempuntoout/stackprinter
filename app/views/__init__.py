@@ -228,7 +228,7 @@ def export():
         if link_to_home:
             yield '', join_('                ', '<a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>\n')
         yield '', join_('                <a href="http://www.stackprinter.com/export?format=HTML&amp;service=', escape_(service, True), '&amp;printer=false&amp;question=', escape_((post.question['question_id']), True), '"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>\n')
-        yield '', join_('            </div>       \n')
+        yield '', join_('            </div> \n')
         yield '', join_('        <div id="question-block">\n')
         yield '', join_('          <div id="question-title">\n')
         yield '', join_('                 <img alt="', escape_((supported_services.info[service]['name']), True), '" src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(post.question['title']), True), '<br/>\n')
@@ -783,6 +783,7 @@ def index():
         yield '', join_('                    <li><a href="/deleted">Deleted questions</a></li>    \n')
         yield '', join_('                    <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>\n')
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
+        yield '', join_('                    <li>Coins: <a class="nolines" href="http://www.dentidelgiudizio.net">Denti del giudizio</a></li>\n')
         yield '', join_('                </ul>\n')
         yield '', join_('              </div>\n')
         yield '', join_('              <div id="appengine_logo">\n')
