@@ -83,12 +83,15 @@ $def with (service, post, pretty_links, printer, link_to_home)
           $else:
               $post.question['body']
           </div>
+          <div class="question-comments">
           	$for comment in post.question['comments']:
                 <div class="comment">
                     $if int(comment['score']) > 0:
                         ($comment['score'])    
                     $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'})['display_name']</b>                   
                 </div>
+          </div>
+              <div class="answers">
               $for answer_number, answer  in enumerate(post.answers):
                   <div class="answer-details">
                       [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
@@ -108,13 +111,17 @@ $def with (service, post, pretty_links, printer, link_to_home)
                     $else:
                         $answer['body']
                   </div>
+                  <div class="answer-comments">
                   $for comment in answer['comments']:
                       <div class="comment">
                       $if int(comment['score']) > 0:
                            ($comment['score'])    
                       $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'})['display_name']</b>     
                       </div>
+                  </div>
                   <div class="answer-pagenumber">$int(answer_number+1)</div>
+                  
+              </div>
       </div>
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

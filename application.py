@@ -36,7 +36,7 @@ app.internalerror = internalerror
 
 def redirect_from_appspot(wsgi_app):
     """Handle redirect to my domain if called from appspot (and not SSL)"""
-    from_server = "stackprinter.appspot.com"
+    from_server = "stackprinter-hrd.appspot.com"
     to_server = "www.stackprinter.com"
 
     def redirect_if_needed(env, start_response):

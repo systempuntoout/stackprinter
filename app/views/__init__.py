@@ -276,12 +276,15 @@ def export():
         else:
             yield '', join_('          ', escape_(post.question['body'], True), '\n')
         yield '', join_('          </div>\n')
+        yield '', join_('          <div class="question-comments">\n')
         for comment in loop.setup(post.question['comments']):
             yield '', join_('                ', '<div class="comment">\n')
             if int(comment['score']) > 0:
                 yield '', join_('                    ', '(', escape_(comment['score'], True), ')    \n')
             yield '', join_('                ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'})['display_name'], True), '</b>                   \n')
             yield '', join_('                ', '</div>\n')
+        yield '', join_('          </div>\n')
+        yield '', join_('              <div class="answer-block">\n')
         for answer_number, answer  in loop.setup(enumerate(post.answers)):
             yield '', join_('              ', '<div class="answer-details">\n')
             yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
@@ -300,13 +303,17 @@ def export():
             else:
                 yield '', join_('                ', escape_(answer['body'], True), '\n')
             yield '', join_('              ', '</div>\n')
+            yield '', join_('              ', '<div class="answer-comments">\n')
             for comment in loop.setup(answer['comments']):
                 yield '', join_('              ', '<div class="comment">\n')
                 if int(comment['score']) > 0:
                     yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
                 yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'})['display_name'], True), '</b>     \n')
                 yield '', join_('              ', '</div>\n')
+            yield '', join_('              ', '</div>\n')
             yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
+            yield '', join_('              ', '\n')
+        yield '', join_('            </div>\n')
         yield '', join_('      </div>\n')
         yield '', join_('        <script type="text/javascript">\n')
         yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
