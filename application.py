@@ -29,11 +29,6 @@ def notfound():
 def internalerror():
     return web.internalerror(render.oops(SERVER_ERROR))
 
-app = web.application(urls, globals())
-app.notfound = notfound
-app.internalerror = internalerror
-
-
 def redirect_from_appspot(wsgi_app):
     """Handle redirect to my domain if called from appspot (and not SSL)"""
     from_server = "stackprinter-hrd.appspot.com"
@@ -51,15 +46,11 @@ def redirect_from_appspot(wsgi_app):
         return wsgi_app(env, start_response)
     return redirect_if_needed
 
-def main():
-    #StackPrinter boot
-    logging.getLogger().setLevel(logging.ERROR)
-    application = app.wsgifunc()
-    application = redirect_from_appspot(application)
-    run_wsgi_app(application)
-    
+app = web.application(urls, globals()).wsgifunc() 
+app.notfound = notfound
+app.internalerror = internalerror
+logging.getLogger().setLevel(logging.ERROR)
+app = redirect_from_appspot(app)
 
-if __name__ == '__main__':
-    main()
 
 

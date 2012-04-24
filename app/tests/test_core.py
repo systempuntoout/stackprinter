@@ -8,7 +8,7 @@ from mock_sepyresults import QUESTION, QUESTIONS, EMPTY_QUESTIONS
 from mock_sepyresults import ANSWER, ANSWERS, EMPTY_ANSWERS
 from mock_sepyresults import USERS, TAGS
 from app.core.stackprinterdownloader import StackExchangeDownloader
-from django.utils import simplejson 
+from app.lib import simplejson 
 
 class StackprinterDownloaderTestCase(unittest.TestCase):
     

@@ -75,7 +75,7 @@ except:
     raise
 
 try:
-    from django.utils import simplejson 
+    from app.lib import simplejson 
 except:
     print "ERROR: could not import simplejson module"
     print
