@@ -17,11 +17,12 @@ import logging
 import os
 
 try:
-    from key import api_key, api_private_key
+    from key import api_key, client_id, client_secret, code
 except ImportError: 
     logging.error(KEY_TEMPLATE_ERROR)
 
-__api_version = '1.0'
+__api_endpoint = 'https://api.stackexchange.com'
+__api_version = '2.0'
 __default_page_size = 100
 __default_page = 1
 __headers = {'User-Agent': 'StackPrinter'}
@@ -33,94 +34,135 @@ class ApiRequestError(Exception):
         self.url = url
         self.code = code
         self.message = message
-        self.api_error_watchdog()
-    def api_error_watchdog(self):
-        """ Take the proper action for a given code error"""
-        if self.code == API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED:
-            try:
-                taskqueue.add(url='/admin/authtokenrenewal', 
-                              method = 'GET', 
-                              name = datetime.now().strftime('Auth%d-%H-%M')) #one task per minute
-            except (taskqueue.TaskAlreadyExistsError, taskqueue.TombstonedTaskError):
-                  pass
             
-def get_question(question_id, api_endpoint, body = False, comments = False, pagesize = 1):
+def get_question(question_id, api_site_parameter, body = False, comments = False, pagesize = 1):
     """
     Get the question of a given question_id 
     """
     path = "questions/%d" % question_id
-    results = __fetch_results(path, api_endpoint, body = body, comments = comments, pagesize = pagesize)
+    
+    query_filter = 'I9hR'
+    
+    if body:
+        query_filter = '-m8CVE-h20D'
+    if comments:
+        query_filter = ')(Ybxr-pC9'
+    if body and comments:
+        query_filter = ')(YbxrpMgi'
+    
+    results = __fetch_results(path, api_site_parameter, filter = query_filter, pagesize = pagesize)
     return results
 
-def get_answer(answer_id, api_endpoint, body = False, comments = False, pagesize = 1):
+def get_answer(answer_id, api_site_parameter, body = False, comments = False, pagesize = 1):
     """
     Get the answer of a given answer_id 
     """
     path = "answers/%d" % answer_id
-    results = __fetch_results(path, api_endpoint, body = body, comments = comments, pagesize = pagesize)
+    
+    query_filter = ')(Y_v2R5Tz'
+    
+    if body:
+        query_filter = '-m84pZ4-YWK'
+    if comments:
+        query_filter = ')(Ybxr-pC9'
+    if body and comments:
+        query_filter = 'D9kY06hX'
+    
+    results = __fetch_results(path, api_site_parameter, filter = query_filter, pagesize = pagesize)
     return results   
         
-def get_answers(question_id, api_endpoint, rpc = None, page = 1, body = False, comments = False, pagesize = 100, sort = 'votes'):
+def get_answers(question_id, api_site_parameter, rpc = None, page = 1, body = False, comments = False, pagesize = 100, sort = 'votes'):
     """
     Get the answers list of a given question_id 
     """
     path = "questions/%d/answers" % question_id
-    results = __fetch_results(path, api_endpoint, rpc = rpc, body = body, page = page, comments = comments, pagesize = pagesize, sort = sort)
+    
+    query_filter = '.p-I38n'
+    
+    if body:
+        query_filter = '-m8C*uMP-q0'
+    if comments:
+        query_filter = ')(Ybp0wdAN'
+    if body and comments:
+        query_filter = 'D9l0ZsiD'
+    if pagesize == 0:
+        query_filter = '!-q2Rj6nE'
+        
+    results = __fetch_results(path, api_site_parameter, rpc = rpc, page = page, filter = query_filter, pagesize = pagesize, sort = sort)
     return results
 
-def get_favorites_questions(user_id, api_endpoint, page = 1, body = False, comments = False, pagesize = 100, sort = 'added'):
+def get_favorites_questions(user_id, api_site_parameter, page = 1, body = False, comments = False, pagesize = 100, sort = 'added'):
     """
     Get the favorites questions list of a given user_id
     """
     path = "users/%d/favorites" % user_id
-    results = __fetch_results(path, api_endpoint, body = body, page = page, comments = comments, pagesize = pagesize, sort = sort)
+    
+    query_filter = ')(Ybxw_gbz'
+    
+    if body:
+        query_filter = '9F)u(CSWCtKt'
+    if comments:
+        query_filter = ')(YbxuzQQ.'
+    if body and comments:
+        query_filter = ')(YbxuzQTp'
+    
+    results = __fetch_results(path, api_site_parameter, page = page, filter = query_filter, pagesize = pagesize, sort = sort)
     return results
 
-def get_questions_by_tags(tagged, api_endpoint, page = 1, pagesize = 30, sort = 'votes'):
+def get_questions_by_tags(tagged, api_site_parameter, page = 1, pagesize = 30, sort = 'votes'):
     """
     Get questions list filtered by tags
     """
     path = "questions" 
-    results = __fetch_results(path, api_endpoint, tagged = tagged, page = page, pagesize = pagesize, sort = sort)
+    
+    query_filter = ')(Ybxw_gbz'
+    
+    results = __fetch_results(path, api_site_parameter, tagged = tagged, page = page, pagesize = pagesize, filter = query_filter, sort = sort)
     return results
 
-def get_questions(api_endpoint, page = 1, pagesize = 30, sort = 'votes'):
+def get_questions(api_site_parameter, page = 1, pagesize = 30, sort = 'votes'):
     """
     Get questions list sorted by votes
     """
-    path = "questions" 
-    results = __fetch_results(path, api_endpoint, page = page, pagesize = pagesize, sort = sort)
+    path = "questions"
+    
+    query_filter = ')(Ybxw_gbz'
+     
+    results = __fetch_results(path, api_site_parameter, page = page, pagesize = pagesize, filter = query_filter, sort = sort)
     return results
 
-def get_users(filter, api_endpoint, page = 1, pagesize = 30, sort = 'reputation'):
+def get_users(filter, api_site_parameter, page = 1, pagesize = 30, sort = 'reputation'):
     """
     Get a list of users filtered by display name
     """
     path = "users"
-    results = __fetch_results(path, api_endpoint, filter= filter, page = page, pagesize = pagesize, sort = sort)
+    results = __fetch_results(path, api_site_parameter, inname= filter, page = page, pagesize = pagesize, sort = sort)
     return results
 
-def get_tags(filter, api_endpoint, page = 1, pagesize = 10, sort = 'popular'):
+def get_tags(filter, api_site_parameter, page = 1, pagesize = 10, sort = 'popular'):
     """
     Get a list of tags filtered by text
     """
     path = "tags"
-    results = __fetch_results(path, api_endpoint, filter= filter, page = page, pagesize = pagesize, sort = sort)
+    
+    query_filter = ')(Yb(vlSfU'
+    
+    results = __fetch_results(path, api_site_parameter, inname= filter, page = page, pagesize = pagesize, filter = query_filter, sort = sort)
     return results
 
-def get_users_by_id(user_id, api_endpoint, page = 1, pagesize = 30, sort = 'reputation'):
+def get_users_by_id(user_id, api_site_parameter, page = 1, pagesize = 30, sort = 'reputation'):
     """
     Get a users of a given user_id
     """
     path = "users/%d" % user_id
-    results = __fetch_results(path, api_endpoint, id = user_id, page = page, pagesize = pagesize, sort = sort)
+    results = __fetch_results(path, api_site_parameter, id = user_id, page = page, pagesize = pagesize, sort = sort)
     return results
 
 def get_sites():
     """
     Get a list of Stack Exchange sites using Stackauth service
     """
-    results = __gae_fetch('http://stackauth.com/%s/sites' % __api_version)
+    results = __gae_fetch('https://api.stackexchange.com/%s/sites?pagesize=999' % __api_version)
     response = simplejson.loads(results.content)
     return response
 
@@ -128,19 +170,28 @@ def get_auth_token():
     """
     Get the auth Token for authentication using Stackauth service
     """
-    payload_data = api_private_key
-    results = __gae_fetch(url = 'http://stackauth.com/%s/auth?key=%s' % (__api_version, api_key),
+    
+    form_fields = {
+      "client_id": client_id,
+      "client_secret":client_secret,
+      "code": code,
+      "redirect_uri": "http://www.stackprinter.com"
+    }
+    form_data = urllib.urlencode(form_fields)
+    results = __gae_fetch(url = 'https://stackexchange.com/oauth/access_token',
                           method = urlfetch.POST, 
-                          payload = payload_data )
-    response = simplejson.loads(results.content)
+                          payload = form_data,
+                          headers={'Content-Type': 'application/x-www-form-urlencoded'})
+    response = results.content
     return response
 
-def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
+def __fetch_results(path, api_site_parameter, rpc = None, **url_params ):
     """
     Fetch results
     """
     
     params = {
+        "site": api_site_parameter,
         "key": api_key,
         "pagesize": __default_page_size,
         "page": __default_page
@@ -150,11 +201,11 @@ def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
     if not __debug:
         auth_token = TokenManager.get_auth_token()
         if auth_token:
-            params['auth'] = auth_token
+            params['access_token'] = auth_token
     
     params.update(url_params)
 
-    url = __build_url(path, api_endpoint, **params)
+    url = __build_url(path, api_site_parameter, **params)
     
     results = __gae_fetch(url, rpc = rpc)
     if rpc:
@@ -162,21 +213,26 @@ def __fetch_results(path, api_endpoint, rpc = None, **url_params ):
     else:
         return handle_response(results, url)
 
-def __build_url(path, api_endpoint, **params):
+def __build_url(path, api_site_parameter, **params):
     """
     Builds the API URL for fetching results.
     """
+    
     query = ["%s=%s" % (key, params[key]) for key in params if (params[key] or key == 'pagesize') ]
     query_string = "&".join(query)
-    url = "%s/%s/%s?" % (api_endpoint, __api_version, path)
+    url = "%s/%s/%s?" % (__api_endpoint, __api_version, path)
     url += query_string
     return url
     
-def __gae_fetch(url, rpc = None, payload = None, method = urlfetch.GET):
-    if rpc:
-        return urlfetch.make_fetch_call(rpc, url, headers = __headers, payload = payload, method = method)
+def __gae_fetch(url, rpc = None, payload = None, method = urlfetch.GET, headers = None):
+    if headers:
+        custom_headers = dict(__headers.items() + headers.items()) 
     else:
-        return urlfetch.fetch(url,  headers = __headers, deadline = 10, payload = payload, method = method)
+        custom_headers = __headers
+    if rpc:
+        return urlfetch.make_fetch_call(rpc, url, headers = custom_headers, payload = payload, method = method)
+    else:
+        return urlfetch.fetch(url,  headers = custom_headers, deadline = 10, payload = payload, method = method)
 
 
 def handle_response(results, url = None):

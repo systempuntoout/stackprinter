@@ -14,7 +14,6 @@ from app.core.stackprinterdownloader import StackAuthDownloader
 import app.utility.utils as utils
 
 
-
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
                                                'commify': web.utils.commify,
@@ -49,8 +48,8 @@ def redirect_from_appspot(wsgi_app):
 app = web.application(urls, globals()).wsgifunc() 
 app.notfound = notfound
 app.internalerror = internalerror
-logging.getLogger().setLevel(logging.ERROR)
 app = redirect_from_appspot(app)
+logging.getLogger().setLevel(logging.ERROR)
 
 
 

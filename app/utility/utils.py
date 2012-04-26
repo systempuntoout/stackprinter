@@ -77,7 +77,7 @@ class Pagination(object):
     def __init__(self, results):
         self.total = results.get('total',0)
         self.page = results.get('page',0)
-        self.pagesize = results.get('pagesize',0)
+        self.pagesize = results.get('page_size',0)
         self.total_pages = 0 if self.total==0 else 1 if (self.total / self.pagesize == 0) else (self.total / self.pagesize) \
                              if (self.total % self.pagesize == 0) else (self.total / self.pagesize) + 1
         self.separator = "..."

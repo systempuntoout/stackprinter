@@ -1,2 +1,4 @@
 api_key = ''
-api_private_key = ''
+client_id = ''
+client_secret = ''
+code = ''

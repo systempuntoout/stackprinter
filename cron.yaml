@@ -3,10 +3,6 @@ cron:
   url: /_ereporter?sender=systempuntoout@gmail.com&to=systempuntoout@gmail.com&delete=true
   schedule: every day 00:00
   timezone: Europe/Rome
-- description: Auth Token Renewal
-  url: /admin/authtokenrenewal
-  schedule: every 6 hours
-  timezone: Europe/Rome
 - description: Sunday morning top questions retriever
   url: /admin/topquestionsretriever
   schedule: every sunday 12:00

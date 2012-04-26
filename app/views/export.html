@@ -41,7 +41,7 @@ $def with (service, post, pretty_links, printer, link_to_home)
           </div>
           <div class="question-details">
                 [$(['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0])$(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))] [$post.question['answer_count']]
-            	 $post.question.get('owner', {'display_name':'community_owned'})['display_name'] 
+            	 $post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned') 
           </div>
           <div class="question-details">
               [$date_from(float(post.question['creation_date']))]
@@ -53,7 +53,10 @@ $def with (service, post, pretty_links, printer, link_to_home)
           ]
           </div>
           <div class="question-details">
-          [ http://$(service).com/questions/$(post.question['question_id'])]
+          $if post.question.has_key('link'):
+             [ $post.question['link'] ]
+          $else:
+             [ http://$(service).com/questions/$(post.question['question_id'])]
           $if post.is_deleted():
               [DELETED]
           </div>
@@ -83,21 +86,22 @@ $def with (service, post, pretty_links, printer, link_to_home)
           $else:
               $post.question['body']
           </div>
-          <div class="question-comments">
-          	$for comment in post.question['comments']:
-                <div class="comment">
-                    $if int(comment['score']) > 0:
-                        ($comment['score'])    
-                    $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'})['display_name']</b>                   
+            $if post.question.get('comments'):
+                <div class="question-comments">  
+          	    $for comment in post.question['comments']:
+                    <div class="comment">
+                        $if int(comment['score']) > 0:
+                            ($comment['score'])    
+                        $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned')</b>                   
+                    </div>
                 </div>
-          </div>
-              <div class="answers">
+          <div class="answers">
               $for answer_number, answer  in enumerate(post.answers):
                   <div class="answer-details">
                       [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
                       [$date_from(float(answer['creation_date']))]     
-                      $answer.get('owner', {'display_name':'community_owned'})['display_name']
-                      $if bool(answer['accepted']):
+                      $answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned')
+                      $if bool(answer.get('accepted') or answer.get('is_accepted')):
                           [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]
                   </div>
                   <div class="answer">
@@ -111,14 +115,15 @@ $def with (service, post, pretty_links, printer, link_to_home)
                     $else:
                         $answer['body']
                   </div>
-                  <div class="answer-comments">
-                  $for comment in answer['comments']:
-                      <div class="comment">
-                      $if int(comment['score']) > 0:
-                           ($comment['score'])    
-                      $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'})['display_name']</b>     
+                  $if answer.get('comments'):
+                      <div class="answer-comments">       
+                      $for comment in answer['comments']:
+                          <div class="comment">
+                          $if int(comment['score']) > 0:
+                               ($comment['score'])    
+                          $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned')</b>     
+                          </div>
                       </div>
-                  </div>
                   <div class="answer-pagenumber">$int(answer_number+1)</div>
                   
               </div>

@@ -235,7 +235,7 @@ def export():
         yield '', join_('          </div>\n')
         yield '', join_('          <div class="question-details">\n')
         yield '', join_('                [', escape_((['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0]), True), escape_((int(post.question['up_vote_count'])-int(post.question['down_vote_count'])), True), '] [', escape_(post.question['answer_count'], True), ']\n')
-        yield '', join_('                 ', escape_(post.question.get('owner', {'display_name':'community_owned'})['display_name'], True), ' \n')
+        yield '', join_('                 ', escape_(post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' \n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div class="question-details">\n')
         yield '', join_('              [', escape_(date_from(float(post.question['creation_date'])), True), ']\n')
@@ -247,7 +247,10 @@ def export():
         yield '', join_('          ]\n')
         yield '', join_('          </div>\n')
         yield '', join_('          <div class="question-details">\n')
-        yield '', join_('          [ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
+        if post.question.has_key('link'):
+            yield '', join_('          ', '[ ', escape_(post.question['link'], True), ' ]\n')
+        else:
+            yield '', join_('          ', '[ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
         if post.is_deleted():
             yield '', join_('          ', '[DELETED]\n')
         yield '', join_('          </div>\n')
@@ -276,21 +279,22 @@ def export():
         else:
             yield '', join_('          ', escape_(post.question['body'], True), '\n')
         yield '', join_('          </div>\n')
-        yield '', join_('          <div class="question-comments">\n')
-        for comment in loop.setup(post.question['comments']):
-            yield '', join_('                ', '<div class="comment">\n')
-            if int(comment['score']) > 0:
-                yield '', join_('                    ', '(', escape_(comment['score'], True), ')    \n')
-            yield '', join_('                ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'})['display_name'], True), '</b>                   \n')
-            yield '', join_('                ', '</div>\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('              <div class="answer-block">\n')
+        if post.question.get('comments'):
+            yield '', join_('            ', '<div class="question-comments">  \n')
+            for comment in loop.setup(post.question['comments']):
+                yield '', join_('                ', '<div class="comment">\n')
+                if int(comment['score']) > 0:
+                    yield '', join_('                    ', '(', escape_(comment['score'], True), ')    \n')
+                yield '', join_('                ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>                   \n')
+                yield '', join_('                ', '</div>\n')
+            yield '', join_('            ', '</div>\n')
+        yield '', join_('          <div class="answers">\n')
         for answer_number, answer  in loop.setup(enumerate(post.answers)):
             yield '', join_('              ', '<div class="answer-details">\n')
             yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
             yield '', join_('              ', '    [', escape_(date_from(float(answer['creation_date'])), True), ']     \n')
-            yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'})['display_name'], True), '\n')
-            if bool(answer['accepted']):
+            yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
+            if bool(answer.get('accepted') or answer.get('is_accepted')):
                 yield '', join_('                  ', '[<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
             yield '', join_('              ', '</div>\n')
             yield '', join_('              ', '<div class="answer">\n')
@@ -303,17 +307,18 @@ def export():
             else:
                 yield '', join_('                ', escape_(answer['body'], True), '\n')
             yield '', join_('              ', '</div>\n')
-            yield '', join_('              ', '<div class="answer-comments">\n')
-            for comment in loop.setup(answer['comments']):
-                yield '', join_('              ', '<div class="comment">\n')
-                if int(comment['score']) > 0:
-                    yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
-                yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'})['display_name'], True), '</b>     \n')
+            if answer.get('comments'):
+                yield '', join_('              ', '<div class="answer-comments">       \n')
+                for comment in loop.setup(answer['comments']):
+                    yield '', join_('              ', '<div class="comment">\n')
+                    if int(comment['score']) > 0:
+                        yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
+                    yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>     \n')
+                    yield '', join_('              ', '</div>\n')
                 yield '', join_('              ', '</div>\n')
-            yield '', join_('              ', '</div>\n')
             yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
             yield '', join_('              ', '\n')
-        yield '', join_('            </div>\n')
+        yield '', join_('              </div>\n')
         yield '', join_('      </div>\n')
         yield '', join_('        <script type="text/javascript">\n')
         yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
@@ -617,7 +622,7 @@ def favorites_user_selection():
             if rown % 3 == 0 :
                 yield '', join_('                            ', '<div>\n')
             yield '', join_('                            ', '<div class="item">\n')
-            yield '', join_('                            ', '    <img src="http://www.gravatar.com/avatar/', escape_((user['email_hash']), True), '?s=40&d=identicon&r=PG" />    \n')
+            yield '', join_('                            ', '    <img src="', escape_((user['profile_image']), True), '?s=40&d=identicon&r=PG" />    \n')
             yield '', join_('                            ', '    <table>\n')
             yield '', join_('                            ', '        <tr>\n')
             yield '', join_('                            ', '            <td>\n')
@@ -790,7 +795,7 @@ def index():
         yield '', join_('                    <li><a href="/deleted">Deleted questions</a></li>    \n')
         yield '', join_('                    <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>\n')
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
-        yield '', join_('                    <li>Coins: <a class="nolines" href="http://www.dentidelgiudizio.net">Denti del giudizio</a></li>\n')
+        yield '', join_('                    <li>Sponsor: <a class="nolines" href="http://www.dentidelgiudizio.net">Denti del giudizio</a></li>\n')
         yield '', join_('                </ul>\n')
         yield '', join_('              </div>\n')
         yield '', join_('              <div id="appengine_logo">\n')
@@ -859,7 +864,7 @@ def quicklook():
         yield '', join_('  </div>\n')
         yield '', join_('  <div id="quicklook_question-details">\n')
         yield '', join_('        [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ' answers]\n')
-        yield '', join_('        ', escape_(question.get('owner', {'display_name':'community_owned'})['display_name'], True), '\n')
+        yield '', join_('        ', escape_(question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
         yield '', join_('  </div>\n')
         yield '', join_('  <div id="quicklook_question-details">\n')
         yield '', join_('      [', escape_(date_from(float(question['creation_date'])), True), ']\n')
@@ -879,7 +884,7 @@ def quicklook():
             yield '', join_('  ', '      <div id="quicklook_answer-details">\n')
             yield '', join_('  ', '            [', escape_((['','+'][(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))>0]), True), escape_((int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count'])), True), ']\n')
             yield '', join_('  ', '            [', escape_(date_from(float(accepted_answer['creation_date'])), True), ']     \n')
-            yield '', join_('  ', '            ', escape_(accepted_answer.get('owner', {'display_name':'community_owned'})['display_name'], True), ' [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
+            yield '', join_('  ', '            ', escape_(accepted_answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
             yield '', join_('  ', '      </div>\n')
             yield '', join_('  ', '      <div id="quicklook_answer">\n')
             yield '', join_('  ', '              ', escape_(accepted_answer['body'], True), '\n')
