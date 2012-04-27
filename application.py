@@ -45,9 +45,10 @@ def redirect_from_appspot(wsgi_app):
         return wsgi_app(env, start_response)
     return redirect_if_needed
 
-app = web.application(urls, globals()).wsgifunc() 
+app = web.application(urls, globals())
 app.notfound = notfound
 app.internalerror = internalerror
+app = app.wsgifunc() 
 app = redirect_from_appspot(app)
 logging.getLogger().setLevel(logging.ERROR)
 
