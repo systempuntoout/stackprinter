@@ -154,7 +154,10 @@ def memcached(key, cache_time, key_suffix_calc_func = None, namespace = None, by
                 if not value:
                     value = func(*args, **kw)
                     if value:
-                        memcache.set(key_with_suffix, value, cache_time, namespace)
+                        try:
+                            memcache.set(key_with_suffix, value, cache_time, namespace)
+                        except:
+                            pass
             return value            
         return cached_func
     return wrap
