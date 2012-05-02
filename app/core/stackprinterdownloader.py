@@ -225,7 +225,7 @@ class StackExchangeDownloader():
         tags = results['items']
         return "\n".join([tag['name'] for tag in tags ])
     
-    @memcached('get_post', 3600*24*20, lambda self, question_id, bypass_cache : question_id, None, lambda self, question_id, bypass_cache : bypass_cache)
+    @memcached('get_post', 3600*24*20, lambda self, question_id, bypass_cache : "%s_%s" % (self.service,question_id), None, lambda self, question_id, bypass_cache : bypass_cache)
     def get_post(self, question_id, bypass_cache = False):
        """
           Return a post object representing the question and the answers list 
