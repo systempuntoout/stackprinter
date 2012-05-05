@@ -43,28 +43,29 @@ $def with (result)
                         </td>
                     </tr>
                     $for question in result:
-                        <tr class="$loop.parity">
-                            <td class="printer">
-                                <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)&linktohome=false"/>
-                                    <img title="Printer-Friendly" src="images/printer_black.png"/>
-                                </a>
-                            </td>
-                            <td class="service_logo">
-                                <a target="_blank" href="$(supported_services.info[question.service]['site_url'])"><img src="$(supported_services.info[question.service]['icon_url'])"/></a>
-                            </td>
-                            <td class="service_name">
-                                [$(supported_services.info[question.service]['name'])]    
-                            </td>    
-                            <td class="title">
-                                <a target="_blank" href="$question.get_url()"/>$htmlquote(question.title)</a><br>
-                                <span class="tag">
-                                    [$(", ".join([tag for tag in question.tags]))]
-                                </span>
-                            </td>
-                            <td class="counter">
-                                    [$(question.counter)]
-                            </td>
-                        </tr>
+                        $if supported_services.info.get(question.service):
+                            <tr class="$loop.parity">
+                                <td class="printer">
+                                    <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)&linktohome=false"/>
+                                        <img title="Printer-Friendly" src="images/printer_black.png"/>
+                                    </a>
+                                </td>
+                                <td class="service_logo">
+                                    <a target="_blank" href="$(supported_services.info[question.service]['site_url'])"><img src="$(supported_services.info[question.service]['icon_url'])"/></a>
+                                </td>
+                                <td class="service_name">
+                                    [$(supported_services.info[question.service]['name'])]    
+                                </td>    
+                                <td class="title">
+                                    <a target="_blank" href="$question.get_url()"/>$htmlquote(question.title)</a><br>
+                                    <span class="tag">
+                                        [$(", ".join([tag for tag in question.tags]))]
+                                    </span>
+                                </td>
+                                <td class="counter">
+                                        [$(question.counter)]
+                                </td>
+                            </tr>
                     $else:
                         $if len(result) == 0:
                             <p id="not_found">
