@@ -8,6 +8,7 @@ urls = (
   '/topprinted', 'app.controllers.main.TopPrinted',
   '/deleted', 'app.controllers.main.Deleted',
   '/favorites', 'app.controllers.main.Favorites',
+  '/myse', 'app.controllers.main.MyStackExchange',
   '/topvoted', 'app.controllers.main.TopVoted',
   '/about', 'app.controllers.main.About',
   '/question','app.controllers.ajax.Question',

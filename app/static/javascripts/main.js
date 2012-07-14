@@ -14,3 +14,24 @@
 function Print(){
     document.body.offsetHeight;window.print()
 };
+
+function StyleCode() 
+{
+    if (typeof disableStyleCode != "undefined") 
+    {
+        return;
+    }
+
+    var a = false;
+
+    jQuery("pre code").parent().each(function() 
+    {
+        if (!jQuery(this).hasClass("prettyprint")) 
+        {
+            jQuery(this).addClass("prettyprint");
+            a = true
+        }
+    });
+    
+    if (a) { prettyPrint() } 
+}

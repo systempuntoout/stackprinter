@@ -79,6 +79,12 @@ a:visited {
     margin-top:25px;
 }
 
+#input_container_myse {
+    margin: auto;
+    text-align:center;
+    margin-top:50px;
+}
+
 #input_wrapper {
     margin:4px;
 }
@@ -137,4 +143,11 @@ a.nolines{text-decoration:none;}
 
 .ac_loading {
 	background: white url('/images/indicator.gif') right center no-repeat;
+}
+
+#myse_login {
+   background:url(/images/unicorn_myse.jpg) no-repeat;
+   height:128px;
+   width:128px;
+   margin-top:15%;
 }

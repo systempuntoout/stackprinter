@@ -3,8 +3,10 @@ import logging, re
 
 from google.appengine.ext import ereporter
 from google.appengine.ext import deferred
+from google.appengine.ext import ndb
 
 import web
+import engineauth
 from app.core.stackprinterdownloader import StackExchangeDownloader
 from app.core.stackprinterdownloader import StackAuthDownloader
 from app.core.stackprinterdownloader import UnsupportedServiceError
@@ -50,7 +52,10 @@ class Export:
             pretty_links =  web.input(prettylinks = 'true')['prettylinks']
             printer =  web.input(printer = 'true')['printer']
             link_to_home = web.input(linktohome = 'true')['linktohome']
+            pretty_print = web.input(prettyprint = 'true')['prettyprint']
+            comments = web.input(comments = 'true')['comments']
             format = web.input(format = 'HTML')['format'] #For future implementations
+            
             
             #Check for malformed request
             if not service or not question_id or not question_id.isdigit():
@@ -80,7 +85,7 @@ class Export:
             if post is None:
                 return render.oops(NOT_FOUND_ERROR)
                 
-            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true' )
+            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true', pretty_print == 'true', comments == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)
@@ -101,6 +106,7 @@ class Favorites:
             username = web.input(username = None)['username']
             page = web.input(page = 1)['page']
             user_id = web.input(userid = None)['userid']
+            
             
             if not service:
                 return render.favorites()
@@ -184,6 +190,55 @@ class TopPrinted:
         except Exception, exception:
             logging.exception("Generic exception")
             return render.oops(GENERIC_ERROR)
+
+
+class MyStackExchange:
+    """
+    MyStackExchange
+    """
+
+    def POST(self):
+        return self.GET()
+
+    def GET(self):
+
+        page = web.input(page = 1)['page']
+        service = web.input(service = None)['service']
+        category = web.input(category = None)['category']
+        logout = web.input(logout = 'false')['logout']
+        
+        
+        user_info = None
+        associated_sites = None
+        associated_sites_keys = None
+
+        user = web.ctx.env.get('webob.adhoc_attrs').get('user')
+        if user and user.auth_ids:
+            profile_keys = [ndb.Key('UserProfile', p) for p in user.auth_ids]
+            profiles = ndb.get_multi(profile_keys)
+            user_info = profiles[0].user_info['extra']['raw_info']  
+            associated_sites = profiles[0].user_info['extra']['associated_sites']
+            associated_sites_keys = profiles[0].user_info['extra']['associated_sites_keys']       
+            
+            
+        if category in ('favorites','asked','answered') and user_info:
+            se_downloader = StackExchangeDownloader(service)
+            if category == 'favorites':
+                result, pagination = se_downloader.get_favorites_questions(associated_sites[service]['user_id'], page)
+            if category == 'asked':
+                result, pagination = se_downloader.get_asked_questions(associated_sites[service]['user_id'], page)
+            if category == 'answered':
+                result, pagination = se_downloader.get_answered_questions(associated_sites[service]['user_id'], page)
+            return render.myse_questions(user_info['display_name'], associated_sites[service]['user_id'], result, service, pagination, category)
+
+        if logout == 'true' and user_info:
+            StackAuthDownloader.invalidate_auth_token((profiles[0].credentials).access_token)
+            web.ctx.env.get('webob.adhoc_attrs').get('session').key.delete()
+            user.key.delete()
+            profiles[0].key.delete()
+            web.redirect('/myse')    
+
+        return render.myse(user_info, associated_sites, associated_sites_keys)
 
 class Deleted:
     """

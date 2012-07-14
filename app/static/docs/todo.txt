@@ -1,5 +1,5 @@
-Last update: 2012-04-26
-Empty! Any ideas?
+Last update: 2012-07-12
+Switch to jinja2 and webapp2; the views have a lot of duplicated stuff.
 
 
 

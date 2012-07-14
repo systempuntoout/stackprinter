@@ -219,6 +219,47 @@ class StackExchangeDownloader():
                                    question['answer_count']
                                    ))
         return (favorites_questions, pagination)
+    
+    def get_asked_questions(self, user_id, page): 
+        asked_questions = []
+        results = self.retriever.get_asked_questions(user_id, self.api_site_parameter, page, pagesize= 30)
+        questions = results["items"]
+        pagination = utils.Pagination(results)
+        for question in questions:
+            asked_questions.append(Question(question['question_id'],
+                                   "http://%s.com/questions/%d" % (self.service, question['question_id']),
+                                   question['title'],
+                                   question['tags'], 
+                                   utils.date_from(question['creation_date']),
+                                   self.service,
+                                   question['up_vote_count'],
+                                   question['down_vote_count'],
+                                   question['answer_count']
+                                   ))
+        return (asked_questions, pagination)
+    
+    def get_answered_questions(self, user_id, page): 
+        asked_questions = []
+        results = self.retriever.get_user_anwers(user_id, self.api_site_parameter, page, pagesize= 30, sort = 'creation')
+        answers = results["items"]
+        logging.info(results)
+        pagination = utils.Pagination(results)
+        question_ids = ';'.join([str(answer['question_id']) for answer in answers])
+        results = self.retriever.get_questions_by_ids(question_ids, self.api_site_parameter, page, pagesize= 30)
+        questions = results["items"]
+        for question in questions:
+            asked_questions.append(Question(question['question_id'],
+                                   "http://%s.com/questions/%d" % (self.service, question['question_id']),
+                                   question['title'],
+                                   question['tags'], 
+                                   utils.date_from(question['creation_date']),
+                                   self.service,
+                                   question['up_vote_count'],
+                                   question['down_vote_count'],
+                                   question['answer_count']
+                                   ))
+        return (asked_questions, pagination)
+    
         
     def get_tags(self, tag_filter):
         results = self.retriever.get_tags(tag_filter, self.api_site_parameter, page = 1, pagesize = 10)
@@ -279,7 +320,10 @@ class StackAuthDownloader():
         token_parameter = sepy.get_auth_token()
         token = token_parameter.split('=')[1]
         return utils.TokenManager.store_auth_token(token)
-
+    @staticmethod    
+    def invalidate_auth_token(auth_token):
+        """ Invalidate auth token"""
+        return sepy.invalidate_auth_token(auth_token)
         
 class DeliciousDownloader():  
     def get_favorites_questions(self, username):

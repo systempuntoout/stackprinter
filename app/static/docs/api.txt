@@ -24,3 +24,11 @@ printer (optional)
 linktohome (optional)
 * show the link to the homepage on the upper left corner
 * boolean true (default)
+
+prettyprint (optional)
+* Enables the syntax highlighting
+* boolean true (default)
+
+comments (optional)
+* Shows the question and answers comments
+* boolean true (default)

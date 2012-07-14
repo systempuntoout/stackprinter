@@ -1,4 +1,4 @@
-$def with (service, post, pretty_links, printer, link_to_home)
+$def with (service, post, pretty_links, printer, link_to_home, pretty_print, comments)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
 	<head>
@@ -9,7 +9,13 @@ $def with (service, post, pretty_links, printer, link_to_home)
 		<title>$post.question['title']</title>
 		<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="/javascripts/main.js"></script>
-		$if service in TEX_ENABLED_SERVICES:
+		$if pretty_print and 'Prettify' in supported_services.info[service].get('markdown_extensions',''):
+		    <script type="text/javascript" src="/javascripts/prettify/prettify.js"></script>
+		    <link rel="stylesheet" href="/stylesheets/prettify.css"> 
+            <script type="text/javascript">
+                jQuery(document).ready(function(){StyleCode();});
+            </script>
+		$if 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
 		    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 
 		            MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
@@ -60,7 +66,7 @@ $def with (service, post, pretty_links, printer, link_to_home)
           $if post.is_deleted():
               [DELETED]
           </div>
-          $if service not in TEX_ENABLED_SERVICES:    
+          $if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):    
               <div id="adsense">
                       <script type="text/javascript"><!--
                       google_ad_client = "pub-3296756901484166";
@@ -86,7 +92,7 @@ $def with (service, post, pretty_links, printer, link_to_home)
           $else:
               $post.question['body']
           </div>
-            $if post.question.get('comments'):
+            $if post.question.get('comments') and comments:
                 <div class="question-comments">  
           	    $for comment in post.question['comments']:
                     <div class="comment">
@@ -115,7 +121,7 @@ $def with (service, post, pretty_links, printer, link_to_home)
                     $else:
                         $answer['body']
                   </div>
-                  $if answer.get('comments'):
+                  $if answer.get('comments') and comments:
                       <div class="answer-comments">       
                       $for comment in answer['comments']:
                           <div class="comment">

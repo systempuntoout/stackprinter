@@ -39,6 +39,7 @@ def get_question(question_id, api_site_parameter, body = False, comments = False
     """
     Get the question of a given question_id 
     """
+
     path = "questions/%d" % question_id
     
     query_filter = 'I9hR'
@@ -50,6 +51,25 @@ def get_question(question_id, api_site_parameter, body = False, comments = False
     if body and comments:
         query_filter = ')(YbxrpMgi'
     
+    results = __fetch_results(path, api_site_parameter, filter = query_filter, pagesize = pagesize)
+    return results
+
+def get_questions_by_ids(question_ids, api_site_parameter, body = False, comments = False, pagesize = 1):
+    """
+    Get the question list of a given question_ids list
+    """
+
+    path = "questions/%s" % question_ids
+
+    query_filter = 'I9hR'
+
+    if body:
+        query_filter = '-m8CVE-h20D'
+    if comments:
+        query_filter = ')(Ybxr-pC9'
+    if body and comments:
+        query_filter = ')(YbxrpMgi'
+
     results = __fetch_results(path, api_site_parameter, filter = query_filter, pagesize = pagesize)
     return results
 
@@ -108,6 +128,36 @@ def get_favorites_questions(user_id, api_site_parameter, page = 1, body = False,
     
     results = __fetch_results(path, api_site_parameter, page = page, filter = query_filter, pagesize = pagesize, sort = sort)
     return results
+
+def get_asked_questions(user_id, api_site_parameter, page = 1, body = False, comments = False, pagesize = 100, sort = 'creation'):
+    """
+    Get the asked questions list of a given user_id
+    """
+    path = "users/%d/questions" % user_id
+
+    query_filter = ')(Ybxw_gbz'
+
+    if body:
+        query_filter = '9F)u(CSWCtKt'
+    if comments:
+        query_filter = ')(YbxuzQQ.'
+    if body and comments:
+        query_filter = ')(YbxuzQTp'
+
+    results = __fetch_results(path, api_site_parameter, page = page, filter = query_filter, pagesize = pagesize, sort = sort)
+    return results
+
+def get_user_anwers(user_id, api_site_parameter, page = 1, pagesize = 100, sort = 'creation'):
+    """
+    Get the answers list of a given user_id
+    """
+    path = "users/%d/answers" % user_id
+    
+    query_filter = "!9hS0OLcgC"
+
+    results = __fetch_results(path, api_site_parameter, page = page, filter = query_filter, pagesize = pagesize, sort = sort)
+    return results
+
 
 def get_questions_by_tags(tagged, api_site_parameter, page = 1, pagesize = 30, sort = 'votes'):
     """
@@ -183,6 +233,16 @@ def get_auth_token():
                           payload = form_data,
                           headers={'Content-Type': 'application/x-www-form-urlencoded'})
     response = results.content
+    return response
+
+
+def invalidate_auth_token(auth_token):
+    """
+    Invalidate the given auth_token
+    """
+
+    results = __gae_fetch('https://api.stackexchange.com/%s/access-tokens/%s/invalidate' % (__api_version, auth_token))
+    response = simplejson.loads(results.content)
     return response
 
 def __fetch_results(path, api_site_parameter, rpc = None, **url_params ):

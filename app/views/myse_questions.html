@@ -1,0 +1,77 @@
+$def with (username, user_id, result, service, pagination, category)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">
+        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">
+        <title>MySe - StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/search.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/javascripts/main.js"></script>     
+  </head>
+    <body>
+        <div id="back">
+	        <a href="/myse"><img src="/images/profile.png"/></a>
+	    </div>
+             <div id="title" class="main"><img src="$(supported_services.info[service]['icon_url'])"/>$(supported_services.info[service]['name'])&nbsp;<i>$category</i> questions <br></div>
+             <p id="input"><a target="_new" href="http://$(service).com/users/$(user_id)/$(username)">$(username)</a></p>
+             <table cellpadding="2" cellspacing="0">
+                    $for question in result:
+                        <tr class="$loop.parity">
+                            <td class="printer">
+                                <a target="_blank" href="/export?question=$(question.question_id)&format=HTML&service=$(question.service)&linktohome=false"/>
+                                    <img title="Printer-Friendly" src="images/printer_black.png"/>
+                                </a>
+                            </td>
+                            <td class="quicklook">
+                                <a onclick="javascript:quicklook($(question.question_id),'$(question.service)');return false;" href="#"/>
+                                    <img title="Quicklook" src="images/quicklook.png"/>
+                                </a>
+                            </td>
+                            <td class="counters">
+                                [$question.get_votes()]<br>[$question.answer_count]
+                            </td>    
+                            <td class="title">
+                                <a target="_blank" href="$question.url"/>$htmlquote(question.title)</a><br>
+                                <span class="tag">
+                                    [$(", ".join([tag for tag in question.tags_list]))]
+                                </span>
+                            </td>
+                            <td class="date">
+                                    [$(question.creation_date.strftime('%Y-%m-%d'))]
+                            </td>
+                        </tr>
+                        $if loop.last:
+                            </table>
+                            <table id="pagination">
+                                <tr>
+                                    <td class="pagination_found">Found: $commify(pagination.total)</td>
+                                    <td class="pagination_page">
+                                        $if pagination.has_previous_entries():
+                                	        <a href="/myse?category=$(category)&service=$(service)&userid=$(user_id)&page=$(pagination.page-1)&pagesize=$(pagination.pagesize)">&laquo; prev&nbsp;&nbsp;</a>
+                                        $for page in pagination.get_pretty_pagination():
+                                            $if page != -1:
+                                                <a href="/myse?category=$(category)&service=$(service)&userid=$(user_id)&page=$(page)&pagesize=$(pagination.pagesize)">
+                                                    $if page == pagination.page:|$(page)|    
+                                                    $else: $page 
+                                                </a>
+                                            $else:
+                                                $pagination.separator
+                                        $if pagination.has_more_entries():
+                                	           <a href="/myse?category=favorites&service=$(service)&userid=$(user_id)&page=$(pagination.page+1)&pagesize=$(pagination.pagesize)">&nbsp;&nbsp;next &raquo;</a>
+                                    </td>
+                                    <td class="pagination_pagesize">Pagesize: $pagination.pagesize</td>
+                                </tr>
+                            </table>
+                    $else:
+                        $if len(result) == 0:
+                            <p id="not_found">
+                                No questions found
+                            </p>
+  </body>
+</html>

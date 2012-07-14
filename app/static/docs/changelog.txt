@@ -1,3 +1,9 @@
+Version 1.1
+2012-07-14
+Prettyprint
+Use Mathjax looking in the JSON response
+Authentication and MySE section
+
 Version 1
 2012-04-26
 Switched to Hrd

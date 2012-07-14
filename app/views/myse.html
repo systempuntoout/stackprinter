@@ -1,0 +1,93 @@
+$def with (user, associated_sites, associated_sites_keys)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">
+        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">
+        <title>MySE - StackPrinter</title> 
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.tools.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
+        <script>
+            jQuery(
+                function()
+                {
+                    jQuery('#favorites').click(function(e){
+                        jQuery('#category').val('favorites');
+                        jQuery.cookie("SERVICE_MYSE", jQuery("#service").val() , { expires: 50 })
+                        jQuery('#myse_form').submit();
+                        return false;
+                    });
+                    jQuery('#asked').click(function(e){
+                        jQuery('#category').val('asked');
+                        jQuery.cookie("SERVICE_MYSE", jQuery("#service").val() , { expires: 50 })
+                        jQuery('#myse_form').submit();
+                        return false;
+                    });
+                    jQuery('#answered').click(function(e){
+                        jQuery('#category').val('answered');
+                        jQuery.cookie("SERVICE_MYSE", jQuery("#service").val() , { expires: 50 })
+                        jQuery('#myse_form').submit();
+                        return false;
+                    });
+                    
+
+                    if (jQuery.cookie("SERVICE_MYSE") != null){
+                        jQuery("#service").val(jQuery.cookie("SERVICE_MYSE"));
+                    }
+                }
+            )
+        </script>
+  </head>
+    <body>
+             <div id="main_container">
+                  <div class="logo">                           
+                  </div>
+                  <div class="header links">
+                      <a class="nolines" href="/">Home</a>|<span class="header_current">MySE</span>|<a class="nolines" href="/favorites">Favorites</a>|<a class="nolines" href="/topvoted">TopVoted</a>|<a class="nolines" href="/topprinted">TopPrinted</a>|<a class="nolines" href="/deleted">Deleted</a>|<a class="nolines" href="/about">About</a>
+                      $if user:
+                        <span style="float:right"><a href="/myse?logout=true">Logout</a></span>
+                      
+                  </div>
+                  $if user:
+                        <div id="input_container_myse">
+                            <div>
+                                <img src="$(user['profile_image'])?s=40&d=identicon&r=PG" />
+                            </div>
+                            <div style="font-family:Courier;font-size:0.8em;margin-top:10px;margin-bottom:10px">
+                                $(user['display_name'])
+                            </div>
+                            <div>
+                                <form id="myse_form" action="/myse">
+                                    
+                                <select id="service" name="service">
+                                      $for service_key in associated_sites_keys:
+                                        <option  value="$(service_key)">$(supported_services.info[service_key]['name'])</option> 
+                                 </select>
+                                 <input type="hidden" id="category" name="category" value="">
+                                </form>
+                            </div>
+                            <div class="links">                           
+                                <ul id="links_block" style="margin-top:20px">
+                                    <li><a id="asked" href="#">Questions</a></li>
+                                    <li><a id="answered" href="#">Answers</a></li>
+                                    <li><a id="favorites" href="#">Favorites</a></li>
+                                </ul>
+                              </div>
+                        </div>
+                  $else:
+                    <center>
+                          <div id="myse_login">                         
+                          </div>
+                          <br/>
+                          <span style="font-family:Courier;font-size:0.8em;">                           
+                              Welcome Guest! Please <a href="/auth/stackexchange">Login</a> 
+                         </span>                              
+                      </center>
+                         
+             </div>
+  </body>
+</html>
