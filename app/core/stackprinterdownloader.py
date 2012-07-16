@@ -242,11 +242,14 @@ class StackExchangeDownloader():
         asked_questions = []
         results = self.retriever.get_user_anwers(user_id, self.api_site_parameter, page, pagesize= 30, sort = 'creation')
         answers = results["items"]
-        logging.info(results)
-        pagination = utils.Pagination(results)
-        question_ids = ';'.join([str(answer['question_id']) for answer in answers])
-        results = self.retriever.get_questions_by_ids(question_ids, self.api_site_parameter, page, pagesize= 30)
-        questions = results["items"]
+        if answers:
+            pagination = utils.Pagination(results)
+            question_ids = ';'.join([str(answer['question_id']) for answer in answers])
+            results = self.retriever.get_questions_by_ids(question_ids, self.api_site_parameter, page, pagesize= 30)
+            questions = results["items"]
+        else:
+            questions = []
+            pagination = None
         for question in questions:
             asked_questions.append(Question(question['question_id'],
                                    "http://%s.com/questions/%d" % (self.service, question['question_id']),
