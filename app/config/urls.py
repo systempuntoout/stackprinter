@@ -40,5 +40,6 @@ static_questions = {
     'stackoverflow_282329':'/questions/what-are-five-things-you-hate-about-your-favorite-language.html',
     'stackoverflow_78756':'/questions/what-do-you-use-to-keep-notes-as-a-developer.html',
     'stackoverflow_1644':'/questions/what-good-technology-podcasts-are-out-there.html',
-    'stackoverflow_687':'/questions/keyboard-for-programmers.html' 
+    'stackoverflow_687':'/questions/keyboard-for-programmers.html',
+    'stackoverflow_2349378':'/questions/new-programming-jargon-you-coined.html' 
 }
