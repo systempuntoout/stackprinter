@@ -807,7 +807,7 @@ def index():
         yield '', join_('                    <li><a href="javascript:(function(){var re = new RegExp(\'^http://(.*?)\\.com/questions/([0-9]+)/\');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open(\'http://www.stackprinter.com/export?format=HTML&service=\'+service+\'&question=\'+questionid)}else{alert(\'Attention: question id not found!\')}})()">StackPrinter Bookmarklet</a></li> \n')
         yield '', join_('                    <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>\n')
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
-        yield '', join_('                    <li>Sponsor: <a class="nolines" href="http://www.dentidelgiudizio.net">Denti del giudizio</a></li>\n')
+        yield '', join_('                    <li>Sponsor: <a class="nolines" href="http://www.calcolobolloauto.net">Calcolo bollo auto</a></li>\n')
         yield '', join_('                </ul>\n')
         yield '', join_('              </div>\n')
         yield '', join_('              <div id="appengine_logo">\n')
