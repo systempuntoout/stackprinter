@@ -10,11 +10,9 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
 		<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="/javascripts/main.js"></script>
 		$if pretty_print and 'Prettify' in supported_services.info[service].get('markdown_extensions',''):
-		    <script type="text/javascript" src="/javascripts/prettify/prettify.js"></script>
-		    <link rel="stylesheet" href="/stylesheets/prettify.css"> 
-            <script type="text/javascript">
-                jQuery(document).ready(function(){StyleCode();});
-            </script>
+			<script type="text/javascript" src="/javascripts/prettify/prettify.js"></script>
+			<link rel="stylesheet" href="/stylesheets/prettify.css"> 
+			<script type="text/javascript">jQuery(document).ready(function(){StyleCode();});</script>
 		$if 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
 		    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 

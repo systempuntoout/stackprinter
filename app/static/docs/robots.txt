@@ -1,5 +1,8 @@
 User-Agent: *
 Disallow: /admin
 Disallow: /myse
+Disallow: /topprinted
+Disallow: /topvoted
+Disallow: /favorites
 Sitemap: http://www.stackprinter.com/sitemap_index.xml
 Sitemap: http://www.stackprinter.com/sitemap.xml

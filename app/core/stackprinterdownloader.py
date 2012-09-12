@@ -13,6 +13,8 @@ from app.utility.utils import memcached
 import app.utility.worker as worker
 import app.db.question as dbquestion
 
+VOTES_ENTRY_LEVEL = 10
+
 deferred.deferred._TASKQUEUE_HEADERS['X-AppEngine-FailFast'] = 'True'
 
 class Post(object):
@@ -61,7 +63,8 @@ class StackExchangeDownloader():
         question = results["items"]
         if len(question) > 0 and question[0].has_key('title'):
             try:
-                deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
+                if int(question[0]['up_vote_count'])-int(question[0]['down_vote_count']) > VOTES_ENTRY_LEVEL :
+                    deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
             except:
                 logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
             return question[0]
@@ -148,7 +151,7 @@ class StackExchangeDownloader():
                 page = page +1 
         return answers"""
     
-    def get_answers(self, question_id):  
+    def get_answers(self, question_id, persist = True):  
         answers_chunk_dict = {}
         answers = []
         page = 1
@@ -186,7 +189,8 @@ class StackExchangeDownloader():
         
         try:
             #cache it to db (does not work for payload bigger than 1MByte)
-            deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
+            if persist:
+                deferred.defer(worker.deferred_store_answers_to_cache, question_id, self.service, answers)
         except:
             logging.info("%s - defer error trying to store answers of question_id : %s" % (self.service, question_id))
             
@@ -278,7 +282,7 @@ class StackExchangeDownloader():
        try:
            question = self.get_question(question_id)
            if question:
-               post = Post(question, self.get_answers(question_id))    
+               post = Post(question, self.get_answers(question_id, int(question['up_vote_count'])-int(question['down_vote_count']) > VOTES_ENTRY_LEVEL))    
            else: #StackPrinter loves the legendary deleted questions 
                post = Post(dbquestion.get_question(question_id, self.service),
                            dbquestion.get_answers(question_id, self.service))
