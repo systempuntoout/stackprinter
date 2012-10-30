@@ -414,7 +414,8 @@ def favorites():
         yield '', join_('                         <div>                                       \n')
         yield '', join_('                               <select id="service" name="service">\n')
         for service_key in loop.setup(supported_services.keys):
-            yield '', join_('                                   ', '  <option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
+            if supported_services.info.get(service_key):
+                yield '', join_('                                   ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
         yield '', join_('                                   <option  value="delicious">Delicious</option> \n')
         yield '', join_('                              </select>\n')
         yield '', join_('                          </div>\n')
@@ -789,7 +790,8 @@ def index():
         yield '', join_('                     <div>                                       \n')
         yield '', join_('                          <select id="service" name="service">\n')
         for service_key in loop.setup(supported_services.keys):
-            yield '', join_('                              ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option> \n')
+            if supported_services.info.get(service_key):
+                yield '', join_('                              ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option> \n')
         yield '', join_('                         </select>\n')
         yield '', join_('                     </div>\n')
         yield '', join_('                     <div class="button">\n')
@@ -806,7 +808,7 @@ def index():
         yield '', join_('                    <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>\n')
         yield '', join_('                    <li><a href="https://twitter.com/systempuntoout">@Systempuntoout</a>    \n')
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
-        yield '', join_('                    <li>Sponsor: <a class="nolines" href="http://www.calcolobolloauto.net">Calcolo del Bollo Auto</a></li>\n')
+        yield '', join_('                    <li>Sponsor: <a class="nolines" href="http://www.calcolobolloauto.net">Calcolo Bollo Auto</a></li>\n')
         yield '', join_('                </ul>\n')
         yield '', join_('              </div>\n')
         yield '', join_('              <div id="appengine_logo">\n')
@@ -1299,7 +1301,8 @@ def topvoted():
         yield '', join_('                 <div>                                       \n')
         yield '', join_('                       <select id="service" name="service">\n')
         for service_key in loop.setup(supported_services.keys):
-            yield '', join_('                           ', '  <option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
+            if supported_services.info.get(service_key):
+                yield '', join_('                           ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
         yield '', join_('                      </select>\n')
         yield '', join_('                  </div>\n')
         yield '', join_('                  <div class="button">\n')

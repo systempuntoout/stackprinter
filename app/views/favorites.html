@@ -55,6 +55,7 @@ $def with (message = None)
                          <div>                                       
                                <select id="service" name="service">
                                    $for service_key in supported_services.keys:
+                                      $if supported_services.info.get(service_key):
                                          <option  value="$(service_key)">$(supported_services.info[service_key]['name'])</option>
                                    <option  value="delicious">Delicious</option> 
                               </select>

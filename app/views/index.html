@@ -91,6 +91,7 @@ $def with (counter)
                      <div>                                       
                           <select id="service" name="service">
                               $for service_key in supported_services.keys:
+                                $if supported_services.info.get(service_key): 
                                   <option  value="$(service_key)">$(supported_services.info[service_key]['name'])</option> 
                          </select>
                      </div>
@@ -108,7 +109,7 @@ $def with (counter)
                     <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>
                     <li><a href="https://twitter.com/systempuntoout">@Systempuntoout</a>    
                     <li>Questions printed so far: <b>$(counter)</b> </li>
-                    <li>Sponsor: <a class="nolines" href="http://www.calcolobolloauto.net">Calcolo del Bollo Auto</a></li>
+                    <li>Sponsor: <a class="nolines" href="http://www.calcolobolloauto.net">Calcolo Bollo Auto</a></li>
                 </ul>
               </div>
               <div id="appengine_logo">

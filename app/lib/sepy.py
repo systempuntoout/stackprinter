@@ -212,7 +212,7 @@ def get_sites():
     """
     Get a list of Stack Exchange sites using Stackauth service
     """
-    results = __gae_fetch('https://api.stackexchange.com/%s/sites?pagesize=999' % __api_version)
+    results = __gae_fetch('https://api.stackexchange.com/%s/sites?pagesize=999&key=%s' % (__api_version, api_key))
     response = simplejson.loads(results.content)
     return response
 
