@@ -13,7 +13,7 @@ from app.utility.utils import memcached
 import app.utility.worker as worker
 import app.db.question as dbquestion
 
-VOTES_ENTRY_LEVEL = 10
+VOTES_ENTRY_LEVEL = 15
 
 deferred.deferred._TASKQUEUE_HEADERS['X-AppEngine-FailFast'] = 'True'
 
@@ -61,12 +61,19 @@ class StackExchangeDownloader():
     def get_question(self, question_id):  
         results = self.retriever.get_question(int(question_id), self.api_site_parameter, body = True, comments = True, pagesize = 1)
         question = results["items"]
-        if len(question) > 0 and question[0].has_key('title'):
-            try:
-                if int(question[0]['up_vote_count'])-int(question[0]['down_vote_count']) > VOTES_ENTRY_LEVEL :
+        if len(question) > 0 and question[0].has_key('title'):           
+            if int(question[0]['up_vote_count'])-int(question[0]['down_vote_count']) > VOTES_ENTRY_LEVEL :
+                try:
                     deferred.defer(worker.deferred_store_question_to_cache, question_id, self.service, question[0])
-            except:
-                logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
+                except:
+                    logging.info("%s - defer error trying to store question_id : %s" % (self.service, question_id))
+            else:
+                try:
+                    logging.info("%s trying to delete question and answers with question_id : %s" % (self.service, question_id)) 
+                    deferred.defer(worker.deferred_delete_question_and_answers, question_id, self.service)
+                except:
+                    logging.info("%s - defer error trying to delete question and answers with question_id : %s" % (self.service, question_id))   
+
             return question[0]
         else:
             return None

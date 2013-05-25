@@ -45,6 +45,10 @@ def deferred_static_counters(question_id, service):
     except Exception, exception:
         logging.exception("db error trying to store stats")
       
-def deferred_normalize_printed_question():
-    for printed_question in dbquestion.PrintedQuestionModel.all():
-        pass
+def deferred_delete_question_and_answers(question_id, service):
+    try:
+        dbquestion.delete_question(question_id, service)
+        dbquestion.delete_answers(question_id, service)
+        dbquestion.delete_printed_question(question_id, service)
+    except Exception, exception:
+        logging.exception("db error deleting question and answers")

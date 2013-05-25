@@ -26,7 +26,7 @@ def suppify_body(body):
         inner_node_value = get_inner_node_value(link_tag)    
         if link_tag.has_key('href') and len(link_tag['href']) > 0 and inner_node_value.strip()!= '' and link_tag['href'].upper() != inner_node_value.upper():
                 links_dict[count]  = link_tag['href']          
-                link_tag.replaceWith( link_tag.prettify() + '<sup style="font-size:9px">[%d]</sup>' % count )          
+                link_tag.replaceWith( link_tag.prettify().replace('rads.stackoverflow.com','www.stackprinter.com') + '<sup style="font-size:9px">[%d]</sup>' % count )          
                 count += 1
     return (soup,links_dict)
 

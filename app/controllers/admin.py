@@ -14,7 +14,7 @@ import app.lib.simplejson as simplejson
 
 deferred.deferred._TASKQUEUE_HEADERS['X-AppEngine-FailFast'] = 'True'
 
-VOTES_ENTRY_LEVEL = 10
+VOTES_ENTRY_LEVEL = 25
 
 render = web.render 
 

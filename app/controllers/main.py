@@ -278,3 +278,10 @@ class About:
     @cachepage()
     def GET(self):
         return render.about()
+
+class Ads:
+    """
+    Advertising
+    """
+    def GET(self, id):
+        web.redirect('http://www.amazon.com/dp/%s/?tag=syst-20' % id)
