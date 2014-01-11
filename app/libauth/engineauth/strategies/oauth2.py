@@ -48,6 +48,7 @@ class OAuth2Strategy(BaseStrategy):
         
         req.credentials = flow.step2_exchange(req.params)
         try:
+            logging.info(req)
             user_info = self.user_info(req)
         except:
             logging.exception('Error logging in')

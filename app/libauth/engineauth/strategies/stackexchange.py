@@ -4,6 +4,7 @@ from engineauth.models import User
 from engineauth.strategies.oauth2 import OAuth2Strategy
 import re
 import app.lib.key as key
+import logging
 
 class StackExchangeUser():
 
@@ -65,7 +66,7 @@ def get_stackexchange_user(sites):
     stackexchange_user = StackExchangeUser()
     for i, site in enumerate(sites):
 
-        key = re.match('^http://(.*).com$',site['site_url']).group(1)
+        key = re.match('^http://(.*).(com|net|org)$',site['site_url']).group(1)
         stackexchange_user.associated_sites_keys.append(key)
         services_key_mapping_list.append((key, site))
         if i == 0 or (site['creation_date'] <= site_creation_date ):            
@@ -99,15 +100,16 @@ class StackExchangeStrategy(OAuth2Strategy):
             return self.raise_error('There was an error contacting StackExchange. '
                                     'Please try again.')
         se_user = get_stackexchange_user(json.loads(results)['items'])
-        
+
         url = "https://api.stackexchange.com/2.0/me?site=%s&key=%s&access_token=%s" % (se_user.main_site_key, key.api_key, req.credentials.access_token)
         res, results = self.http(req).request(url)
         if res.status is not 200:
             return self.raise_error('There was an error contacting StackExchange. '
                                     'Please try again.')
-
+                           
         main_user = json.loads(results)['items'][0]
         auth_id = User.generate_auth_id(req.provider, main_user['user_id'])
+
         return {
             'auth_id': auth_id,
             'info': {
