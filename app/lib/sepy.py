@@ -6,6 +6,7 @@ Python Stack Exchange library customized for Google App Engine
 import app.lib.simplejson as simplejson 
 from google.appengine.api import urlfetch
 from google.appengine.api.taskqueue import taskqueue
+from google.appengine.api import memcache
 from app.config.constant import KEY_TEMPLATE_ERROR
 from app.config.constant import API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED
 from app.config.constant import API_ERROR_THROTTLING
@@ -250,6 +251,10 @@ def __fetch_results(path, api_site_parameter, rpc = None, **url_params ):
     Fetch results
     """
     
+    #Backoff and respect the API
+    if memcache.get('backoff') is not None:
+        raise ApiRequestError(None, CODE_API_ERROR_THROTTLING, API_ERROR_THROTTLING)
+    
     params = {
         "site": api_site_parameter,
         "key": api_key,
@@ -302,8 +307,13 @@ def handle_response(results, url = None):
     #When request is throttled, API simply closes the door without any response
     try:
         response = simplejson.loads(results.content)
-    except simplejson.JSONDecodeError:
+    except:
         raise ApiRequestError(url, CODE_API_ERROR_THROTTLING, API_ERROR_THROTTLING) 
+    
+    if "backoff" in response:
+        logging.info('Backoff warning found! Value: %s Url: %s' % (response["backoff"], url))
+        memcache.set('backoff', response["backoff"],response["backoff"])
+        
     if "error" in response:
         error = response["error"]
         code = error["code"]
