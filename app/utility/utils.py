@@ -44,6 +44,7 @@ def get_supported_services(sites):
         key = re.match('^http://(.*).(com|net|org)$',site['site_url']).group(1)
         supported_services.keys.append(key)
         services_key_mapping_list.append((key, site))
+ 
     supported_services.info = dict(services_key_mapping_list)
     'need to order keys'
     supported_services.keys = order_supported_services_keys(supported_services.keys)
@@ -60,6 +61,7 @@ def order_supported_services_keys(keys):
     keys.remove('superuser')
     keys.remove('meta.superuser')
     keys.remove('stackapps')
+    keys.remove('meta.stackexchange')
     keys_stripped_meta = [key for key in keys if not key.startswith('meta.')]
     keys_stripped_meta.sort()
     keys_added_meta = [prefix+key for key in keys_stripped_meta for prefix in ('','meta.')]
@@ -69,7 +71,8 @@ def order_supported_services_keys(keys):
     ordered_keys.append('stackapps') 
     ordered_keys.append('meta.stackoverflow')
     ordered_keys.append('meta.serverfault')
-    ordered_keys.append('meta.superuser')  
+    ordered_keys.append('meta.superuser') 
+    ordered_keys.append('meta.stackexchange') 
     ordered_keys = ordered_keys + keys_added_meta
     return ordered_keys    
 
