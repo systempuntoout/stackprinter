@@ -305,18 +305,18 @@ def handle_response(results, url = None):
     Load results in JSON
     """
     #When request is throttled, API simply closes the door without any response
+
     try:
         response = simplejson.loads(results.content)
     except:
         raise ApiRequestError(url, CODE_API_ERROR_THROTTLING, API_ERROR_THROTTLING) 
-    
     if "backoff" in response:
         logging.info('Backoff warning found! Value: %s Url: %s' % (response["backoff"], url))
         memcache.set('backoff', response["backoff"],response["backoff"])
-        
-    if "error" in response:
-        error = response["error"]
-        code = error["code"]
-        message = error["message"]
+ 
+    if "error_id" in response:
+        error = response["error_name"]
+        code = response["error_id"]
+        message = response["error_message"]
         raise ApiRequestError(url, code, message)
     return response    
