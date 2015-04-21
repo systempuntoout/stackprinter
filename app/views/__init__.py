@@ -219,7 +219,7 @@ def export():
             yield '', join_('                ', '\n')
             yield '', join_('                ', '        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },\n')
             yield '', join_('                ', '                         tex2jax: { inlineMath: [ ["', '$', '", "', '$', '"], ["\\\\\\\\(","\\\\\\\\)"] ], displayMath: [ ["', '$', '$', '","', '$', '$', '"], ["\\\\[", "\\\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },\n')
-            yield '', join_('                ', '                         TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },\n')
+            yield '', join_('                ', '                         TeX: {extensions: ["mhchem.js"], noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },\n')
             yield '', join_('                ', '                         messageStyle: "none"\n')
             yield '', join_('                ', '        });\n')
             yield '', join_('                ', 'MathJax.Hub.Startup.onload();\n')

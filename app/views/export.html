@@ -18,7 +18,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
 
 		            MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
                                              tex2jax: { inlineMath: [ ["$$", "$$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$$$","$$$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
-                                             TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+                                             TeX: {extensions: ["mhchem.js"], noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
                                              messageStyle: "none"
                             });
                     MathJax.Hub.Startup.onload();
