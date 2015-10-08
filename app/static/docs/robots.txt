@@ -4,5 +4,6 @@ Disallow: /myse
 Disallow: /topprinted
 Disallow: /topvoted
 Disallow: /favorites
+Crawl-delay: 10
 Sitemap: http://www.stackprinter.com/sitemap_index.xml
 Sitemap: http://www.stackprinter.com/sitemap.xml
