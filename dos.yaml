@@ -1,0 +1,3 @@
+blacklist:
+- subnet: 52.84.0.0/24
+  description: an IPv4 subnet

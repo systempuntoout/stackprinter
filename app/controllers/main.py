@@ -56,7 +56,6 @@ class Export:
             comments = web.input(comments = 'true')['comments']
             format = web.input(format = 'HTML')['format'] #For future implementations
             
-            
             #Check for malformed request
             if not service or not question_id or not question_id.isdigit():
                 return Index().GET()

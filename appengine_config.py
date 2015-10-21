@@ -1,6 +1,5 @@
 import app.lib.key as keys
 
-
 def webapp_add_wsgi_middleware(app):
     from engineauth import middleware
     return middleware.AuthMiddleware(app)

@@ -11,9 +11,11 @@ from app.config.urls import urls
 from app.config.constant import UNICORN_MESSAGE_ERROR, NOT_FOUND_ERROR, SERVER_ERROR
 from app.core.stackprinterdownloader import StackAuthDownloader
 import app.utility.utils as utils
+import os
 
 if 'app/libauth' not in sys.path:
-    sys.path[0:0] = ['app/libauth']
+    sys.path.insert(0, '/Users/micheletrimarchi/Project/GoogleAppEngine/stackprinter/app/libauth')
+    sys.path.insert(1,'app/libauth')
 
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
