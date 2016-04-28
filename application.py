@@ -14,8 +14,7 @@ import app.utility.utils as utils
 import os
 
 if 'app/libauth' not in sys.path:
-    sys.path.insert(0, '/Users/micheletrimarchi/Project/GoogleAppEngine/stackprinter/app/libauth')
-    sys.path.insert(1,'app/libauth')
+    sys.path[0:0] = ['app/libauth']
 
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
