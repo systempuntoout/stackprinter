@@ -1,3 +1,5 @@
 blacklist:
 - subnet: 52.84.0.0/24
   description: an IPv4 subnet
+- subnet: 204.79.180.0/24
+  description: drake holding
