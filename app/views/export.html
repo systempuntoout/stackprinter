@@ -1,4 +1,4 @@
-$def with (service, post, pretty_links, printer, link_to_home, pretty_print, comments)
+$def with (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
 	<head>
@@ -38,33 +38,34 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
 	        $if link_to_home:
 	            <a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>
 	        <a href="http://www.stackprinter.com/export?format=HTML&amp;service=$service&amp;printer=false&amp;question=$(post.question['question_id'])"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>
-	    </div> 
-        <div id="question-block">
-          <div id="question-title">
+	    </div>
+        <div id="question-block">           
+            <div id="question-title">   
           	 <img alt="$(supported_services.info[service]['name'])" src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(post.question['title'])<br/>
-          </div>
-          <div class="question-details">
+            </div>
+          $if not hide_question:
+            <div class="question-details">
                 [$(['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0])$(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))] [$post.question['answer_count']]
             	 $post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned') 
-          </div>
-          <div class="question-details">
+            </div>
+            <div class="question-details">
               [$date_from(float(post.question['creation_date']))]
-          </div>
-          <div class="question-details">
-          [
-          $for tag in post.question['tags']:
-              $tag
-          ]
-          </div>
-          <div class="question-details">
-          $if post.question.has_key('link'):
-             [ $post.question['link'] ]
-          $else:
-             [ http://$(service).com/questions/$(post.question['question_id'])]
-          $if post.is_deleted():
-              [DELETED]
-          </div>
-          $if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):    
+            </div>
+            <div class="question-details">
+                [
+                $for tag in post.question['tags']:
+                    $tag
+                ]
+            </div>
+            <div class="question-details">
+                $if post.question.has_key('link'):
+                    [ $post.question['link'] ]
+                $else:
+                    [ http://$(service).com/questions/$(post.question['question_id'])]
+                $if post.is_deleted():
+                    [DELETED]
+            </div>
+            $if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):    
               <div id="adsense">
                       <script type="text/javascript"><!--
                       google_ad_client = "pub-3296756901484166";
@@ -78,8 +79,8 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                       src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                       </script>
               </div>
-          <div id="question">
-          $if pretty_links:
+            <div id="question">
+            $if pretty_links:
               $code:
                   (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
               $sup_question_body
@@ -87,9 +88,9 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
               $for key in sup_question_links.keys():
                   [$(key)] $(sup_question_links[key].replace("&","&amp;"))<br/>
               </div>
-          $else:
+            $else:
               $post.question['body']
-          </div>
+            </div>
             $if post.question.get('comments') and comments:
                 <div class="question-comments">  
           	    $for comment in post.question['comments']:
@@ -101,6 +102,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                 </div>
           <div class="answers">
               $for answer_number, answer  in enumerate(post.answers):
+                $if (not answer_id or answer['answer_id'] == int(answer_id)):
                   <div class="answer-details">
                       [$(['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0])$(int(answer['up_vote_count'])-int(answer['down_vote_count']))]
                       [$date_from(float(answer['creation_date']))]     
@@ -130,7 +132,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                       </div>
                   <div class="answer-pagenumber">$int(answer_number+1)</div>
                   
-              </div>
+          </div>
       </div>
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

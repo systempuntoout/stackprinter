@@ -55,9 +55,10 @@ class Export:
             pretty_print = web.input(prettyprint = 'true')['prettyprint']
             comments = web.input(comments = 'true')['comments']
             format = web.input(format = 'HTML')['format'] #For future implementations
-            
+            answer_id = web.input(answer = None)['answer']
+            hide_question = web.input(hidequestion = 'true' if (answer_id is not None) else 'false' )['hidequestion']
             #Check for malformed request
-            if not service or not question_id or not question_id.isdigit():
+            if not service or not question_id or not question_id.isdigit() or (answer_id and not answer_id.isdigit()):
                 return Index().GET()
             
             #Check for static questions
@@ -73,7 +74,7 @@ class Export:
             referrer = os.environ.get("HTTP_REFERER")
             if referrer:
                 try:
-                    referrer_key = re.match('^http://(.*).com',referrer).group(1)
+                    referrer_key = re.match('^(http|https)://(.*).com',referrer).group(2)
                     if referrer_key in StackAuthDownloader.get_supported_services().keys or referrer in ('http://www.stackprinter.com/','http://stackprinter.appspot.com/'):
                         bypass_cache = True
                 except:
@@ -84,7 +85,7 @@ class Export:
             if post is None:
                 return render.oops(NOT_FOUND_ERROR)
                 
-            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true', pretty_print == 'true', comments == 'true' )
+            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true', pretty_print == 'true', comments == 'true', answer_id, hide_question == 'true' )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)

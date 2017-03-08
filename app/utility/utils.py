@@ -41,7 +41,7 @@ def get_supported_services(sites):
     services_key_mapping_list = []
     supported_services = SupportedServices()
     for site in sites:
-        key = re.match('^http://(.*).(com|net|org)$',site['site_url']).group(1)
+        key = re.match('^(http|https)://(.*).(com|net|org)$',site['site_url']).group(2)
         supported_services.keys.append(key)
         services_key_mapping_list.append((key, site))
  

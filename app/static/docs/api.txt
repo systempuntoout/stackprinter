@@ -3,7 +3,7 @@ Summary: shows a printable view of a question
 Parameters:
 question
 * question id
-* string
+* int
 
 service
 * endpoint (stackoverflow|meta.stackoverflow|superuser|serverfault|stackapps|..stackexchange endpoint sites)
@@ -32,3 +32,12 @@ prettyprint (optional)
 comments (optional)
 * Shows the question and answers comments
 * boolean true (default)
+
+answer (optional)
+* Print a specific answer by id
+* answer id
+* int
+
+hidequestion (optional)
+* Hide question from printing
+* boolean (false by default, true if the answer parameter is used) 

@@ -199,7 +199,7 @@ def export():
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments):
+    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question):
         yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n')
         yield '', join_('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">\n')
         yield '', join_('        <head>\n')
@@ -239,97 +239,99 @@ def export():
         if link_to_home:
             yield '', join_('                ', '<a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>\n')
         yield '', join_('                <a href="http://www.stackprinter.com/export?format=HTML&amp;service=', escape_(service, True), '&amp;printer=false&amp;question=', escape_((post.question['question_id']), True), '"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>\n')
-        yield '', join_('            </div> \n')
-        yield '', join_('        <div id="question-block">\n')
-        yield '', join_('          <div id="question-title">\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('        <div id="question-block">           \n')
+        yield '', join_('            <div id="question-title">   \n')
         yield '', join_('                 <img alt="', escape_((supported_services.info[service]['name']), True), '" src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(post.question['title']), True), '<br/>\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('          <div class="question-details">\n')
-        yield '', join_('                [', escape_((['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0]), True), escape_((int(post.question['up_vote_count'])-int(post.question['down_vote_count'])), True), '] [', escape_(post.question['answer_count'], True), ']\n')
-        yield '', join_('                 ', escape_(post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' \n')
-        yield '', join_('          </div>\n')
-        yield '', join_('          <div class="question-details">\n')
-        yield '', join_('              [', escape_(date_from(float(post.question['creation_date'])), True), ']\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('          <div class="question-details">\n')
-        yield '', join_('          [\n')
-        for tag in loop.setup(post.question['tags']):
-            yield '', join_('          ', escape_(tag, True), '\n')
-        yield '', join_('          ]\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('          <div class="question-details">\n')
-        if post.question.has_key('link'):
-            yield '', join_('          ', '[ ', escape_(post.question['link'], True), ' ]\n')
-        else:
-            yield '', join_('          ', '[ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
-        if post.is_deleted():
-            yield '', join_('          ', '[DELETED]\n')
-        yield '', join_('          </div>\n')
-        if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
-            yield '', join_('          ', '<div id="adsense">\n')
-            yield '', join_('          ', '        <script type="text/javascript"><!--\n')
-            yield '', join_('          ', '        google_ad_client = "pub-3296756901484166";\n')
-            yield '', join_('          ', '        /* 728x90, created 9/8/11 */\n')
-            yield '', join_('          ', '        google_ad_slot = "7129208720";\n')
-            yield '', join_('          ', '        google_ad_width = 728;\n')
-            yield '', join_('          ', '        google_ad_height = 90;\n')
-            yield '', join_('          ', '        //-->\n')
-            yield '', join_('          ', '        </script>\n')
-            yield '', join_('          ', '        <script type="text/javascript"\n')
-            yield '', join_('          ', '        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n')
-            yield '', join_('          ', '        </script>\n')
+        yield '', join_('            </div>\n')
+        if not hide_question:
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '    [', escape_((['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0]), True), escape_((int(post.question['up_vote_count'])-int(post.question['down_vote_count'])), True), '] [', escape_(post.question['answer_count'], True), ']\n')
+            yield '', join_('          ', '     ', escape_(post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' \n')
             yield '', join_('          ', '</div>\n')
-        yield '', join_('          <div id="question">\n')
-        if pretty_links:
-            (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
-            yield '', join_('          ', escape_(sup_question_body, True), '\n')
-            yield '', join_('          ', '<div id="question-links">\n')
-            for key in loop.setup(sup_question_links.keys()):
-                yield '', join_('          ', '[', escape_((key), True), '] ', escape_((sup_question_links[key].replace("&","&amp;")), True), '<br/>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '  [', escape_(date_from(float(post.question['creation_date'])), True), ']\n')
             yield '', join_('          ', '</div>\n')
-        else:
-            yield '', join_('          ', escape_(post.question['body'], True), '\n')
-        yield '', join_('          </div>\n')
-        if post.question.get('comments') and comments:
-            yield '', join_('            ', '<div class="question-comments">  \n')
-            for comment in loop.setup(post.question['comments']):
-                yield '', join_('                ', '<div class="comment">\n')
-                if int(comment['score']) > 0:
-                    yield '', join_('                    ', '(', escape_(comment['score'], True), ')    \n')
-                yield '', join_('                ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>                   \n')
-                yield '', join_('                ', '</div>\n')
-            yield '', join_('            ', '</div>\n')
-        yield '', join_('          <div class="answers">\n')
-        for answer_number, answer  in loop.setup(enumerate(post.answers)):
-            yield '', join_('              ', '<div class="answer-details">\n')
-            yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
-            yield '', join_('              ', '    [', escape_(date_from(float(answer['creation_date'])), True), ']     \n')
-            yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
-            if bool(answer.get('accepted') or answer.get('is_accepted')):
-                yield '', join_('                  ', '[<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
-            yield '', join_('              ', '</div>\n')
-            yield '', join_('              ', '<div class="answer">\n')
-            if pretty_links:
-                (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
-                yield '', join_('                ', escape_(sup_answer_body, True), '  \n')
-                for key in loop.setup(sup_answer_links.keys()):
-                    yield '', join_('                ', '[', escape_((key), True), '] ', escape_((sup_answer_links[key].replace("&","&amp;")), True), '<br/>\n')
-                yield '', join_('                ', '<br/>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '    [\n')
+            for tag in loop.setup(post.question['tags']):
+                yield '', join_('              ', escape_(tag, True), '\n')
+            yield '', join_('          ', '    ]\n')
+            yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            if post.question.has_key('link'):
+                yield '', join_('              ', '[ ', escape_(post.question['link'], True), ' ]\n')
             else:
-                yield '', join_('                ', escape_(answer['body'], True), '\n')
-            yield '', join_('              ', '</div>\n')
-            if answer.get('comments') and comments:
-                yield '', join_('              ', '<div class="answer-comments">       \n')
-                for comment in loop.setup(answer['comments']):
+                yield '', join_('              ', '[ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
+            if post.is_deleted():
+                yield '', join_('              ', '[DELETED]\n')
+            yield '', join_('          ', '</div>\n')
+            if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
+                yield '', join_('          ', '<div id="adsense">\n')
+                yield '', join_('          ', '        <script type="text/javascript"><!--\n')
+                yield '', join_('          ', '        google_ad_client = "pub-3296756901484166";\n')
+                yield '', join_('          ', '        /* 728x90, created 9/8/11 */\n')
+                yield '', join_('          ', '        google_ad_slot = "7129208720";\n')
+                yield '', join_('          ', '        google_ad_width = 728;\n')
+                yield '', join_('          ', '        google_ad_height = 90;\n')
+                yield '', join_('          ', '        //-->\n')
+                yield '', join_('          ', '        </script>\n')
+                yield '', join_('          ', '        <script type="text/javascript"\n')
+                yield '', join_('          ', '        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n')
+                yield '', join_('          ', '        </script>\n')
+                yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div id="question">\n')
+            if pretty_links:
+                (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
+                yield '', join_('          ', escape_(sup_question_body, True), '\n')
+                yield '', join_('          ', '<div id="question-links">\n')
+                for key in loop.setup(sup_question_links.keys()):
+                    yield '', join_('          ', '[', escape_((key), True), '] ', escape_((sup_question_links[key].replace("&","&amp;")), True), '<br/>\n')
+                yield '', join_('          ', '</div>\n')
+            else:
+                yield '', join_('          ', escape_(post.question['body'], True), '\n')
+            yield '', join_('          ', '</div>\n')
+            if post.question.get('comments') and comments:
+                yield '', join_('          ', '<div class="question-comments">  \n')
+                for comment in loop.setup(post.question['comments']):
                     yield '', join_('              ', '<div class="comment">\n')
                     if int(comment['score']) > 0:
-                        yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
-                    yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>     \n')
+                        yield '', join_('                  ', '(', escape_(comment['score'], True), ')    \n')
+                    yield '', join_('              ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>                   \n')
                     yield '', join_('              ', '</div>\n')
+                yield '', join_('          ', '</div>\n')
+        yield '', join_('          <div class="answers">\n')
+        for answer_number, answer  in loop.setup(enumerate(post.answers)):
+            if (not answer_id or answer['answer_id'] == int(answer_id)):
+                yield '', join_('              ', '<div class="answer-details">\n')
+                yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
+                yield '', join_('              ', '    [', escape_(date_from(float(answer['creation_date'])), True), ']     \n')
+                yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
+                if bool(answer.get('accepted') or answer.get('is_accepted')):
+                    yield '', join_('                  ', '[<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
                 yield '', join_('              ', '</div>\n')
-            yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
-            yield '', join_('              ', '\n')
-        yield '', join_('              </div>\n')
+                yield '', join_('              ', '<div class="answer">\n')
+                if pretty_links:
+                    (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
+                    yield '', join_('                ', escape_(sup_answer_body, True), '  \n')
+                    for key in loop.setup(sup_answer_links.keys()):
+                        yield '', join_('                ', '[', escape_((key), True), '] ', escape_((sup_answer_links[key].replace("&","&amp;")), True), '<br/>\n')
+                    yield '', join_('                ', '<br/>\n')
+                else:
+                    yield '', join_('                ', escape_(answer['body'], True), '\n')
+                yield '', join_('              ', '</div>\n')
+                if answer.get('comments') and comments:
+                    yield '', join_('              ', '<div class="answer-comments">       \n')
+                    for comment in loop.setup(answer['comments']):
+                        yield '', join_('              ', '<div class="comment">\n')
+                        if int(comment['score']) > 0:
+                            yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
+                        yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>     \n')
+                        yield '', join_('              ', '</div>\n')
+                    yield '', join_('              ', '</div>\n')
+                yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
+                yield '', join_('              ', '\n')
+        yield '', join_('          </div>\n')
         yield '', join_('      </div>\n')
         yield '', join_('        <script type="text/javascript">\n')
         yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
