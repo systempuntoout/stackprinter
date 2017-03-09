@@ -66,7 +66,7 @@ def get_stackexchange_user(sites):
     stackexchange_user = StackExchangeUser()
     for i, site in enumerate(sites):
 
-        key = re.match('^http://(.*).(com|net|org)$',site['site_url']).group(1)
+        key = re.match('^(http|https)://(.*).(com|net|org)$',site['site_url']).group(2)
         stackexchange_user.associated_sites_keys.append(key)
         services_key_mapping_list.append((key, site))
         if i == 0 or (site['creation_date'] <= site_creation_date ):            
