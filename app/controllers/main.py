@@ -61,6 +61,12 @@ class Export:
             if not service or not question_id or not question_id.isdigit() or (answer_id and not answer_id.isdigit()):
                 return Index().GET()
             
+            #Meta normalization
+            if service.startswith('meta.'):
+                service_split = service.split('.')
+                if len(service_split) > 2:
+                    service = '%s.%s.%s' % (service_split[1],service_split[0],service_split[2])
+            
             #Check for static questions
             if "%s_%s" % (service,question_id) in urls.static_questions:
                 deferred.defer(worker.deferred_static_counters, question_id, service)
