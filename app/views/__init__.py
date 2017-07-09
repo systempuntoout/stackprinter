@@ -34,7 +34,7 @@ def about():
         yield '', join_('                  <br/>\n')
         yield '', join_('                  The easiest way to use this service is with:<br/>\n')
         yield '', join_('                  * <a href="https://greasyfork.org/en/scripts/12350-stack-overflow-stackprinter" >StackPrinter GreaseMonkey script</a><br/>\n')
-        yield '', join_('                  * <a href="javascript:(function(){var re = new RegExp(\'^http://(.*?)\\.com/questions/([0-9]+)/\');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open(\'http://www.stackprinter.com/export?format=HTML&service=\'+service+\'&question=\'+questionid)}else{alert(\'Attention: question id not found!\')}})()">Bookmarklet</a><br/>\n')
+        yield '', join_('                  * <a href="javascript:(function(){var re = new RegExp(\'^https://(.*?)\\.com/questions/([0-9]+)/\');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open(\'http://www.stackprinter.com/export?format=HTML&service=\'+service+\'&question=\'+questionid)}else{alert(\'Attention: question id not found!\')}})()">Bookmarklet</a><br/>\n')
         yield '', join_('                  <br/>\n')
         yield '', join_('                    <b>MySE:</b><br/>\n')
         yield '', join_('                    Retrieves and lets you print all your Stack Exchange stuff\n')
