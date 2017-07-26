@@ -65,6 +65,8 @@ $def with (user, associated_sites, associated_sites_keys)
                                     
                                 <select id="service" name="service">
                                       $for service_key in associated_sites_keys:
+                                        $code:
+                                            service_key = normalize_meta(service_key)
                                         <option  value="$(service_key)">$(supported_services.info[service_key]['name'])</option> 
                                  </select>
                                  <input type="hidden" id="category" name="category" value="">

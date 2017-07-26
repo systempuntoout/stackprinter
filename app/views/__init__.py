@@ -896,6 +896,7 @@ def myse():
             yield '', join_('                  ', '\n')
             yield '', join_('                  ', '          <select id="service" name="service">\n')
             for service_key in loop.setup(associated_sites_keys):
+                service_key = normalize_meta(service_key)
                 yield '', join_('                                  ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option> \n')
             yield '', join_('                  ', '           </select>\n')
             yield '', join_('                  ', '           <input type="hidden" id="category" name="category" value="">\n')

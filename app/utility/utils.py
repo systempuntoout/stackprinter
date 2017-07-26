@@ -6,6 +6,13 @@ import re
 import logging
 import web
 
+def normalize_meta(service):
+    """Normalize service definition from meta.xxx.stackexchange to xxx.meta.stackexchange"""
+    if service.startswith('meta.'):
+        service_split = service.split('.')
+        if len(service_split) > 2:
+            service = '%s.%s.%s' % (service_split[1],service_split[0],service_split[2])
+    return service
 
 def date_from(timestamp):
     """Format the given timestamp""" 

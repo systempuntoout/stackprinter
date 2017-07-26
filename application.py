@@ -19,6 +19,7 @@ if 'app/libauth' not in sys.path:
 web.render = render = web.template.render('app/views/', globals = {'date_from':utils.date_from,
                                                'suppify_body':utils.suppify_body,
                                                'commify': web.utils.commify,
+                                               'normalize_meta' : utils.normalize_meta,
                                                'urlquote':web.net.urlquote,
                                                'htmlquote':web.net.htmlquote,
                                                'supported_services': StackAuthDownloader.get_supported_services(),
