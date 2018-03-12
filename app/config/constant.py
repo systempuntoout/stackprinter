@@ -7,3 +7,4 @@ KEY_TEMPLATE_ERROR = "Attention: rename key_template.py in key.py and insert you
 API_ERROR_THROTTLING = "The StackExchange server is too busy at the moment. Please try again later."
 CODE_API_ERROR_THROTTLING = 0
 API_ERROR_AUTH_TOKEN_NOT_AUTHORIZED = 4009
+DEFAULT_FONT_FAMILY = "Georgia"

@@ -41,3 +41,7 @@ answer (optional)
 hidequestion (optional)
 * Hide question from printing
 * boolean (false by default, true if the answer parameter is used) 
+
+font_family (optional)
+* Pick your favorite font-family
+* string (Georgia by default)

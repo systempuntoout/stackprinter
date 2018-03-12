@@ -1,8 +1,16 @@
-$def with (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question)
+$def with (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question, font_family)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<style>
+        body {
+            background: white;
+            font-size: 10pt;
+            font-family: "$(font_family)";
+            text-align:justify;
+        }
+        </style>
 		<link rel="stylesheet" href="/stylesheets/export.css"/>
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 		<link rel="canonical" href="http://www.stackprinter.com/export?service=$service&amp;question=$(post.question['question_id'])&amp;printer=false&amp;linktohome=true"/>

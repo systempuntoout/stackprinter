@@ -11,7 +11,7 @@ from app.core.stackprinterdownloader import StackExchangeDownloader
 from app.core.stackprinterdownloader import StackAuthDownloader
 from app.core.stackprinterdownloader import UnsupportedServiceError
 from app.core.stackprinterdownloader import DeliciousDownloader
-from app.config.constant import NOT_FOUND_ERROR, GENERIC_ERROR, UNSUPPORTED_SERVICE_ERROR
+from app.config.constant import NOT_FOUND_ERROR, GENERIC_ERROR, UNSUPPORTED_SERVICE_ERROR, DEFAULT_FONT_FAMILY
 import app.lib.sepy as sepy
 import app.db.counter as dbcounter
 import app.db.question as dbquestion
@@ -56,10 +56,15 @@ class Export:
             comments = web.input(comments = 'true')['comments']
             format = web.input(format = 'HTML')['format'] #For future implementations
             answer_id = web.input(answer = None)['answer']
+            font_family = web.input(font_family = DEFAULT_FONT_FAMILY)['font_family']
             hide_question = web.input(hidequestion = 'true' if (answer_id is not None) else 'false' )['hidequestion']
             #Check for malformed request
             if not service or not question_id or not question_id.isdigit() or (answer_id and not answer_id.isdigit()):
                 return Index().GET()
+            
+            #Normalize font-family
+            if not font_family.replace(" ","").isalpha():
+                font_family = DEFAULT_FONT_FAMILY
             
             #Meta normalization
             service = utils.normalize_meta(service)
@@ -88,7 +93,7 @@ class Export:
             if post is None:
                 return render.oops(NOT_FOUND_ERROR)
                 
-            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true', pretty_print == 'true', comments == 'true', answer_id, hide_question == 'true' )
+            return render.export(service, post, pretty_links == 'true', printer == 'true', link_to_home == 'true', pretty_print == 'true', comments == 'true', answer_id, hide_question == 'true', font_family )
         except (sepy.ApiRequestError, UnsupportedServiceError), exception:
             logging.error(exception)
             return render.oops(exception.message)

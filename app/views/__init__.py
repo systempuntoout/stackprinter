@@ -199,11 +199,19 @@ def export():
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question):
+    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question, font_family):
         yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n')
         yield '', join_('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">\n')
         yield '', join_('        <head>\n')
         yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
+        yield '', join_('                <style>\n')
+        yield '', join_('        body {\n')
+        yield '', join_('            background: white;\n')
+        yield '', join_('            font-size: 10pt;\n')
+        yield '', join_('            font-family: "', escape_((font_family), True), '";\n')
+        yield '', join_('            text-align:justify;\n')
+        yield '', join_('        }\n')
+        yield '', join_('        </style>\n')
         yield '', join_('                <link rel="stylesheet" href="/stylesheets/export.css"/>\n')
         yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
         yield '', join_('                <link rel="canonical" href="http://www.stackprinter.com/export?service=', escape_(service, True), '&amp;question=', escape_((post.question['question_id']), True), '&amp;printer=false&amp;linktohome=true"/>\n')
@@ -805,6 +813,7 @@ def index():
         yield '', join_('              <div class="links">                           \n')
         yield '', join_('                <ul id="links_block">\n')
         yield '', join_('                    <li><b>Sample</b>:  <a target="_blank" href="/export?format=HTML&service=stackoverflow&question=3800707&printer=false"/>What is negative code ?</a>\n')
+        yield '', join_('                    <li><a href="/docs/api.txt">API</a>\n')
         yield '', join_('                    <li><a href="https://greasyfork.org/en/scripts/12350-stack-overflow-stackprinter" >StackPrinter GreaseMonkey script</a></li>\n')
         yield '', join_('                    <li><a href="javascript:(function(){var re = new RegExp(\'^https://(.*?)\\.com/questions/([0-9]+)/\');var group = re.exec(window.location.href);if (group!=null){var service = group[1];var questionid=group[2];window.open(\'http://www.stackprinter.com/export?format=HTML&service=\'+service+\'&question=\'+questionid)}else{alert(\'Attention: question id not found!\')}})()">StackPrinter Bookmarklet</a></li> \n')
         yield '', join_('                    <li><a href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Feedback</a>\n')
