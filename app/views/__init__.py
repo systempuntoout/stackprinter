@@ -1,6 +1,29 @@
 from web.template import CompiledTemplate, ForLoop
 
 
+def sitemap_questions():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (questions):
+        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
+        yield '', join_('<urlset\n')
+        yield '', join_('      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n')
+        yield '', join_('      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n')
+        yield '', join_('      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n')
+        yield '', join_('http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n')
+        for question in loop.setup(questions):
+            yield '', join_('  ', '<url>\n')
+            yield '', join_('  ', '  <loc>http://www.stackprinter.com/export?service=', escape_((question.split('_')[1]), True), '&amp;question=', escape_((question.split('_')[0]), True), '&amp;printer=false&amp;linktohome=true</loc>\n')
+            yield '', join_('  ', '</url>\n')
+        yield '', join_('</urlset>\n')
+    return __template__
+
+sitemap_questions = CompiledTemplate(sitemap_questions(), 'apps/app/views/sitemap_questions.xml')
+
+
 def about():
     loop = ForLoop()
     _dummy  = CompiledTemplate(lambda: None, "dummy")
@@ -27,6 +50,16 @@ def about():
         yield '', join_('              </div>\n')
         yield '', join_('              <div class="about">\n')
         yield '', join_('                  <br/>\n')
+        yield '', join_('                  <b>Please support Stackprinter with a donation:</b><br/>\n')
+        yield '', join_('                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n')
+        yield '', join_('                    <input type="hidden" name="cmd" value="_donations" />\n')
+        yield '', join_('                    <input type="hidden" name="business" value="YWAN3PD3PQE2L" />\n')
+        yield '', join_('                    <input type="hidden" name="item_name" value="Support Stackprinter" />\n')
+        yield '', join_('                    <input type="hidden" name="currency_code" value="EUR" />\n')
+        yield '', join_('                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Please support Stackprinter making a PayPal donation!" alt="Donate with PayPal button" />\n')
+        yield '', join_('                    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />\n')
+        yield '', join_('                    </form>\n')
+        yield '', join_('                    <br/>\n')
         yield '', join_('                  <b>Printer-Friendly:</b><br/>\n')
         yield '', join_('                  Using the <a href="http://www.stackexchange.com/sites">Stack Exchange</a> Network <a href="http://stackapps.com/questions/1/api-documentation-and-help">API</a> produces an essential printable view of a given <i>question id</i> with:<br/>\n')
         yield '', join_('                  * All the answers<br/> \n')
@@ -52,14 +85,103 @@ def about():
         yield '', join_('                  <b>Info:</b><br/>\n')
         yield '', join_('                  <a target="_new" href="/docs/changelog.txt">Changelog</a>/<a target="_new" href="/docs/todo.txt">ToDo</a>/<a target="_new" href="http://stackapps.com/questions/179/stackprinter-the-stack-exchange-printer-suite">Stack Apps</a>/<a target="_new" href="/docs/api.txt">Api</a><br/>\n')
         yield '', join_('                  <a target="_new" href="http://github.com/systempuntoout/stackprinter"/>Source code on Github</a>/<a target="_new" href="/docs/privacy.txt">Privacy</a><br/>\n')
-        yield '', join_('                  <img src="/images/systempuntooutmail.jpg"/><br/><br/>\n')
+        yield '', join_('                  <img src="/images/systempuntooutmail.jpg"/><br/><br/>                  \n')
+        yield '', join_('                    \n')
         yield '', join_('              </div>                                 \n')
         yield '', join_('          </div>\n')
         yield '', join_('  </body>\n')
         yield '', join_('</html>\n')
     return __template__
 
-about = CompiledTemplate(about(), 'app/views/about.html')
+about = CompiledTemplate(about(), 'apps/app/views/about.html')
+
+
+def favorites_delicious():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (username, result):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>Favorites - StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>\n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('        <div id="back">\n')
+        yield '', join_('            <a href="/favorites"><img src="/images/search.png"/></a>\n')
+        yield '', join_('        </div>\n')
+        yield '', join_('             <div id="title" class="main">\n')
+        yield '', join_('                 <img src="/images/delicious.jpg"/>&nbsp;Delicious <i>stackoverflow</i> questions <br>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('            <p id="input"><a target="_new" href="http://www.delicious.com/', escape_((username), True), '/stackoverflow">', escape_((username), True), '</a></p>\n')
+        yield '', join_('            \n')
+        yield '', join_('            <table cellpadding="2" cellspacing="0">\n')
+        for question in loop.setup(result):
+            yield '', join_('            ', '<tr class="', escape_(loop.parity, True), '">\n')
+            yield '', join_('            ', '    <td class="printer">\n')
+            yield '', join_('            ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+            yield '', join_('            ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+            yield '', join_('            ', '        </a>\n')
+            yield '', join_('            ', '    </td>\n')
+            yield '', join_('            ', '    <td class="quicklook">\n')
+            yield '', join_('            ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
+            yield '', join_('            ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
+            yield '', join_('            ', '        </a>\n')
+            yield '', join_('            ', '    </td>    \n')
+            yield '', join_('            ', '    <td class="title">\n')
+            yield '', join_('            ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(question.title, True), '</a><br>\n')
+            yield '', join_('            ', '        <span class="tag">\n')
+            yield '', join_('            ', '            [', escape_((", ".join([tag for tag in question.tags_list if tag!='stackoverflow'])), True), ']\n')
+            yield '', join_('            ', '        </span>\n')
+            yield '', join_('            ', '    </td>\n')
+            yield '', join_('            ', '    <td class="date">\n')
+            yield '', join_('            ', '        [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
+            yield '', join_('            ', '    </td>\n')
+            yield '', join_('            ', '</tr>\n')
+            if loop.last:
+                yield '', join_('            ', '</table>\n')
+        else:
+            if len(result) == 0:
+                yield '', join_('            ', '<p id="not_found">\n')
+                yield '', join_('            ', '    No links found tagged <i>stackoverflow</i> \n')
+                yield '', join_('            ', '</p>                            \n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+favorites_delicious = CompiledTemplate(favorites_delicious(), 'apps/app/views/favorites_delicious.html')
+
+
+def sitemap_index():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (sitemaps):
+        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
+        yield '', join_('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for sitemap in loop.setup(sitemaps):
+            yield '', join_('  ', '<sitemap>\n')
+            yield '', join_('  ', '    <loc>http://www.stackprinter.com/sitemap_', escape_((sitemap.key().id()), True), '.xml</loc>\n')
+            yield '', join_('  ', '    <lastmod>', escape_((sitemap.last_modified.strftime("%Y-%m-%d")), True), '</lastmod>\n')
+            yield '', join_('  ', '</sitemap>\n')
+        yield '', join_('</sitemapindex>\n')
+    return __template__
+
+sitemap_index = CompiledTemplate(sitemap_index(), 'apps/app/views/sitemap_index.xml')
 
 
 def admin():
@@ -104,261 +226,7 @@ def admin():
         yield '', join_('</html>\n')
     return __template__
 
-admin = CompiledTemplate(admin(), 'app/views/admin.html')
-
-
-def deleted():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (result):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Deleted - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('             <div id="back">\n')
-        yield '', join_('                    <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
-        yield '', join_('                 </div>\n')
-        yield '', join_('             <div id="title" class="main"><i>Deleted</i> questions</div>\n')
-        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
-        yield '', join_('                    <tr class="even">\n')
-        yield '', join_('                            <td class="printer">\n')
-        yield '', join_('                            <a target="_blank" href="/questions/what-is-your-solution-to-the-fizzbuzz-problem.html"/>\n')
-        yield '', join_('                                <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-        yield '', join_('                            </a>\n')
-        yield '', join_('                        </td>\n')
-        yield '', join_('                        <td class="service_logo">\n')
-        yield '', join_('                            <a target="_blank" href="http://stackoverflow.com"><img src="http://sstatic.net/stackoverflow/img/apple-touch-icon.png"/></a>\n')
-        yield '', join_('                        </td>\n')
-        yield '', join_('                        <td class="service_name">\n')
-        yield '', join_('                            [Stack Overflow]    \n')
-        yield '', join_('                        </td>    \n')
-        yield '', join_('                        <td class="title">\n')
-        yield '', join_('                            <a target="_blank" href="http://stackoverflow.com/questions/437"/>What is your solution to the FizzBuzz problem?</a><br>\n')
-        yield '', join_('                            <span class="tag">\n')
-        yield '', join_('                                [ language-agnostic interview-questions code-golf rosetta-stone fizzbuzz ]  \n')
-        yield '', join_('                            </span>\n')
-        yield '', join_('                        </td>\n')
-        yield '', join_('                        <td class="counter">\n')
-        yield '', join_('                                [Static]\n')
-        yield '', join_('                        </td>\n')
-        yield '', join_('                    </tr>\n')
-        for question in loop.setup(result):
-            if supported_services.info.get(question.service):
-                yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
-                yield '', join_('                    ', '    <td class="printer">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-                yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-                yield '', join_('                    ', '        </a>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="service_logo">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="', escape_((supported_services.info[question.service]['site_url']), True), '"><img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/></a>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="service_name">\n')
-                yield '', join_('                    ', '        [', escape_((supported_services.info[question.service]['name']), True), ']    \n')
-                yield '', join_('                    ', '    </td>    \n')
-                yield '', join_('                    ', '    <td class="title">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.get_url(), True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
-                yield '', join_('                    ', '        <span class="tag">\n')
-                yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags])), True), ']\n')
-                yield '', join_('                    ', '        </span>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="counter">\n')
-                yield '', join_('                    ', '            [', escape_((question.counter), True), ']\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '</tr>\n')
-        else:
-            if len(result) == 0:
-                yield '', join_('                    ', '<p id="not_found">\n')
-                yield '', join_('                    ', '    No questions found\n')
-                yield '', join_('                    ', '</p>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-deleted = CompiledTemplate(deleted(), 'app/views/deleted.html')
-
-
-def export():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question, font_family):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n')
-        yield '', join_('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">\n')
-        yield '', join_('        <head>\n')
-        yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
-        yield '', join_('                <style>\n')
-        yield '', join_('        body {\n')
-        yield '', join_('            background: white;\n')
-        yield '', join_('            font-size: 10pt;\n')
-        yield '', join_('            font-family: "', escape_((font_family), True), '";\n')
-        yield '', join_('            text-align:justify;\n')
-        yield '', join_('        }\n')
-        yield '', join_('        </style>\n')
-        yield '', join_('                <link rel="stylesheet" href="/stylesheets/export.css"/>\n')
-        yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
-        yield '', join_('                <link rel="canonical" href="http://www.stackprinter.com/export?service=', escape_(service, True), '&amp;question=', escape_((post.question['question_id']), True), '&amp;printer=false&amp;linktohome=true"/>\n')
-        yield '', join_('                <title>', escape_(post.question['title'], True), '</title>\n')
-        yield '', join_('                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
-        if pretty_print and 'Prettify' in supported_services.info[service].get('markdown_extensions',''):
-            yield '', join_('                ', '    <script type="text/javascript" src="/javascripts/prettify/prettify.js"></script>\n')
-            yield '', join_('                ', '    <link rel="stylesheet" href="/stylesheets/prettify.css"> \n')
-            yield '', join_('                ', '    <script type="text/javascript">jQuery(document).ready(function(){StyleCode();});</script>\n')
-        if 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
-            yield '', join_('                ', '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">\n')
-            yield '', join_('                ', '\n')
-            yield '', join_('                ', '        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },\n')
-            yield '', join_('                ', '                         tex2jax: { inlineMath: [ ["', '$', '", "', '$', '"], ["\\\\\\\\(","\\\\\\\\)"] ], displayMath: [ ["', '$', '$', '","', '$', '$', '"], ["\\\\[", "\\\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },\n')
-            yield '', join_('                ', '                         TeX: {extensions: ["mhchem.js"], noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },\n')
-            yield '', join_('                ', '                         messageStyle: "none"\n')
-            yield '', join_('                ', '        });\n')
-            yield '', join_('                ', 'MathJax.Hub.Startup.onload();\n')
-            yield '', join_('                ', '</script>\n')
-            if printer:
-                yield '', join_('                ', '<script type="text/javascript">\n')
-                yield '', join_('                ', '    MathJax.Hub.Queue(["Delay",MathJax.Callback,700],Print)\n')
-                yield '', join_('                ', '</script>\n')
-        else:
-            if printer:
-                yield '', join_('                ', '<script type="text/javascript">\n')
-                yield '', join_('                ', '    jQuery(document).ready(function(){Print();});\n')
-        yield '', join_('                </script>\n')
-        yield '', join_('    </head>\n')
-        yield '', join_('        <body>\n')
-        yield '', join_('            <div id="home">\n')
-        if link_to_home:
-            yield '', join_('                ', '<a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>\n')
-        yield '', join_('                <a href="http://www.stackprinter.com/export?format=HTML&amp;service=', escape_(service, True), '&amp;printer=false&amp;question=', escape_((post.question['question_id']), True), '"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>\n')
-        yield '', join_('            </div>\n')
-        yield '', join_('        <div id="question-block">           \n')
-        yield '', join_('            <div id="question-title">   \n')
-        yield '', join_('                 <img alt="', escape_((supported_services.info[service]['name']), True), '" src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(post.question['title']), True), '<br/>\n')
-        yield '', join_('            </div>\n')
-        if not hide_question:
-            yield '', join_('          ', '<div class="question-details">\n')
-            yield '', join_('          ', '    [', escape_((['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0]), True), escape_((int(post.question['up_vote_count'])-int(post.question['down_vote_count'])), True), '] [', escape_(post.question['answer_count'], True), ']\n')
-            yield '', join_('          ', '     ', escape_(post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' \n')
-            yield '', join_('          ', '</div>\n')
-            yield '', join_('          ', '<div class="question-details">\n')
-            yield '', join_('          ', '  [', escape_(date_from(float(post.question['creation_date'])), True), ']\n')
-            yield '', join_('          ', '</div>\n')
-            yield '', join_('          ', '<div class="question-details">\n')
-            yield '', join_('          ', '    [\n')
-            for tag in loop.setup(post.question['tags']):
-                yield '', join_('              ', escape_(tag, True), '\n')
-            yield '', join_('          ', '    ]\n')
-            yield '', join_('          ', '</div>\n')
-            yield '', join_('          ', '<div class="question-details">\n')
-            if post.question.has_key('link'):
-                yield '', join_('              ', '[ ', escape_(post.question['link'], True), ' ]\n')
-            else:
-                yield '', join_('              ', '[ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
-            if post.is_deleted():
-                yield '', join_('              ', '[DELETED]\n')
-            yield '', join_('          ', '</div>\n')
-            if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
-                yield '', join_('          ', '<div id="adsense">\n')
-                yield '', join_('          ', '        <script type="text/javascript"><!--\n')
-                yield '', join_('          ', '        google_ad_client = "pub-3296756901484166";\n')
-                yield '', join_('          ', '        /* 728x90, created 9/8/11 */\n')
-                yield '', join_('          ', '        google_ad_slot = "7129208720";\n')
-                yield '', join_('          ', '        google_ad_width = 728;\n')
-                yield '', join_('          ', '        google_ad_height = 90;\n')
-                yield '', join_('          ', '        //-->\n')
-                yield '', join_('          ', '        </script>\n')
-                yield '', join_('          ', '        <script type="text/javascript"\n')
-                yield '', join_('          ', '        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n')
-                yield '', join_('          ', '        </script>\n')
-                yield '', join_('          ', '</div>\n')
-            yield '', join_('          ', '<div id="question">\n')
-            if pretty_links:
-                (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
-                yield '', join_('          ', escape_(sup_question_body, True), '\n')
-                yield '', join_('          ', '<div id="question-links">\n')
-                for key in loop.setup(sup_question_links.keys()):
-                    yield '', join_('          ', '[', escape_((key), True), '] ', escape_((sup_question_links[key].replace("&","&amp;")), True), '<br/>\n')
-                yield '', join_('          ', '</div>\n')
-            else:
-                yield '', join_('          ', escape_(post.question['body'], True), '\n')
-            yield '', join_('          ', '</div>\n')
-            if post.question.get('comments') and comments:
-                yield '', join_('          ', '<div class="question-comments">  \n')
-                for comment in loop.setup(post.question['comments']):
-                    yield '', join_('              ', '<div class="comment">\n')
-                    if int(comment['score']) > 0:
-                        yield '', join_('                  ', '(', escape_(comment['score'], True), ')    \n')
-                    yield '', join_('              ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>                   \n')
-                    yield '', join_('              ', '</div>\n')
-                yield '', join_('          ', '</div>\n')
-        yield '', join_('          <div class="answers">\n')
-        for answer_number, answer  in loop.setup(enumerate(post.answers)):
-            if (not answer_id or answer['answer_id'] == int(answer_id)):
-                yield '', join_('              ', '<div class="answer-details">\n')
-                yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
-                yield '', join_('              ', '    [', escape_(date_from(float(answer['creation_date'])), True), ']     \n')
-                yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
-                if bool(answer.get('accepted') or answer.get('is_accepted')):
-                    yield '', join_('                  ', '[<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
-                yield '', join_('              ', '</div>\n')
-                yield '', join_('              ', '<div class="answer">\n')
-                if pretty_links:
-                    (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
-                    yield '', join_('                ', escape_(sup_answer_body, True), '  \n')
-                    for key in loop.setup(sup_answer_links.keys()):
-                        yield '', join_('                ', '[', escape_((key), True), '] ', escape_((sup_answer_links[key].replace("&","&amp;")), True), '<br/>\n')
-                    yield '', join_('                ', '<br/>\n')
-                else:
-                    yield '', join_('                ', escape_(answer['body'], True), '\n')
-                yield '', join_('              ', '</div>\n')
-                if answer.get('comments') and comments:
-                    yield '', join_('              ', '<div class="answer-comments">       \n')
-                    for comment in loop.setup(answer['comments']):
-                        yield '', join_('              ', '<div class="comment">\n')
-                        if int(comment['score']) > 0:
-                            yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
-                        yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>     \n')
-                        yield '', join_('              ', '</div>\n')
-                    yield '', join_('              ', '</div>\n')
-                yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
-                yield '', join_('              ', '\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('      </div>\n')
-        yield '', join_('        <script type="text/javascript">\n')
-        yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
-        yield '', join_('            document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));\n')
-        yield '', join_('        </script>\n')
-        yield '', join_('        <script type="text/javascript">\n')
-        yield '', join_('            try {\n')
-        yield '', join_('                var pageTracker = _gat._getTracker("UA-4276204-5");\n')
-        yield '', join_('                pageTracker._trackPageview();\n')
-        yield '', join_('            } catch(err) {}\n')
-        yield '', join_('        </script>\n')
-        yield '', join_('            <script src="http://static.getclicky.com/js" type="text/javascript"></script>\n')
-        yield '', join_('        <script type="text/javascript">clicky.init(250663);</script>\n')
-        yield '', join_('        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-export = CompiledTemplate(export(), 'app/views/export.html')
+admin = CompiledTemplate(admin(), 'apps/app/views/admin.html')
 
 
 def favorites():
@@ -443,91 +311,108 @@ def favorites():
         yield '', join_('</html>\n')
     return __template__
 
-favorites = CompiledTemplate(favorites(), 'app/views/favorites.html')
+favorites = CompiledTemplate(favorites(), 'apps/app/views/favorites.html')
 
 
-def favorites_delicious():
+def topvoted():
     loop = ForLoop()
     _dummy  = CompiledTemplate(lambda: None, "dummy")
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (username, result):
+    def __template__():
         yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
         yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
         yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Favorites - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <title>Top Voted - StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery.autocomplete.css">\n')
         yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
         yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.autocomplete.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript">\n')
+        yield '', join_('        jQuery(\n')
+        yield '', join_('                function()\n')
+        yield '', join_('                {   \n')
+        yield '', join_('                    jQuery("#input_main").autocomplete(\'tags\', {\n')
+        yield '', join_('                                multiple: true,\n')
+        yield '', join_('                                matchContains: true,\n')
+        yield '', join_("                                multipleSeparator:' ',\n")
+        yield '', join_('                                extraParams: { service: jQuery("#service").val()}\n')
+        yield '', join_('                        });\n')
+        yield '', join_('                                \n')
+        yield '', join_('                        jQuery("#input_main").focus();\n')
+        yield '', join_('                        \n')
+        yield '', join_("                jQuery('#input_main').bind('keyup blur',function(){ \n")
+        yield '', join_('                    jQuery("#input_main").setOptions({\n')
+        yield '', join_('                      extraParams: { service: jQuery("#service").val() }\n')
+        yield '', join_('                    }).flushCache();  \n')
+        yield '', join_('                  }\n')
+        yield '', join_('                );\n')
+        yield '', join_('                        \n')
+        yield '', join_('                        if (jQuery.cookie("SERVICE_TOPVOTED") != null){\n')
+        yield '', join_('                            jQuery("#service").val(jQuery.cookie("SERVICE_TOPVOTED"));\n')
+        yield '', join_('                        }\n')
+        yield '', join_('                        jQuery("#topvoted_button").click(function() {\n')
+        yield '', join_('                            input = jQuery.trim(jQuery("#input_main").val())\n')
+        yield '', join_('                    jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })\n')
+        yield '', join_('                        jQuery("#topvoted_form").submit();                                                \n')
+        yield '', join_('                });\n')
+        yield '', join_('                });\n')
+        yield '', join_('        </script>\n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
-        yield '', join_('        <div id="back">\n')
-        yield '', join_('            <a href="/favorites"><img src="/images/search.png"/></a>\n')
-        yield '', join_('        </div>\n')
-        yield '', join_('             <div id="title" class="main">\n')
-        yield '', join_('                 <img src="/images/delicious.jpg"/>&nbsp;Delicious <i>stackoverflow</i> questions <br>\n')
+        yield '', join_('     <div id="main_container">\n')
+        yield '', join_('          <div class="logo">                           \n')
         yield '', join_('            </div>\n')
-        yield '', join_('            <p id="input"><a target="_new" href="http://www.delicious.com/', escape_((username), True), '/stackoverflow">', escape_((username), True), '</a></p>\n')
-        yield '', join_('            \n')
-        yield '', join_('            <table cellpadding="2" cellspacing="0">\n')
-        for question in loop.setup(result):
-            yield '', join_('            ', '<tr class="', escape_(loop.parity, True), '">\n')
-            yield '', join_('            ', '    <td class="printer">\n')
-            yield '', join_('            ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-            yield '', join_('            ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-            yield '', join_('            ', '        </a>\n')
-            yield '', join_('            ', '    </td>\n')
-            yield '', join_('            ', '    <td class="quicklook">\n')
-            yield '', join_('            ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
-            yield '', join_('            ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
-            yield '', join_('            ', '        </a>\n')
-            yield '', join_('            ', '    </td>    \n')
-            yield '', join_('            ', '    <td class="title">\n')
-            yield '', join_('            ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(question.title, True), '</a><br>\n')
-            yield '', join_('            ', '        <span class="tag">\n')
-            yield '', join_('            ', '            [', escape_((", ".join([tag for tag in question.tags_list if tag!='stackoverflow'])), True), ']\n')
-            yield '', join_('            ', '        </span>\n')
-            yield '', join_('            ', '    </td>\n')
-            yield '', join_('            ', '    <td class="date">\n')
-            yield '', join_('            ', '        [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
-            yield '', join_('            ', '    </td>\n')
-            yield '', join_('            ', '</tr>\n')
-            if loop.last:
-                yield '', join_('            ', '</table>\n')
-        else:
-            if len(result) == 0:
-                yield '', join_('            ', '<p id="not_found">\n')
-                yield '', join_('            ', '    No links found tagged <i>stackoverflow</i> \n')
-                yield '', join_('            ', '</p>                            \n')
+        yield '', join_('          <div class="header links">\n')
+        yield '', join_('              <a class="nolines" href="/">Home</a>|<a class="nolines" href="/myse">MySE</a>|<a class="nolines" href="/favorites">Favorites</a>|<span class="header_current"><Favorites>TopVoted</span>|<a class="nolines" href="/topprinted">TopPrinted</a>|<a class="nolines" href="/deleted">Deleted</a>|<a class="nolines" href="/about">About</a>\n')
+        yield '', join_('          </div>\n')
+        yield '', join_('          <br>\n')
+        yield '', join_('          <form  id="topvoted_form" action="/topvoted" method="POST">\n')
+        yield '', join_('              <div id="input_container_topvoted">\n')
+        yield '', join_('                 <span class="main">Tags</span>\n')
+        yield '', join_('                     <div id="input_wrapper">\n')
+        yield '', join_('                         <input maxlength="60" name="tagged" value="" style="text-align:left" size="40" id="input_main">\n')
+        yield '', join_('                     </div>\n')
+        yield '', join_('                 <div>                                       \n')
+        yield '', join_('                       <select id="service" name="service">\n')
+        for service_key in loop.setup(supported_services.keys):
+            if supported_services.info.get(service_key):
+                yield '', join_('                           ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
+        yield '', join_('                      </select>\n')
+        yield '', join_('                  </div>\n')
+        yield '', join_('                  <div class="button">\n')
+        yield '', join_('                      <input type="image" id="topvoted_button" src="/images/getquestions.png" onmouseover="this.src=\'/images/getquestions_MouseOver.png\';" onmouseout="this.src=\'/images/getquestions.png\';" />\n')
+        yield '', join_('                  </div>\n')
+        yield '', join_('              </div>\n')
+        yield '', join_('          </form>                          \n')
+        yield '', join_('      </div>\n')
         yield '', join_('  </body>\n')
         yield '', join_('</html>\n')
     return __template__
 
-favorites_delicious = CompiledTemplate(favorites_delicious(), 'app/views/favorites_delicious.html')
+topvoted = CompiledTemplate(topvoted(), 'apps/app/views/topvoted.html')
 
 
-def favorites_stackexchange():
+def topprinted():
     loop = ForLoop()
     _dummy  = CompiledTemplate(lambda: None, "dummy")
     join_ = _dummy._join
     escape_ = _dummy._escape
 
-    def __template__ (username, user_id, result, service, pagination):
+    def __template__ (result, page , pagesize, count):
         yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
         yield '', join_('<html>\n')
         yield '', join_('    <head>\n')
         yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
         yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
         yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Favorites - StackPrinter</title> \n')
+        yield '', join_('        <title>Top Printed - StackPrinter</title> \n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
         yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
@@ -537,59 +422,56 @@ def favorites_stackexchange():
         yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
         yield '', join_('  </head>\n')
         yield '', join_('    <body>\n')
-        yield '', join_('        <div id="back">\n')
-        yield '', join_('                <a href="/favorites"><img src="/images/search.png"/></a>\n')
-        yield '', join_('            </div>\n')
-        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>favorites</i> questions <br></div>\n')
-        yield '', join_('             <p id="input"><a target="_new" href="http://', escape_((service), True), '.com/users/', escape_((user_id), True), '/', escape_((username), True), '">', escape_((username), True), '</a></p>\n')
+        yield '', join_('             <div id="back">\n')
+        yield '', join_('                    <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
+        yield '', join_('                 </div>\n')
+        yield '', join_('             <div id="title" class="main"><i>Top Printed</i> questions</div>\n')
         yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
         for question in loop.setup(result):
-            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
-            yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-            yield '', join_('                    ', '        </a>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="quicklook">\n')
-            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
-            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
-            yield '', join_('                    ', '        </a>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="counters">\n')
-            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
-            yield '', join_('                    ', '    </td>    \n')
-            yield '', join_('                    ', '    <td class="title">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
-            yield '', join_('                    ', '        <span class="tag">\n')
-            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
-            yield '', join_('                    ', '        </span>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="date">\n')
-            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '</tr>\n')
+            if supported_services.info.get(question.service):
+                yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
+                yield '', join_('                    ', '    <td class="printer">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+                yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+                yield '', join_('                    ', '        </a>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="quicklook">\n')
+                if question.deleted:
+                    yield '', join_('                            ', '<img title="Deleted" src="images/deleted.png"/>\n')
+                else:
+                    yield '', join_('                            ', '<a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
+                    yield '', join_('                            ', '    <img title="Quicklook" src="images/quicklook.png"/>\n')
+                    yield '', join_('                            ', '</a>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="service_logo">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="', escape_((supported_services.info[question.service]['site_url']), True), '"><img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/></a>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="service_name">\n')
+                yield '', join_('                    ', '        [', escape_((supported_services.info[question.service]['name']), True), ']    \n')
+                yield '', join_('                    ', '    </td>    \n')
+                yield '', join_('                    ', '    <td class="title">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.get_url(), True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
+                yield '', join_('                    ', '        <span class="tag">\n')
+                yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags])), True), ']\n')
+                yield '', join_('                    ', '        </span>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="counter">\n')
+                yield '', join_('                    ', '            [', escape_((question.counter), True), ']\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '</tr>\n')
             if loop.last:
                 yield '', join_('                    ', '</table>\n')
                 yield '', join_('                    ', '<table id="pagination">\n')
                 yield '', join_('                    ', '    <tr>\n')
-                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
+                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(count), True), '</td>\n')
                 yield '', join_('                    ', '        <td class="pagination_page">\n')
-                if pagination.has_previous_entries():
-                    yield '', join_('                                ', '    <a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
-                for page in loop.setup(pagination.get_pretty_pagination()):
-                    if page != -1:
-                        yield '', join_('                                ', '<a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
-                        if page == pagination.page:
-                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
-                        else:
-                            yield '', join_('                                    ', escape_(page, True), ' \n')
-                        yield '', join_('                                ', '</a>\n')
-                    else:
-                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
-                if pagination.has_more_entries():
-                    yield '', join_('                                ', '       <a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
+                if page > 1:
+                    yield '', join_('                                ', '    <a href="/topprinted?page=', escape_((page-1), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
+                    yield '', join_('                                ', '\n')
+                if len(result) >= pagesize:
+                    yield '', join_('                                ', '       <a href="/topprinted?page=', escape_((page+1), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
                 yield '', join_('                    ', '        </td>\n')
-                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
+                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagesize, True), '</td>\n')
                 yield '', join_('                    ', '    </tr>\n')
                 yield '', join_('                    ', '</table>\n')
         else:
@@ -601,7 +483,57 @@ def favorites_stackexchange():
         yield '', join_('</html>\n')
     return __template__
 
-favorites_stackexchange = CompiledTemplate(favorites_stackexchange(), 'app/views/favorites_stackexchange.html')
+topprinted = CompiledTemplate(topprinted(), 'apps/app/views/topprinted.html')
+
+
+def quicklook():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (service, question, accepted_answer):
+        yield '', join_('<div id="quicklook_question-block">\n')
+        yield '', join_('  <div id="quicklook_printer">\n')
+        yield '', join_('        <a target="_blank" href="/export?question=', escape_((question['question_id']), True), '&format=HTML&service=', escape_((service), True), '&linktohome=false">\n')
+        yield '', join_('            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+        yield '', join_('        </a>                            \n')
+        yield '', join_('  </div>\n')
+        yield '', join_('  <div id="quicklook_question-title">\n')
+        yield '', join_('         <img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(question['title']), True), '<br>\n')
+        yield '', join_('  </div>\n')
+        yield '', join_('  <div id="quicklook_question-details">\n')
+        yield '', join_('        [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ' answers]\n')
+        yield '', join_('        ', escape_(question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
+        yield '', join_('  </div>\n')
+        yield '', join_('  <div id="quicklook_question-details">\n')
+        yield '', join_('      [', escape_(date_from(float(question['creation_date'])), True), ']\n')
+        yield '', join_('  </div>\n')
+        yield '', join_('  <div id="quicklook_question-details">\n')
+        yield '', join_('  [\n')
+        for tag in loop.setup(question['tags']):
+            yield '', join_('  ', escape_(tag, True), '\n')
+        yield '', join_('  ]\n')
+        yield '', join_('  </div>\n')
+        yield '', join_('  <div id="quicklook_question">\n')
+        yield '', join_('      ', escape_(question['body'], True), '\n')
+        yield '', join_('  </div>\n')
+        if accepted_answer is not None:
+            yield '', join_('  ', '  <hr>\n')
+            yield '', join_('  ', '  <div id="accepted_answer_block">\n')
+            yield '', join_('  ', '      <div id="quicklook_answer-details">\n')
+            yield '', join_('  ', '            [', escape_((['','+'][(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))>0]), True), escape_((int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count'])), True), ']\n')
+            yield '', join_('  ', '            [', escape_(date_from(float(accepted_answer['creation_date'])), True), ']     \n')
+            yield '', join_('  ', '            ', escape_(accepted_answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
+            yield '', join_('  ', '      </div>\n')
+            yield '', join_('  ', '      <div id="quicklook_answer">\n')
+            yield '', join_('  ', '              ', escape_(accepted_answer['body'], True), '\n')
+            yield '', join_('  ', '      </div>\n')
+            yield '', join_('  ', '  </div>  \n')
+        yield '', join_('</div>\n')
+    return __template__
+
+quicklook = CompiledTemplate(quicklook(), 'apps/app/views/quicklook.html')
 
 
 def favorites_user_selection():
@@ -698,7 +630,566 @@ def favorites_user_selection():
         yield '', join_('</html>\n')
     return __template__
 
-favorites_user_selection = CompiledTemplate(favorites_user_selection(), 'app/views/favorites_user_selection.html')
+favorites_user_selection = CompiledTemplate(favorites_user_selection(), 'apps/app/views/favorites_user_selection.html')
+
+
+def oops():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (message):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('         <div id="home">\n')
+        yield '', join_('                <a href="/"><img width="20px" heigth="20px" border="0" src="/images/icon_home.png"/></a>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('         <center>\n')
+        yield '', join_('              <div class="oops">                         \n')
+        yield '', join_('              </div>\n')
+        yield '', join_('              <br>\n')
+        yield '', join_('              <div id="oops_message">                           \n')
+        yield '', join_('                  ', escape_(ERROR_MESSAGE, True), '<br>\n')
+        yield '', join_('                  ', escape_((message), True), '\n')
+        yield '', join_('             </div>                              \n')
+        yield '', join_('          </center>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+oops = CompiledTemplate(oops(), 'apps/app/views/oops.html')
+
+
+def favorites_stackexchange():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (username, user_id, result, service, pagination):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>Favorites - StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('        <div id="back">\n')
+        yield '', join_('                <a href="/favorites"><img src="/images/search.png"/></a>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>favorites</i> questions <br></div>\n')
+        yield '', join_('             <p id="input"><a target="_new" href="http://', escape_((service), True), '.com/users/', escape_((user_id), True), '/', escape_((username), True), '">', escape_((username), True), '</a></p>\n')
+        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
+        for question in loop.setup(result):
+            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
+            yield '', join_('                    ', '    <td class="printer">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+            yield '', join_('                    ', '        </a>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="quicklook">\n')
+            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
+            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
+            yield '', join_('                    ', '        </a>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="counters">\n')
+            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
+            yield '', join_('                    ', '    </td>    \n')
+            yield '', join_('                    ', '    <td class="title">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
+            yield '', join_('                    ', '        <span class="tag">\n')
+            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
+            yield '', join_('                    ', '        </span>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="date">\n')
+            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '</tr>\n')
+            if loop.last:
+                yield '', join_('                    ', '</table>\n')
+                yield '', join_('                    ', '<table id="pagination">\n')
+                yield '', join_('                    ', '    <tr>\n')
+                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
+                yield '', join_('                    ', '        <td class="pagination_page">\n')
+                if pagination.has_previous_entries():
+                    yield '', join_('                                ', '    <a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
+                for page in loop.setup(pagination.get_pretty_pagination()):
+                    if page != -1:
+                        yield '', join_('                                ', '<a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
+                        if page == pagination.page:
+                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
+                        else:
+                            yield '', join_('                                    ', escape_(page, True), ' \n')
+                        yield '', join_('                                ', '</a>\n')
+                    else:
+                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
+                if pagination.has_more_entries():
+                    yield '', join_('                                ', '       <a href="/favorites?service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
+                yield '', join_('                    ', '        </td>\n')
+                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
+                yield '', join_('                    ', '    </tr>\n')
+                yield '', join_('                    ', '</table>\n')
+        else:
+            if len(result) == 0:
+                yield '', join_('                    ', '<p id="not_found">\n')
+                yield '', join_('                    ', '    No questions found\n')
+                yield '', join_('                    ', '</p>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+favorites_stackexchange = CompiledTemplate(favorites_stackexchange(), 'apps/app/views/favorites_stackexchange.html')
+
+
+def export():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (service, post, pretty_links, printer, link_to_home, pretty_print, comments, answer_id, hide_question, font_family):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n')
+        yield '', join_('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">\n')
+        yield '', join_('        <head>\n')
+        yield '', join_('                <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
+        yield '', join_('                <style>\n')
+        yield '', join_('        body {\n')
+        yield '', join_('            background: white;\n')
+        yield '', join_('            font-size: 10pt;\n')
+        yield '', join_('            font-family: "', escape_((font_family), True), '";\n')
+        yield '', join_('            text-align:justify;\n')
+        yield '', join_('        }\n')
+        yield '', join_('        </style>\n')
+        yield '', join_('                <link rel="stylesheet" href="/stylesheets/export.css?v=1"/>\n')
+        yield '', join_('                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
+        yield '', join_('                <link rel="canonical" href="http://www.stackprinter.com/export?service=', escape_(service, True), '&amp;question=', escape_((post.question['question_id']), True), '&amp;printer=false&amp;linktohome=true"/>\n')
+        yield '', join_('                <title>', escape_(post.question['title'], True), '</title>\n')
+        yield '', join_('                <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('                <script type="text/javascript" src="/javascripts/main.js"></script>\n')
+        if pretty_print and 'Prettify' in supported_services.info[service].get('markdown_extensions',''):
+            yield '', join_('                ', '    <script type="text/javascript" src="/javascripts/prettify/prettify.js"></script>\n')
+            yield '', join_('                ', '    <link rel="stylesheet" href="/stylesheets/prettify.css"> \n')
+            yield '', join_('                ', '    <script type="text/javascript">jQuery(document).ready(function(){StyleCode();});</script>\n')
+        if 'MathJax' in supported_services.info[service].get('markdown_extensions',''):
+            yield '', join_('                ', '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">\n')
+            yield '', join_('                ', '\n')
+            yield '', join_('                ', '        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },\n')
+            yield '', join_('                ', '                         tex2jax: { inlineMath: [ ["', '$', '", "', '$', '"], ["\\\\\\\\(","\\\\\\\\)"] ], displayMath: [ ["', '$', '$', '","', '$', '$', '"], ["\\\\[", "\\\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },\n')
+            yield '', join_('                ', '                         TeX: {extensions: ["mhchem.js"], noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },\n')
+            yield '', join_('                ', '                         messageStyle: "none"\n')
+            yield '', join_('                ', '        });\n')
+            yield '', join_('                ', 'MathJax.Hub.Startup.onload();\n')
+            yield '', join_('                ', '</script>\n')
+            if printer:
+                yield '', join_('                ', '<script type="text/javascript">\n')
+                yield '', join_('                ', '    MathJax.Hub.Queue(["Delay",MathJax.Callback,700],Print)\n')
+                yield '', join_('                ', '</script>\n')
+        else:
+            if printer:
+                yield '', join_('                ', '<script type="text/javascript">\n')
+                yield '', join_('                ', '    jQuery(document).ready(function(){Print();});\n')
+        yield '', join_('                </script>\n')
+        yield '', join_('    </head>\n')
+        yield '', join_('        <body>\n')
+        yield '', join_('            <div id="home">\n')
+        if link_to_home:
+            yield '', join_('                ', '<a href="/"><img title="Back to home" width="20px" height="20px" src="/images/icon_home.png" style="border:0"/></a>\n')
+        yield '', join_('                <a href="http://www.stackprinter.com/export?format=HTML&amp;service=', escape_(service, True), '&amp;printer=false&amp;question=', escape_((post.question['question_id']), True), '"><img title="Link to this printed question" width="20px" height="20px" alt="share" src="/images/Share.gif" style="border:0"/></a>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('        <div id="question-block">           \n')
+        yield '', join_('            <div id="question-title">   \n')
+        yield '', join_('                 <img alt="', escape_((supported_services.info[service]['name']), True), '" src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(post.question['title']), True), '<br/>\n')
+        yield '', join_('            </div>\n')
+        if not hide_question:
+            yield '', join_('          ', '<div id="donate">\n')
+            yield '', join_('          ', '[Please support Stackprinter with a donation]\n')
+            yield '', join_('          ', '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n')
+            yield '', join_('          ', '    <input type="hidden" name="cmd" value="_donations" />\n')
+            yield '', join_('          ', '    <input type="hidden" name="business" value="YWAN3PD3PQE2L" />\n')
+            yield '', join_('          ', '    <input type="hidden" name="item_name" value="Support Stackprinter" />\n')
+            yield '', join_('          ', '    <input type="hidden" name="currency_code" value="EUR" />\n')
+            yield '', join_('          ', '    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Please support Stackprinter making a PayPal donation!" alt="Donate with PayPal button" />\n')
+            yield '', join_('          ', '    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />\n')
+            yield '', join_('          ', '    </form>\n')
+            yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '    [', escape_((['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0]), True), escape_((int(post.question['up_vote_count'])-int(post.question['down_vote_count'])), True), '] [', escape_(post.question['answer_count'], True), ']\n')
+            yield '', join_('          ', '     ', escape_(post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' \n')
+            yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '  [', escape_(date_from(float(post.question['creation_date'])), True), ']\n')
+            yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            yield '', join_('          ', '    [\n')
+            for tag in loop.setup(post.question['tags']):
+                yield '', join_('              ', escape_(tag, True), '\n')
+            yield '', join_('          ', '    ]\n')
+            yield '', join_('          ', '</div>\n')
+            yield '', join_('          ', '<div class="question-details">\n')
+            if post.question.has_key('link'):
+                yield '', join_('              ', '[ ', escape_(post.question['link'], True), ' ]\n')
+            else:
+                yield '', join_('              ', '[ http://', escape_((service), True), '.com/questions/', escape_((post.question['question_id']), True), ']\n')
+            if post.is_deleted():
+                yield '', join_('              ', '[DELETED]\n')
+            yield '', join_('          ', '</div>            \n')
+            yield '', join_('          ', '<div id="question">\n')
+            if pretty_links:
+                (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
+                yield '', join_('          ', escape_(sup_question_body, True), '\n')
+                yield '', join_('          ', '<div id="question-links">\n')
+                for key in loop.setup(sup_question_links.keys()):
+                    yield '', join_('          ', '[', escape_((key), True), '] ', escape_((sup_question_links[key].replace("&","&amp;")), True), '<br/>\n')
+                yield '', join_('          ', '</div>\n')
+            else:
+                yield '', join_('          ', escape_(post.question['body'], True), '\n')
+            yield '', join_('          ', '</div>\n')
+            if post.question.get('comments') and comments:
+                yield '', join_('          ', '<div class="question-comments">  \n')
+                for comment in loop.setup(post.question['comments']):
+                    yield '', join_('              ', '<div class="comment">\n')
+                    if int(comment['score']) > 0:
+                        yield '', join_('                  ', '(', escape_(comment['score'], True), ')    \n')
+                    yield '', join_('              ', '    ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>                   \n')
+                    yield '', join_('              ', '</div>\n')
+                yield '', join_('          ', '</div>\n')
+        yield '', join_('          <div class="answers">\n')
+        for answer_number, answer  in loop.setup(enumerate(post.answers)):
+            if (not answer_id or answer['answer_id'] == int(answer_id)):
+                yield '', join_('              ', '<div class="answer-details">\n')
+                yield '', join_('              ', '    [', escape_((['','+'][(int(answer['up_vote_count'])-int(answer['down_vote_count']))>0]), True), escape_((int(answer['up_vote_count'])-int(answer['down_vote_count'])), True), ']\n')
+                yield '', join_('              ', '    [', escape_(date_from(float(answer['creation_date'])), True), ']     \n')
+                yield '', join_('              ', '    ', escape_(answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
+                if bool(answer.get('accepted') or answer.get('is_accepted')):
+                    yield '', join_('                  ', '[<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
+                yield '', join_('              ', '</div>\n')
+                yield '', join_('              ', '<div class="answer">\n')
+                if pretty_links:
+                    (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
+                    yield '', join_('                ', escape_(sup_answer_body, True), '  \n')
+                    for key in loop.setup(sup_answer_links.keys()):
+                        yield '', join_('                ', '[', escape_((key), True), '] ', escape_((sup_answer_links[key].replace("&","&amp;")), True), '<br/>\n')
+                    yield '', join_('                ', '<br/>\n')
+                else:
+                    yield '', join_('                ', escape_(answer['body'], True), '\n')
+                yield '', join_('              ', '</div>\n')
+                if answer.get('comments') and comments:
+                    yield '', join_('              ', '<div class="answer-comments">       \n')
+                    for comment in loop.setup(answer['comments']):
+                        yield '', join_('              ', '<div class="comment">\n')
+                        if int(comment['score']) > 0:
+                            yield '', join_('              ', ' (', escape_(comment['score'], True), ')    \n')
+                        yield '', join_('              ', escape_(comment['body'], True), ' - <b> ', escape_(comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned'), True), '</b>     \n')
+                        yield '', join_('              ', '</div>\n')
+                    yield '', join_('              ', '</div>\n')
+                yield '', join_('              ', '<div class="answer-pagenumber">', escape_(int(answer_number+1), True), '</div>\n')
+                yield '', join_('              ', '\n')
+        yield '', join_('          </div>\n')
+        yield '', join_('      </div>\n')
+        yield '', join_('        <script type="text/javascript">\n')
+        yield '', join_('            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n')
+        yield '', join_('            document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));\n')
+        yield '', join_('        </script>\n')
+        yield '', join_('        <script type="text/javascript">\n')
+        yield '', join_('            try {\n')
+        yield '', join_('                var pageTracker = _gat._getTracker("UA-4276204-5");\n')
+        yield '', join_('                pageTracker._trackPageview();\n')
+        yield '', join_('            } catch(err) {}\n')
+        yield '', join_('        </script>\n')
+        yield '', join_('            <script src="http://static.getclicky.com/js" type="text/javascript"></script>\n')
+        yield '', join_('        <script type="text/javascript">clicky.init(250663);</script>\n')
+        yield '', join_('        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/250663ns.gif" /></p></noscript>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+export = CompiledTemplate(export(), 'apps/app/views/export.html')
+
+
+def deleted():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (result):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>Deleted - StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('             <div id="back">\n')
+        yield '', join_('                    <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
+        yield '', join_('                 </div>\n')
+        yield '', join_('             <div id="title" class="main"><i>Deleted</i> questions</div>\n')
+        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
+        yield '', join_('                    <tr class="even">\n')
+        yield '', join_('                            <td class="printer">\n')
+        yield '', join_('                            <a target="_blank" href="/questions/what-is-your-solution-to-the-fizzbuzz-problem.html"/>\n')
+        yield '', join_('                                <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+        yield '', join_('                            </a>\n')
+        yield '', join_('                        </td>\n')
+        yield '', join_('                        <td class="service_logo">\n')
+        yield '', join_('                            <a target="_blank" href="http://stackoverflow.com"><img src="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png"/></a>\n')
+        yield '', join_('                        </td>\n')
+        yield '', join_('                        <td class="service_name">\n')
+        yield '', join_('                            [Stack Overflow]    \n')
+        yield '', join_('                        </td>    \n')
+        yield '', join_('                        <td class="title">\n')
+        yield '', join_('                            <a target="_blank" href="http://stackoverflow.com/questions/437"/>What is your solution to the FizzBuzz problem?</a><br>\n')
+        yield '', join_('                            <span class="tag">\n')
+        yield '', join_('                                [ language-agnostic interview-questions code-golf rosetta-stone fizzbuzz ]  \n')
+        yield '', join_('                            </span>\n')
+        yield '', join_('                        </td>\n')
+        yield '', join_('                        <td class="counter">\n')
+        yield '', join_('                                [Static]\n')
+        yield '', join_('                        </td>\n')
+        yield '', join_('                    </tr>\n')
+        for question in loop.setup(result):
+            if supported_services.info.get(question.service):
+                yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
+                yield '', join_('                    ', '    <td class="printer">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+                yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+                yield '', join_('                    ', '        </a>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="service_logo">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="', escape_((supported_services.info[question.service]['site_url']), True), '"><img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/></a>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="service_name">\n')
+                yield '', join_('                    ', '        [', escape_((supported_services.info[question.service]['name']), True), ']    \n')
+                yield '', join_('                    ', '    </td>    \n')
+                yield '', join_('                    ', '    <td class="title">\n')
+                yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.get_url(), True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
+                yield '', join_('                    ', '        <span class="tag">\n')
+                yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags])), True), ']\n')
+                yield '', join_('                    ', '        </span>\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '    <td class="counter">\n')
+                yield '', join_('                    ', '            [', escape_((question.counter), True), ']\n')
+                yield '', join_('                    ', '    </td>\n')
+                yield '', join_('                    ', '</tr>\n')
+        else:
+            if len(result) == 0:
+                yield '', join_('                    ', '<p id="not_found">\n')
+                yield '', join_('                    ', '    No questions found\n')
+                yield '', join_('                    ', '</p>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+deleted = CompiledTemplate(deleted(), 'apps/app/views/deleted.html')
+
+
+def topvoted_tagged():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (tagged, result, service, pagination):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>Top Voted - StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>\n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('        <div id="back">\n')
+        yield '', join_('                <a href="/topvoted"><img src="/images/search.png"/></a>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>Top Voted</i> questions </div>\n')
+        yield '', join_('             <p id="input">', escape_((tagged), True), '</p>\n')
+        yield '', join_('             \n')
+        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
+        for question in loop.setup(result):
+            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
+            yield '', join_('                    ', '    <td class="printer">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+            yield '', join_('                    ', '        </a>                            \n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="quicklook">\n')
+            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
+            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
+            yield '', join_('                    ', '        </a>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="counters">\n')
+            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
+            yield '', join_('                    ', '    </td>    \n')
+            yield '', join_('                    ', '    <td class="title">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
+            yield '', join_('                    ', '        <span class="tag">\n')
+            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
+            yield '', join_('                    ', '        </span>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="date">\n')
+            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '</tr>\n')
+            if loop.last:
+                yield '', join_('                    ', '</table>\n')
+                yield '', join_('                    ', '<table id="pagination">\n')
+                yield '', join_('                    ', '    <tr>\n')
+                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
+                yield '', join_('                    ', '        <td class="pagination_page">\n')
+                if pagination.has_previous_entries():
+                    yield '', join_('                                ', '    <a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
+                for page in loop.setup(pagination.get_pretty_pagination()):
+                    if page != -1:
+                        yield '', join_('                                ', '<a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
+                        if page == pagination.page:
+                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
+                        else:
+                            yield '', join_('                                    ', escape_(page, True), ' \n')
+                        yield '', join_('                                ', '</a>\n')
+                    else:
+                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
+                if pagination.has_more_entries():
+                    yield '', join_('                                ', '       <a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
+                yield '', join_('                    ', '        </td>\n')
+                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
+                yield '', join_('                    ', '    </tr>\n')
+                yield '', join_('                    ', '</table>\n')
+        else:
+            if len(result) == 0:
+                yield '', join_('                    ', '<p id="not_found">\n')
+                yield '', join_('                    ', '    No questions found\n')
+                yield '', join_('                    ', '</p>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+topvoted_tagged = CompiledTemplate(topvoted_tagged(), 'apps/app/views/topvoted_tagged.html')
+
+
+def myse_questions():
+    loop = ForLoop()
+    _dummy  = CompiledTemplate(lambda: None, "dummy")
+    join_ = _dummy._join
+    escape_ = _dummy._escape
+
+    def __template__ (username, user_id, result, service, pagination, category):
+        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
+        yield '', join_('<html>\n')
+        yield '', join_('    <head>\n')
+        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
+        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
+        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
+        yield '', join_('        <title>MySe - StackPrinter</title> \n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
+        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
+        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
+        yield '', join_('  </head>\n')
+        yield '', join_('    <body>\n')
+        yield '', join_('        <div id="back">\n')
+        yield '', join_('                <a href="/myse"><img src="/images/profile.png"/></a>\n')
+        yield '', join_('            </div>\n')
+        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>', escape_(category, True), '</i> questions <br></div>\n')
+        yield '', join_('             <p id="input"><a target="_new" href="http://', escape_((service), True), '.com/users/', escape_((user_id), True), '/', escape_((username), True), '">', escape_((username), True), '</a></p>\n')
+        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
+        for question in loop.setup(result):
+            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
+            yield '', join_('                    ', '    <td class="printer">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
+            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
+            yield '', join_('                    ', '        </a>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="quicklook">\n')
+            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
+            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
+            yield '', join_('                    ', '        </a>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="counters">\n')
+            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
+            yield '', join_('                    ', '    </td>    \n')
+            yield '', join_('                    ', '    <td class="title">\n')
+            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
+            yield '', join_('                    ', '        <span class="tag">\n')
+            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
+            yield '', join_('                    ', '        </span>\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '    <td class="date">\n')
+            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
+            yield '', join_('                    ', '    </td>\n')
+            yield '', join_('                    ', '</tr>\n')
+            if loop.last:
+                yield '', join_('                    ', '</table>\n')
+                yield '', join_('                    ', '<table id="pagination">\n')
+                yield '', join_('                    ', '    <tr>\n')
+                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
+                yield '', join_('                    ', '        <td class="pagination_page">\n')
+                if pagination.has_previous_entries():
+                    yield '', join_('                                ', '    <a href="/myse?category=', escape_((category), True), '&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
+                for page in loop.setup(pagination.get_pretty_pagination()):
+                    if page != -1:
+                        yield '', join_('                                ', '<a href="/myse?category=', escape_((category), True), '&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
+                        if page == pagination.page:
+                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
+                        else:
+                            yield '', join_('                                    ', escape_(page, True), ' \n')
+                        yield '', join_('                                ', '</a>\n')
+                    else:
+                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
+                if pagination.has_more_entries():
+                    yield '', join_('                                ', '       <a href="/myse?category=favorites&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
+                yield '', join_('                    ', '        </td>\n')
+                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
+                yield '', join_('                    ', '    </tr>\n')
+                yield '', join_('                    ', '</table>\n')
+        else:
+            if len(result) == 0:
+                yield '', join_('                    ', '<p id="not_found">\n')
+                yield '', join_('                    ', '    No questions found\n')
+                yield '', join_('                    ', '</p>\n')
+        yield '', join_('  </body>\n')
+        yield '', join_('</html>\n')
+    return __template__
+
+myse_questions = CompiledTemplate(myse_questions(), 'apps/app/views/myse_questions.html')
 
 
 def index():
@@ -719,7 +1210,7 @@ def index():
         yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite. StackPrinter offers a detailed Printer-friendly rendering of Stack Exchange questions, answers and comments. ">\n')
         yield '', join_('        <meta name="keywords" content="printer-friendly printer printerfriendly stackoverflow stackapps stackexchange programmers programming joke cartoons hidden features">\n')
         yield '', join_('        <title>StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css"/>\n')
+        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css?v=1"/>\n')
         yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>\n')
         yield '', join_('        <script src="http://static.getclicky.com/js" type="text/javascript"></script>\n')
         yield '', join_('        <script type="text/javascript">clicky.init(250663);</script>\n')
@@ -806,7 +1297,7 @@ def index():
         yield '', join_('                     </div>\n')
         yield '', join_('                     <div class="button">\n')
         yield '', join_('                         <input type="image" id="question_button" src="/images/print.png" onmouseover="this.src=\'/images/print_MouseOver.png\';" onmouseout="this.src=\'/images/print.png\';" />\n')
-        yield '', join_('                     </div>\n')
+        yield '', join_('                     </div>                     \n')
         yield '', join_('                  </div>\n')
         yield '', join_('              </form>\n')
         yield '', join_('              <p id="question_title">&nbsp;</p>\n')
@@ -821,6 +1312,16 @@ def index():
         yield '', join_('                    <li>Questions printed so far: <b>', escape_((counter), True), '</b> </li>\n')
         yield '', join_('                </ul>\n')
         yield '', join_('              </div>\n')
+        yield '', join_('              <div id="donation">\n')
+        yield '', join_('                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n')
+        yield '', join_('                    <input type="hidden" name="cmd" value="_donations" />\n')
+        yield '', join_('                    <input type="hidden" name="business" value="YWAN3PD3PQE2L" />\n')
+        yield '', join_('                    <input type="hidden" name="item_name" value="Support Stackprinter" />\n')
+        yield '', join_('                    <input type="hidden" name="currency_code" value="EUR" />\n')
+        yield '', join_('                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Please support Stackprinter making a PayPal donation!" alt="Donate with PayPal button" />\n')
+        yield '', join_('                    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />\n')
+        yield '', join_('                    </form>\n')
+        yield '', join_('             </div>\n')
         yield '', join_('              <div id="appengine_logo">\n')
         yield '', join_('                  <img margin="0" border="0" src="/images/appengine.gif"/>\n')
         yield '', join_('              </div>                                 \n')
@@ -829,7 +1330,7 @@ def index():
         yield '', join_('</html>\n')
     return __template__
 
-index = CompiledTemplate(index(), 'app/views/index.html')
+index = CompiledTemplate(index(), 'apps/app/views/index.html')
 
 
 def myse():
@@ -934,488 +1435,5 @@ def myse():
         yield '', join_('</html>\n')
     return __template__
 
-myse = CompiledTemplate(myse(), 'app/views/myse.html')
-
-
-def myse_questions():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (username, user_id, result, service, pagination, category):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>MySe - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('        <div id="back">\n')
-        yield '', join_('                <a href="/myse"><img src="/images/profile.png"/></a>\n')
-        yield '', join_('            </div>\n')
-        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>', escape_(category, True), '</i> questions <br></div>\n')
-        yield '', join_('             <p id="input"><a target="_new" href="http://', escape_((service), True), '.com/users/', escape_((user_id), True), '/', escape_((username), True), '">', escape_((username), True), '</a></p>\n')
-        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
-        for question in loop.setup(result):
-            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
-            yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-            yield '', join_('                    ', '        </a>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="quicklook">\n')
-            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
-            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
-            yield '', join_('                    ', '        </a>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="counters">\n')
-            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
-            yield '', join_('                    ', '    </td>    \n')
-            yield '', join_('                    ', '    <td class="title">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
-            yield '', join_('                    ', '        <span class="tag">\n')
-            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
-            yield '', join_('                    ', '        </span>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="date">\n')
-            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '</tr>\n')
-            if loop.last:
-                yield '', join_('                    ', '</table>\n')
-                yield '', join_('                    ', '<table id="pagination">\n')
-                yield '', join_('                    ', '    <tr>\n')
-                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
-                yield '', join_('                    ', '        <td class="pagination_page">\n')
-                if pagination.has_previous_entries():
-                    yield '', join_('                                ', '    <a href="/myse?category=', escape_((category), True), '&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
-                for page in loop.setup(pagination.get_pretty_pagination()):
-                    if page != -1:
-                        yield '', join_('                                ', '<a href="/myse?category=', escape_((category), True), '&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
-                        if page == pagination.page:
-                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
-                        else:
-                            yield '', join_('                                    ', escape_(page, True), ' \n')
-                        yield '', join_('                                ', '</a>\n')
-                    else:
-                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
-                if pagination.has_more_entries():
-                    yield '', join_('                                ', '       <a href="/myse?category=favorites&service=', escape_((service), True), '&userid=', escape_((user_id), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
-                yield '', join_('                    ', '        </td>\n')
-                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
-                yield '', join_('                    ', '    </tr>\n')
-                yield '', join_('                    ', '</table>\n')
-        else:
-            if len(result) == 0:
-                yield '', join_('                    ', '<p id="not_found">\n')
-                yield '', join_('                    ', '    No questions found\n')
-                yield '', join_('                    ', '</p>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-myse_questions = CompiledTemplate(myse_questions(), 'app/views/myse_questions.html')
-
-
-def oops():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (message):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('         <div id="home">\n')
-        yield '', join_('                <a href="/"><img width="20px" heigth="20px" border="0" src="/images/icon_home.png"/></a>\n')
-        yield '', join_('            </div>\n')
-        yield '', join_('         <center>\n')
-        yield '', join_('              <div class="oops">                         \n')
-        yield '', join_('              </div>\n')
-        yield '', join_('              <br>\n')
-        yield '', join_('              <div id="oops_message">                           \n')
-        yield '', join_('                  ', escape_(ERROR_MESSAGE, True), '<br>\n')
-        yield '', join_('                  ', escape_((message), True), '\n')
-        yield '', join_('             </div>                              \n')
-        yield '', join_('          </center>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-oops = CompiledTemplate(oops(), 'app/views/oops.html')
-
-
-def quicklook():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (service, question, accepted_answer):
-        yield '', join_('<div id="quicklook_question-block">\n')
-        yield '', join_('  <div id="quicklook_printer">\n')
-        yield '', join_('        <a target="_blank" href="/export?question=', escape_((question['question_id']), True), '&format=HTML&service=', escape_((service), True), '&linktohome=false">\n')
-        yield '', join_('            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-        yield '', join_('        </a>                            \n')
-        yield '', join_('  </div>\n')
-        yield '', join_('  <div id="quicklook_question-title">\n')
-        yield '', join_('         <img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_(htmlquote(question['title']), True), '<br>\n')
-        yield '', join_('  </div>\n')
-        yield '', join_('  <div id="quicklook_question-details">\n')
-        yield '', join_('        [', escape_((['','+'][(int(question['up_vote_count'])-int(question['down_vote_count']))>0]), True), escape_((int(question['up_vote_count'])-int(question['down_vote_count'])), True), '] [', escape_(question['answer_count'], True), ' answers]\n')
-        yield '', join_('        ', escape_(question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), '\n')
-        yield '', join_('  </div>\n')
-        yield '', join_('  <div id="quicklook_question-details">\n')
-        yield '', join_('      [', escape_(date_from(float(question['creation_date'])), True), ']\n')
-        yield '', join_('  </div>\n')
-        yield '', join_('  <div id="quicklook_question-details">\n')
-        yield '', join_('  [\n')
-        for tag in loop.setup(question['tags']):
-            yield '', join_('  ', escape_(tag, True), '\n')
-        yield '', join_('  ]\n')
-        yield '', join_('  </div>\n')
-        yield '', join_('  <div id="quicklook_question">\n')
-        yield '', join_('      ', escape_(question['body'], True), '\n')
-        yield '', join_('  </div>\n')
-        if accepted_answer is not None:
-            yield '', join_('  ', '  <hr>\n')
-            yield '', join_('  ', '  <div id="accepted_answer_block">\n')
-            yield '', join_('  ', '      <div id="quicklook_answer-details">\n')
-            yield '', join_('  ', '            [', escape_((['','+'][(int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count']))>0]), True), escape_((int(accepted_answer['up_vote_count'])-int(accepted_answer['down_vote_count'])), True), ']\n')
-            yield '', join_('  ', '            [', escape_(date_from(float(accepted_answer['creation_date'])), True), ']     \n')
-            yield '', join_('  ', '            ', escape_(accepted_answer.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned'), True), ' [<img  height="17px" width="17px" src="/images/blackflag.png"/>ACCEPTED]\n')
-            yield '', join_('  ', '      </div>\n')
-            yield '', join_('  ', '      <div id="quicklook_answer">\n')
-            yield '', join_('  ', '              ', escape_(accepted_answer['body'], True), '\n')
-            yield '', join_('  ', '      </div>\n')
-            yield '', join_('  ', '  </div>  \n')
-        yield '', join_('</div>\n')
-    return __template__
-
-quicklook = CompiledTemplate(quicklook(), 'app/views/quicklook.html')
-
-
-def sitemap_index():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (sitemaps):
-        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
-        yield '', join_('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-        for sitemap in loop.setup(sitemaps):
-            yield '', join_('  ', '<sitemap>\n')
-            yield '', join_('  ', '    <loc>http://www.stackprinter.com/sitemap_', escape_((sitemap.key().id()), True), '.xml</loc>\n')
-            yield '', join_('  ', '    <lastmod>', escape_((sitemap.last_modified.strftime("%Y-%m-%d")), True), '</lastmod>\n')
-            yield '', join_('  ', '</sitemap>\n')
-        yield '', join_('</sitemapindex>\n')
-    return __template__
-
-sitemap_index = CompiledTemplate(sitemap_index(), 'app/views/sitemap_index.xml')
-
-
-def sitemap_questions():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (questions):
-        yield '', join_('<?xml version="1.0" encoding="UTF-8"?>\n')
-        yield '', join_('<urlset\n')
-        yield '', join_('      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n')
-        yield '', join_('      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n')
-        yield '', join_('      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n')
-        yield '', join_('http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n')
-        for question in loop.setup(questions):
-            yield '', join_('  ', '<url>\n')
-            yield '', join_('  ', '  <loc>http://www.stackprinter.com/export?service=', escape_((question.split('_')[1]), True), '&amp;question=', escape_((question.split('_')[0]), True), '&amp;printer=false&amp;linktohome=true</loc>\n')
-            yield '', join_('  ', '</url>\n')
-        yield '', join_('</urlset>\n')
-    return __template__
-
-sitemap_questions = CompiledTemplate(sitemap_questions(), 'app/views/sitemap_questions.xml')
-
-
-def topprinted():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (result, page , pagesize, count):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Top Printed - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>     \n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('             <div id="back">\n')
-        yield '', join_('                    <a href="/"><img title="Back to home" width="20px" height="20px" border="0" src="/images/icon_home.png"/></a>\n')
-        yield '', join_('                 </div>\n')
-        yield '', join_('             <div id="title" class="main"><i>Top Printed</i> questions</div>\n')
-        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
-        for question in loop.setup(result):
-            if supported_services.info.get(question.service):
-                yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
-                yield '', join_('                    ', '    <td class="printer">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-                yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-                yield '', join_('                    ', '        </a>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="quicklook">\n')
-                if question.deleted:
-                    yield '', join_('                            ', '<img title="Deleted" src="images/deleted.png"/>\n')
-                else:
-                    yield '', join_('                            ', '<a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
-                    yield '', join_('                            ', '    <img title="Quicklook" src="images/quicklook.png"/>\n')
-                    yield '', join_('                            ', '</a>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="service_logo">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="', escape_((supported_services.info[question.service]['site_url']), True), '"><img src="', escape_((supported_services.info[question.service]['icon_url']), True), '"/></a>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="service_name">\n')
-                yield '', join_('                    ', '        [', escape_((supported_services.info[question.service]['name']), True), ']    \n')
-                yield '', join_('                    ', '    </td>    \n')
-                yield '', join_('                    ', '    <td class="title">\n')
-                yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.get_url(), True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
-                yield '', join_('                    ', '        <span class="tag">\n')
-                yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags])), True), ']\n')
-                yield '', join_('                    ', '        </span>\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '    <td class="counter">\n')
-                yield '', join_('                    ', '            [', escape_((question.counter), True), ']\n')
-                yield '', join_('                    ', '    </td>\n')
-                yield '', join_('                    ', '</tr>\n')
-            if loop.last:
-                yield '', join_('                    ', '</table>\n')
-                yield '', join_('                    ', '<table id="pagination">\n')
-                yield '', join_('                    ', '    <tr>\n')
-                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(count), True), '</td>\n')
-                yield '', join_('                    ', '        <td class="pagination_page">\n')
-                if page > 1:
-                    yield '', join_('                                ', '    <a href="/topprinted?page=', escape_((page-1), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
-                    yield '', join_('                                ', '\n')
-                if len(result) >= pagesize:
-                    yield '', join_('                                ', '       <a href="/topprinted?page=', escape_((page+1), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
-                yield '', join_('                    ', '        </td>\n')
-                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagesize, True), '</td>\n')
-                yield '', join_('                    ', '    </tr>\n')
-                yield '', join_('                    ', '</table>\n')
-        else:
-            if len(result) == 0:
-                yield '', join_('                    ', '<p id="not_found">\n')
-                yield '', join_('                    ', '    No questions found\n')
-                yield '', join_('                    ', '</p>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-topprinted = CompiledTemplate(topprinted(), 'app/views/topprinted.html')
-
-
-def topvoted():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__():
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Top Voted - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery.autocomplete.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery.autocomplete.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript">\n')
-        yield '', join_('        jQuery(\n')
-        yield '', join_('                function()\n')
-        yield '', join_('                {   \n')
-        yield '', join_('                    jQuery("#input_main").autocomplete(\'tags\', {\n')
-        yield '', join_('                                multiple: true,\n')
-        yield '', join_('                                matchContains: true,\n')
-        yield '', join_("                                multipleSeparator:' ',\n")
-        yield '', join_('                                extraParams: { service: jQuery("#service").val()}\n')
-        yield '', join_('                        });\n')
-        yield '', join_('                                \n')
-        yield '', join_('                        jQuery("#input_main").focus();\n')
-        yield '', join_('                        \n')
-        yield '', join_("                jQuery('#input_main').bind('keyup blur',function(){ \n")
-        yield '', join_('                    jQuery("#input_main").setOptions({\n')
-        yield '', join_('                      extraParams: { service: jQuery("#service").val() }\n')
-        yield '', join_('                    }).flushCache();  \n')
-        yield '', join_('                  }\n')
-        yield '', join_('                );\n')
-        yield '', join_('                        \n')
-        yield '', join_('                        if (jQuery.cookie("SERVICE_TOPVOTED") != null){\n')
-        yield '', join_('                            jQuery("#service").val(jQuery.cookie("SERVICE_TOPVOTED"));\n')
-        yield '', join_('                        }\n')
-        yield '', join_('                        jQuery("#topvoted_button").click(function() {\n')
-        yield '', join_('                            input = jQuery.trim(jQuery("#input_main").val())\n')
-        yield '', join_('                    jQuery.cookie("SERVICE_TOPVOTED", jQuery("#service").val() , { expires: 50 })\n')
-        yield '', join_('                        jQuery("#topvoted_form").submit();                                                \n')
-        yield '', join_('                });\n')
-        yield '', join_('                });\n')
-        yield '', join_('        </script>\n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('     <div id="main_container">\n')
-        yield '', join_('          <div class="logo">                           \n')
-        yield '', join_('            </div>\n')
-        yield '', join_('          <div class="header links">\n')
-        yield '', join_('              <a class="nolines" href="/">Home</a>|<a class="nolines" href="/myse">MySE</a>|<a class="nolines" href="/favorites">Favorites</a>|<span class="header_current"><Favorites>TopVoted</span>|<a class="nolines" href="/topprinted">TopPrinted</a>|<a class="nolines" href="/deleted">Deleted</a>|<a class="nolines" href="/about">About</a>\n')
-        yield '', join_('          </div>\n')
-        yield '', join_('          <br>\n')
-        yield '', join_('          <form  id="topvoted_form" action="/topvoted" method="POST">\n')
-        yield '', join_('              <div id="input_container_topvoted">\n')
-        yield '', join_('                 <span class="main">Tags</span>\n')
-        yield '', join_('                     <div id="input_wrapper">\n')
-        yield '', join_('                         <input maxlength="60" name="tagged" value="" style="text-align:left" size="40" id="input_main">\n')
-        yield '', join_('                     </div>\n')
-        yield '', join_('                 <div>                                       \n')
-        yield '', join_('                       <select id="service" name="service">\n')
-        for service_key in loop.setup(supported_services.keys):
-            if supported_services.info.get(service_key):
-                yield '', join_('                           ', '<option  value="', escape_((service_key), True), '">', escape_((supported_services.info[service_key]['name']), True), '</option>\n')
-        yield '', join_('                      </select>\n')
-        yield '', join_('                  </div>\n')
-        yield '', join_('                  <div class="button">\n')
-        yield '', join_('                      <input type="image" id="topvoted_button" src="/images/getquestions.png" onmouseover="this.src=\'/images/getquestions_MouseOver.png\';" onmouseout="this.src=\'/images/getquestions.png\';" />\n')
-        yield '', join_('                  </div>\n')
-        yield '', join_('              </div>\n')
-        yield '', join_('          </form>                          \n')
-        yield '', join_('      </div>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-topvoted = CompiledTemplate(topvoted(), 'app/views/topvoted.html')
-
-
-def topvoted_tagged():
-    loop = ForLoop()
-    _dummy  = CompiledTemplate(lambda: None, "dummy")
-    join_ = _dummy._join
-    escape_ = _dummy._escape
-
-    def __template__ (tagged, result, service, pagination):
-        yield '', join_('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
-        yield '', join_('<html>\n')
-        yield '', join_('    <head>\n')
-        yield '', join_('        <meta http-equiv="content-type" content="text/html; charset=UTF-8">\n')
-        yield '', join_('        <meta name="description" content="StackPrinter - The Stack Exchange Printer Suite">\n')
-        yield '', join_('        <meta name="keywords" content="printer friendly stackoverflow stackapps stack exchange">\n')
-        yield '', join_('        <title>Top Voted - StackPrinter</title> \n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/search.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/main.css">\n')
-        yield '', join_('        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">\n')
-        yield '', join_('        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>\n')
-        yield '', join_('        <script type="text/javascript" src="/javascripts/main.js"></script>\n')
-        yield '', join_('  </head>\n')
-        yield '', join_('    <body>\n')
-        yield '', join_('        <div id="back">\n')
-        yield '', join_('                <a href="/topvoted"><img src="/images/search.png"/></a>\n')
-        yield '', join_('            </div>\n')
-        yield '', join_('             <div id="title" class="main"><img src="', escape_((supported_services.info[service]['icon_url']), True), '"/>', escape_((supported_services.info[service]['name']), True), '&nbsp;<i>Top Voted</i> questions </div>\n')
-        yield '', join_('             <p id="input">', escape_((tagged), True), '</p>\n')
-        yield '', join_('             \n')
-        yield '', join_('             <table cellpadding="2" cellspacing="0">\n')
-        for question in loop.setup(result):
-            yield '', join_('                    ', '<tr class="', escape_(loop.parity, True), '">\n')
-            yield '', join_('                    ', '    <td class="printer">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="/export?question=', escape_((question.question_id), True), '&format=HTML&service=', escape_((question.service), True), '&linktohome=false"/>\n')
-            yield '', join_('                    ', '            <img title="Printer-Friendly" src="images/printer_black.png"/>\n')
-            yield '', join_('                    ', '        </a>                            \n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="quicklook">\n')
-            yield '', join_('                    ', '        <a onclick="javascript:quicklook(', escape_((question.question_id), True), ",'", escape_((question.service), True), '\');return false;" href="#"/>\n')
-            yield '', join_('                    ', '            <img title="Quicklook" src="images/quicklook.png"/>\n')
-            yield '', join_('                    ', '        </a>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="counters">\n')
-            yield '', join_('                    ', '        [', escape_(question.get_votes(), True), ']<br>[', escape_(question.answer_count, True), ']\n')
-            yield '', join_('                    ', '    </td>    \n')
-            yield '', join_('                    ', '    <td class="title">\n')
-            yield '', join_('                    ', '        <a target="_blank" href="', escape_(question.url, True), '"/>', escape_(htmlquote(question.title), True), '</a><br>\n')
-            yield '', join_('                    ', '        <span class="tag">\n')
-            yield '', join_('                    ', '            [', escape_((", ".join([tag for tag in question.tags_list])), True), ']\n')
-            yield '', join_('                    ', '        </span>\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '    <td class="date">\n')
-            yield '', join_('                    ', '            [', escape_((question.creation_date.strftime('%Y-%m-%d')), True), ']\n')
-            yield '', join_('                    ', '    </td>\n')
-            yield '', join_('                    ', '</tr>\n')
-            if loop.last:
-                yield '', join_('                    ', '</table>\n')
-                yield '', join_('                    ', '<table id="pagination">\n')
-                yield '', join_('                    ', '    <tr>\n')
-                yield '', join_('                    ', '        <td class="pagination_found">Found: ', escape_(commify(pagination.total), True), '</td>\n')
-                yield '', join_('                    ', '        <td class="pagination_page">\n')
-                if pagination.has_previous_entries():
-                    yield '', join_('                                ', '    <a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((pagination.page-1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&laquo; prev&nbsp;&nbsp;</a>\n')
-                for page in loop.setup(pagination.get_pretty_pagination()):
-                    if page != -1:
-                        yield '', join_('                                ', '<a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((page), True), '&pagesize=', escape_((pagination.pagesize), True), '">\n')
-                        if page == pagination.page:
-                            yield '', join_('                                    ', '|', escape_((page), True), '|    \n')
-                        else:
-                            yield '', join_('                                    ', escape_(page, True), ' \n')
-                        yield '', join_('                                ', '</a>\n')
-                    else:
-                        yield '', join_('                                ', escape_(pagination.separator, True), '\n')
-                if pagination.has_more_entries():
-                    yield '', join_('                                ', '       <a href="/topvoted?service=', escape_((service), True), '&tagged=', escape_((urlquote(tagged)), True), '&page=', escape_((pagination.page+1), True), '&pagesize=', escape_((pagination.pagesize), True), '">&nbsp;&nbsp;next &raquo;</a>\n')
-                yield '', join_('                    ', '        </td>\n')
-                yield '', join_('                    ', '        <td class="pagination_pagesize">Pagesize: ', escape_(pagination.pagesize, True), '</td>\n')
-                yield '', join_('                    ', '    </tr>\n')
-                yield '', join_('                    ', '</table>\n')
-        else:
-            if len(result) == 0:
-                yield '', join_('                    ', '<p id="not_found">\n')
-                yield '', join_('                    ', '    No questions found\n')
-                yield '', join_('                    ', '</p>\n')
-        yield '', join_('  </body>\n')
-        yield '', join_('</html>\n')
-    return __template__
-
-topvoted_tagged = CompiledTemplate(topvoted_tagged(), 'app/views/topvoted_tagged.html')
+myse = CompiledTemplate(myse(), 'apps/app/views/myse.html')
 

@@ -73,7 +73,9 @@ a:link {
 }
 
 #donate  { 
-    float:right;
+    font-weight:bold;
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 @media print{

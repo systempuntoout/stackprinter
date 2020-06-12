@@ -11,7 +11,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
             text-align:justify;
         }
         </style>
-		<link rel="stylesheet" href="/stylesheets/export.css"/>
+		<link rel="stylesheet" href="/stylesheets/export.css?v=1"/>
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 		<link rel="canonical" href="http://www.stackprinter.com/export?service=$service&amp;question=$(post.question['question_id'])&amp;printer=false&amp;linktohome=true"/>
 		<title>$post.question['title']</title>
@@ -52,6 +52,17 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
           	 <img alt="$(supported_services.info[service]['name'])" src="$(supported_services.info[service]['icon_url'])"/>$htmlquote(post.question['title'])<br/>
             </div>
           $if not hide_question:
+            <div id="donate">
+            [Please support Stackprinter with a donation]
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_donations" />
+                <input type="hidden" name="business" value="YWAN3PD3PQE2L" />
+                <input type="hidden" name="item_name" value="Support Stackprinter" />
+                <input type="hidden" name="currency_code" value="EUR" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Please support Stackprinter making a PayPal donation!" alt="Donate with PayPal button" />
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                </form>
+            </div>
             <div class="question-details">
                 [$(['','+'][(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))>0])$(int(post.question['up_vote_count'])-int(post.question['down_vote_count']))] [$post.question['answer_count']]
             	 $post.question.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned') 
@@ -72,21 +83,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                     [ http://$(service).com/questions/$(post.question['question_id'])]
                 $if post.is_deleted():
                     [DELETED]
-            </div>
-            $if not 'MathJax' in supported_services.info[service].get('markdown_extensions',''):    
-              <div id="adsense">
-                      <script type="text/javascript"><!--
-                      google_ad_client = "pub-3296756901484166";
-                      /* 728x90, created 9/8/11 */
-                      google_ad_slot = "7129208720";
-                      google_ad_width = 728;
-                      google_ad_height = 90;
-                      //-->
-                      </script>
-                      <script type="text/javascript"
-                      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                      </script>
-              </div>
+            </div>            
             <div id="question">
             $if pretty_links:
               $code:
