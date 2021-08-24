@@ -1,7 +1,12 @@
 runtime: python27
 api_version: 1
 threadsafe: true
-
+instance_class: F1
+automatic_scaling:
+  max_idle_instances: 1  
+  min_pending_latency: automatic  
+  max_pending_latency: 30ms
+  max_instances: 1
 
 builtins:
 - deferred: on
